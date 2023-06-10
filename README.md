@@ -14,7 +14,7 @@ Game Parameters:
 
 Game Features:
 
-- Save as many in-progress games as desired.
+- Save as many in-progress games as desired when in-game.
   - Games are saved as `save_<unique_integer_id>.yaml` YAML files in the /saves folder.
 - Load from any existing game save file.
 
