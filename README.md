@@ -1,4 +1,4 @@
-# Connect Four Console Game
+# Chess Console Game
 
 <!-- ![Gameplay demo of one player winning the game Chess](/assets/chess-demo.gif) -->
 
