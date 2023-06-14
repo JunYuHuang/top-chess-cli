@@ -2,7 +2,104 @@
 
 ## Basic Game Rules and Mechanics
 
-- TODO
+- 2 player PVP game played on a 8 x 8 game board
+- 1 player uses white pieces, the other uses black pieces
+- Player with white pieces goes first
+- objective of game is for a player to checkmate or capture the other player's king piece
+- Game progresses by alternating turns between each player
+- On each player's turn, they can move only 1 of their pieces
+  - exception: castling with King and a Bishop piece if neither has moved in the game yet
+- Game ends in 3 possible ways:
+  - white wins + black loses; white checkmates black
+  - white loses + black wins; black checkmates white
+  - stalemate / tie; one of the players cannot make a legal move with their king b/c it will be checkmated if done so
+- 8 x 8 game board
+  - rows / ranks: labelled from 8 to 1 from top to bottom
+  - cols / files: labelled from a to h from left to right
+  - cell coordinates are given as `file/rank` e.g. `e4`
+  - initial board state
+    - black's pieces fill ranks 8 and 7 (top 2 rows)
+    - white's pieces fill ranks 2 and 1 (bottom 2 rows)
+- each player has 16 pieces composed of 6 unique types:
+  - 8 x Pawns
+  - 2 x Rooks
+  - 2 x Knights
+  - 2 x Bishops
+  - 1 x Queen
+  - 1 x King
+- shared common actions for each piece:
+  - move to an empty, in-bound cell
+  - capture a piece owned by the opposing player
+    - typically by moving to that piece's cell position
+    - captures by pawns are different
+  - check the opposing player's king
+  - checkmate the opposing player's king
+- unique actions for certain pieces:
+  - move next to each other and swap sides (castling with king and bishop pieces)
+  - change to a non-King and non-Pawn piece (promotion)
+- each game piece type has their own set of valid movements and may have special moves
+  - Pawn:
+    - can move 1 cell / step forward; can NOT move backwards
+    - can move 2 cells / steps forward on its first move
+    - can only move diagonally forward left/right if capturing an enemy piece
+    - `taking en-passant`:
+      - can capture an opposing pawn piece that is in the same row / rank in a certain scenario
+      - must be done immediately after opposing pawn has made its double-step move
+        - cannot capture such a pawn if the pawn makes any other moves after that
+      - capture is done by moving forward diagonally to the cell "behind" the to-be-captured pawn
+      - for black pawns, can only take en-passant white pawns that have double-stepped into row / rank 4
+        - black pawn captures the white pawn and moves to rank 3
+      - for white pawns, can only take en-passant black pawns that have double-stepped into row / rank 5
+        - white pawn captures the black pawn and moves to rank 6
+    - cannot jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - `promotion`: piece must be replaced by another piece when it reaches the furthest row from its starting row
+      - valid replacement allied pieces: rook, knight, bishop, or queen
+      - must reach row 8 if pawn is white or row 1 if pawn is black
+  - Rook: moves in any straight line horizontally or horizontally up to the boundaries of the board
+    - cannot jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - moving to a cell that has an enemy piece captures that piece
+  - Knight: moves to any cell following a 3-step L-path (up to 8 possible moves)
+    - moves left/right once then top/down twice OR
+    - moves left/right twice then top/down once OR
+    - moves top/down once then left/right twice OR
+    - moves top/down twice then left/right once
+    - CAN jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - moving to a cell that has an enemy piece captures that piece
+  - Bishop: moves in any straight diagonal line up to the boundaries of the board
+    - cannot jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - moving to a cell that has an enemy piece captures that piece
+  - Queen: moves in any straight line horizontal / vertical / diagonal up to the boundaries of the board
+    - cannot jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - moving to a cell that has an enemy piece captures that piece
+  - King: moves to any adjacent single cell horizontally / vertically / diagonally
+    - most important piece of game
+    - cannot move to a cell that places itself in check
+    - cannot jump over other (ally or enemy) pieces
+    - cannot move to a cell that has an allied piece (no friendly fire / team kill)
+    - moving to a cell that has an enemy piece captures that piece
+    - `castling`: moves simultaneously with and side-by-side to an allied bishop piece
+      - can be done by each player at most once per game
+      - must meet several (7) requirements to be able to perform the move
+      - `long castling`: castling with furthest (i.e. left-most) allied bishop
+      - `short castling`: castling with closest (i.e. right-most) allied bishop
+- terminology
+  - `check`: when a player's king can be taken by a piece of the opposing player
+    - player with piece that gives check (can take the king) should declare check
+  - `checkmate`/ `mate`: when a player is in check and they cannot make a move to escape the check
+    - ends game; checkmated player loses, player that mated the other player wins
+  - `stalemate`: player cannot make a legal move and player is not in check
+    - ends game in a tie / draw
+  - `en-passant`: see above notes
+  - `castling`: see above notes
+  - `promotion`: see above notes
+- algebraic / standard notation cheatsheet notes
+  - see [this page](https://cheatography.com/davechild/cheat-sheets/chess-algebraic-notation/) for full details
+  - a
 
 ## MVP Requirements
 
