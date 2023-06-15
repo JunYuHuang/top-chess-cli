@@ -124,6 +124,11 @@
     - e.g. `e8=Q`
   - `check` is denoted by the `+` char
   - `checkmate` is denoted by the `#` char
+- consider allowing only `long algebraic notation` or `reversible algebraic notation` for player inputs
+  - `long alge. notation`: alge. not. + must specify starting file and rank of piece
+  - `rev. alge. notation`: `long alge. notation` + must specify captured piece if move captures a piece
+- need to specify `check` or `checkmate` in alge. not?
+  - no; is optional according to ChatGPT
 
 ## MVP Requirements
 

@@ -4,12 +4,26 @@
 
 This is a console implementation of the classic two-player board game Chess.
 
-Game Parameters:
+Game Parameters and Constraints:
 
 - Allows 2 human players to play against each other.
 - Player 1 is always assigned the white pieces.
 - Player 2 is always assigned the black pieces.
 - The player with the white pieces ('White') always goes first.
+- Allows players to input moves using Long Algebraic Notation.
+- Uses the following symbols / characters to specify special moves in player input:
+  - `=`: Pawn Promotion
+  - `+`: Check (can be omitted)
+  - `#`: Checkmate (can be omitted)
+  - `x`: Capture
+  - `O-O` or `0-0`: Kingside Castle
+  - `O-O-O` or `0-0-0`: Queenside Castle
+- Game ends on a checkmate or stalemate
+- Does **not** support the following rules:
+  - Resign and draw proposals
+  - Reptition of moves
+  - 50 moves rules
+  - Chess clocks and time
 <!-- - TODO: Allow the human player to play against a computer player. -->
 
 Game Features:
