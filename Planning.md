@@ -99,7 +99,31 @@
   - `promotion`: see above notes
 - algebraic / standard notation cheatsheet notes
   - see [this page](https://cheatography.com/davechild/cheat-sheets/chess-algebraic-notation/) for full details
-  - a
+  - standard move format:
+    - `{piece}[start_file][start_rank][capture]{target_cell}[promotion|check|checkmate]`
+      - specify a different `target_cell` if executing a `taking en-passant` move
+  - special move formats:
+    - `O-O`: kingside / short castling
+    - `O-O-O`: queenside / long castling
+  - only `piece` and `target_cell` are required if
+    - declared piece is unambiguous
+    - the move is not a capture / check / checkmate / promotion
+  - if declared piece is ambiguous (there are multiple valid pieces that the declared piece can refer to)
+    - use `start_file` to make it clear
+    - use `start_rank` to make it clear if `start_file` is still unclear
+    - use both `start_file` and `start_rank` to make it totally clear
+  - `piece` is always a single uppercase alphabet char or an empty string that
+    - `K`: king
+    - `Q`: queen
+    - `R`: rook
+    - `B`: bishop
+    - `N`: knight
+    - `_` (empty string): pawn
+  - `capture` is denoted by the `x` char
+  - `promotion` is denoted by the `=` char appended with a piece char that represents a queen, rook, bishop, or knight
+    - e.g. `e8=Q`
+  - `check` is denoted by the `+` char
+  - `checkmate` is denoted by the `#` char
 
 ## MVP Requirements
 
