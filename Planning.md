@@ -132,7 +132,31 @@
 
 ## MVP Requirements
 
-- TODO
+- 2 human players
+- uses ASCII characters to represent the game pieces
+  - e.g. `♟︎` for black pawn
+- console GUI / interface
+- accepts LAN (Long Algebraic Notation) from human players for chess move inputs
+- console UI 'screens'
+  - in-progress game turn screen
+    - display game board
+    - display
+  - game end / result screen
+    - display game board
+    - display game result (checkmate or stalmate)
+  - load screen
+    - display first 3 save file names in ASCII "table"
+    - allow user to either:
+      - start a new game
+      - load from a previously saved game
+  - new game screen (implement only if completed AI computer bot player)
+    - choose which piece to play as
+      - TODO
+    - choose to play against another human or computer player
+      - TODO
+- bonus
+  - allow human player to play against a simple AI computer player that makes random legal moves
+  - update chess notation parser to accept short algebraic notation with abbreviations
 
 ## Game Logic and Basic Pseudocode
 
