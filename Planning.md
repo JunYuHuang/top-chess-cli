@@ -127,7 +127,7 @@
 - consider allowing only `long algebraic notation` or `reversible algebraic notation` for player inputs
   - `long alge. notation`: alge. not. + must specify starting file and rank of piece
   - `rev. alge. notation`: `long alge. notation` + must specify captured piece if move captures a piece
-- need to specify `check` or `checkmate` in alge. not?
+- need to specify `check` or `checkmate` in alge. not.?
   - no; is optional according to ChatGPT
 
 ## MVP Requirements
@@ -138,18 +138,23 @@
 - console GUI / interface
 - accepts LAN (Long Algebraic Notation) from human players for chess move inputs
 - console UI 'screens'
-  - in-progress game turn screen
+  - game turn screen that displays
+    - game board
+    - pieces captured by white
+    - pieces captured by black
+    - whose turn it currently is
+    - message indicating that the player's king has been checked if so
+    - prompt for how to enter a valid chess move in Long AN
+    - message indicating that the input was invalid if an invalid input was entered previously
+  - game end screen
     - display game board
-    - display
-  - game end / result screen
-    - display game board
-    - display game result (checkmate or stalmate)
-  - load screen
+    - display game result (checkmate or stalemate)
+  - game load screen
     - display first 3 save file names in ASCII "table"
     - allow user to either:
       - start a new game
       - load from a previously saved game
-  - new game screen (implement only if completed AI computer bot player)
+  - game config / setup screen (implement only if completed AI computer bot player)
     - choose which piece to play as
       - TODO
     - choose to play against another human or computer player
@@ -157,8 +162,48 @@
 - bonus
   - allow human player to play against a simple AI computer player that makes random legal moves
   - update chess notation parser to accept short algebraic notation with abbreviations
+  - allow players to propose (agree or reject) a draw
+  - allow a player to resign or forfeit the game (to let the opposing player to win by choice)
 
-## Game Logic and Basic Pseudocode
+## Game Logic and Basic Pseudocode v1 (base game with saves and loads)
+
+- if there are any existing local game save files
+  - prompt human player to either
+    - start a new game OR
+    - load from an existing game file
+  - if human player requested to load a game file
+    - display a "table" of existing save files
+    - prompt player for which game file to load
+    - while entered game file id is invalid,
+      - prompt for a valid game to load
+    - load the game file
+  - else start a new game
+- if new game started
+  - prompt the first (human) player for which side (by piece colour) they want to play as
+  - while input side is invalid,
+    - prompt for a valid input side
+- while game is not over
+  - return if there are not 2 players in the game
+  - print game end screen and return if:
+    - the white player won (checkmated the black king) OR
+    - the black player won (checkmated the white king) OR
+    - there is a stalemate (neither player can win)
+  - get input from human player
+    - print turn screen
+    - do something based on what the input is
+    - if the input is a valid chess move
+      - valid chess moves:
+        - non-capturing move
+        - capturing move (includes en-passant)
+        - pawn promotion
+        - kingside or queenside castling
+      - update game state
+    - else if the input is a valid command to save the current game i.e. `!save`
+      - save the current game's state as a new save file under `/saves/save_{save_count}.yaml`
+      - display something in the next turn screen that indicates that the game was saved successfully as `save_{save_count}`
+  - switch the turn to the other player
+
+## Game Logic and Basic Pseudocode v2 (with AI computer player)
 
 - TODO
 
