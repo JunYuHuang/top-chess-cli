@@ -6,6 +6,18 @@
 
 This is a console implementation of the classic two-player board game Chess.
 
+Note that chess pieces are printed on the chess board as 2-character strings composed of a lowercase and an uppercase alphabetical English characters e.g. `bP` for a Black Pawn.
+
+The first character is either `b` or `w` which denotes the color of the piece as black or white respectively.
+
+The second character denotes the type of chess piece it is. The letter to piece mappings are as follows:
+- `P`: Pawn
+- `R`: Rook
+- `N`: Knight
+- `B`: Bishop
+- `Q`: Queen
+- `K`: King
+
 ## Quick Start
 
 This application assumes you have Ruby 3.1.4 installed.
@@ -24,6 +36,7 @@ rspec
 ## Skills Demonstrated
 
 - Object-Oriented Programming (OOP) Design
+- Adhering to SOLID Principles (e.g. Dependency Injection, Single Responsiblity, etc.)
 - Unit and Integration Testing
 - Input Validation
 - Handling Edge Cases
