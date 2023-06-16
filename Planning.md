@@ -100,7 +100,7 @@
 - algebraic / standard notation cheatsheet notes
   - see [this page](https://cheatography.com/davechild/cheat-sheets/chess-algebraic-notation/) for full details
   - standard move format:
-    - `{piece}[start_file][start_rank][capture]{target_cell}[promotion|check|checkmate]`
+    - `{piece}[start_file][start_rank][capture]{target_cell}[promotion|check|checkmate|en-passant]`
       - specify a different `target_cell` if executing a `taking en-passant` move
   - special move formats:
     - `O-O`: kingside / short castling
@@ -124,6 +124,7 @@
     - e.g. `e8=Q`
   - `check` is denoted by the `+` char
   - `checkmate` is denoted by the `#` char
+  - `en-passant` is optionally denoted by a ` e.p.` suffix string
 - consider allowing only `long algebraic notation` or `reversible algebraic notation` for player inputs
   - `long alge. notation`: alge. not. + must specify starting file and rank of piece
   - `rev. alge. notation`: `long alge. notation` + must specify captured piece if move captures a piece
@@ -133,15 +134,11 @@
 ## MVP Requirements
 
 - 2 human players
-- uses ASCII characters to represent the game pieces
-  - e.g. `♟︎` for black pawn
 - console GUI / interface
 - accepts LAN (Long Algebraic Notation) from human players for chess move inputs
 - console UI 'screens'
   - game turn screen that displays
     - game board
-    - pieces captured by white
-    - pieces captured by black
     - whose turn it currently is
     - message indicating that the player's king has been checked if so
     - prompt for how to enter a valid chess move in Long AN
@@ -164,6 +161,11 @@
   - update chess notation parser to accept short algebraic notation with abbreviations
   - allow players to propose (agree or reject) a draw
   - allow a player to resign or forfeit the game (to let the opposing player to win by choice)
+  - uses ASCII characters to represent the game pieces
+    - e.g. `♟︎` for black pawn
+  - game turn screen displays
+    - pieces captured by white
+    - pieces captured by black
 
 ## Game Logic and Basic Pseudocode v1 (base game with saves and loads)
 
@@ -247,6 +249,12 @@
     - TODO
   - set_board!(board)
     - TODO
+  - is_valid_piece?()
+    - TODO
+  - get_pieces(piece_color, piece_type)
+    - TODO
+  - get_piece(cell)
+    - TODO
   - did_check?()
     - TODO
   - did_checkmate?()
@@ -267,7 +275,7 @@
     - TODO
   - is_valid_promotion?()
     - TODO
-  - promote_pawn!()
+  - promote_pawn!(cell, new_piece)
     - TODO
   - is_valid_en_passant?()
     - TODO
@@ -311,19 +319,25 @@
 - `Player` class
   - constructor()
     - TODO
-  - color()
+  - get_piece_color()
     - TODO
 - `HumanPlayer` class
   - constructor()
     - TODO
-  - get_input()
+  - get_turn_input()
+    - TODO
+  - get_start_option()
+    - TODO
+  - get_piece_color()
+    - TODO
+  - get_opponent_type()
     - TODO
   - to_s()
     - TODO
 - `ComputerPlayer` class
   - constructor()
     - TODO
-  - get_input()
+  - get_turn_input()
     - TODO
   - get_random_move()
     - TODO
@@ -332,44 +346,109 @@
 - `Piece` class
   - constructor()
     - TODO
-  - color()
+  - get_color()
     - TODO
+  - can_jump?()
+    - TODO: not sure if this method is needed
 - `Pawn` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - did_move()?
+  - get_moves()
     - TODO
-  - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
+  - did_move?()
+    - TODO
+  - can_double_step?()
+    - TODO
+  - can_promote?()
+    - TODO
+  - promote!()
+    - TODO
+  - can_capture_en_passant?()
+    - TODO
+  - get_captures_en_passant()
+    - TODO
 - `Rook` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - did_move()?
+  - get_moves()
     - TODO
-  - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
+  - did_move?()
+    - TODO
+  - can_castle_queenside?()
+    - TODO
+  - can_castle_kingside?()
+    - TODO
+  - can_castle?()
+    - TODO
 - `Knight` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - TODO
+  - get_moves()
+    - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
 - `Bishop` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - TODO
+  - get_moves()
+    - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
 - `Queen` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - TODO
+  - get_moves()
+    - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
 - `King` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - did_move()?
+  - get_moves()
     - TODO
-  - TODO
+  - get_captures()
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
+  - did_move?()
+    - TODO
+  - can_castle_queenside?()
+    - TODO
+  - can_castle_kingside?()
+    - TODO
+  - can_castle?()
+    - TODO
 - `PieceFactory` class
   - constructor(piece_class, pieces_dict)
     - TODO
   - get_piece(piece_type)
     - TODO
-  - TODO
 - `GameSave` class
   - constructor()
     - TODO
