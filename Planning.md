@@ -209,7 +209,188 @@
 
 ## Expanded Pseudocode / Partial Code
 
-- TODO
+- `Game` class
+  - constructor()
+    - TODO
+  - use_game_save(game_save_obj)
+    - TODO
+  - is_valid_game?()
+    - TODO
+  - is_valid_board?()
+    - TODO
+  - add_player!()
+    - TODO
+  - update!(options)
+    - TODO
+  - play!()
+    - TODO
+  - is_valid_piece_color?(piece_color)
+    - TODO
+  - get_player(piece_color)
+    - TODO
+  - did_game_end?()
+    - TODO
+  - is_valid_command?()
+    - TODO
+  - run_command!()
+    - TODO
+  - run_chess_move!()
+    - TODO
+  - add_captured_piece!(piece)
+    - TODO
+  - switch_player_turns!()
+    - TODO
+- `Chess` class or merge it with `Game` class?
+  - constructor()
+    - TODO
+  - get_starting_board()
+    - TODO
+  - set_board!(board)
+    - TODO
+  - did_check?()
+    - TODO
+  - did_checkmate?()
+    - TODO
+  - did_stalemate?()
+    - TODO
+  - is_valid_move?()
+    - TODO
+  - move_piece!()
+    - TODO
+  - is_valid_capture?()
+    - TODO
+  - capture_piece!()
+    - TODO
+  - is_valid_long_alge_note?()
+    - TODO
+  - get_chess_move()
+    - TODO
+  - is_valid_promotion?()
+    - TODO
+  - promote_pawn!()
+    - TODO
+  - is_valid_en_passant?()
+    - TODO
+  - capture_en_passant!()
+    - TODO
+  - is_valid_castle?()
+    - TODO
+  - queenside_castle!()
+    - TODO
+  - kingside_castle!()
+    - TODO
+- `ConsoleUI` class?
+  - constructor()
+    - TODO
+  - clear_UI()
+    - TODO
+  - print_board()
+    - TODO
+  - print_captured_pieces(capturer_color)
+    - TODO
+  - print_turn_prompt(is_valid, last_input)
+    - TODO
+  - print_game_end()
+    - TODO
+  - print_saves_table()
+    - TODO
+  - print_load_prompt(is_valid, last_input)
+    - TODO
+  - print_color_prompt(is_valid, last_input)
+    - TODO
+  - print_opponent_prompt(is_valid, last_input)
+    - TODO
+  - print_load_screen()
+    - TODO
+  - print_setup_screen()
+    - TODO
+  - print_turn_screen()
+    - TODO
+  - print_end_screen()
+    - TODO
+- `Player` class
+  - constructor()
+    - TODO
+  - color()
+    - TODO
+- `HumanPlayer` class
+  - constructor()
+    - TODO
+  - get_input()
+    - TODO
+  - to_s()
+    - TODO
+- `ComputerPlayer` class
+  - constructor()
+    - TODO
+  - get_input()
+    - TODO
+  - get_random_move()
+    - TODO
+  - to_s()
+    - TODO
+- `Piece` class
+  - constructor()
+    - TODO
+  - color()
+    - TODO
+- `Pawn` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - did_move()?
+    - TODO
+  - TODO
+- `Rook` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - did_move()?
+    - TODO
+  - TODO
+- `Knight` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - TODO
+- `Bishop` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - TODO
+- `Queen` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - TODO
+- `King` class that inherits from `Piece` class
+  - constructor()
+    - TODO
+  - did_move()?
+    - TODO
+  - TODO
+- `PieceFactory` class
+  - constructor(piece_class, pieces_dict)
+    - TODO
+  - get_piece(piece_type)
+    - TODO
+  - TODO
+- `GameSave` class
+  - constructor()
+    - TODO
+  - path()
+    - TODO
+  - set_path()
+    - TODO
+  - save_prefix()
+    - TODO
+  - set_save_prefix(prefix)
+    - TODO
+  - count_saves()
+    - TODO
+  - get_save_names_list(save_name_prefix, limit)
+    - TODO
+  - does_save_exist?(save_name)
+    - TODO
+  - create_save(game_obj)
+    - TODO
+  - load_save(game_obj, save_name)
+    - TODO
 
 ## UI Design
 
