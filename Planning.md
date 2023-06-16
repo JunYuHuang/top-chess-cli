@@ -212,5 +212,124 @@
 - TODO
 
 ## UI Design
+<!--
+### Board 1
 
-- TODO
+```
+    a   b   c   d   e   f   g   h
+  +---+---+---+---+---+---+---+---+
+8 | R | N | B | Q | K | B | N | R | 8
+  +---+---+---+---+---+---+---+---+
+7 | P | P | P | P | P | P | P | P | 7
+  +---+---+---+---+---+---+---+---+
+6 |   |   |   |   |   |   |   |   | 6
+  +---+---+---+---+---+---+---+---+
+5 |   |   |   |   |   |   |   |   | 5
+  +---+---+---+---+---+---+---+---+
+4 |   |   |   |   |   |   |   |   | 4
+  +---+---+---+---+---+---+---+---+
+3 |   |   |   |   |   |   |   |   | 3
+  +---+---+---+---+---+---+---+---+
+2 | P | P | P | P | P | P | P | P | 2
+  +---+---+---+---+---+---+---+---+
+1 | R | N | B | Q | K | B | N | R | 1
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
+```
+
+### Board 2
+
+```
+   a  b  c  d  e  f  g  h
+  ╔══╤══╤══╤══╤══╤══╤══╤══╗
+8 ║bR│bN│bB│bQ│bK│bB│bN│bB║ 8
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+7 ║bP│bP│bP│bP│bP│bP│bP│bP║ 7
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+6 ║  │░░│  │░░│  │░░│  │░░║ 6
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+5 ║░░│  │░░│  │░░│  │░░│  ║ 5
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+4 ║  │░░│  │░░│  │░░│  │░░║ 4
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+3 ║░░│  │░░│  │░░│  │░░│  ║ 3
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+2 ║wP│wP│wP│wP│wP│wP│wP│wP║ 2
+  ╟──┼──┼──┼──┼──┼──┼──┼──╢
+1 ║wR│wN│wB│wQ│wK│wB│wN│wB║ 1
+  ╚══╧══╧══╧══╧══╧══╧══╧══╝
+   a  b  c  d  e  f  g  h
+``` -->
+
+### Board 3
+
+```
+    a    b    c    d    e    f    g    h
+  ╔════╤════╤════╤════╤════╤════╤════╤════╗
+8 ║ bR │ bN │ bB │ bQ │ bK │ bB │ bN │ bB ║ 8
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+7 ║ bP │ bP │ bP │ bP │ bP │ bP │ bP │ bP ║ 7
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+6 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 6
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+5 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 5
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+4 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 4
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+3 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 3
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+2 ║ wP │ wP │ wP │ wP │ wP │ wP │ wP │ wP ║ 2
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+1 ║ wR │ wN │ wB │ wQ │ wK │ wB │ wN │ wB ║ 1
+  ╚════╧════╧════╧════╧════╧════╧════╧════╝
+    a    b    c    d    e    f    g    h
+```
+
+### Turn Screen
+
+```
+[ Chess Board ]
+
+WHITE's captured pieces:
+BLACK's captured pieces:
+
+It is WHITE (Human Player 1)'s turn.
+
+Enter your move in Long AN or '!save' to save the game:
+❌ 'asdf' is an illegal move or an invalid save command. Try again.
+```
+
+### End Screen
+
+```
+[ Chess Board ]
+
+TODO
+```
+
+### Load Screen (appears if have 1+ game saves)
+
+```
+ _____________________
+| Chess Game Saves    |
+|_____________________|
+| save_1              |
+| save_2              |
+| save_3              |
+| and 0 more saves    |
+|_____________________|
+
+You have 3 Chess game save files.
+Load a game from a save file or start a new game.
+
+Enter '!new' to start a new game.
+Enter '!load <save file name>' to resume playing from a game save.
+❌ '!loadz' is not a valid choice. Try again.
+Enter your choice (without quotes):
+```
+
+### Setup Screen
+
+```
+TODO
+```
