@@ -36,7 +36,7 @@ rspec
 ## Skills Demonstrated
 
 - Object-Oriented Programming (OOP) Design
-- Adhering to SOLID Principles (e.g. Dependency Injection, Single Responsiblity, etc.)
+- Applied SOLID Principles (e.g. Dependency Injection, Single Responsiblity, etc.)
 - Unit and Integration Testing
 - Input Validation
 - Handling Edge Cases
@@ -55,6 +55,7 @@ rspec
   - `+`: Check (can be omitted)
   - `#`: Checkmate (can be omitted)
   - `x`: Capture
+  - `e.p.`: Piece captured / taken en-passant (can be omitted)
   - `O-O` or `0-0`: Kingside Castle
   - `O-O-O` or `0-0-0`: Queenside Castle
 - Game ends on a checkmate or stalemate
