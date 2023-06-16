@@ -212,56 +212,8 @@
 - TODO
 
 ## UI Design
-<!--
-### Board 1
 
-```
-    a   b   c   d   e   f   g   h
-  +---+---+---+---+---+---+---+---+
-8 | R | N | B | Q | K | B | N | R | 8
-  +---+---+---+---+---+---+---+---+
-7 | P | P | P | P | P | P | P | P | 7
-  +---+---+---+---+---+---+---+---+
-6 |   |   |   |   |   |   |   |   | 6
-  +---+---+---+---+---+---+---+---+
-5 |   |   |   |   |   |   |   |   | 5
-  +---+---+---+---+---+---+---+---+
-4 |   |   |   |   |   |   |   |   | 4
-  +---+---+---+---+---+---+---+---+
-3 |   |   |   |   |   |   |   |   | 3
-  +---+---+---+---+---+---+---+---+
-2 | P | P | P | P | P | P | P | P | 2
-  +---+---+---+---+---+---+---+---+
-1 | R | N | B | Q | K | B | N | R | 1
-  +---+---+---+---+---+---+---+---+
-    a   b   c   d   e   f   g   h
-```
-
-### Board 2
-
-```
-   a  b  c  d  e  f  g  h
-  ╔══╤══╤══╤══╤══╤══╤══╤══╗
-8 ║bR│bN│bB│bQ│bK│bB│bN│bB║ 8
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-7 ║bP│bP│bP│bP│bP│bP│bP│bP║ 7
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-6 ║  │░░│  │░░│  │░░│  │░░║ 6
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-5 ║░░│  │░░│  │░░│  │░░│  ║ 5
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-4 ║  │░░│  │░░│  │░░│  │░░║ 4
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-3 ║░░│  │░░│  │░░│  │░░│  ║ 3
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-2 ║wP│wP│wP│wP│wP│wP│wP│wP║ 2
-  ╟──┼──┼──┼──┼──┼──┼──┼──╢
-1 ║wR│wN│wB│wQ│wK│wB│wN│wB║ 1
-  ╚══╧══╧══╧══╧══╧══╧══╧══╝
-   a  b  c  d  e  f  g  h
-``` -->
-
-### Board 3
+### Turn Screen
 
 ```
     a    b    c    d    e    f    g    h
@@ -283,28 +235,46 @@
 1 ║ wR │ wN │ wB │ wQ │ wK │ wB │ wN │ wB ║ 1
   ╚════╧════╧════╧════╧════╧════╧════╧════╝
     a    b    c    d    e    f    g    h
-```
 
-### Turn Screen
-
-```
-[ Chess Board ]
-
-WHITE's captured pieces:
 BLACK's captured pieces:
+WHITE's captured pieces:
 
 It is WHITE (Human Player 1)'s turn.
-
+[if applies: 'Your king has been checked. Move it to an unchecked square.']
+✅ Started new game.
+❌ 'asdf' is an illegal move or an invalid command. Try again.
 Enter your move in Long AN or '!save' to save the game:
-❌ 'asdf' is an illegal move or an invalid save command. Try again.
 ```
 
 ### End Screen
 
 ```
-[ Chess Board ]
+    a    b    c    d    e    f    g    h
+  ╔════╤════╤════╤════╤════╤════╤════╤════╗
+8 ║    │░░░░│    │░░░░│    │ wQ │    │ bK ║ 8
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+7 ║░░░░│    │░░░░│    │░░░░│    │░░░░│ bP ║ 7
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+6 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 6
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+5 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 5
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+4 ║    │░░░░│    │░░░░│    │░░░░│ wK │░░░░║ 4
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+3 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 3
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+2 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 2
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+1 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 1
+  ╚════╧════╧════╧════╧════╧════╧════╧════╝
+    a    b    c    d    e    f    g    h
 
-TODO
+BLACK's captures: wP x 8, wB x 2, wN x 2, wR x 2
+WHITE's captures: bP x 7, bB x 2, bN x 2, bR x 2, bQ x 1
+
+WHITE (Human Player 1) has checkmated BLACK (Human Player 2).
+
+Game ended: 1-0 WHITE (Human Player 1) won!
 ```
 
 ### Load Screen (appears if have 1+ game saves)
@@ -331,5 +301,15 @@ Enter your choice (without quotes):
 ### Setup Screen
 
 ```
-TODO
+New Chess Game Setup
+
+Choose your colored piece.
+Enter 'white' or 'black' (without quotes):
+
+You chose 'white'.
+
+Choose to play against a human or a computer opponent.
+Enter 'human' or 'computer' (without quotes):
+
+You chose 'human'.
 ```
