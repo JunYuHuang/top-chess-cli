@@ -17,18 +17,19 @@ Complete the expanded pseudocode for following classes:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
-- [ ] `#get_piece_color` method
+- [x] `.initialize` constructor
+- [x] `#piece_color` method
+- [x] `#name` method
 
 ## `HumanPlayer` class
 
 Complete the following:
 
-- [ ] `.initialize` constructor
+- [x] `.initialize` constructor
 - [ ] `#get_turn_input` method
 - [ ] `#get_start_option` method
 - [ ] `#get_opponent_type` method
-- [ ] `t_so` method
+- [x] `to_s` method
 
 ## `Piece` class
 
