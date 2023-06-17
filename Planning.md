@@ -328,8 +328,6 @@
     - TODO
   - get_start_option()
     - TODO
-  - get_piece_color()
-    - TODO
   - get_opponent_type()
     - TODO
   - to_s()
@@ -364,15 +362,15 @@
   - did_move?()
     - TODO
   - can_double_step?()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_promote?()
-    - TODO
+    - TODO: not sure if this method is needed
   - promote!()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_capture_en_passant?()
-    - TODO
+    - TODO: not sure if this method is needed
   - get_captures_en_passant()
-    - TODO
+    - TODO: not sure if this method is needed
 - `Rook` class that inherits from `Piece` class
   - constructor()
     - TODO
@@ -387,11 +385,11 @@
   - did_move?()
     - TODO
   - can_castle_queenside?()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_castle_kingside?()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_castle?()
-    - TODO
+    - TODO: not sure if this method is needed
 - `Knight` class that inherits from `Piece` class
   - constructor()
     - TODO
@@ -439,11 +437,11 @@
   - did_move?()
     - TODO
   - can_castle_queenside?()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_castle_kingside?()
-    - TODO
+    - TODO: not sure if this method is needed
   - can_castle?()
-    - TODO
+    - TODO: not sure if this method is needed
 - `PieceFactory` class
   - constructor(piece_class, pieces_dict)
     - TODO
