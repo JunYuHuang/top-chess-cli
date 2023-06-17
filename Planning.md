@@ -348,7 +348,7 @@
     - TODO
   - can_jump?()
     - TODO: not sure if this method is needed
-- `Pawn` class that inherits from `Piece` class
+- `PawnPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
@@ -371,7 +371,7 @@
     - TODO: not sure if this method is needed
   - get_captures_en_passant()
     - TODO: not sure if this method is needed
-- `Rook` class that inherits from `Piece` class
+- `RookPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
@@ -390,7 +390,7 @@
     - TODO: not sure if this method is needed
   - can_castle?()
     - TODO: not sure if this method is needed
-- `Knight` class that inherits from `Piece` class
+- `KnightPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
@@ -401,7 +401,7 @@
     - TODO
   - did_checkmate?()
     - TODO
-- `Bishop` class that inherits from `Piece` class
+- `BishopPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
@@ -412,7 +412,7 @@
     - TODO
   - did_checkmate?()
     - TODO
-- `Queen` class that inherits from `Piece` class
+- `QueenPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
@@ -423,7 +423,7 @@
     - TODO
   - did_checkmate?()
     - TODO
-- `King` class that inherits from `Piece` class
+- `KingPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - get_moves()
