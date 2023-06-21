@@ -161,8 +161,7 @@
   - update chess notation parser to accept short algebraic notation with abbreviations
   - allow players to propose (agree or reject) a draw
   - allow a player to resign or forfeit the game (to let the opposing player to win by choice)
-  - uses ASCII characters to represent the game pieces
-    - e.g. `♟︎` for black pawn
+  - represent the game pieces by 2-letter alphabet chars e.g. `bP` for a Black Pawn
   - game turn screen displays
     - pieces captured by white
     - pieces captured by black
@@ -212,8 +211,27 @@
 ## Expanded Pseudocode / Partial Code
 
 - `Game` class
-  - constructor()
+  - constructor(board, player_1_class, player_2_class)
     - TODO
+  - build_board(board)
+    - inputs
+      - `board`: a 2D array of symbols representing the board to build
+        - valid cells (`board[r][c]`):
+          - `b_pwn`: represents a Black Pawn
+          - `b_rok`: represents a Black Rook
+          - `b_nte`: represents a Black Knight
+          - `b_bsh`: represents a Black Bishop
+          - `b_qwn`: represesnts a Black Queen
+          - `b_kng`: represents the Black King
+          - `w_pwn`: represents a White Pawn
+          - `w_rok`: represents a White Rook
+          - `w_nte`: represents a White Knight
+          - `w_bsh`: represents a White Bishop
+          - `w_qwn`: represesnts a White Queen
+          - `w_kng`: represents the White King
+          - `empty`: represents an empty cell / square
+    - outputs
+      - `res`: a 2D array of various Piece subclass objects built from `board`
   - use_game_save(game_save_obj)
     - TODO
   - is_valid_game?()
@@ -241,9 +259,6 @@
   - add_captured_piece!(piece)
     - TODO
   - switch_player_turns!()
-    - TODO
-- `Chess` class or merge it with `Game` class?
-  - constructor()
     - TODO
   - get_starting_board()
     - TODO
@@ -344,16 +359,16 @@
 - `Piece` class
   - constructor()
     - TODO
-  - get_color()
+  - color()
     - TODO
-  - can_jump?()
-    - TODO: not sure if this method is needed
+  - type()
+    - TODO
 - `PawnPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
@@ -374,15 +389,17 @@
 - `RookPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
   - did_checkmate?()
     - TODO
   - did_move?()
+    - TODO
+  - moved!()
     - TODO
   - can_castle_queenside?()
     - TODO: not sure if this method is needed
@@ -393,9 +410,9 @@
 - `KnightPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
@@ -404,9 +421,9 @@
 - `BishopPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
@@ -415,9 +432,9 @@
 - `QueenPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
@@ -426,9 +443,9 @@
 - `KingPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
-  - get_moves()
+  - moves()
     - TODO
-  - get_captures()
+  - captures()
     - TODO
   - did_check?()
     - TODO
@@ -445,7 +462,7 @@
 - `PieceFactory` class
   - constructor(piece_class, pieces_dict)
     - TODO
-  - get_piece(piece_type)
+  - create(piece_type, options)
     - TODO
 - `GameSave` class
   - constructor()
