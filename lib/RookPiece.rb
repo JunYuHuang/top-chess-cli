@@ -31,7 +31,6 @@ class RookPiece < Piece
     ]
   end
 
-  # TODO - to test
   def captures(src_cell, board)
     res = [
       self.class.up_capture(src_cell, board),

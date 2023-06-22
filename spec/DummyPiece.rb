@@ -11,7 +11,6 @@ class DummyPiece < Piece
     did_move: false
   }
 
-  # TODO
   def initialize(options = @@default_options)
     passed_options = {
       color: options.fetch(:color, @@default_options[:color]),
@@ -23,7 +22,6 @@ class DummyPiece < Piece
     @did_move = options.fetch(:did_move, @@default_options[:did_move])
   end
 
-  # TODO - to test
   def did_move?
     @did_move
   end
