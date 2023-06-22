@@ -1,8 +1,8 @@
 require './lib/Piece'
-require './lib/PieceActionUtils'
+require './lib/PieceUtils'
 
 class RookPiece < Piece
-  extend PieceActionUtils
+  extend PieceUtils
 
   attr_accessor(:default_options, :did_move)
 
@@ -28,24 +28,33 @@ class RookPiece < Piece
   end
 
   # TODO - to test
-  def moves(start_cell, board)
-    #
+  def moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    res = [
+      *up_moves(src_cell, board, options),
+      *down_moves(src_cell, board, options),
+      *left_moves(src_cell, board, options),
+      *right_moves(src_cell, board, options)
+    ]
   end
 
   # TODO - to test
-  def captures(start_cell, board)
-    #
+  def captures(src_cell, board)
+    res = [
+      up_capture(src_cell, board),
+      down_capture(src_cell, board),
+      left_capture(src_cell, board),
+      right_capture(src_cell, board)
+    ]
+    res.filter { |cell| !cell.nil? }
   end
 
-  # TODO - to test
+  def did_move?
+    @did_move
+  end
+
   def moved!
     return if @did_move
     @did_move = true
-  end
-
-  # TODO - to test
-  def did_move?
-    @did_move
   end
 end
 
