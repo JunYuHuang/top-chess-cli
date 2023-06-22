@@ -3,7 +3,6 @@ module PieceUtils
   DEFAULT_MOVE_OPTIONS = {
     max_steps: BOARD_LENGTH - 1
   }
-  EMPTY_ARRAY = []
 
   # TODO
   def is_inbound_cell?(cell)
@@ -13,7 +12,6 @@ module PieceUtils
     true
   end
 
-  # TODO
   def is_empty_cell?(cell, board)
     row, col = cell
     piece = board[row][col]
@@ -41,10 +39,8 @@ module PieceUtils
     src_piece.type != dst_piece.type
   end
 
-  # TODO
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -73,10 +69,8 @@ module PieceUtils
     nil
   end
 
-  # TODO
   def down_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -105,10 +99,8 @@ module PieceUtils
     nil
   end
 
-  # TODO
   def left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -137,10 +129,8 @@ module PieceUtils
     nil
   end
 
-  # TODO
   def right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -171,8 +161,7 @@ module PieceUtils
 
   # TODO (cells in lower half of positive diagonal line)
   def down_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -207,8 +196,7 @@ module PieceUtils
 
   # TODO (get cells in upper half of positive diagonal line)
   def up_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -243,8 +231,7 @@ module PieceUtils
 
   # TODO (get cells in lower half of negative diagonal line)
   def down_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell
@@ -279,8 +266,7 @@ module PieceUtils
 
   # TODO (get cells in upper half of negative diagonal line)
   def up_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
-    options => { max_steps: }
-    max_steps = max_steps ? max_steps : BOARD_LENGTH - 1
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
     res = []
     src_row, src_col = src_cell

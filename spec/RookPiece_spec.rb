@@ -10,9 +10,8 @@ describe RookPiece do
   end
 
   describe "#moves" do
-    # failing test due to issue with DummyPiece constructor
     it "returns the correct int matrix if called with a valid cell and an otherwise empty board" do
-      empty_piece = DummyPiece.new({ type: :empty })
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_rook = RookPiece.new({ did_move: true })

@@ -11,39 +11,34 @@ class RookPiece < Piece
     did_move: false
   }
 
-  # TODO - to test
   def initialize(options = @@default_options)
-    options => {
-      color:,
-      did_move:
-    }
     passed_options = {
-      color: color ? color : :white,
+      color: options.fetch(:color, @@default_options[:color]),
       type: :rook,
       is_interactive: true,
       is_capturable: true
     }
     super(passed_options)
-    @did_move = did_move ? did_move : false
+    @did_move = options.fetch(:did_move, @@default_options[:did_move])
   end
 
-  # TODO - to test
-  def moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+  # TODO - to test (write more tests)
+  def moves(src_cell, board, options = {})
     res = [
-      *up_moves(src_cell, board, options),
-      *down_moves(src_cell, board, options),
-      *left_moves(src_cell, board, options),
-      *right_moves(src_cell, board, options)
+      *self.class.up_moves(src_cell, board, options),
+      *self.class.down_moves(src_cell, board, options),
+      *self.class.left_moves(src_cell, board, options),
+      *self.class.right_moves(src_cell, board, options)
     ]
   end
 
   # TODO - to test
   def captures(src_cell, board)
     res = [
-      up_capture(src_cell, board),
-      down_capture(src_cell, board),
-      left_capture(src_cell, board),
-      right_capture(src_cell, board)
+      self.class.up_capture(src_cell, board),
+      self.class.down_capture(src_cell, board),
+      self.class.left_capture(src_cell, board),
+      self.class.right_capture(src_cell, board)
     ]
     res.filter { |cell| !cell.nil? }
   end

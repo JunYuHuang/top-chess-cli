@@ -10,16 +10,10 @@ class Piece
 
   # TODO - to test
   def initialize(options = @@default_options)
-    options => {
-      color:,
-      type:,
-      is_interactive:,
-      is_capturable:
-    }
-    @color = color ? color : nil
-    @type = type ? type : nil
-    @is_interactive = is_interactive ? is_interactive : false
-    @is_capturable = is_capturable ? is_capturable : false
+    @color = options.fetch(:color, @@default_options[:color])
+    @type = options.fetch(:type, @@default_options[:type])
+    @is_interactive = options.fetch(:is_interactive, @@default_options[:is_interactive])
+    @is_capturable = options.fetch(:is_capturable, @@default_options[:is_capturable])
   end
 
   # TODO - to test
