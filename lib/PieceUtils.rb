@@ -1,10 +1,14 @@
+require 'set'
+
 module PieceUtils
   BOARD_LENGTH = 8
   DEFAULT_MOVE_OPTIONS = {
     max_steps: BOARD_LENGTH - 1
   }
+  VALID_PIECE_TYPES = Set.new([:pawn, :rook, :knight, :bishop, :queen, :king])
+  VALID_PIECE_COLORS = Set.new([:black, :white])
 
-  # TODO
+  # TODO - to test
   def is_inbound_cell?(cell)
     row, col = cell
     return false if row < 0 or row >= BOARD_LENGTH
@@ -19,7 +23,7 @@ module PieceUtils
     piece.type == :empty
   end
 
-  # TODO
+  # TODO - to test
   def is_ally_piece_cell?(src_cell, dst_cell, board)
     src_row, src_col = src_cell
     dst_row, dst_col = dst_cell
@@ -29,14 +33,16 @@ module PieceUtils
     src_piece.type == dst_piece.type
   end
 
-  # TODO
   def is_enemy_piece_cell?(src_cell, dst_cell, board)
     src_row, src_col = src_cell
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
     dst_piece = board[dst_row][dst_col]
-    return false if src_piece.nil? or src_piece.type == :empty
-    src_piece.type != dst_piece.type
+    return false unless VALID_PIECE_COLORS.include?(src_piece.color)
+    return false unless VALID_PIECE_TYPES.include?(src_piece.type)
+    return false unless VALID_PIECE_COLORS.include?(dst_piece.color)
+    return false unless VALID_PIECE_TYPES.include?(dst_piece.type)
+    src_piece.color != dst_piece.color
   end
 
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
@@ -56,7 +62,6 @@ module PieceUtils
     res
   end
 
-  # TODO
   def up_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row - 1
@@ -86,7 +91,6 @@ module PieceUtils
     res
   end
 
-  # TODO
   def down_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row + 1
@@ -116,7 +120,6 @@ module PieceUtils
     res
   end
 
-  # TODO
   def left_capture(src_cell, board)
     src_row, src_col = src_cell
     col = src_col - 1
@@ -146,7 +149,6 @@ module PieceUtils
     res
   end
 
-  # TODO
   def right_capture(src_cell, board)
     src_row, src_col = src_cell
     col = src_col + 1
@@ -159,7 +161,8 @@ module PieceUtils
     nil
   end
 
-  # TODO (cells in lower half of positive diagonal line)
+  # TODO - to test
+  # cells in lower half of positive diagonal line
   def down_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
@@ -179,7 +182,8 @@ module PieceUtils
     res
   end
 
-  # TODO (cell in lower half of positive diagonal line)
+  # TODO - to test
+  # cell in lower half of positive diagonal line
   def down_left_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row + 1
@@ -194,7 +198,8 @@ module PieceUtils
     nil
   end
 
-  # TODO (get cells in upper half of positive diagonal line)
+  # TODO - to test
+  # cells in upper half of positive diagonal line
   def up_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
@@ -214,7 +219,8 @@ module PieceUtils
     res
   end
 
-  # TODO (get cell in upper half of positive diagonal line)
+  # TODO - to test
+  # cell in upper half of positive diagonal line
   def up_right_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row - 1
@@ -229,7 +235,8 @@ module PieceUtils
     nil
   end
 
-  # TODO (get cells in lower half of negative diagonal line)
+  # TODO - to test
+  # cells in lower half of negative diagonal line
   def down_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
@@ -249,7 +256,8 @@ module PieceUtils
     res
   end
 
-  # TODO (get cell in lower half of negative diagonal line)
+  # TODO - to test
+  # cell in lower half of negative diagonal line
   def down_right_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row + 1
@@ -264,7 +272,8 @@ module PieceUtils
     nil
   end
 
-  # TODO (get cells in upper half of negative diagonal line)
+  # TODO - to test
+  # cells in upper half of negative diagonal line
   def up_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 
@@ -284,7 +293,8 @@ module PieceUtils
     res
   end
 
-  # TODO (get cell in upper half of negative diagonal line)
+  # TODO - to test
+  # cell in upper half of negative diagonal line
   def up_left_capture(src_cell, board)
     src_row, src_col = src_cell
     row = src_row - 1

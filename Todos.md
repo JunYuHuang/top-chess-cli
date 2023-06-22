@@ -13,6 +13,16 @@ Complete the expanded pseudocode for following classes:
 - [x] `KingPiece` class
 - [x] `PieceFactory` class
 
+## Overall Milestone TODOs
+
+Complete the following:
+
+- [ ] Build base game logic
+- [ ] Build GUI interfaces for getting player inputs (via console)
+- [ ] Build GUI interfaces for displaying the game (via console)
+- [ ] Build game saving and loading feature
+- [ ] Build simple computer AI opponent player
+
 ## `Player` class
 
 Complete the following:
@@ -56,6 +66,29 @@ Complete the following:
 - [x] `#up_left_moves` method
 - [x] `#up_left_capture` method
 
+Complete the tests for the following (indirectly via `Piece` subclasses that use this module):
+
+- [ ] `#is_inbound_cell?` method (possibly not needed?)
+- [x] `#is_empty_cell?` method
+- [ ] `#is_ally_piece_cell?` method
+- [x] `#is_enemy_piece_cell?` method
+- [x] `#up_moves` method
+- [x] `#up_capture` method
+- [x] `#down_moves` method
+- [x] `#down_capture` method
+- [x] `#left_moves` method
+- [x] `#left_capture` method
+- [x] `#right_moves` method
+- [x] `#right_capture` method
+- [ ] `#down_left_moves` method
+- [ ] `#down_left_capture` method
+- [ ] `#up_right_moves` method
+- [ ] `#up_right_capture` method
+- [ ] `#down_right_moves` method
+- [ ] `#down_right_capture` method
+- [ ] `#up_left_moves` method
+- [ ] `#up_left_capture` method
+
 ## `Piece` class
 
 Complete the following:
@@ -87,4 +120,4 @@ Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
