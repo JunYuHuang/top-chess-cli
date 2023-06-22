@@ -22,7 +22,6 @@ class RookPiece < Piece
     @did_move = options.fetch(:did_move, @@default_options[:did_move])
   end
 
-  # TODO - to test (write more tests)
   def moves(src_cell, board, options = {})
     res = [
       *self.class.up_moves(src_cell, board, options),

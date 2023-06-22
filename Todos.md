@@ -86,5 +86,5 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [ ] `#moves` method
+- [x] `#moves` method
 - [ ] `#captures` method

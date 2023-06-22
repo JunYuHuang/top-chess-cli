@@ -10,7 +10,7 @@ describe RookPiece do
   end
 
   describe "#moves" do
-    it "returns the correct int matrix if called with a valid cell and an otherwise empty board" do
+    it "returns the correct int matrix if called with a valid cell and a board with a white pawn and a black pawn" do
       empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
@@ -26,6 +26,25 @@ describe RookPiece do
         [4,3], [4,4], [4,5], [4,6], [4,7],  # right cells
         [3,2], [2,2],                       # up cells
         [5,2]                               # down cells
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and an otherwise empty board" do
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
+      white_rook = RookPiece.new({ did_move: true })
+      board = Array.new(8) { Array.new(8, empty_piece) }
+      board[4][2] = white_rook
+
+      res = white_rook.moves([4,2], board)
+      expected = [
+        [4,0], [4,1],                       # left cells
+        [4,3], [4,4], [4,5], [4,6], [4,7],  # right cells
+        [3,2], [2,2], [1,2], [0,2],         # up cells
+        [5,2], [6,2], [7,2]                 # down cells
       ]
       expect(res.size).to eql(expected.size)
       expected.each do |move|
