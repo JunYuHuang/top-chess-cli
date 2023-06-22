@@ -1,6 +1,9 @@
 require './lib/Piece'
+require './lib/PieceActionUtils'
 
 class RookPiece < Piece
+  extend PieceActionUtils
+
   attr_accessor(:default_options, :did_move)
 
   @@default_options = {
@@ -15,9 +18,10 @@ class RookPiece < Piece
       did_move:
     }
     passed_options = {
-      color: color ? color : nil,
-      type: :rook
-      is_interactive: true
+      color: color ? color : :white,
+      type: :rook,
+      is_interactive: true,
+      is_capturable: true
     }
     super(passed_options)
     @did_move = did_move ? did_move : false
@@ -34,12 +38,12 @@ class RookPiece < Piece
   end
 
   # TODO - to test
-  def moved!(is_moved = true)
-    return if @did_move == is_moved
-    @did_move = is_moved
+  def moved!
+    return if @did_move
+    @did_move = true
   end
 
-  # TODO -to test
+  # TODO - to test
   def did_move?
     @did_move
   end

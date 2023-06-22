@@ -10,5 +10,10 @@ class EmptyPiece < Piece
   def self.is_interactive?
     false
   end
+
+  # TODO - to test
+  def self.is_capturable?
+    false
+  end
 end
 
