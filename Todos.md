@@ -105,6 +105,13 @@ Complete the following:
 
 - [x] `.type` method
 - [x] `.is_interactive?` method
+- [x] `.is_capturable?` method
+
+Complete the tests for the following:
+
+- [x] `.type` method
+- [x] `.is_interactive?` method
+- [x] `.is_capturable?` method
 
 ## `RookPiece` class (inherits from `Piece`)
 
