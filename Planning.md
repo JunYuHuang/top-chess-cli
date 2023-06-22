@@ -221,13 +221,13 @@
           - `b_rok`: represents a Black Rook
           - `b_nte`: represents a Black Knight
           - `b_bsh`: represents a Black Bishop
-          - `b_qwn`: represesnts a Black Queen
+          - `b_qwn`: represents a Black Queen
           - `b_kng`: represents the Black King
           - `w_pwn`: represents a White Pawn
           - `w_rok`: represents a White Rook
           - `w_nte`: represents a White Knight
           - `w_bsh`: represents a White Bishop
-          - `w_qwn`: represesnts a White Queen
+          - `w_qwn`: represents a White Queen
           - `w_kng`: represents the White King
           - `empty`: represents an empty cell / square
     - outputs
