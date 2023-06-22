@@ -2,6 +2,7 @@ require './lib/Piece'
 
 =begin
 This `Piece` subclass is a wildcard Piece that can be any valid chess piece (e.g. PawnPiece) or a piece that represents an empty cell on the board (i.e. EmptyPiece).
+
 `DummyPiece` is meant to be used as a mock or test double in the testing or spec files only and not in or as part of a real chess game.
 =end
 
