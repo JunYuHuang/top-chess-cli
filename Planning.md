@@ -266,13 +266,7 @@
     - TODO
   - is_valid_piece?()
     - TODO
-  - get_pieces(piece_color, piece_type)
-    - TODO
-  - get_piece(cell)
-    - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
+  - get_pieces(filters)
     - TODO
   - did_stalemate?()
     - TODO
@@ -288,17 +282,19 @@
     - TODO
   - get_chess_move()
     - TODO
-  - is_valid_promotion?()
+  - can_promote_pawn?()
     - TODO
   - promote_pawn!(cell, new_piece)
     - TODO
-  - is_valid_en_passant?()
-    - TODO
+  - can_capture_en_passant?()
+    - TODO: not sure if this method is needed
   - capture_en_passant!()
-    - TODO
-  - is_valid_castle?()
+    - TODO: not sure if this method is needed
+  - can_queenside_castle?()
     - TODO
   - queenside_castle!()
+    - TODO
+  - can_kingside_castle?()
     - TODO
   - kingside_castle!()
     - TODO
@@ -363,6 +359,10 @@
     - TODO
   - type()
     - TODO
+  - is_interactive?()
+    - TODO
+  - is_capturable?()
+    - TODO
 - `PawnPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
@@ -370,22 +370,8 @@
     - TODO
   - captures()
     - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
-    - TODO
   - did_move?()
     - TODO
-  - can_double_step?()
-    - TODO: not sure if this method is needed
-  - can_promote?()
-    - TODO: not sure if this method is needed
-  - promote!()
-    - TODO: not sure if this method is needed
-  - can_capture_en_passant?()
-    - TODO: not sure if this method is needed
-  - get_captures_en_passant()
-    - TODO: not sure if this method is needed
 - `RookPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
@@ -393,30 +379,16 @@
     - TODO
   - captures()
     - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
-    - TODO
   - did_move?()
     - TODO
   - moved!()
     - TODO
-  - can_castle_queenside?()
-    - TODO: not sure if this method is needed
-  - can_castle_kingside?()
-    - TODO: not sure if this method is needed
-  - can_castle?()
-    - TODO: not sure if this method is needed
 - `KnightPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - moves()
     - TODO
   - captures()
-    - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
     - TODO
 - `BishopPiece` class that inherits from `Piece` class
   - constructor()
@@ -425,20 +397,12 @@
     - TODO
   - captures()
     - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
-    - TODO
 - `QueenPiece` class that inherits from `Piece` class
   - constructor()
     - TODO
   - moves()
     - TODO
   - captures()
-    - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
     - TODO
 - `KingPiece` class that inherits from `Piece` class
   - constructor()
@@ -447,18 +411,12 @@
     - TODO
   - captures()
     - TODO
-  - did_check?()
-    - TODO
-  - did_checkmate?()
-    - TODO
   - did_move?()
     - TODO
-  - can_castle_queenside?()
-    - TODO: not sure if this method is needed
-  - can_castle_kingside?()
-    - TODO: not sure if this method is needed
-  - can_castle?()
-    - TODO: not sure if this method is needed
+  - is_checked?()
+    - TODO
+  - is_checkmated?()
+    - TODO
 - `PieceFactory` class
   - constructor(piece_class, pieces_dict)
     - TODO
