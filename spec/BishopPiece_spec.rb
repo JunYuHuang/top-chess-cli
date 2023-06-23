@@ -71,7 +71,7 @@ describe BishopPiece do
       empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
-      white_bishop = BishopPiece.new({ color: :white, color: :white })
+      white_bishop = BishopPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, empty_piece) }
       board[1][0] = black_pawn
       board[1][6] = black_pawn
