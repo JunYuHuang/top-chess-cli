@@ -161,7 +161,6 @@ module PieceUtils
     nil
   end
 
-  # TODO - to test
   # cells in lower half of positive diagonal line
   def down_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
@@ -182,7 +181,6 @@ module PieceUtils
     res
   end
 
-  # TODO - to test
   # cell in lower half of positive diagonal line
   def down_left_capture(src_cell, board)
     src_row, src_col = src_cell
@@ -198,7 +196,6 @@ module PieceUtils
     nil
   end
 
-  # TODO - to test
   # cells in upper half of positive diagonal line
   def up_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
@@ -219,7 +216,6 @@ module PieceUtils
     res
   end
 
-  # TODO - to test
   # cell in upper half of positive diagonal line
   def up_right_capture(src_cell, board)
     src_row, src_col = src_cell
@@ -235,7 +231,6 @@ module PieceUtils
     nil
   end
 
-  # TODO - to test
   # cells in lower half of negative diagonal line
   def down_right_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
@@ -256,7 +251,6 @@ module PieceUtils
     res
   end
 
-  # TODO - to test
   # cell in lower half of negative diagonal line
   def down_right_capture(src_cell, board)
     src_row, src_col = src_cell
@@ -272,7 +266,6 @@ module PieceUtils
     nil
   end
 
-  # TODO - to test
   # cells in upper half of negative diagonal line
   def up_left_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
@@ -293,7 +286,6 @@ module PieceUtils
     res
   end
 
-  # TODO - to test
   # cell in upper half of negative diagonal line
   def up_left_capture(src_cell, board)
     src_row, src_col = src_cell

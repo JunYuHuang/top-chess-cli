@@ -80,14 +80,14 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#left_capture` method
 - [x] `#right_moves` method
 - [x] `#right_capture` method
-- [ ] `#down_left_moves` method
-- [ ] `#down_left_capture` method
-- [ ] `#up_right_moves` method
-- [ ] `#up_right_capture` method
-- [ ] `#down_right_moves` method
-- [ ] `#down_right_capture` method
-- [ ] `#up_left_moves` method
-- [ ] `#up_left_capture` method
+- [x] `#down_left_moves` method
+- [x] `#down_left_capture` method
+- [x] `#up_right_moves` method
+- [x] `#up_right_capture` method
+- [x] `#down_right_moves` method
+- [x] `#down_right_capture` method
+- [x] `#up_left_moves` method
+- [x] `#up_left_capture` method
 
 ## `Piece` class
 
@@ -122,6 +122,20 @@ Complete the following:
 - [x] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
+
+Complete the tests for the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
+
+## `BishopPiece` class (inherits from `Piece`)
+
+Complete the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
 
 Complete the tests for the following:
 
