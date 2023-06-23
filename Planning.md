@@ -234,6 +234,8 @@
       - `res`: a 2D array of various Piece subclass objects built from `board`
   - use_game_save(game_save_obj)
     - TODO
+  - use_gui(gui_obj)
+    - TODO
   - is_valid_game?()
     - TODO
   - is_valid_board?()
@@ -412,10 +414,6 @@
   - captures()
     - TODO
   - did_move?()
-    - TODO
-  - is_checked?()
-    - TODO
-  - is_checkmated?()
     - TODO
 - `PieceFactory` class
   - constructor(piece_class, pieces_dict)
