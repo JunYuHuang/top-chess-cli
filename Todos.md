@@ -142,3 +142,17 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+
+## `QueenPiece` class (inherits from `Piece`)
+
+Complete the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
+
+Complete the tests for the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
