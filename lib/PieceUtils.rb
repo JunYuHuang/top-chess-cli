@@ -7,8 +7,17 @@ module PieceUtils
   }
   VALID_PIECE_TYPES = Set.new([:pawn, :rook, :knight, :bishop, :queen, :king])
   VALID_PIECE_COLORS = Set.new([:black, :white])
+  L_SHAPED_CELL_OFFSETS = [
+    [-1, -2],   # 2 lefts -> 1 up
+    [1, -2],    # 2 lefts -> 1 down
+    [-1, 2],    # 2 rights -> 1 up
+    [1, 2],     # 2 rights -> 1 down
+    [-2, -1],   # 2 ups -> 1 left
+    [-2, 1],    # 2 ups -> 1 right
+    [2, -1],    # 2 downs -> 1 left
+    [2, 1]      # 2 downs -> 1 right
+  ]
 
-  # TODO - to test
   def is_inbound_cell?(cell)
     row, col = cell
     return false if row < 0 or row >= BOARD_LENGTH
@@ -299,5 +308,29 @@ module PieceUtils
       col -= 1
     end
     nil
+  end
+
+  def l_shaped_moves(src_cell, board)
+    src_row, src_col = src_cell
+    res = []
+    L_SHAPED_CELL_OFFSETS.each do |offset_cell|
+      offset_row, offset_col = offset_cell
+      dst_cell = [src_row + offset_row, src_col + offset_col]
+      next unless is_inbound_cell?(dst_cell)
+      res.push(dst_cell) if is_empty_cell?(dst_cell, board)
+    end
+    res
+  end
+
+  def l_shaped_captures(src_cell, board)
+    src_row, src_col = src_cell
+    res = []
+    L_SHAPED_CELL_OFFSETS.each do |offset_cell|
+      offset_row, offset_col = offset_cell
+      dst_cell = [src_row + offset_row, src_col + offset_col]
+      next unless is_inbound_cell?(dst_cell)
+      res.push(dst_cell) if is_enemy_piece_cell?(src_cell, dst_cell, board)
+    end
+    res
   end
 end

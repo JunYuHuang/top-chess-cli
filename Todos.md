@@ -65,10 +65,12 @@ Complete the following:
 - [x] `#down_right_capture` method
 - [x] `#up_left_moves` method
 - [x] `#up_left_capture` method
+- [x] `#l_shaped_moves` method
+- [x] `#l_shaped_captures` method
 
 Complete the tests for the following (indirectly via `Piece` subclasses that use this module):
 
-- [ ] `#is_inbound_cell?` method (possibly not needed?)
+- [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
@@ -88,6 +90,8 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#down_right_capture` method
 - [x] `#up_left_moves` method
 - [x] `#up_left_capture` method
+- [x] `#l_shaped_moves` method
+- [x] `#l_shaped_captures` method
 
 ## `Piece` class
 
@@ -144,6 +148,20 @@ Complete the tests for the following:
 - [x] `#captures` method
 
 ## `QueenPiece` class (inherits from `Piece`)
+
+Complete the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
+
+Complete the tests for the following:
+
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
+
+## `KnightPiece` class (inherits from `Piece`)
 
 Complete the following:
 
