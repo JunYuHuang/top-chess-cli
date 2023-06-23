@@ -29,7 +29,7 @@ describe BishopPiece do
       end
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with a white pawn and a black pawn" do
+    it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
       empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
@@ -67,7 +67,7 @@ describe BishopPiece do
       expect(res).to eql([])
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with a white pawn and a black pawn" do
+    it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
       empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
