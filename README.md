@@ -50,6 +50,13 @@ rspec
 - Player 1 can choose which side to play as (white or black).
 - Player 2 is automatically assigned the opposing side to play (black if Player 1 chose white or white if Player 1 chose black).
 - Allows players to input moves using Long Algebraic Notation.
+  - E.g. `Nf1f3` to move White's Knight to the square `f3` from its starting position.
+- Supports all of the following standard and special chess moves:
+  - Non-capturing moves
+  - Capturing moves
+  - En-passant captures
+  - Pawn promotions
+  - Both queenside and kingside castling
 - Uses the following symbols / characters to specify special moves in player input:
   - `=`: Pawn Promotion
   - `+`: Check (can be omitted)
