@@ -41,14 +41,26 @@ Complete the following:
 - [ ] `#get_opponent_type` method
 - [x] `to_s` method
 
+<!-- ## `ComputerPlayer` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#get_turn_input` method
+- [ ] `#get_random_move` method (private)
+- [ ] `to_s` method -->
+
 ## `PieceUtils` module
 
 Complete the following:
 
+- [x] `#is_valid_piece_color?` method
 - [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
+- [ ] `#at_last_row?` method
+- [ ] `#is_valid_promotion?` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -70,10 +82,13 @@ Complete the following:
 
 Complete the tests for the following (indirectly via `Piece` subclasses that use this module):
 
+- [ ] `#is_valid_piece_color?` method
 - [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
+- [ ] `#at_last_row?` method
+- [ ] `#is_valid_promotion?` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -174,3 +189,193 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+
+## `PawnPiece` class (inherits from `Piece`)
+
+Complete the following:
+
+- [x] `.initialize` constructor
+- [ ] `#moves` method
+- [ ] `#captures` method
+- [ ] `#did_move?` method
+- [ ] `#moved!` method
+- [ ] `#is_promotable?` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#black_moves` method (private)
+- [ ] `#white_moves` method (private)
+- [ ] `#black_captures` method (private)
+- [ ] `#white_captures` method (private)
+
+Complete the tests for the following:
+
+- [x] `.initialize` constructor
+- [ ] `#moves` method
+- [ ] `#captures` method
+- [ ] `#is_promotable?` method
+- [ ] `#can_capture_en_passant?` method
+
+## `KingPiece` class (inherits from `Piece`)
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#moves` method
+- [ ] `#captures` method
+- [ ] `#did_move?` method
+- [ ] `#moved!` method
+
+Complete the tests for the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#moves` method
+- [ ] `#captures` method
+
+## `PieceFactory` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#spawn` method
+
+Complete the tests for the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#spawn` method
+
+## `Board` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#update` method
+- [ ] `#is_king_checked?` method
+- [ ] `#is_king_checkmated?` method
+- [ ] `#is_stalemated?` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#queenside_castle!` method
+- [ ] `#can_kingside_castle?` method
+- [ ] `#kingside_castle!` method
+- [ ] `#pieces` method
+- [ ] `#is_valid_move?` method
+- [ ] `#move_piece!` method
+- [ ] `#is_valid_capture?` method
+- [ ] `#capture_piece!` method
+- [ ] `#can_promote?` method
+- [ ] `#promote!` method
+- [ ] `#empty_board` method (private)
+- [ ] `#start_board` method (private)
+- [ ] `#is_valid_capture_en_passant?` method (private)
+- [ ] `#capture_en_passant` method (private)
+- [ ] `#can_white_queenside_castle?` method (private)
+- [ ] `#white_queenside_castle!` method (private)
+- [ ] `#can_black_queenside_castle?` method (private)
+- [ ] `#black_queenside_castle!` method (private)
+- [ ] `#can_white_promote?` method (private)
+- [ ] `#white_promote!` method (private)
+- [ ] `#can_black_promote?` method (private)
+- [ ] `#black_promote!` method (private)
+
+Complete the tests for the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#update` method
+- [ ] `#is_king_checked?` method
+- [ ] `#is_king_checkmated?` method
+- [ ] `#is_stalemated?` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#can_kingside_castle?` method
+- [ ] `#get_pieces` method
+- [ ] `#is_valid_move?` method
+- [ ] `#move_piece` method
+- [ ] `#is_valid_capture?` method
+- [ ] `#capture_piece` method
+- [ ] `#can_promote?` method
+- [ ] `#promote!` method
+
+## `Game` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#add_player!` method
+- [ ] `#update!` method
+- [ ] `#play!` method
+- [ ] `#is_valid_piece_color?` method
+- [ ] `#get_player` method
+- [ ] `#add_captured_piece!` method
+- [ ] `#switch_player_turns!` method
+- [ ] `#did_player_win?` method
+- [ ] `#did_tie?` method
+- [ ] `#use_game_saves` method
+- [ ] `#use_console_ui` method
+- [ ] `#use_chess_move_runner` method
+- [ ] `#use_command_runner` method
+
+Complete the tests for the following:
+
+- [ ] TODO
+
+## `ChessMoveRunner` class
+
+Complete the following:
+
+- [ ] TODO
+
+Complete the tests for the following:
+
+- [ ] TODO
+
+## `CommandRunner` class
+
+Complete the following:
+
+- [ ] TODO
+
+Complete the tests for the following:
+
+- [ ] TODO
+
+## `ConsoleUI` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `.clear_UI` method
+- [ ] `.print_board` method
+- [ ] `.print_captured_pieces` method
+- [ ] `.print_turn_prompt` method
+- [ ] `.print_game_end` method
+- [ ] `.print_saves_tables` method
+- [ ] `.print_load_prompt` method
+- [ ] `.print_load_screen` method
+- [ ] `.print_setup_scren` method
+- [ ] `.print_turn_screen` method
+- [ ] `.print_end_screen` method
+
+## `GameSave` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#path` constructor
+- [ ] `#set_path` method
+- [ ] `#save_prefix` method
+- [ ] `#set_save_prefix` method
+- [ ] `#count_saves` method
+- [ ] `get_save_names_list` method
+- [ ] `#does_save_exist?` method
+- [ ] `#create_save` method
+- [ ] `#load_save` method
+
+Complete the tests for the following:
+
+- [ ] `.initialize` constructor
+- [ ] `#path` constructor
+- [ ] `#set_path` method
+- [ ] `#save_prefix` method
+- [ ] `#set_save_prefix` method
+- [ ] `#count_saves` method
+- [ ] `get_save_names_list` method
+- [ ] `#does_save_exist?` method
+- [ ] `#create_save` method
+- [ ] `#load_save` method
