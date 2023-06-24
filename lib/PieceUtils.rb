@@ -18,6 +18,11 @@ module PieceUtils
     [2, 1]      # 2 downs -> 1 right
   ]
 
+  # TODO - to test
+  def is_valid_piece_color?(color)
+    VALID_PIECE_COLORS.include?(color)
+  end
+
   def is_inbound_cell?(cell)
     row, col = cell
     return false if row < 0 or row >= BOARD_LENGTH
@@ -38,8 +43,11 @@ module PieceUtils
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
     dst_piece = board[dst_row][dst_col]
-    return false if src_piece.nil? or src_piece.type == :empty
-    src_piece.type == dst_piece.type
+    return false unless VALID_PIECE_COLORS.include?(src_piece.color)
+    return false unless VALID_PIECE_TYPES.include?(src_piece.type)
+    return false unless VALID_PIECE_COLORS.include?(dst_piece.color)
+    return false unless VALID_PIECE_TYPES.include?(dst_piece.type)
+    src_piece.color == dst_piece.color
   end
 
   def is_enemy_piece_cell?(src_cell, dst_cell, board)
@@ -60,7 +68,7 @@ module PieceUtils
     res = []
     src_row, src_col = src_cell
     row = src_row - 1
-    steps = 0
+    steps = 1
     while row >= 0 do
       break unless is_empty_cell?([row, src_col], board)
       break if steps > max_steps
@@ -89,7 +97,7 @@ module PieceUtils
     res = []
     src_row, src_col = src_cell
     row = src_row + 1
-    steps = 0
+    steps = 1
     while row < BOARD_LENGTH do
       break unless is_empty_cell?([row, src_col], board)
       break if steps > max_steps
@@ -118,7 +126,7 @@ module PieceUtils
     res = []
     src_row, src_col = src_cell
     col = src_col - 1
-    steps = 0
+    steps = 1
     while col >= 0 do
       break unless is_empty_cell?([src_row, col], board)
       break if steps > max_steps
@@ -147,7 +155,7 @@ module PieceUtils
     res = []
     src_row, src_col = src_cell
     col = src_col + 1
-    steps = 0
+    steps = 1
     while col < BOARD_LENGTH do
       break unless is_empty_cell?([src_row, col], board)
       break if steps > max_steps
@@ -178,7 +186,7 @@ module PieceUtils
     src_row, src_col = src_cell
     row = src_row + 1
     col = src_col - 1
-    steps = 0
+    steps = 1
     while row < BOARD_LENGTH && col >= 0 do
       break unless is_empty_cell?([row, col], board)
       break if steps > max_steps
@@ -213,7 +221,7 @@ module PieceUtils
     src_row, src_col = src_cell
     row = src_row - 1
     col = src_col + 1
-    steps = 0
+    steps = 1
     while row >= 0 && col < BOARD_LENGTH do
       break unless is_empty_cell?([row, col], board)
       break if steps > max_steps
@@ -248,7 +256,7 @@ module PieceUtils
     src_row, src_col = src_cell
     row = src_row + 1
     col = src_col + 1
-    steps = 0
+    steps = 1
     while row < BOARD_LENGTH && col < BOARD_LENGTH do
       break unless is_empty_cell?([row, col], board)
       break if steps > max_steps
@@ -283,7 +291,7 @@ module PieceUtils
     src_row, src_col = src_cell
     row = src_row - 1
     col = src_col - 1
-    steps = 0
+    steps = 1
     while row >= 0 && col >= 0 do
       break unless is_empty_cell?([row, col], board)
       break if steps > max_steps

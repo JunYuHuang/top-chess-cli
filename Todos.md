@@ -195,21 +195,23 @@ Complete the tests for the following:
 Complete the following:
 
 - [x] `.initialize` constructor
-- [ ] `#moves` method
-- [ ] `#captures` method
-- [ ] `#did_move?` method
-- [ ] `#moved!` method
+- [x] `#moves` method
+- [x] `#captures` method
+- [x] `#did_move?` method
+- [x] `#moved!` method
 - [ ] `#is_promotable?` method
 - [ ] `#can_capture_en_passant?` method
-- [ ] `#black_moves` method (private)
-- [ ] `#white_moves` method (private)
+- [x] `#black_moves` method (private)
+- [x] `#white_moves` method (private)
 - [ ] `#black_captures` method (private)
 - [ ] `#white_captures` method (private)
+- [ ] `#white_can_capture_en_passant?` method (private)
+- [ ] `#black_can_capture_en_passant?` method (private)
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [ ] `#moves` method
+- [x] `#moves` method
 - [ ] `#captures` method
 - [ ] `#is_promotable?` method
 - [ ] `#can_capture_en_passant?` method
