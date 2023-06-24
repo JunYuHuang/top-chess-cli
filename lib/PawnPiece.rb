@@ -50,9 +50,8 @@ class PawnPiece < Piece
     @did_move = true
   end
 
-  # TODO - to test
   def is_promotable?(src_cell, board)
-    # TODO
+    self.class.at_last_row?(src_cell, board)
   end
 
   # TODO - to test

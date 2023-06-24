@@ -17,10 +17,14 @@ module PieceUtils
     [2, -1],    # 2 downs -> 1 left
     [2, 1]      # 2 downs -> 1 right
   ]
+  VALID_PROMOTION_PIECE_TYPES = Set.new([:rook, :knight, :bishop, :queen])
 
-  # TODO - to test
   def is_valid_piece_color?(color)
     VALID_PIECE_COLORS.include?(color)
+  end
+
+  def is_valid_piece_type?(type)
+    VALID_PIECE_TYPES.include?(type)
   end
 
   def is_inbound_cell?(cell)
@@ -43,10 +47,10 @@ module PieceUtils
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
     dst_piece = board[dst_row][dst_col]
-    return false unless VALID_PIECE_COLORS.include?(src_piece.color)
-    return false unless VALID_PIECE_TYPES.include?(src_piece.type)
-    return false unless VALID_PIECE_COLORS.include?(dst_piece.color)
-    return false unless VALID_PIECE_TYPES.include?(dst_piece.type)
+    return false unless is_valid_piece_color?(src_piece.color)
+    return false unless is_valid_piece_type?(src_piece.type)
+    return false unless is_valid_piece_color?(dst_piece.color)
+    return false unless is_valid_piece_type?(dst_piece.type)
     src_piece.color == dst_piece.color
   end
 
@@ -55,11 +59,28 @@ module PieceUtils
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
     dst_piece = board[dst_row][dst_col]
-    return false unless VALID_PIECE_COLORS.include?(src_piece.color)
-    return false unless VALID_PIECE_TYPES.include?(src_piece.type)
-    return false unless VALID_PIECE_COLORS.include?(dst_piece.color)
-    return false unless VALID_PIECE_TYPES.include?(dst_piece.type)
+    return false unless is_valid_piece_color?(src_piece.color)
+    return false unless is_valid_piece_type?(src_piece.type)
+    return false unless is_valid_piece_color?(dst_piece.color)
+    return false unless is_valid_piece_type?(dst_piece.type)
     src_piece.color != dst_piece.color
+  end
+
+  def at_last_row?(src_cell, board)
+    return false unless is_inbound_cell?(src_cell)
+    return false if is_empty_cell?(src_cell, board)
+
+    src_row, src_col = src_cell
+    piece_color = board[src_row][src_col].color
+    return false unless is_valid_piece_color?(piece_color)
+    piece_color == :white ?
+      src_row == 0 :
+      src_row == BOARD_LENGTH - 1
+  end
+
+  # TODO - to test
+  def is_valid_promotion?(piece_type)
+    VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
   end
 
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)

@@ -55,12 +55,13 @@ Complete the following:
 Complete the following:
 
 - [x] `#is_valid_piece_color?` method
+- [x] `#is_valid_piece_type?` method
 - [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [ ] `#at_last_row?` method
-- [ ] `#is_valid_promotion?` method
+- [x] `#at_last_row?` method
+- [x] `#is_valid_promotion?` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -82,12 +83,13 @@ Complete the following:
 
 Complete the tests for the following (indirectly via `Piece` subclasses that use this module):
 
-- [ ] `#is_valid_piece_color?` method
+- [x] `#is_valid_piece_color?` method
+- [x] `#is_valid_piece_type?` method
 - [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [ ] `#at_last_row?` method
+- [x] `#at_last_row?` method
 - [ ] `#is_valid_promotion?` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
@@ -199,7 +201,7 @@ Complete the following:
 - [x] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
-- [ ] `#is_promotable?` method
+- [x] `#is_promotable?` method
 - [ ] `#can_capture_en_passant?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
@@ -213,7 +215,7 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [ ] `#captures` method
-- [ ] `#is_promotable?` method
+- [x] `#is_promotable?` method
 - [ ] `#can_capture_en_passant?` method
 
 ## `KingPiece` class (inherits from `Piece`)
