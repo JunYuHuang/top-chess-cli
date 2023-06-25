@@ -54,11 +54,6 @@ class PawnPiece < Piece
     self.class.at_last_row?(src_cell, board)
   end
 
-  # TODO - to test
-  def can_capture_en_passant?(src_cell, dst_cell, board)
-    # TODO
-  end
-
   private
 
   def white_moves(src_cell, board)
@@ -72,11 +67,14 @@ class PawnPiece < Piece
       self.class.up_left_capture(src_cell, board, @@one_step),
       self.class.up_right_capture(src_cell, board, @@one_step),
     ]
+    # if can_white_capture_en_passant?(src_cell, board)
+    #   # TODO
+    # end
     res.filter { |cell| !cell.nil? }
   end
 
   # TODO - to test
-  def can_white_capture_en_passant?(src_cell, dst_cell, board)
+  def can_white_capture_en_passant?(src_cell, board)
     # TODO
   end
 
@@ -91,11 +89,14 @@ class PawnPiece < Piece
       self.class.down_left_capture(src_cell, board, @@one_step),
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
+    # if can_black_capture_en_passant?(src_cell, board)
+    #   # TODO
+    # end
     res.filter { |cell| !cell.nil? }
   end
 
   # TODO - to test
-  def can_black_capture_en_passant?(src_cell, dst_cell, board)
+  def can_black_capture_en_passant?(src_cell, board)
     # TODO
   end
 end

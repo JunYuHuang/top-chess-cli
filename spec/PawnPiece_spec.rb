@@ -111,6 +111,70 @@ describe PawnPiece do
     end
   end
 
+  describe "#captures" do
+    it "returns an empty int matrix if called with a valid cell and an otherwise empty board on a white pawn" do
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, empty_piece) }
+      board[6][3] = white_pawn
+
+      res = white_pawn.captures([6,3], board)
+      expect(res.size).to eql(0)
+      expect(res).to eql([])
+    end
+
+    it "returns an empty int matrix if called with a valid cell and an otherwise empty board on a black pawn" do
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, empty_piece) }
+      board[1][3] = black_pawn
+
+      res = black_pawn.captures([1,3], board)
+      expect(res.size).to eql(0)
+      expect(res).to eql([])
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a board with 2 other black knights on a white pawn" do
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
+      black_knight = DummyPiece.new({ color: :black, type: :knight })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, empty_piece) }
+      board[5][2] = black_knight
+      board[5][4] = black_knight
+      board[6][3] = white_pawn
+
+      res = white_pawn.captures([6,3], board)
+      expected = [
+        [5,2],  # up left cell
+        [5,4]   # up right cell
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a board with 2 other white knights on a black pawn" do
+      empty_piece = DummyPiece.new({ color: :none, type: :empty })
+      white_knight = DummyPiece.new({ color: :white, type: :knight })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, empty_piece) }
+      board[2][2] = white_knight
+      board[2][4] = white_knight
+      board[1][3] = black_pawn
+
+      res = black_pawn.captures([1,3], board)
+      expected = [
+        [2,2],  # down left cell
+        [2,4]   # down right cell
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
+  end
+
   describe "#is_promotable?" do
     it "returns false if called with an out-of-bounds cell and a board" do
       empty_piece = DummyPiece.new({ color: :none, type: :empty })

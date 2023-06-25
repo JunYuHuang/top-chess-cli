@@ -100,14 +100,19 @@ module PieceUtils
     res
   end
 
-  def up_capture(src_cell, board)
+  def up_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row - 1
+    steps = 1
     while row >= 0 do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
       row -= 1
+      steps += 1
     end
     nil
   end
@@ -129,14 +134,19 @@ module PieceUtils
     res
   end
 
-  def down_capture(src_cell, board)
+  def down_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row + 1
+    steps = 1
     while row < BOARD_LENGTH do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
       row += 1
+      steps += 1
     end
     nil
   end
@@ -158,14 +168,19 @@ module PieceUtils
     res
   end
 
-  def left_capture(src_cell, board)
+  def left_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     col = src_col - 1
+    steps = 1
     while col >= 0 do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
       col -= 1
+      steps += 1
     end
     nil
   end
@@ -187,14 +202,19 @@ module PieceUtils
     res
   end
 
-  def right_capture(src_cell, board)
+  def right_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     col = src_col + 1
+    steps = 1
     while col < BOARD_LENGTH do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
       col += 1
+      steps += 1
     end
     nil
   end
@@ -220,16 +240,21 @@ module PieceUtils
   end
 
   # cell in lower half of positive diagonal line
-  def down_left_capture(src_cell, board)
+  def down_left_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row + 1
     col = src_col - 1
+    steps = 1
     while row < BOARD_LENGTH && col >= 0 do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row += 1
       col -= 1
+      steps += 1
     end
     nil
   end
@@ -255,16 +280,21 @@ module PieceUtils
   end
 
   # cell in upper half of positive diagonal line
-  def up_right_capture(src_cell, board)
+  def up_right_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row - 1
     col = src_col + 1
+    steps = 1
     while row >= 0 && col < BOARD_LENGTH do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row -= 1
       col += 1
+      steps += 1
     end
     nil
   end
@@ -290,16 +320,21 @@ module PieceUtils
   end
 
   # cell in lower half of negative diagonal line
-  def down_right_capture(src_cell, board)
+  def down_right_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row + 1
     col = src_col + 1
+    steps = 1
     while row < BOARD_LENGTH && col < BOARD_LENGTH do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row += 1
       col += 1
+      steps += 1
     end
     nil
   end
@@ -325,16 +360,21 @@ module PieceUtils
   end
 
   # cell in upper half of negative diagonal line
-  def up_left_capture(src_cell, board)
+  def up_left_capture(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
+    max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
+
     src_row, src_col = src_cell
     row = src_row - 1
     col = src_col - 1
+    steps = 1
     while row >= 0 && col >= 0 do
+      break if steps > max_steps
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row -= 1
       col -= 1
+      steps += 1
     end
     nil
   end

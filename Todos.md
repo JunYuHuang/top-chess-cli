@@ -198,11 +198,10 @@ Complete the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [x] `#captures` method
+- [ ] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_promotable?` method
-- [ ] `#can_capture_en_passant?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [ ] `#black_captures` method (private)
@@ -216,7 +215,6 @@ Complete the tests for the following:
 - [x] `#moves` method
 - [ ] `#captures` method
 - [x] `#is_promotable?` method
-- [ ] `#can_capture_en_passant?` method
 
 ## `KingPiece` class (inherits from `Piece`)
 
@@ -227,12 +225,18 @@ Complete the following:
 - [ ] `#captures` method
 - [ ] `#did_move?` method
 - [ ] `#moved!` method
+- [ ] `#is_checked?` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#can_kingside_castle?` method
 
 Complete the tests for the following:
 
 - [ ] `.initialize` constructor
 - [ ] `#moves` method
 - [ ] `#captures` method
+- [ ] `#is_checked?` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#can_kingside_castle?` method
 
 ## `PieceFactory` class
 
