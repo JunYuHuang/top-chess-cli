@@ -27,6 +27,18 @@ module PieceUtils
     VALID_PIECE_TYPES.include?(type)
   end
 
+  # TODO - to test
+  def is_valid_row?(row)
+    return false unless row.class == Integer
+    0 <= row && row < BOARD_LENGTH
+  end
+
+  # TODO - to test
+  def is_valid_col?(col)
+    return false unless col.class == Integer
+    0 <= col && col < BOARD_LENGTH
+  end
+
   def is_inbound_cell?(cell)
     row, col = cell
     return false if row < 0 or row >= BOARD_LENGTH
@@ -43,6 +55,9 @@ module PieceUtils
 
   # TODO - to test
   def is_ally_piece_cell?(src_cell, dst_cell, board)
+    return false if is_empty_cell?(src_cell, board)
+    return false if is_empty_cell?(dst_cell, board)
+
     src_row, src_col = src_cell
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
@@ -55,6 +70,9 @@ module PieceUtils
   end
 
   def is_enemy_piece_cell?(src_cell, dst_cell, board)
+    return false if is_empty_cell?(src_cell, board)
+    return false if is_empty_cell?(dst_cell, board)
+
     src_row, src_col = src_cell
     dst_row, dst_col = dst_cell
     src_piece = board[src_row][src_col]
@@ -81,6 +99,63 @@ module PieceUtils
   # TODO - to test
   def is_valid_promotion?(piece_type)
     VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
+  end
+
+  # TODO - to test
+  def pieces(board, filters)
+    res = []
+
+    BOARD_LENGTH.times do |r|
+      BOARD_LENGTH.times do |c|
+        next if is_empty_cell?([r, c], board)
+        res.push({
+          piece: board[r][c],
+          cell: [r, c]
+        })
+      end
+    end
+
+    def passes_filters?(filters, piece_hash)
+      type = filters.fetch(:type, nil)
+      color = filters.fetch(:color, nil)
+      row = filters.fetch(:row, nil)
+      col = filters.fetch(:col, nil)
+
+      my_type = piece_hash[:piece].type
+      my_color = piece_hash[:piece].color
+      my_row = piece_hash[:cell][0]
+      my_col = piece_hash[:cell][1]
+
+      return false if is_valid_piece_type?(type) && my_type != type
+      return false if is_valid_piece_color?(color) && my_color != color
+      return false if is_valid_row?(row) && my_row != row
+      return false if is_valid_col?(col) && my_col != col
+      true
+    end
+
+    res.filter! { |piece_hash| passes_filters?(filters, piece_hash) }
+  end
+
+  # TODO - to test
+  def is_clear_between_two_cells_in_row?(src_cell, dst_cell, board)
+    src_row, src_col = src_cell
+    dst_row, dst_col = dst_cell
+    return false if src_row != dst_row or src_col == dst_col
+
+    first_col = 0
+    last_col = BOARD_LENGTH - 1
+    if src_col < dst_col
+      first_col = src_col
+      last_col = dst_col
+    else
+      first_col = dst_col
+      last_col = src_col
+    end
+
+    (first_col + 1..last_col).to_a.each do |col|
+      return false unless is_empty_cell?([src_cell, col], board)
+    end
+    true
   end
 
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)

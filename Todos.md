@@ -23,6 +23,17 @@ Complete the following:
 - [ ] Build game saving and loading feature
 - [ ] Build simple computer AI opponent player
 
+## Optional and Nice-to-have TODOs
+
+Complete the following:
+
+- [ ] Rename `DummyPiece` to `MockPiece`
+- [ ] Refactor `Piece` subclasses to store their own position on the grid
+- [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
+- [ ] Refactor to not use and remove the `EmptyPiece` class
+- [ ] Add `move_to` method to `Piece` subclasses (modifies board in-place or returns a new board)
+- [ ] Add `capture_at` method to `Piece subclasses (modifies board in-place or returns a new board)
+
 ## `Player` class
 
 Complete the following:
@@ -62,6 +73,7 @@ Complete the following:
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
+- [x] `#pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -91,6 +103,7 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#at_last_row?` method
 - [ ] `#is_valid_promotion?` method
+- [ ] `#pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -202,6 +215,8 @@ Complete the following:
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_promotable?` method
+- [ ] `#capture_en_passant` method
+- [ ] `#can_capture_en_passant?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [ ] `#black_captures` method (private)
@@ -220,23 +235,31 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
-- [ ] `#moves` method
-- [ ] `#captures` method
-- [ ] `#did_move?` method
-- [ ] `#moved!` method
-- [ ] `#is_checked?` method
+- [x] `.initialize` constructor
+- [x] `#moves` method
+- [x] `#captures` method
+- [x] `#did_move?` method
+- [x] `#moved!` method
+- [x] `#is_checked?` method
+- [ ] `#is_checkmated?` method
+- [ ] `#is_stalemated?` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#can_kingside_castle?` method
+- [ ] `#moves_queenside_castle` method
+- [ ] `#moves_kingside_castle` method
 
 Complete the tests for the following:
 
-- [ ] `.initialize` constructor
+- [x] `.initialize` constructor
 - [ ] `#moves` method
 - [ ] `#captures` method
-- [ ] `#is_checked?` method
+- [x] `#is_checked?` method
+- [ ] `#is_checkmated?` method
+- [ ] `#is_stalemated?` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#can_kingside_castle?` method
+- [ ] `#moves_queenside_castle` method
+- [ ] `#moves_kingside_castle` method
 
 ## `PieceFactory` class
 
@@ -318,6 +341,7 @@ Complete the following:
 - [ ] `#use_console_ui` method
 - [ ] `#use_chess_move_runner` method
 - [ ] `#use_command_runner` method
+- [ ] `#is_last_move_enemy_pawn_double_step?` method
 
 Complete the tests for the following:
 
