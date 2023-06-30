@@ -19,6 +19,11 @@ module PieceUtils
   ]
   VALID_PROMOTION_PIECE_TYPES = Set.new([:rook, :knight, :bishop, :queen])
 
+  # TODO - to test
+  def board_length
+    BOARD_LENGTH
+  end
+
   def is_valid_piece_color?(color)
     VALID_PIECE_COLORS.include?(color)
   end
@@ -27,13 +32,11 @@ module PieceUtils
     VALID_PIECE_TYPES.include?(type)
   end
 
-  # TODO - to test
   def is_valid_row?(row)
     return false unless row.class == Integer
     0 <= row && row < BOARD_LENGTH
   end
 
-  # TODO - to test
   def is_valid_col?(col)
     return false unless col.class == Integer
     0 <= col && col < BOARD_LENGTH
@@ -101,7 +104,53 @@ module PieceUtils
     VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
   end
 
-  # TODO - to test
+  def deep_copy(board)
+    if board.is_a?(Array)
+      new_array = board.map { |el| deep_copy(el) }
+    elsif board.is_a?(Hash)
+      new_hash = {}
+      board.each do |key, value|
+        new_hash[key] = deep_copy(value)
+      end
+      new_hash
+    else
+      board.clone
+    end
+  end
+
+  def board_to_s(board)
+    piece_to_s = {
+      nil => "     ",
+      [:rook, :black] => "b_rok",
+      [:rook, :white] => "w_rok",
+      [:knight, :black] => "b_nte",
+      [:knight, :white] => "w_nte",
+      [:bishop, :black] => "b_bsh",
+      [:bishop, :white] => "w_bsh",
+      [:queen, :black] => "b_qwn",
+      [:queen, :white] => "w_qwn",
+      [:king, :black] => "b_kng",
+      [:king, :white] => "w_kng",
+      [:pawn, :black] => "b_pwn",
+      [:pawn, :white] => "w_pwn",
+    }
+    res = []
+    BOARD_LENGTH.times do |r|
+      row = ["|"]
+      BOARD_LENGTH.times do |c|
+        if board[r][c].nil? or board[r][c].type == :empty
+          row.push(" #{piece_to_s[nil]} |")
+          next
+        end
+        type = board[r][c].type
+        color = board[r][c].color
+        row.push(" #{piece_to_s[[type, color]]} |")
+      end
+      res.push("#{row.join}\n")
+    end
+    res.join
+  end
+
   def pieces(board, filters)
     res = []
 

@@ -73,6 +73,8 @@ Complete the following:
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
+- [x] `#deep_copy` method
+- [x] `#board_to_s` method
 - [x] `#pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
@@ -103,6 +105,8 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#at_last_row?` method
 - [ ] `#is_valid_promotion?` method
+- [x] `#deep_copy` method
+- [x] `#board_to_s` method
 - [ ] `#pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
