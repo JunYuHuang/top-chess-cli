@@ -63,15 +63,18 @@ class KingPiece < Piece
     @did_move = true
   end
 
-  # TODO - incomplete
   def is_checked?(src_cell, board)
     return false unless self.class.is_inbound_cell?(src_cell)
 
-    # need to make copy of board that is modified to have it (the king piece) at position `src_cell` and pass the board copy to each `#captures` method call of each enemy piece
+    board_copy = self.class.deep_copy(board)
+    src_row, src_col = src_cell
+    board_copy[src_row][src_col] = self
     filter = @color == :white ? { color: :black } : { color: :white }
     enemy_pieces = self.class.pieces(board, filter)
     enemy_pieces.each do |enemy|
-      enemy_captures = enemy[:piece].captures(enemy[:cell], board)
+      # skip enemy king b/c it is illegal for a king to check an enemy king
+      next if enemy[:piece].type == :king
+      enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy)
       checkable = enemy_captures.include?(src_cell)
       return true if checkable
     end

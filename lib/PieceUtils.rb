@@ -19,7 +19,6 @@ module PieceUtils
   ]
   VALID_PROMOTION_PIECE_TYPES = Set.new([:rook, :knight, :bishop, :queen])
 
-  # TODO - to test
   def board_length
     BOARD_LENGTH
   end
@@ -104,17 +103,17 @@ module PieceUtils
     VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
   end
 
-  def deep_copy(board)
-    if board.is_a?(Array)
-      new_array = board.map { |el| deep_copy(el) }
-    elsif board.is_a?(Hash)
+  def deep_copy(obj)
+    if obj.is_a?(Array)
+      new_array = obj.map { |el| deep_copy(el) }
+    elsif obj.is_a?(Hash)
       new_hash = {}
-      board.each do |key, value|
+      obj.each do |key, value|
         new_hash[key] = deep_copy(value)
       end
       new_hash
     else
-      board.clone
+      obj.clone
     end
   end
 

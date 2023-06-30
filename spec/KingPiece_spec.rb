@@ -180,7 +180,6 @@ describe KingPiece do
       end
     end
 
-    # TODO - fails due to `KingPiece#is_checked?` method
     it "returns the correct int matrix if called with a valid cell and a board with a black rook on a white king" do
       black_rook = DummyPiece.new({
         color: :black,
@@ -193,7 +192,6 @@ describe KingPiece do
       board[7][4] = white_king
 
       res = white_king.moves([7,4], board)
-      puts("\n#{res}")
       expected = [
         [7,3],   # left cell
         [7,5],   # right cell
