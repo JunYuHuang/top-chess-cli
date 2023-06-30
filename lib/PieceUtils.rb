@@ -184,6 +184,41 @@ module PieceUtils
     res.filter! { |piece_hash| passes_filters?(filters, piece_hash) }
   end
 
+  def remove_pieces(board, filters)
+    board_copy = deep_copy(board)
+
+    def passes_filters?(filters, piece_hash)
+      type = filters.fetch(:type, nil)
+      color = filters.fetch(:color, nil)
+      row = filters.fetch(:row, nil)
+      col = filters.fetch(:col, nil)
+
+      my_type = piece_hash[:piece].type
+      my_color = piece_hash[:piece].color
+      my_row = piece_hash[:cell][0]
+      my_col = piece_hash[:cell][1]
+
+      return false if is_valid_piece_type?(type) && my_type != type
+      return false if is_valid_piece_color?(color) && my_color != color
+      return false if is_valid_row?(row) && my_row != row
+      return false if is_valid_col?(col) && my_col != col
+      true
+    end
+
+    BOARD_LENGTH.times do |r|
+      BOARD_LENGTH.times do |c|
+        next if is_empty_cell?([r, c], board_copy)
+        piece_hash = {
+          piece: board_copy[r][c],
+          cell: [r, c]
+        }
+        board_copy[r][c] = nil if passes_filters?(filters, piece_hash)
+      end
+    end
+
+    board_copy
+  end
+
   # TODO - to test
   def is_clear_between_two_cells_in_row?(src_cell, dst_cell, board)
     src_row, src_col = src_cell

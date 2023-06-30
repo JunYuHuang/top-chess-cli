@@ -76,6 +76,7 @@ Complete the following:
 - [x] `#deep_copy` method
 - [x] `#board_to_s` method
 - [x] `#pieces` method
+- [x] `#remove_pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -108,6 +109,7 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#deep_copy` method
 - [x] `#board_to_s` method
 - [x] `#pieces` method
+- [x] `#remove_pieces` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -255,7 +257,7 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [ ] `#moves` method
+- [x] `#moves` method
 - [ ] `#captures` method
 - [x] `#is_checked?` method
 - [ ] `#is_checkmated?` method

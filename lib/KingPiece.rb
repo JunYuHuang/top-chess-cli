@@ -66,9 +66,14 @@ class KingPiece < Piece
   def is_checked?(src_cell, board)
     return false unless self.class.is_inbound_cell?(src_cell)
 
+    # make copy of `board` and move the king's position in it to `src_cell`
+    # in case `src_cell` is not where the king itself actually is
     board_copy = self.class.deep_copy(board)
+    filters = { color: @color, type: :king }
+    board_copy = self.class.remove_pieces(board_copy, filters)
     src_row, src_col = src_cell
     board_copy[src_row][src_col] = self
+
     filter = @color == :white ? { color: :black } : { color: :white }
     enemy_pieces = self.class.pieces(board, filter)
     enemy_pieces.each do |enemy|
