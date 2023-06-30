@@ -159,6 +159,28 @@ describe KingPiece do
       end
     end
 
+    it "returns the correct int matrix if called with a valid cell and an otherwise empty board on a black king" do
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][3] = black_king
+
+      res = black_king.moves([4,3], board)
+      expected = [
+        [4,2],   # left cell
+        [4,4],   # right cell
+        [3,3],   # up cell
+        [5,3],   # down cell
+        [3,2],   # up left cell
+        [3,4],   # up right cell
+        [5,2],   # down left cell
+        [5,4]    # down right cell
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
+
     it "returns the correct int matrix if called with a valid cell and a board with 3 white pawns, a white queen, and a white bishop on a white king" do
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       white_bishop = DummyPiece.new({ color: :white, type: :bishop })
@@ -173,6 +195,27 @@ describe KingPiece do
       board[7][4] = white_king
 
       res = white_king.moves([7,4], board)
+      expected = []
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a board with 3 black pawns, a black queen, and a black bishop on a black king" do
+      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      black_bishop = DummyPiece.new({ color: :black, type: :bishop })
+      black_queen = DummyPiece.new({ color: :black, type: :queen })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[1][3] = black_pawn
+      board[1][4] = black_pawn
+      board[1][5] = black_pawn
+      board[0][3] = black_queen
+      board[0][5] = black_bishop
+      board[0][4] = black_king
+
+      res = black_king.moves([0,4], board)
       expected = []
       expect(res.size).to eql(expected.size)
       expected.each do |move|
@@ -203,44 +246,90 @@ describe KingPiece do
         expect(res.include?(move)).to eql(true)
       end
     end
+
+    it "returns the correct int matrix if called with a valid cell and a board with a white rook on a black king" do
+      white_rook = DummyPiece.new({
+        color: :white,
+        type: :rook,
+        did_move: true
+      })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = white_rook
+      board[0][4] = black_king
+
+      res = black_king.moves([0,4], board)
+      expected = [
+        [0,3],   # left cell
+        [0,5],   # right cell
+        [1,3],   # down left cell
+        [1,5],   # down right cell
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |move|
+        expect(res.include?(move)).to eql(true)
+      end
+    end
   end
 
-  # describe "#captures" do
-  #   it "returns an empty int matrix if called with a valid cell and an otherwise empty board" do
-  #     empty_piece = DummyPiece.new({ color: :none, type: :empty })
-  #     white_king = KingPiece.new({ color: :white })
-  #     board = Array.new(8) { Array.new(8, empty_piece) }
-  #     board[4][3] = white_king
+  describe "#captures" do
+    it "returns an empty int matrix if called with a valid cell and an otherwise empty board on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][3] = white_king
 
-  #     res = white_king.captures([4,3], board)
-  #     expect(res.size).to eql(0)
-  #     expect(res).to eql([])
-  #   end
+      res = white_king.captures([4,3], board)
+      expect(res.size).to eql(0)
+      expect(res).to eql([])
+    end
 
-  #   it "returns the correct int matrix if called with a valid cell and a board with 3 white pawns and 3 black pawns" do
-  #     empty_piece = DummyPiece.new({ color: :none, type: :empty })
-  #     white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-  #     black_pawn = DummyPiece.new({ color: :black, type: :pawn })
-  #     white_king = KingPiece.new({ color: :white })
-  #     board = Array.new(8) { Array.new(8, empty_piece) }
-  #     board[1][0] = black_pawn
-  #     board[1][3] = black_pawn
-  #     board[1][6] = black_pawn
-  #     board[6][1] = white_pawn
-  #     board[6][3] = white_pawn
-  #     board[6][5] = white_pawn
-  #     board[4][3] = white_king
+    it "returns the correct int matrix if called with a valid cell and a board with a black pawn on a white king" do
+      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][2] = black_pawn
+      board[4][3] = white_king
 
-  #     res = white_king.captures([4,3], board)
-  #     expected = [
-  #       [1,0],  # up left cell
-  #       [1,3],  # up cell
-  #       [1,6]   # up right cell
-  #     ]
-  #     expect(res.size).to eql(expected.size)
-  #     expected.each do |move|
-  #       expect(res.include?(move)).to eql(true)
-  #     end
-  #   end
-  # end
+      res = white_king.captures([4,3], board)
+      expected = [
+        [4,2]    # left cell
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |capture|
+        expect(res.include?(capture)).to eql(true)
+      end
+    end
+
+    it "returns an empty int matrix if called with a valid cell and a board with a black pawn on a white king" do
+      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][1] = black_pawn
+      board[4][3] = white_king
+
+      res = white_king.captures([4,3], board)
+      expected = []
+      expect(res.size).to eql(expected.size)
+      expected.each do |capture|
+        expect(res.include?(capture)).to eql(true)
+      end
+    end
+
+    it "returns an empty int matrix if called with a valid cell and a board with a black queen and a black pawn on a white king" do
+      black_queen = DummyPiece.new({ color: :black, type: :queen })
+      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][1] = black_queen
+      board[4][2] = black_pawn
+      board[4][3] = white_king
+
+      res = white_king.captures([4,3], board)
+      expected = []
+      expect(res.size).to eql(expected.size)
+      expected.each do |capture|
+        expect(res.include?(capture)).to eql(true)
+      end
+    end
+  end
 end

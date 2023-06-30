@@ -258,7 +258,7 @@ Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
 - [x] `#is_checked?` method
 - [ ] `#is_checkmated?` method
 - [ ] `#is_stalemated?` method

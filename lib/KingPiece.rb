@@ -24,7 +24,6 @@ class KingPiece < Piece
     @did_move = options.fetch(:did_move, @@default_options[:did_move])
   end
 
-  # TODO - to test
   def moves(src_cell, board)
     res = [
       *self.class.up_moves(src_cell, board, @@one_step),
@@ -39,7 +38,6 @@ class KingPiece < Piece
     res.filter { |cell| !is_checked?(cell, board) }
   end
 
-  # TODO - to test
   def captures(src_cell, board)
     res = [
       self.class.up_capture(src_cell, board, @@one_step),
