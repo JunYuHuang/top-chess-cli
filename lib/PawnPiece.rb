@@ -4,11 +4,14 @@ require './lib/PieceUtils'
 class PawnPiece < Piece
   extend PieceUtils
 
-  attr_accessor(:default_options, :did_move, :one_step, :two_steps)
+  attr_accessor(
+    :default_options, :did_move, :one_step, :two_steps, :did_double_step
+  )
 
   @@default_options = {
     color: :white,
-    did_move: false
+    did_move: false,
+    did_double_step: false
   }
 
   @@one_step = { max_steps: 1 }
@@ -24,6 +27,7 @@ class PawnPiece < Piece
     }
     super(passed_options)
     @did_move = options.fetch(:did_move, @@default_options[:did_move])
+    @did_double_step = options.fetch(:did_double_step, @@default_options[:did_double_step])
   end
 
   def moves(src_cell, board)
@@ -33,12 +37,35 @@ class PawnPiece < Piece
       black_moves(src_cell, board)
   end
 
-  # TODO - to test
   def captures(src_cell, board)
     return [] unless self.class.is_valid_piece_color?(@color)
     @color == :white ?
       white_captures(src_cell, board) :
       black_captures(src_cell, board)
+  end
+
+  # TODO - to test
+  def can_capture_en_passant?(args, &is_right_last_move)
+    src_cell = args.fetch(:src_cell, nil)
+    captive_cell = args.fetch(:captive_cell, nil)
+    board = args.fetch(:board, nil)
+    return if src_cell.nil? or captive_cell.nil? or board.nil?
+    return if self.class.is_empty_cell?(src_cell)
+    return if self.class.is_empty_cell?(captive_cell)
+    return unless is_valid_piece_color?(@color)
+    return unless block_given?
+    return unless is_right_last_move.call(args)
+
+    @color == :white ?
+      white_captures(src_cell, board) :
+      black_captures(src_cell, board)
+  end
+
+  # TODO - to test
+  def capture_en_passant(src_cell, board)
+    @color == :white ?
+      white_capture_en_passant(src_cell, board) :
+      black_capture_en_passant(src_cell, board)
   end
 
   def did_move?
@@ -54,6 +81,15 @@ class PawnPiece < Piece
     self.class.at_last_row?(src_cell, board)
   end
 
+  def did_double_step?
+    @did_double_step
+  end
+
+  def double_step!
+    return if @did_double_step
+    @did_double_step = true
+  end
+
   private
 
   def white_moves(src_cell, board)
@@ -61,15 +97,11 @@ class PawnPiece < Piece
     self.class.up_moves(src_cell, board, options)
   end
 
-  # TODO - to test
   def white_captures(src_cell, board)
     res = [
       self.class.up_left_capture(src_cell, board, @@one_step),
       self.class.up_right_capture(src_cell, board, @@one_step),
     ]
-    # if can_white_capture_en_passant?(src_cell, board)
-    #   # TODO
-    # end
     res.filter { |cell| !cell.nil? }
   end
 
@@ -78,25 +110,31 @@ class PawnPiece < Piece
     # TODO
   end
 
+  # TODO - to test
+  def white_capture_en_passant(src_cell, board)
+    # TODO
+  end
+
   def black_moves(src_cell, board)
     options = did_move? ? @@one_step : @@two_steps
     self.class.down_moves(src_cell, board, options)
   end
 
-  # TODO - to test
   def black_captures(src_cell, board)
     res = [
       self.class.down_left_capture(src_cell, board, @@one_step),
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
-    # if can_black_capture_en_passant?(src_cell, board)
-    #   # TODO
-    # end
     res.filter { |cell| !cell.nil? }
   end
 
   # TODO - to test
   def can_black_capture_en_passant?(src_cell, board)
+    # TODO
+  end
+
+  # TODO - to test
+  def black_capture_en_passant(src_cell, board)
     # TODO
   end
 end
