@@ -28,7 +28,7 @@ describe KingPiece do
       expect(res).to eql(false)
     end
 
-    it "returns false if called with a valid cell and a board with a black rook and a white pawn on a white king" do
+    it "returns false if called with a valid cell and a certain board with a black rook and a white pawn on a white king" do
       black_rook = DummyPiece.new({
         color: :black,
         type: :rook,
@@ -45,7 +45,7 @@ describe KingPiece do
       expect(res).to eql(false)
     end
 
-    it "returns true if called with a valid cell and a board with a black rook on a white king" do
+    it "returns true if called with a valid cell and a certain board with a black rook on a white king" do
       black_rook = DummyPiece.new({
         color: :black,
         type: :rook,
@@ -60,7 +60,7 @@ describe KingPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid cell and a board with a white rook on a black king" do
+    it "returns true if called with a valid cell and a certain board with a white rook on a black king" do
       white_rook = DummyPiece.new({
         color: :white,
         type: :rook,
@@ -75,7 +75,7 @@ describe KingPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid cell and a board with a black knight on a white king" do
+    it "returns true if called with a valid cell and a certain board with a black knight on a white king" do
       black_knight = DummyPiece.new({
         color: :black,
         type: :knight,
@@ -90,7 +90,7 @@ describe KingPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid cell and a board with a black bishop on a white king" do
+    it "returns true if called with a valid cell and a certain board with a black bishop on a white king" do
       black_bishop = DummyPiece.new({
         color: :black,
         type: :bishop,
@@ -105,7 +105,7 @@ describe KingPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid cell and a board with a black queen on a white king" do
+    it "returns true if called with a valid cell and a certain board with a black queen on a white king" do
       black_queen = DummyPiece.new({
         color: :black,
         type: :queen,
@@ -120,7 +120,7 @@ describe KingPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid cell and a board with a black pawn on a white king" do
+    it "returns true if called with a valid cell and a certain board with a black pawn on a white king" do
       black_pawn = DummyPiece.new({
         color: :black,
         type: :pawn,
@@ -181,7 +181,7 @@ describe KingPiece do
       end
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with 3 white pawns, a white queen, and a white bishop on a white king" do
+    it "returns the correct int matrix if called with a valid cell and a certain board with 3 white pawns, a white queen, and a white bishop on a white king" do
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       white_bishop = DummyPiece.new({ color: :white, type: :bishop })
       white_queen = DummyPiece.new({ color: :white, type: :queen })
@@ -202,7 +202,7 @@ describe KingPiece do
       end
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with 3 black pawns, a black queen, and a black bishop on a black king" do
+    it "returns the correct int matrix if called with a valid cell and a certain board with 3 black pawns, a black queen, and a black bishop on a black king" do
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       black_bishop = DummyPiece.new({ color: :black, type: :bishop })
       black_queen = DummyPiece.new({ color: :black, type: :queen })
@@ -223,7 +223,7 @@ describe KingPiece do
       end
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with a black rook on a white king" do
+    it "returns the correct int matrix if called with a valid cell and a certain board with a black rook on a white king" do
       black_rook = DummyPiece.new({
         color: :black,
         type: :rook,
@@ -247,7 +247,7 @@ describe KingPiece do
       end
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with a white rook on a black king" do
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white rook on a black king" do
       white_rook = DummyPiece.new({
         color: :white,
         type: :rook,
@@ -283,7 +283,7 @@ describe KingPiece do
       expect(res).to eql([])
     end
 
-    it "returns the correct int matrix if called with a valid cell and a board with a black pawn on a white king" do
+    it "returns the correct int matrix if called with a valid cell and a certain board with a black pawn on a white king" do
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
@@ -300,7 +300,7 @@ describe KingPiece do
       end
     end
 
-    it "returns an empty int matrix if called with a valid cell and a board with a black pawn on a white king" do
+    it "returns an empty int matrix if called with a valid cell and a certain board with a black pawn on a white king" do
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
@@ -315,7 +315,7 @@ describe KingPiece do
       end
     end
 
-    it "returns an empty int matrix if called with a valid cell and a board with a black queen and a black pawn on a white king" do
+    it "returns an empty int matrix if called with a valid cell and a certain board with a black queen and a black pawn on a white king" do
       black_queen = DummyPiece.new({ color: :black, type: :queen })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
@@ -330,6 +330,106 @@ describe KingPiece do
       expected.each do |capture|
         expect(res.include?(capture)).to eql(true)
       end
+    end
+  end
+
+  describe "#is_checkmated?" do
+    it "returns false if called with a valid cell and an otherwise empty board on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][4] = white_king
+
+      res = white_king.is_checkmated?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = white_rook
+      board[7][4] = white_king
+      board[0][4] = black_king
+
+      res = black_king.is_checkmated?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][4] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+
+      res = black_king.is_checkmated?([0,7], board)
+      expect(res).to eql(true)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+
+      res = black_king.is_checkmated?([0,7], board)
+      expect(res).to eql(false)
+    end
+  end
+
+  describe "#is_stalemated?" do
+    it "returns false if called with a valid cell and an otherwise empty board on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][4] = white_king
+
+      res = white_king.is_stalemated?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = white_rook
+      board[7][4] = white_king
+      board[0][4] = black_king
+
+      res = black_king.is_stalemated?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][4] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+
+      res = black_king.is_stalemated?([0,7], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell and a certain board with a white rook and a white king on a black king" do
+      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+
+      res = black_king.is_stalemated?([0,7], board)
+      expect(res).to eql(true)
     end
   end
 end

@@ -38,7 +38,9 @@ class KingPiece < Piece
     res.filter { |cell| !is_checked?(cell, board) }
   end
 
-  def captures(src_cell, board)
+  def captures(src_cell, board, options = {})
+    filter_is_checked = options.fetch(:filter_is_checked, true)
+
     res = [
       self.class.up_capture(src_cell, board, @@one_step),
       self.class.down_capture(src_cell, board, @@one_step),
@@ -49,7 +51,8 @@ class KingPiece < Piece
       self.class.down_right_capture(src_cell, board, @@one_step),
       self.class.up_left_capture(src_cell, board, @@one_step)
     ]
-    res.filter { |cell| !cell.nil? && !is_checked?(cell, board) }
+    res.filter! { |cell| !cell.nil? }
+    filter_is_checked ? res.filter { |cell| !is_checked?(cell, board)} : res
   end
 
   def did_move?
@@ -75,25 +78,27 @@ class KingPiece < Piece
     filter = @color == :white ? { color: :black } : { color: :white }
     enemy_pieces = self.class.pieces(board, filter)
     enemy_pieces.each do |enemy|
-      # skip enemy king b/c it is illegal for a king to check an enemy king
-      next if enemy[:piece].type == :king
-      enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy)
+      enemy_captures = []
+      if enemy[:piece].type == :king
+        option = { filter_is_checked: false }
+        enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy, option)
+      else
+        enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy)
+      end
       checkable = enemy_captures.include?(src_cell)
       return true if checkable
     end
     false
   end
 
-  # TODO - to test
   def is_checkmated?(src_cell, board)
     return false unless is_checked?(src_cell, board)
-    # TODO
+    moves(src_cell, board).size == 0
   end
 
-  # TODO - to test
   def is_stalemated?(src_cell, board)
     return false if is_checked?(src_cell, board)
-    # TODO
+    moves(src_cell, board).size == 0
   end
 
   # TODO - to test

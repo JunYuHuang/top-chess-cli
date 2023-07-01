@@ -247,8 +247,8 @@ Complete the following:
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_checked?` method
-- [ ] `#is_checkmated?` method
-- [ ] `#is_stalemated?` method
+- [x] `#is_checkmated?` method
+- [x] `#is_stalemated?` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#can_kingside_castle?` method
 - [ ] `#moves_queenside_castle` method
@@ -260,8 +260,8 @@ Complete the tests for the following:
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#is_checked?` method
-- [ ] `#is_checkmated?` method
-- [ ] `#is_stalemated?` method
+- [x] `#is_checkmated?` method
+- [x] `#is_stalemated?` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#can_kingside_castle?` method
 - [ ] `#moves_queenside_castle` method
