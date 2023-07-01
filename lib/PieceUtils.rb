@@ -51,8 +51,7 @@ module PieceUtils
   def is_empty_cell?(cell, board)
     row, col = cell
     piece = board[row][col]
-    return true if piece.nil?
-    piece.type == :empty
+    piece.nil?
   end
 
   # TODO - to test
@@ -137,7 +136,7 @@ module PieceUtils
     BOARD_LENGTH.times do |r|
       row = ["|"]
       BOARD_LENGTH.times do |c|
-        if board[r][c].nil? or board[r][c].type == :empty
+        if is_empty_cell?([r, c], board)
           row.push(" #{piece_to_s[nil]} |")
           next
         end
