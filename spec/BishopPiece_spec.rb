@@ -11,9 +11,8 @@ describe BishopPiece do
 
   describe "#moves" do
     it "returns the correct int matrix if called with a valid cell and an otherwise empty board" do
-      empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_bishop = BishopPiece.new({ color: :white })
-      board = Array.new(8) { Array.new(8, empty_piece) }
+      board = Array.new(8) { Array.new(8, nil) }
       board[4][3] = white_bishop
 
       res = white_bishop.moves([4,3], board)
@@ -30,11 +29,10 @@ describe BishopPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_bishop = BishopPiece.new({ color: :white })
-      board = Array.new(8) { Array.new(8, empty_piece) }
+      board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn
       board[1][6] = black_pawn
       board[6][1] = white_pawn
@@ -57,9 +55,8 @@ describe BishopPiece do
 
   describe "#captures" do
     it "returns an empty int matrix if called with a valid cell and an otherwise empty board" do
-      empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_bishop = BishopPiece.new({ color: :white })
-      board = Array.new(8) { Array.new(8, empty_piece) }
+      board = Array.new(8) { Array.new(8, nil) }
       board[4][3] = white_bishop
 
       res = white_bishop.captures([4,3], board)
@@ -68,11 +65,10 @@ describe BishopPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      empty_piece = DummyPiece.new({ color: :none, type: :empty })
       white_pawn = DummyPiece.new({ color: :white, type: :pawn })
       black_pawn = DummyPiece.new({ color: :black, type: :pawn })
       white_bishop = BishopPiece.new({ color: :white })
-      board = Array.new(8) { Array.new(8, empty_piece) }
+      board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn
       board[1][6] = black_pawn
       board[6][1] = white_pawn

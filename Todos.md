@@ -30,7 +30,7 @@ Complete the following:
 - [ ] Rename `DummyPiece` to `MockPiece`
 - [ ] Refactor `Piece` subclasses to store their own position on the grid
 - [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
-- [ ] Refactor to not use and remove the `EmptyPiece` class
+- [x] Refactor to not use and remove the `EmptyPiece` class
 - [ ] Add `move_to` method to `Piece` subclasses (modifies board in-place or returns a new board)
 - [ ] Add `capture_at` method to `Piece subclasses (modifies board in-place or returns a new board)
 
@@ -139,20 +139,6 @@ Complete the following:
 - [x] `#is_interactive?` method
 - [x] `#is_capturable?` method
 
-## `EmptyPiece` class (inherits from `Piece`)
-
-Complete the following:
-
-- [x] `.type` method
-- [x] `.is_interactive?` method
-- [x] `.is_capturable?` method
-
-Complete the tests for the following:
-
-- [x] `.type` method
-- [x] `.is_interactive?` method
-- [x] `.is_capturable?` method
-
 ## `RookPiece` class (inherits from `Piece`)
 
 Complete the following:
@@ -253,6 +239,14 @@ Complete the following:
 - [ ] `#can_kingside_castle?` method
 - [ ] `#moves_queenside_castle` method
 - [ ] `#moves_kingside_castle` method
+- [ ] `#white_moves_queenside_castle` method (private)
+- [ ] `#black_moves_queenside_castle` method (private)
+- [ ] `#white_moves_kingside_castle` method (private)
+- [ ] `#black_moves_kingside_castle` method (private)
+- [ ] `#can_white_queenside_castle?` method (private)
+- [ ] `#can_black_queenside_castle?` method (private)
+- [ ] `#can_white_kingside_castle?` method (private)
+- [ ] `#can_black_kingside_castle?` method (private)
 
 Complete the tests for the following:
 
