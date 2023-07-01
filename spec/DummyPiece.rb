@@ -37,21 +37,46 @@ class DummyPiece < Piece
     @did_move
   end
 
-  # TODO - to test
-  def captures(src_cell, board)
+  def captures(src_cell, board, options = {})
     return [] if !self.class.is_inbound_cell?(src_cell)
     return [] if self.class.is_empty_cell?(src_cell, board)
 
     src_row, src_col = src_cell
     piece = board[src_row][src_col]
 
-    # for simplicity, do not support captures for a mocked king
-    return [] if piece.type == :king
+    return king_captures(src_cell, board, options) if piece.type == :king
     return rook_captures(src_cell, board) if piece.type == :rook
     return bishop_captures(src_cell, board) if piece.type == :bishop
     return knight_captures(src_cell, board) if piece.type == :knight
     return queen_captures(src_cell, board) if piece.type == :queen
     return pawn_captures(src_cell, board) if piece.type == :pawn
+  end
+
+  def is_checked?(src_cell, board)
+    return false unless self.class.is_inbound_cell?(src_cell)
+
+    # make copy of `board` and move the king's position in it to `src_cell`
+    # in case `src_cell` is not where the king itself actually is
+    board_copy = self.class.deep_copy(board)
+    filters = { color: @color, type: :king }
+    board_copy = self.class.remove_pieces(board_copy, filters)
+    src_row, src_col = src_cell
+    board_copy[src_row][src_col] = self
+
+    filter = @color == :white ? { color: :black } : { color: :white }
+    enemy_pieces = self.class.pieces(board, filter)
+    enemy_pieces.each do |enemy|
+      enemy_captures = []
+      if enemy[:piece].type == :king
+        option = { filter_is_checked: false }
+        enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy, option)
+      else
+        enemy_captures = enemy[:piece].captures(enemy[:cell], board_copy)
+      end
+      checkable = enemy_captures.include?(src_cell)
+      return true if checkable
+    end
+    false
   end
 
   private
@@ -115,5 +140,22 @@ class DummyPiece < Piece
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
     res.filter { |cell| !cell.nil? }
+  end
+
+  def king_captures(src_cell, board, options = {})
+    filter_is_checked = options.fetch(:filter_is_checked, true)
+
+    res = [
+      self.class.up_capture(src_cell, board, @@one_step),
+      self.class.down_capture(src_cell, board, @@one_step),
+      self.class.left_capture(src_cell, board, @@one_step),
+      self.class.right_capture(src_cell, board, @@one_step),
+      self.class.down_left_capture(src_cell, board, @@one_step),
+      self.class.up_right_capture(src_cell, board, @@one_step),
+      self.class.down_right_capture(src_cell, board, @@one_step),
+      self.class.up_left_capture(src_cell, board, @@one_step)
+    ]
+    res.filter! { |cell| !cell.nil? }
+    filter_is_checked ? res.filter { |cell| !is_checked?(cell, board)} : res
   end
 end
