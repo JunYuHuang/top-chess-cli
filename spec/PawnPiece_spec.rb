@@ -1,5 +1,5 @@
 require './lib/PawnPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe PawnPiece do
   describe "#initialize" do
@@ -73,7 +73,7 @@ describe PawnPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and an otherwise empty board on a white pawn that has not moved yet with a black pawn in the cell directly above it" do
-      black_pawn = DummyPiece.new({ color: :black, did_move: true })
+      black_pawn = MockPiece.new({ color: :black, did_move: true })
       white_pawn = PawnPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[5][3] = black_pawn
@@ -88,7 +88,7 @@ describe PawnPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and an otherwise empty board on a white pawn that has not moved yet with a black pawn in the cell above the cell directly above it" do
-      black_pawn = DummyPiece.new({ color: :black, did_move: true })
+      black_pawn = MockPiece.new({ color: :black, did_move: true })
       white_pawn = PawnPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[4][3] = black_pawn
@@ -127,7 +127,7 @@ describe PawnPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 other black knights on a white pawn" do
-      black_knight = DummyPiece.new({ color: :black, type: :knight })
+      black_knight = MockPiece.new({ color: :black, type: :knight })
       white_pawn = PawnPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[5][2] = black_knight
@@ -146,7 +146,7 @@ describe PawnPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 other white knights on a black pawn" do
-      white_knight = DummyPiece.new({ color: :white, type: :knight })
+      white_knight = MockPiece.new({ color: :white, type: :knight })
       black_pawn = PawnPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
       board[2][2] = white_knight

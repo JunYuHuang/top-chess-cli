@@ -1,5 +1,5 @@
 require './lib/BishopPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe BishopPiece do
   describe "#initialize" do
@@ -29,8 +29,8 @@ describe BishopPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_bishop = BishopPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn
@@ -65,8 +65,8 @@ describe BishopPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_bishop = BishopPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn

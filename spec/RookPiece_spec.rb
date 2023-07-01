@@ -1,5 +1,5 @@
 require './lib/RookPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe RookPiece do
   describe "#initialize" do
@@ -11,8 +11,8 @@ describe RookPiece do
 
   describe "#moves" do
     it "returns the correct int matrix if called with a valid cell and a board with a white pawn and a black pawn" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_rook = RookPiece.new({ color: :white, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][2] = black_pawn
@@ -53,8 +53,8 @@ describe RookPiece do
 
   describe "#captures" do
     it "returns the correct int matrix if called with a valid cell and a board with a white pawn and a black pawn" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_rook = RookPiece.new({ color: :white, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][2] = black_pawn

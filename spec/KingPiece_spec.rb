@@ -1,5 +1,5 @@
 require './lib/KingPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe KingPiece do
   describe "#initialize" do
@@ -29,12 +29,12 @@ describe KingPiece do
     end
 
     it "returns false if called with a valid cell and a certain board with a black rook and a white pawn on a white king" do
-      black_rook = DummyPiece.new({
+      black_rook = MockPiece.new({
         color: :black,
         type: :rook,
         did_move: true
       })
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[4][4] = black_rook
@@ -46,7 +46,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a black rook on a white king" do
-      black_rook = DummyPiece.new({
+      black_rook = MockPiece.new({
         color: :black,
         type: :rook,
         did_move: true
@@ -61,7 +61,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a white rook on a black king" do
-      white_rook = DummyPiece.new({
+      white_rook = MockPiece.new({
         color: :white,
         type: :rook,
         did_move: true
@@ -76,7 +76,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a black knight on a white king" do
-      black_knight = DummyPiece.new({
+      black_knight = MockPiece.new({
         color: :black,
         type: :knight,
         did_move: true
@@ -91,7 +91,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a black bishop on a white king" do
-      black_bishop = DummyPiece.new({
+      black_bishop = MockPiece.new({
         color: :black,
         type: :bishop,
         did_move: true
@@ -106,7 +106,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a black queen on a white king" do
-      black_queen = DummyPiece.new({
+      black_queen = MockPiece.new({
         color: :black,
         type: :queen,
         did_move: true
@@ -121,7 +121,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a black pawn on a white king" do
-      black_pawn = DummyPiece.new({
+      black_pawn = MockPiece.new({
         color: :black,
         type: :pawn,
         did_move: true
@@ -182,9 +182,9 @@ describe KingPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a certain board with 3 white pawns, a white queen, and a white bishop on a white king" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      white_bishop = DummyPiece.new({ color: :white, type: :bishop })
-      white_queen = DummyPiece.new({ color: :white, type: :queen })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[6][3] = white_pawn
@@ -203,9 +203,9 @@ describe KingPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a certain board with 3 black pawns, a black queen, and a black bishop on a black king" do
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
-      black_bishop = DummyPiece.new({ color: :black, type: :bishop })
-      black_queen = DummyPiece.new({ color: :black, type: :queen })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_queen = MockPiece.new({ color: :black, type: :queen })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][3] = black_pawn
@@ -224,7 +224,7 @@ describe KingPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a black rook on a white king" do
-      black_rook = DummyPiece.new({
+      black_rook = MockPiece.new({
         color: :black,
         type: :rook,
         did_move: true
@@ -248,7 +248,7 @@ describe KingPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white rook on a black king" do
-      white_rook = DummyPiece.new({
+      white_rook = MockPiece.new({
         color: :white,
         type: :rook,
         did_move: true
@@ -284,7 +284,7 @@ describe KingPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a black pawn on a white king" do
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[4][2] = black_pawn
@@ -301,7 +301,7 @@ describe KingPiece do
     end
 
     it "returns an empty int matrix if called with a valid cell and a certain board with a black pawn on a white king" do
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[4][1] = black_pawn
@@ -316,8 +316,8 @@ describe KingPiece do
     end
 
     it "returns an empty int matrix if called with a valid cell and a certain board with a black queen and a black pawn on a white king" do
-      black_queen = DummyPiece.new({ color: :black, type: :queen })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      black_queen = MockPiece.new({ color: :black, type: :queen })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_king = KingPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[4][1] = black_queen
@@ -344,7 +344,7 @@ describe KingPiece do
     end
 
     it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
@@ -357,7 +357,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
@@ -370,7 +370,7 @@ describe KingPiece do
     end
 
     it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
@@ -394,7 +394,7 @@ describe KingPiece do
     end
 
     it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
@@ -407,7 +407,7 @@ describe KingPiece do
     end
 
     it "returns false if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }
@@ -420,7 +420,7 @@ describe KingPiece do
     end
 
     it "returns true if called with a valid cell and a certain board with a white rook and a white king on a black king" do
-      white_rook = DummyPiece.new({ color: :white, type: :rook })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
       white_king = KingPiece.new({ color: :white })
       black_king = KingPiece.new({ color: :black })
       board = Array.new(8) { Array.new(8, nil) }

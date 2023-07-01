@@ -1,5 +1,5 @@
 require './lib/KnightPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe KnightPiece do
   describe "#initialize" do
@@ -33,8 +33,8 @@ describe KnightPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_knight = KnightPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][3] = black_pawn
@@ -69,8 +69,8 @@ describe KnightPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 2 white pawns and 2 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_knight = KnightPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][3] = black_pawn

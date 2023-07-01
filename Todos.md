@@ -27,7 +27,7 @@ Complete the following:
 
 Complete the following:
 
-- [ ] Rename `DummyPiece` to `MockPiece`
+- [x] Rename `DummyPiece` to `MockPiece`
 - [ ] Refactor `Piece` subclasses to store their own position on the grid
 - [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
 - [x] Refactor to not use and remove the `EmptyPiece` class

@@ -1,5 +1,5 @@
 require './lib/QueenPiece'
-require './spec/DummyPiece'
+require './spec/MockPiece'
 
 describe QueenPiece do
   describe "#initialize" do
@@ -33,8 +33,8 @@ describe QueenPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 3 white pawns and 3 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_queen = QueenPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn
@@ -75,8 +75,8 @@ describe QueenPiece do
     end
 
     it "returns the correct int matrix if called with a valid cell and a board with 3 white pawns and 3 black pawns" do
-      white_pawn = DummyPiece.new({ color: :white, type: :pawn })
-      black_pawn = DummyPiece.new({ color: :black, type: :pawn })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
       white_queen = QueenPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[1][0] = black_pawn

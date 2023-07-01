@@ -4,17 +4,17 @@ require './lib/PieceUtils'
 =begin
 This `Piece` subclass is a wildcard Piece that can be any valid chess piece (e.g. PawnPiece) or a piece that represents an empty cell on the board (i.e. EmptyPiece).
 
-`DummyPiece` is meant to be used as a mock or test double in the testing or spec files only and not in or as part of a real chess game.
+`MockPiece` is meant to be used as a mock or test double in the testing or spec files only and not in or as part of a real chess game.
 =end
 
-class DummyPiece < Piece
+class MockPiece < Piece
   extend PieceUtils
 
   attr_accessor(:default_options, :did_move, :one_step)
 
   @@default_options = {
     color: :white,
-    type: :dummy,
+    type: :mock,
     is_interactive: true,
     is_capturable: true,
     did_move: false
