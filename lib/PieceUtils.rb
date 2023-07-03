@@ -218,28 +218,6 @@ module PieceUtils
     board_copy
   end
 
-  # TODO - to test
-  def is_clear_between_two_cells_in_row?(src_cell, dst_cell, board)
-    src_row, src_col = src_cell
-    dst_row, dst_col = dst_cell
-    return false if src_row != dst_row or src_col == dst_col
-
-    first_col = 0
-    last_col = BOARD_LENGTH - 1
-    if src_col < dst_col
-      first_col = src_col
-      last_col = dst_col
-    else
-      first_col = dst_col
-      last_col = src_col
-    end
-
-    (first_col + 1..last_col).to_a.each do |col|
-      return false unless is_empty_cell?([src_cell, col], board)
-    end
-    true
-  end
-
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
     max_steps = options.fetch(:max_steps, BOARD_LENGTH - 1)
 

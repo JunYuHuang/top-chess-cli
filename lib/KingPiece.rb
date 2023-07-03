@@ -4,7 +4,9 @@ require './lib/PieceUtils'
 class KingPiece < Piece
   extend PieceUtils
 
-  attr_accessor(:default_options, :did_move, :one_step)
+  attr_accessor(
+    :default_options, :did_move, :one_step, :two_steps, :three_steps
+  )
 
   @@default_options = {
     color: :white,
@@ -12,6 +14,10 @@ class KingPiece < Piece
   }
 
   @@one_step = { max_steps: 1 }
+
+  @@two_steps = { max_steps: 2 }
+
+  @@three_steps = { max_steps: 3 }
 
   def initialize(options = @@default_options)
     passed_options = {
@@ -102,18 +108,6 @@ class KingPiece < Piece
   end
 
   # TODO - to test
-  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
-  def moves_queenside_castle(src_cell, board)
-    # TODO
-  end
-
-  # TODO - to test
-  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
-  def moves_kingside_castle(src_cell, board)
-    # TODO
-  end
-
-  # TODO - to test
   def can_queenside_castle?(src_cell, board)
     return false unless self.class.is_inbound_cell?(src_cell)
     return false if self.class.is_empty_cell?(src_cell)
@@ -134,6 +128,32 @@ class KingPiece < Piece
   private
 
   # TODO - to test
+  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
+  def moves_queenside_castle(src_cell, board)
+    return false unless self.class.is_inbound_cell?(src_cell)
+    return false if self.class.is_empty_cell?(src_cell)
+    self.class.left_moves(src_cell, board, @@two_steps)
+  end
+
+  # TODO - to test
+  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
+  def moves_kingside_castle(src_cell, board)
+    return false unless self.class.is_inbound_cell?(src_cell)
+    return false if self.class.is_empty_cell?(src_cell)
+    self.class.right_moves(src_cell, board, @@two_steps)
+  end
+
+  # TODO - to test
+  def are_cells_amid_queenside_castle_empty?(src_cell, board)
+    self.class.left_moves(src_cell, board, @@three_steps).size == 3
+  end
+
+  # TODO - to test
+  def are_cells_amid_kingside_castle_empty?(src_cell, board)
+    self.class.right_moves(src_cell, board, @@two_steps).size == 2
+  end
+
+  # TODO - to test
   def can_white_queenside_castle?(src_cell, board)
     return false if did_move?
 
@@ -146,25 +166,99 @@ class KingPiece < Piece
     rook_row, rook_col = left_white_rook[:cell]
     return false if src_row != rook_row
     return false if is_checked?(src_cell, board)
-    # TODO - return false if any cells the white king moves across to its castling makes the king in check
-    # TODO - return false the destination cell that the king moves to for castling makes the king in check
-    # TODO - return false if any cells between the left white rook and white king are non-empty
+
+    # return false if any cells (2 cells) between the left white rook and the white king are non-empty
+    return false unless are_cells_amid_queenside_castle_empty?(src_cell, board)
+
+    # return false if any cells the white king moves across to its castling (including the destination cell) makes the king in check
+    moves = moves_queenside_castle(src_cell, board)
+    return false if moves.size != 2
+    moves.each do |move|
+      return false if is_checked?(move, board)
+    end
+
     true
   end
 
   # TODO - to test
   def can_white_kingside_castle?(src_cell, board)
-    # TODO
+    return false if did_move?
+
+    filters = { color: :white, row: 7, col: 7 }
+    right_white_rook = self.class.pieces(board, filters)[0]
+    return false if right_white_rook.nil?
+    return false if right_white_rook[:piece].did_move?
+
+    src_row, src_col = src_cell
+    rook_row, rook_col = right_white_rook[:cell]
+    return false if src_row != rook_row
+    return false if is_checked?(src_cell, board)
+
+    # return false if any cells (2 cells) between the right white rook and the white king are non-empty
+    return false unless are_cells_amid_kingside_castle_empty?(src_cell, board)
+
+    # return false if any cells the white king moves across to its castling (including the destination cell) makes the king in check
+    moves = moves_kingside_castle(src_cell, board)
+    return false if moves.size != 2
+    moves.each do |move|
+      return false if is_checked?(move, board)
+    end
+
+    true
   end
 
   # TODO - to test
   def can_black_queenside_castle?(src_cell, board)
-    # TODO
+    return false if did_move?
+
+    filters = { color: :black, row: 0, col: 0 }
+    left_black_rook = self.class.pieces(board, filters)[0]
+    return false if left_black_rook.nil?
+    return false if left_black_rook[:piece].did_move?
+
+    src_row, src_col = src_cell
+    rook_row, rook_col = left_black_rook[:cell]
+    return false if src_row != rook_row
+    return false if is_checked?(src_cell, board)
+
+    # return false if any cells (2 cells) between the left black rook and the black king are non-empty
+    return false unless are_cells_amid_queenside_castle_empty?(src_cell, board)
+
+    # return false if any cells the black king moves across to its castling (including the destination cell) makes the king in check
+    moves = moves_queenside_castle(src_cell, board)
+    return false if moves.size != 2
+    moves.each do |move|
+      return false if is_checked?(move, board)
+    end
+
+    true
   end
 
   # TODO - to test
   def can_black_kingside_castle?(src_cell, board)
-    # TODO
+    return false if did_move?
+
+    filters = { color: :black, row: 0, col: 7 }
+    right_black_rook = self.class.pieces(board, filters)[0]
+    return false if right_black_rook.nil?
+    return false if right_black_rook[:piece].did_move?
+
+    src_row, src_col = src_cell
+    rook_row, rook_col = right_black_rook[:cell]
+    return false if src_row != rook_row
+    return false if is_checked?(src_cell, board)
+
+    # return false if any cells (2 cells) between the right black rook and the black king are non-empty
+    return false unless are_cells_amid_kingside_castle_empty?(src_cell, board)
+
+    # return false if any cells the black king moves across to its castling (including the destination cell) makes the king in check
+    moves = moves_kingside_castle(src_cell, board)
+    return false if moves.size != 2
+    moves.each do |move|
+      return false if is_checked?(move, board)
+    end
+
+    true
   end
 end
 

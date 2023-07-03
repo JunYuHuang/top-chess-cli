@@ -31,8 +31,8 @@ Complete the following:
 - [ ] Refactor `Piece` subclasses to store their own position on the grid
 - [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
 - [x] Refactor to not use and remove the `EmptyPiece` class
-- [ ] Add `move_to` method to `Piece` subclasses (modifies board in-place or returns a new board)
-- [ ] Add `capture_at` method to `Piece subclasses (modifies board in-place or returns a new board)
+- [ ] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
+- [ ] Add `capture` method to `Piece subclasses (modifies board in-place or returns a new board)
 
 ## `Player` class
 
@@ -235,18 +235,16 @@ Complete the following:
 - [x] `#is_checked?` method
 - [x] `#is_checkmated?` method
 - [x] `#is_stalemated?` method
-- [ ] `#can_queenside_castle?` method
-- [ ] `#can_kingside_castle?` method
-- [ ] `#moves_queenside_castle` method
-- [ ] `#moves_kingside_castle` method
-- [ ] `#white_moves_queenside_castle` method (private)
-- [ ] `#black_moves_queenside_castle` method (private)
-- [ ] `#white_moves_kingside_castle` method (private)
-- [ ] `#black_moves_kingside_castle` method (private)
-- [ ] `#can_white_queenside_castle?` method (private)
-- [ ] `#can_black_queenside_castle?` method (private)
-- [ ] `#can_white_kingside_castle?` method (private)
-- [ ] `#can_black_kingside_castle?` method (private)
+- [x] `#can_queenside_castle?` method
+- [x] `#can_kingside_castle?` method
+- [x] `#moves_queenside_castle` method (private)
+- [x] `#moves_kingside_castle` method (private)
+- [x] `#are_cells_amid_queenside_castle_empty?` method (private)
+- [x] `#are_cells_amid_kingside_castle_empty?` method (private)
+- [x] `#can_white_queenside_castle?` method (private)
+- [x] `#can_black_queenside_castle?` method (private)
+- [x] `#can_white_kingside_castle?` method (private)
+- [x] `#can_black_kingside_castle?` method (private)
 
 Complete the tests for the following:
 
@@ -258,8 +256,6 @@ Complete the tests for the following:
 - [x] `#is_stalemated?` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#can_kingside_castle?` method
-- [ ] `#moves_queenside_castle` method
-- [ ] `#moves_kingside_castle` method
 
 ## `PieceFactory` class
 
