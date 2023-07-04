@@ -539,8 +539,6 @@ describe KingPiece do
       expect(res).to eql(false)
     end
 
-    # TODO - tests for black queenside castling
-
     it "returns false if called with a valid cell and an otherwise empty board on a black king that has moved" do
       black_king = KingPiece.new({ color: :black, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
