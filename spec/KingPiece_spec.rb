@@ -539,6 +539,17 @@ describe KingPiece do
       expect(res).to eql(false)
     end
 
+    it "returns true if called with a valid cell and a certain board with an unmoved left white rook on a white king" do
+      left_white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][0] = left_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_queenside_castle?([7,4], board)
+      expect(res).to eql(true)
+    end
+
     it "returns false if called with a valid cell and an otherwise empty board on a black king that has moved" do
       black_king = KingPiece.new({ color: :black, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
@@ -626,6 +637,17 @@ describe KingPiece do
 
       res = black_king.can_queenside_castle?([0,4], board)
       expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell and a certain board with an unmoved left black rook on a black king" do
+      left_black_rook = MockPiece.new({ color: :black, type: :rook })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = left_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_queenside_castle?([0,4], board)
+      expect(res).to eql(true)
     end
   end
 
@@ -745,8 +767,6 @@ describe KingPiece do
       res = white_king.can_kingside_castle?([7,4], board)
       expect(res).to eql(true)
     end
-
-    # TODO - tests for black kingside castling
 
     it "returns false if called with a valid cell and an otherwise empty board on a black king that has moved" do
       black_king = KingPiece.new({ color: :black, did_move: true })
