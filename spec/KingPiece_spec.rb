@@ -628,4 +628,224 @@ describe KingPiece do
       expect(res).to eql(false)
     end
   end
+
+  describe "#can_kingside_castle?" do
+    it "returns false if called with an out-of-bounds cell and an otherwise empty board on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+
+      res = white_king.can_kingside_castle?([1,8], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid but empty cell and an otherwise empty board on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and an otherwise empty board on a white king that has moved" do
+      white_king = KingPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[6][4] = white_king
+
+      res = white_king.can_kingside_castle?([6,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and an otherwise empty board with no right white rook on a white king" do
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right white rook that has moved on a white king" do
+      right_white_rook = MockPiece.new({
+        color: :white, type: :rook, did_move: true
+      })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right white rook and a black rook on a white king that is in check" do
+      right_white_rook = MockPiece.new({
+        color: :white, type: :rook
+      })
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][4] = black_rook
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right white rook and a white bishop that blocks the white king from kingside castling on a white king" do
+      right_white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][5] = white_bishop
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right white rook and a black rook that would check the white king on cells the king would move across to kingside castle on a white king" do
+      right_white_rook = MockPiece.new({
+        color: :white, type: :rook
+      })
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][5] = black_rook
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right white rook and a black rook that would check the white king on its destination kingside castle cell on a white king" do
+      right_white_rook = MockPiece.new({
+        color: :white, type: :rook
+      })
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = black_rook
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell and a certain board with an unmoved right white rook on a white king" do
+      right_white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][7] = right_white_rook
+      board[7][4] = white_king
+
+      res = white_king.can_kingside_castle?([7,4], board)
+      expect(res).to eql(true)
+    end
+
+    # TODO - tests for black kingside castling
+
+    it "returns false if called with a valid cell and an otherwise empty board on a black king that has moved" do
+      black_king = KingPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and an otherwise empty board with no right black rook on a black king" do
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right black rook that has moved on a black king" do
+      right_black_rook = MockPiece.new({
+        color: :black, type: :rook, did_move: true
+      })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right black rook and a white rook on a black king that is in check" do
+      right_black_rook = MockPiece.new({
+        color: :black, type: :rook
+      })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[5][4] = white_rook
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right black rook and a black bishop that blocks the black king from kingside castling on a black king" do
+      right_black_rook = MockPiece.new({ color: :black, type: :rook })
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][5] = black_bishop
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right black rook and a white rook that would check the black king on cells the king would move across to kingside castle on a black king" do
+      right_black_rook = MockPiece.new({
+        color: :black, type: :rook
+      })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[5][5] = white_rook
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell and a certain board with a right black rook and a white rook that would check the black king on its destination kingside castle cell on a black king" do
+      right_black_rook = MockPiece.new({
+        color: :black, type: :rook
+      })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      black_king = KingPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[5][6] = white_rook
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell and a certain board with an unmoved right black rook on a black king" do
+      right_black_rook = MockPiece.new({ color: :black, type: :rook })
+      black_king = KingPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][7] = right_black_rook
+      board[0][4] = black_king
+
+      res = black_king.can_kingside_castle?([0,4], board)
+      expect(res).to eql(true)
+    end
+  end
 end

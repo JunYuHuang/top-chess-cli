@@ -255,7 +255,7 @@ Complete the tests for the following:
 - [x] `#is_checkmated?` method
 - [x] `#is_stalemated?` method
 - [x] `#can_queenside_castle?` method
-- [ ] `#can_kingside_castle?` method
+- [x] `#can_kingside_castle?` method
 
 ## `PieceFactory` class
 
