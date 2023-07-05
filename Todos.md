@@ -269,56 +269,6 @@ Complete the tests for the following:
 - [ ] `.initialize` constructor
 - [ ] `#spawn` method
 
-## `Board` class
-
-Complete the following:
-
-- [ ] `.initialize` constructor
-- [ ] `#update` method
-- [ ] `#is_king_checked?` method
-- [ ] `#is_king_checkmated?` method
-- [ ] `#is_stalemated?` method
-- [ ] `#can_queenside_castle?` method
-- [ ] `#queenside_castle!` method
-- [ ] `#can_kingside_castle?` method
-- [ ] `#kingside_castle!` method
-- [ ] `#pieces` method
-- [ ] `#is_valid_move?` method
-- [ ] `#move_piece!` method
-- [ ] `#is_valid_capture?` method
-- [ ] `#capture_piece!` method
-- [ ] `#can_promote?` method
-- [ ] `#promote!` method
-- [ ] `#empty_board` method (private)
-- [ ] `#start_board` method (private)
-- [ ] `#is_valid_capture_en_passant?` method (private)
-- [ ] `#capture_en_passant` method (private)
-- [ ] `#can_white_queenside_castle?` method (private)
-- [ ] `#white_queenside_castle!` method (private)
-- [ ] `#can_black_queenside_castle?` method (private)
-- [ ] `#black_queenside_castle!` method (private)
-- [ ] `#can_white_promote?` method (private)
-- [ ] `#white_promote!` method (private)
-- [ ] `#can_black_promote?` method (private)
-- [ ] `#black_promote!` method (private)
-
-Complete the tests for the following:
-
-- [ ] `.initialize` constructor
-- [ ] `#update` method
-- [ ] `#is_king_checked?` method
-- [ ] `#is_king_checkmated?` method
-- [ ] `#is_stalemated?` method
-- [ ] `#can_queenside_castle?` method
-- [ ] `#can_kingside_castle?` method
-- [ ] `#get_pieces` method
-- [ ] `#is_valid_move?` method
-- [ ] `#move_piece` method
-- [ ] `#is_valid_capture?` method
-- [ ] `#capture_piece` method
-- [ ] `#can_promote?` method
-- [ ] `#promote!` method
-
 ## `Game` class
 
 Complete the following:
@@ -338,12 +288,24 @@ Complete the following:
 - [ ] `#use_chess_move_runner` method
 - [ ] `#use_command_runner` method
 - [ ] `#is_last_move_enemy_pawn_double_step?` method
+- [ ] `#is_valid_move?` method
+- [ ] `#move!` method
+- [ ] `#is_valid_capture?` method
+- [ ] `#capture!` method
+- [ ] `#can_promote?` method
+- [ ] `#promote!` method
+- [ ] `#is_valid_castle?` method
+- [ ] `#castle!` method
+- [ ] `#is_valid_capture_en_passant?` method
+- [ ] `#capture_en_passant!` method
+- [ ] `#empty_board` method (private)
+- [ ] `#start_board` method (private)
 
 Complete the tests for the following:
 
 - [ ] TODO
 
-## `ChessMoveRunner` class
+## `ChessMoveConverter` class
 
 Complete the following:
 
