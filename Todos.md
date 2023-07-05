@@ -206,6 +206,7 @@ Complete the following:
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_promotable?` method
+- [x] `#is_valid_promotion?` method
 - [ ] `#capture_en_passant` method
 - [ ] `#can_capture_en_passant?` method
 - [x] `#black_moves` method (private)
@@ -221,6 +222,7 @@ Complete the tests for the following:
 - [x] `#moves` method
 - [ ] `#captures` method
 - [x] `#is_promotable?` method
+- [x] `#is_valid_promotion?` method
 
 ## `KingPiece` class (inherits from `Piece`)
 

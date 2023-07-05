@@ -97,7 +97,6 @@ module PieceUtils
       src_row == BOARD_LENGTH - 1
   end
 
-  # TODO - to test
   def is_valid_promotion?(piece_type)
     VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
   end

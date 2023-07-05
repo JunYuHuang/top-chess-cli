@@ -48,12 +48,12 @@ class PawnPiece < Piece
     src_cell = args.fetch(:src_cell, nil)
     captive_cell = args.fetch(:captive_cell, nil)
     board = args.fetch(:board, nil)
-    return if src_cell.nil? or captive_cell.nil? or board.nil?
-    return if self.class.is_empty_cell?(src_cell)
-    return if self.class.is_empty_cell?(captive_cell)
-    return unless is_valid_piece_color?(@color)
-    return unless block_given?
-    return unless is_right_last_move.call(args)
+    return false if src_cell.nil? or captive_cell.nil? or board.nil?
+    return false if self.class.is_empty_cell?(src_cell)
+    return false if self.class.is_empty_cell?(captive_cell)
+    return false unless is_valid_piece_color?(@color)
+    return false unless block_given?
+    return false unless is_right_last_move.call(args)
 
     @color == :white ?
       white_captures(src_cell, board) :
@@ -78,6 +78,10 @@ class PawnPiece < Piece
 
   def is_promotable?(src_cell, board)
     self.class.at_last_row?(src_cell, board)
+  end
+
+  def is_valid_promotion?(piece_type)
+    self.class.is_valid_promotion?(piece_type)
   end
 
   def did_double_step?
