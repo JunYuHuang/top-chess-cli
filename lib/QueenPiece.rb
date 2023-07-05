@@ -14,7 +14,6 @@ class QueenPiece < Piece
     passed_options = {
       color: options.fetch(:color, @@default_options[:color]),
       type: :queen,
-      is_interactive: true,
       is_capturable: true
     }
     super(passed_options)

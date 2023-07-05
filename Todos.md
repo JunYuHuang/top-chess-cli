@@ -136,7 +136,6 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#color` method
 - [x] `#type` method
-- [x] `#is_interactive?` method
 - [x] `#is_capturable?` method
 
 ## `RookPiece` class (inherits from `Piece`)

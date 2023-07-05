@@ -22,7 +22,6 @@ class PawnPiece < Piece
     passed_options = {
       color: options.fetch(:color, @@default_options[:color]),
       type: :pawn,
-      is_interactive: true,
       is_capturable: true
     }
     super(passed_options)

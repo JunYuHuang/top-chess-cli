@@ -23,7 +23,6 @@ class KingPiece < Piece
     passed_options = {
       color: options.fetch(:color, @@default_options[:color]),
       type: :king,
-      is_interactive: true,
       is_capturable: false
     }
     super(passed_options)
