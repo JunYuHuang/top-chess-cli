@@ -32,7 +32,11 @@ Complete the following:
 - [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
 - [x] Refactor to not use and remove the `EmptyPiece` class
 - [ ] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
-- [ ] Add `capture` method to `Piece subclasses (modifies board in-place or returns a new board)
+- [ ] Add `capture` method to `Piece` subclasses (modifies board in-place or returns a new board)
+- [ ] Add `queenside_castle` method to `King` class
+- [ ] Add `kingside_castle` method to `King` class
+- [ ] Add `queenside_castle` method to `Rook` class
+- [ ] Add `kingside_castle` method to `Rook` class
 
 ## `Player` class
 
@@ -214,7 +218,7 @@ Complete the following:
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant` method
+- [x] `#capture_en_passant` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
@@ -225,8 +229,8 @@ Complete the following:
 - [x] `#can_black_capture_en_passant_right?` method (private)
 - [x] `#can_white_capture_en_passant?` method (private)
 - [x] `#can_black_capture_en_passant?` method (private)
-- [ ] `#white_capture_en_passant` method (private)
-- [ ] `#black_capture_en_passant` method (private)
+- [x] `#white_capture_en_passant` method (private)
+- [x] `#black_capture_en_passant` method (private)
 
 Complete the tests for the following:
 
