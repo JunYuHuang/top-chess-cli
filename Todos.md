@@ -75,6 +75,8 @@ Complete the following:
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#board_to_s` method
+- [x] `#is_piece_type?` method
+- [x] `#is_piece_color?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#up_moves` method
@@ -105,9 +107,11 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#at_last_row?` method
-- [ ] `#is_valid_promotion?` method
+- [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#board_to_s` method
+- [x] `#is_piece_type?` method
+- [x] `#is_piece_color?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#up_moves` method
@@ -202,25 +206,35 @@ Complete the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
+- [x] `#did_double_step?` method
+- [x] `#double_stepped!` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
+- [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
-- [ ] `#can_capture_en_passant?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
-- [ ] `#black_captures` method (private)
-- [ ] `#white_captures` method (private)
-- [ ] `#white_can_capture_en_passant?` method (private)
-- [ ] `#black_can_capture_en_passant?` method (private)
+- [x] `#black_captures` method (private)
+- [x] `#white_captures` method (private)
+- [x] `#can_white_capture_en_passant_left?` method (private)
+- [x] `#can_white_capture_en_passant_right?` method (private)
+- [x] `#can_black_capture_en_passant_left?` method (private)
+- [x] `#can_black_capture_en_passant_right?` method (private)
+- [x] `#can_white_capture_en_passant?` method (private)
+- [x] `#can_black_capture_en_passant?` method (private)
+- [ ] `#white_capture_en_passant` method (private)
+- [ ] `#black_capture_en_passant` method (private)
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
 

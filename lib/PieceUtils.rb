@@ -148,6 +148,18 @@ module PieceUtils
     res.join
   end
 
+  def is_piece_type?(src_cell, board, piece_type)
+    src_row, src_col = src_cell
+    return false unless is_inbound_cell?(src_cell)
+    return board[src_row][src_col].type == piece_type
+  end
+
+  def is_piece_color?(src_cell, board, piece_color)
+    src_row, src_col = src_cell
+    return false unless is_inbound_cell?(src_cell)
+    return board[src_row][src_col].color == piece_color
+  end
+
   def pieces(board, filters)
     res = []
 
@@ -215,6 +227,24 @@ module PieceUtils
     end
 
     board_copy
+  end
+
+  def in_row?(src_cell, row)
+    src_row, src_col = src_cell
+    src_row == row
+  end
+
+  def is_left_adjacent?(src_cell, dst_cell)
+    src_row, src_col = src_cell
+    dst_row, dst_col = dst_cell
+    dst_col == src_col - 1
+  end
+
+  # TODO - to test
+  def is_right_adjacent?(src_cell, dst_cell)
+    src_row, src_col = src_cell
+    dst_row, dst_col = dst_cell
+    dst_col == src_col + 1
   end
 
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
