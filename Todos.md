@@ -233,7 +233,7 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#can_capture_en_passant?` method
+- [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method

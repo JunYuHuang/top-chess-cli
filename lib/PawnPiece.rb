@@ -148,7 +148,6 @@ class PawnPiece < Piece
     true
   end
 
-  # TODO - to test
   def can_black_capture_en_passant_left?(args, &is_proper_last_move)
     args => { src_cell:, captive_cell:, board: }
 
@@ -157,8 +156,8 @@ class PawnPiece < Piece
     return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
 
     cap_row, cap_col = captive_cell
-    top_adjacent = [cap_row - 1, cap_col]
-    return false unless self.class.is_empty_cell?(top_adjacent, board)
+    bot_adjacent = [cap_row + 1, cap_col]
+    return false unless self.class.is_empty_cell?(bot_adjacent, board)
 
     enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
     return false unless enemy_pawn[:piece].did_double_step?
@@ -168,7 +167,6 @@ class PawnPiece < Piece
     true
   end
 
-  # TODO - to test
   def can_white_capture_en_passant_right?(args, &is_proper_last_move)
     args => { src_cell:, captive_cell:, board: }
 
@@ -188,17 +186,16 @@ class PawnPiece < Piece
     true
   end
 
-  # TODO - to test
   def can_black_capture_en_passant_right?(args, &is_proper_last_move)
     args => { src_cell:, captive_cell:, board: }
 
     return false unless self.class.in_row?(src_cell, 4)
     return false unless self.class.in_row?(captive_cell, 4)
-    return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
+    return false unless self.class.is_right_adjacent?(src_cell, captive_cell)
 
     cap_row, cap_col = captive_cell
-    top_adjacent = [cap_row - 1, cap_col]
-    return false unless self.class.is_empty_cell?(top_adjacent, board)
+    bot_adjacent = [cap_row + 1, cap_col]
+    return false unless self.class.is_empty_cell?(bot_adjacent, board)
 
     enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
     return false unless enemy_pawn[:piece].did_double_step?
@@ -208,14 +205,12 @@ class PawnPiece < Piece
     true
   end
 
-  # TODO - to test
   def can_white_capture_en_passant?(args, &is_proper_last_move)
     return true if can_white_capture_en_passant_left?(args, &is_proper_last_move)
     return true if can_white_capture_en_passant_right?(args, &is_proper_last_move)
     false
   end
 
-  # TODO - to test
   def can_black_capture_en_passant?(args, &is_proper_last_move)
     return true if can_black_capture_en_passant_left?(args, &is_proper_last_move)
     return true if can_black_capture_en_passant_right?(args, &is_proper_last_move)
