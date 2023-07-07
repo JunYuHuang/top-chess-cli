@@ -602,118 +602,116 @@ describe PawnPiece do
     end
   end
 
-  # TODO - tests for `#capture_en_passant`
-
   describe "#capture_en_passant" do
-    # it "returns false if called with an args hash whose captive cell has a black pawn that double stepped and a valid block that returns false on a white pawn" do
-    #   black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
-    #   white_pawn = PawnPiece.new({ color: :white })
-    #   board = Array.new(8) { Array.new(8, nil) }
-    #   board[3][4] = black_pawn
-    #   board[3][5] = white_pawn
-    #   args = {
-    #     src_cell: [3,5],
-    #     captive_cell: [3,4],
-    #     board: board
-    #   }
-    #   # mock method that returns false
-    #   def is_last_move_enemy_pawn_double_step?(args)
-    #     false
-    #   end
+    it "returns nil if called with an args hash whose captive cell has a black pawn that double stepped and a valid block that returns false on a white pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = black_pawn
+      board[3][5] = white_pawn
+      args = {
+        src_cell: [3,5],
+        captive_cell: [3,4],
+        board: board
+      }
+      # mock method that returns false
+      def is_last_move_enemy_pawn_double_step?(args)
+        false
+      end
 
-    #   res = white_pawn.can_capture_en_passant?(args) do |block_args|
-    #     is_last_move_enemy_pawn_double_step?(block_args)
-    #   end
-    #   expect(res).to eql(false)
-    # end
+      res = white_pawn.capture_en_passant(args) do |block_args|
+        is_last_move_enemy_pawn_double_step?(block_args)
+      end
+      expect(res).to eql(nil)
+    end
 
-    # it "returns true if called with an args hash whose captive cell has a black pawn that double stepped on the white pawn's adjacent left cell and a valid block that returns true on a white pawn" do
-    #   black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
-    #   white_pawn = PawnPiece.new({ color: :white })
-    #   board = Array.new(8) { Array.new(8, nil) }
-    #   board[3][4] = black_pawn
-    #   board[3][5] = white_pawn
-    #   args = {
-    #     src_cell: [3,5],
-    #     captive_cell: [3,4],
-    #     board: board
-    #   }
-    #   # mock method that returns true
-    #   def is_last_move_enemy_pawn_double_step?(args)
-    #     true
-    #   end
+    it "returns [2,4] if called with an args hash whose captive cell has a black pawn that double stepped on the white pawn's adjacent left cell and a valid block that returns true on a white pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = black_pawn
+      board[3][5] = white_pawn
+      args = {
+        src_cell: [3,5],
+        captive_cell: [3,4],
+        board: board
+      }
+      # mock method that returns true
+      def is_last_move_enemy_pawn_double_step?(args)
+        true
+      end
 
-    #   res = white_pawn.can_capture_en_passant?(args) do |block_args|
-    #     is_last_move_enemy_pawn_double_step?(block_args)
-    #   end
-    #   expect(res).to eql(true)
-    # end
+      res = white_pawn.capture_en_passant(args) do |block_args|
+        is_last_move_enemy_pawn_double_step?(block_args)
+      end
+      expect(res).to eql([2,4])
+    end
 
-    # it "returns true if called with an args hash whose captive cell has a black pawn that double stepped on the white pawn's adjacent right cell and a valid block that returns true on a white pawn" do
-    #   black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
-    #   white_pawn = PawnPiece.new({ color: :white })
-    #   board = Array.new(8) { Array.new(8, nil) }
-    #   board[3][6] = black_pawn
-    #   board[3][5] = white_pawn
-    #   args = {
-    #     src_cell: [3,5],
-    #     captive_cell: [3,6],
-    #     board: board
-    #   }
-    #   # mock method that returns true
-    #   def is_last_move_enemy_pawn_double_step?(args)
-    #     true
-    #   end
+    it "returns [2,6] if called with an args hash whose captive cell has a black pawn that double stepped on the white pawn's adjacent right cell and a valid block that returns true on a white pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][6] = black_pawn
+      board[3][5] = white_pawn
+      args = {
+        src_cell: [3,5],
+        captive_cell: [3,6],
+        board: board
+      }
+      # mock method that returns true
+      def is_last_move_enemy_pawn_double_step?(args)
+        true
+      end
 
-    #   res = white_pawn.can_capture_en_passant?(args) do |block_args|
-    #     is_last_move_enemy_pawn_double_step?(block_args)
-    #   end
-    #   expect(res).to eql(true)
-    # end
+      res = white_pawn.capture_en_passant(args) do |block_args|
+        is_last_move_enemy_pawn_double_step?(block_args)
+      end
+      expect(res).to eql([2,6])
+    end
 
-    # it "returns true if called with an args hash whose captive cell has a white pawn that double stepped on the black pawn's adjacent left cell and a valid block that returns true on a black pawn" do
-    #   white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
-    #   black_pawn = PawnPiece.new({ color: :black })
-    #   board = Array.new(8) { Array.new(8, nil) }
-    #   board[4][1] = white_pawn
-    #   board[4][2] = black_pawn
-    #   args = {
-    #     src_cell: [4,2],
-    #     captive_cell: [4,1],
-    #     board: board
-    #   }
-    #   # mock method that returns true
-    #   def is_last_move_enemy_pawn_double_step?(args)
-    #     true
-    #   end
+    it "returns [5,1] if called with an args hash whose captive cell has a white pawn that double stepped on the black pawn's adjacent left cell and a valid block that returns true on a black pawn" do
+      white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][1] = white_pawn
+      board[4][2] = black_pawn
+      args = {
+        src_cell: [4,2],
+        captive_cell: [4,1],
+        board: board
+      }
+      # mock method that returns true
+      def is_last_move_enemy_pawn_double_step?(args)
+        true
+      end
 
-    #   res = black_pawn.can_capture_en_passant?(args) do |block_args|
-    #     is_last_move_enemy_pawn_double_step?(block_args)
-    #   end
-    #   expect(res).to eql(true)
-    # end
+      res = black_pawn.capture_en_passant(args) do |block_args|
+        is_last_move_enemy_pawn_double_step?(block_args)
+      end
+      expect(res).to eql([5,1])
+    end
 
-    # it "returns true if called with an args hash whose captive cell has a white pawn that double stepped on the black pawn's adjacent right cell and a valid block that returns true on a black pawn" do
-    #   white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
-    #   black_pawn = PawnPiece.new({ color: :black })
-    #   board = Array.new(8) { Array.new(8, nil) }
-    #   board[4][3] = white_pawn
-    #   board[4][2] = black_pawn
-    #   args = {
-    #     src_cell: [4,2],
-    #     captive_cell: [4,3],
-    #     board: board
-    #   }
-    #   # mock method that returns true
-    #   def is_last_move_enemy_pawn_double_step?(args)
-    #     true
-    #   end
+    it "returns [5,3] if called with an args hash whose captive cell has a white pawn that double stepped on the black pawn's adjacent right cell and a valid block that returns true on a black pawn" do
+      white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][3] = white_pawn
+      board[4][2] = black_pawn
+      args = {
+        src_cell: [4,2],
+        captive_cell: [4,3],
+        board: board
+      }
+      # mock method that returns true
+      def is_last_move_enemy_pawn_double_step?(args)
+        true
+      end
 
-    #   res = black_pawn.can_capture_en_passant?(args) do |block_args|
-    #     is_last_move_enemy_pawn_double_step?(block_args)
-    #   end
-    #   expect(res).to eql(true)
-    # end
+      res = black_pawn.capture_en_passant(args) do |block_args|
+        is_last_move_enemy_pawn_double_step?(block_args)
+      end
+      expect(res).to eql([5,3])
+    end
   end
 
   describe "#is_promotable?" do

@@ -238,7 +238,7 @@ Complete the tests for the following:
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant` method
+- [x] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
 

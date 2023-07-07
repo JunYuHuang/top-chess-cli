@@ -43,7 +43,6 @@ class PawnPiece < Piece
       black_captures(src_cell, board)
   end
 
-  # TODO - to test
   def can_capture_en_passant?(args, &is_proper_last_move)
     src_cell = args.fetch(:src_cell, nil)
     captive_cell = args.fetch(:captive_cell, nil)
@@ -68,15 +67,14 @@ class PawnPiece < Piece
       can_black_capture_en_passant?(args, &is_proper_last_move)
   end
 
-  # TODO - to test
-  # en-passant captures in Long Algebraic Notation specify dest. cell not capturee cell
+  # returns dest. cell (not captive pawn cell) of pawn capturer
   def capture_en_passant(args, &is_proper_last_move)
     src_cell = args.fetch(:src_cell, nil)
     captive_cell = args.fetch(:captive_cell, nil)
     board = args.fetch(:board, nil)
-    return [] if src_cell.nil? or captive_cell.nil? or board.nil?
-    return [] unless self.class.is_valid_piece_color?(@color)
-    return [] unless can_capture_en_passant?(args, &is_proper_last_move)
+    return if src_cell.nil? or captive_cell.nil? or board.nil?
+    return unless self.class.is_valid_piece_color?(@color)
+    return unless can_capture_en_passant?(args, &is_proper_last_move)
 
     @color == :white ?
       white_capture_en_passant(args, &is_proper_last_move) :
@@ -225,16 +223,14 @@ class PawnPiece < Piece
     false
   end
 
-  # TODO - to test
   def white_capture_en_passant(args, &is_proper_last_move)
-    can_capture = can_white_capture_en_passant(args, &is_proper_last_move)
+    can_capture = can_white_capture_en_passant?(args, &is_proper_last_move)
     captive_cell = args.fetch(:captive_cell, nil)
     can_capture ? self.class.up_adjacent_cell(captive_cell) : nil
   end
 
-  # TODO - to test
-  def black_capture_en_passant(src_cell, board)
-    can_capture = can_black_capture_en_passant(args, &is_proper_last_move)
+  def black_capture_en_passant(args, &is_proper_last_move)
+    can_capture = can_black_capture_en_passant?(args, &is_proper_last_move)
     captive_cell = args.fetch(:captive_cell, nil)
     can_capture ? self.class.down_adjacent_cell(captive_cell) : nil
   end
