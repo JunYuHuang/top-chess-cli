@@ -167,8 +167,8 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `BishopPiece` class (inherits from `Piece`)
 
@@ -185,8 +185,8 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `QueenPiece` class (inherits from `Piece`)
 
@@ -203,8 +203,8 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `KnightPiece` class (inherits from `Piece`)
 
@@ -221,13 +221,12 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `PawnPiece` class (inherits from `Piece`)
 
-Complete the following:
-
+Complete the following:x
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
@@ -288,8 +287,8 @@ Complete the following:
 - [x] `#can_black_queenside_castle?` method (private)
 - [x] `#can_white_kingside_castle?` method (private)
 - [x] `#can_black_kingside_castle?` method (private)
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
@@ -301,8 +300,8 @@ Complete the tests for the following:
 - [x] `#is_stalemated?` method
 - [x] `#can_queenside_castle?` method
 - [x] `#can_kingside_castle?` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `PieceFactory` class
 

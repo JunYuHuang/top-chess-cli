@@ -90,4 +90,30 @@ describe KnightPiece do
       end
     end
   end
+
+  describe "#move" do
+    it "returns the correct board if called with all valid arguments on a white knight" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_knight = KnightPiece.new({ color: :white })
+      board[7][1] = white_knight
+      res = white_knight.move([7,1], [5,2], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][2] = white_knight
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#capture" do
+    it "returns the correct board if called with all valid arguments on a white knight" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      white_knight = KnightPiece.new({ color: :white })
+      board[5][2] = black_pawn
+      board[7][1] = white_knight
+      res = white_knight.capture([7,1], [5,2], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][2] = white_knight
+      expect(res).to eql(expected)
+    end
+  end
 end

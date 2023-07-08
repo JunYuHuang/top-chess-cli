@@ -45,5 +45,21 @@ class QueenPiece < Piece
     ]
     res.filter { |cell| !cell.nil? }
   end
+
+  def move(src_cell, dst_cell, board)
+    args = {
+      src_cell: src_cell, dst_cell: dst_cell,
+      board: board, piece_obj: self
+    }
+    self.class.move(args)
+  end
+
+  def capture(src_cell, dst_cell, board)
+    args = {
+      src_cell: src_cell, dst_cell: dst_cell,
+      board: board, piece_obj: self
+    }
+    self.class.capture(args)
+  end
 end
 

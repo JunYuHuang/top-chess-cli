@@ -99,4 +99,30 @@ describe QueenPiece do
       end
     end
   end
+
+  describe "#move" do
+    it "returns the correct board if called with all valid arguments on a white queen" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_queen = QueenPiece.new({ color: :white })
+      board[7][3] = white_queen
+      res = white_queen.move([7,3], [5,1], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][1] = white_queen
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#capture" do
+    it "returns the correct board if called with all valid arguments on a white queen" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      white_queen = QueenPiece.new({ color: :white })
+      board[5][1] = black_pawn
+      board[7][3] = white_queen
+      res = white_queen.capture([7,3], [5,1], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][1] = white_queen
+      expect(res).to eql(expected)
+    end
+  end
 end

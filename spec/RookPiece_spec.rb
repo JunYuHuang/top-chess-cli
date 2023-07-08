@@ -81,4 +81,30 @@ describe RookPiece do
       expect(res).to eql([])
     end
   end
+
+  describe "#move" do
+    it "returns the correct board if called with all valid arguments on a white rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_rook = RookPiece.new({ color: :white })
+      board[7][0] = white_rook
+      res = white_rook.move([7,0], [5,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][0] = white_rook
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#capture" do
+    it "returns the correct board if called with all valid arguments on a white rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      white_rook = RookPiece.new({ color: :white })
+      board[5][0] = black_pawn
+      board[7][0] = white_rook
+      res = white_rook.capture([7,0], [5,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][0] = white_rook
+      expect(res).to eql(expected)
+    end
+  end
 end

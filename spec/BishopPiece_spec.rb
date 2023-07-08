@@ -86,4 +86,30 @@ describe BishopPiece do
       end
     end
   end
+
+  describe "#move" do
+    it "returns the correct board if called with all valid arguments on a white bishop" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_bishop = BishopPiece.new({ color: :white })
+      board[7][2] = white_bishop
+      res = white_bishop.move([7,2], [5,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][0] = white_bishop
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#capture" do
+    it "returns the correct board if called with all valid arguments on a white bishop" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      white_bishop = BishopPiece.new({ color: :white })
+      board[5][0] = black_pawn
+      board[7][2] = white_bishop
+      res = white_bishop.capture([7,2], [5,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[5][0] = white_bishop
+      expect(res).to eql(expected)
+    end
+  end
 end

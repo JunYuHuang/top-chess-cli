@@ -868,4 +868,30 @@ describe KingPiece do
       expect(res).to eql(true)
     end
   end
+
+  describe "#move" do
+    it "returns the correct board if called with all valid arguments on a white king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_king = KingPiece.new({ color: :white })
+      board[7][4] = white_king
+      res = white_king.move([7,4], [6,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[6][4] = white_king
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#capture" do
+    it "returns the correct board if called with all valid arguments on a white king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      white_king = KingPiece.new({ color: :white })
+      board[6][4] = black_pawn
+      board[7][4] = white_king
+      res = white_king.capture([7,4], [6,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[6][4] = white_king
+      expect(res).to eql(expected)
+    end
+  end
 end
