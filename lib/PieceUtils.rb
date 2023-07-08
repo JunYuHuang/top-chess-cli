@@ -285,13 +285,11 @@ module PieceUtils
     dst_col == src_col + 1
   end
 
-  # TODO - to test
   def up_adjacent_cell(src_cell)
     src_row, src_col = src_cell
     [src_row - 1, src_col]
   end
 
-  # TODO - to test
   def down_adjacent_cell(src_cell)
     src_row, src_col = src_cell
     [src_row + 1, src_col]
