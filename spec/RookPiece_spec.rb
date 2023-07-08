@@ -107,4 +107,48 @@ describe RookPiece do
       expect(res).to eql(expected)
     end
   end
+
+  describe "#queenside_castle" do
+    it "returns the correct board if called with all valid arguments on a white rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_rook = RookPiece.new({ color: :white })
+      board[7][0] = white_rook
+      res = white_rook.queenside_castle([7,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[7][3] = white_rook
+      expect(res).to eql(expected)
+    end
+
+    it "returns the correct board if called with all valid arguments on a black rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_rook = RookPiece.new({ color: :black })
+      board[0][0] = black_rook
+      res = black_rook.queenside_castle([0,0], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[0][3] = black_rook
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#kingside_castle" do
+    it "returns the correct board if called with all valid arguments on a white rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_rook = RookPiece.new({ color: :white })
+      board[7][7] = white_rook
+      res = white_rook.kingside_castle([7,7], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[7][5] = white_rook
+      expect(res).to eql(expected)
+    end
+
+    it "returns the correct board if called with all valid arguments on a black rook" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_rook = RookPiece.new({ color: :black })
+      board[0][7] = black_rook
+      res = black_rook.kingside_castle([0,7], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[0][5] = black_rook
+      expect(res).to eql(expected)
+    end
+  end
 end

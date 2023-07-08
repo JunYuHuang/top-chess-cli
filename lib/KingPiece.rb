@@ -138,6 +138,28 @@ class KingPiece < Piece
     self.class.capture(args)
   end
 
+  def queenside_castle(src_cell, board)
+    src_row, src_col = src_cell
+    args = {
+      piece_obj: self,
+      src_cell: src_cell,
+      dst_cell: [src_row, src_col - 2],
+      board: board
+    }
+    self.class.move(args)
+  end
+
+  def kingside_castle(src_cell, board)
+    src_row, src_col = src_cell
+    args = {
+      piece_obj: self,
+      src_cell: src_cell,
+      dst_cell: [src_row, src_col + 2],
+      board: board
+    }
+    self.class.move(args)
+  end
+
   private
 
   # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)

@@ -33,10 +33,10 @@ Complete the following:
 - [x] Refactor to not use and remove the `EmptyPiece` class
 - [ ] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
 - [ ] Add `capture` method to `Piece` subclasses (modifies board in-place or returns a new board)
-- [ ] Add `queenside_castle` method to `King` class
-- [ ] Add `kingside_castle` method to `King` class
-- [ ] Add `queenside_castle` method to `Rook` class
-- [ ] Add `kingside_castle` method to `Rook` class
+- [x] Add `queenside_castle` method to `King` class
+- [x] Add `kingside_castle` method to `King` class
+- [x] Add `queenside_castle` method to `Rook` class
+- [x] Add `kingside_castle` method to `Rook` class
 
 ## `Player` class
 
@@ -161,6 +161,8 @@ Complete the following:
 - [x] `#moved!` method
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#queenside_castle` method
+- [x] `#kingside_castle` method
 
 Complete the tests for the following:
 
@@ -169,6 +171,8 @@ Complete the tests for the following:
 - [x] `#captures` method
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#queenside_castle` method
+- [x] `#kingside_castle` method
 
 ## `BishopPiece` class (inherits from `Piece`)
 
@@ -289,6 +293,8 @@ Complete the following:
 - [x] `#can_black_kingside_castle?` method (private)
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#queenside_castle` method
+- [x] `#kingside_castle` method
 
 Complete the tests for the following:
 
@@ -298,10 +304,12 @@ Complete the tests for the following:
 - [x] `#is_checked?` method
 - [x] `#is_checkmated?` method
 - [x] `#is_stalemated?` method
-- [x] `#can_queenside_castle?` method
+- [x] `#can_queensidexcastle?` method
 - [x] `#can_kingside_castle?` method
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#queenside_castle` method
+- [x] `#kingside_castle` method
 
 ## `PieceFactory` class
 

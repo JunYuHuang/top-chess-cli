@@ -894,4 +894,48 @@ describe KingPiece do
       expect(res).to eql(expected)
     end
   end
+
+  describe "#queenside_castle" do
+    it "returns the correct board if called with all valid arguments on a white king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_king = KingPiece.new({ color: :white })
+      board[7][4] = white_king
+      res = white_king.queenside_castle([7,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[7][2] = white_king
+      expect(res).to eql(expected)
+    end
+
+    it "returns the correct board if called with all valid arguments on a black king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_king = KingPiece.new({ color: :black })
+      board[0][4] = black_king
+      res = black_king.queenside_castle([0,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[0][2] = black_king
+      expect(res).to eql(expected)
+    end
+  end
+
+  describe "#kingside_castle" do
+    it "returns the correct board if called with all valid arguments on a white king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_king = KingPiece.new({ color: :white })
+      board[7][4] = white_king
+      res = white_king.kingside_castle([7,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[7][6] = white_king
+      expect(res).to eql(expected)
+    end
+
+    it "returns the correct board if called with all valid arguments on a black king" do
+      board = Array.new(8) { Array.new(8, nil) }
+      black_king = KingPiece.new({ color: :black })
+      board[0][4] = black_king
+      res = black_king.kingside_castle([0,4], board)
+      expected = Array.new(8) { Array.new(8, nil) }
+      expected[0][6] = black_king
+      expect(res).to eql(expected)
+    end
+  end
 end
