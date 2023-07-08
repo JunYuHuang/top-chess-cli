@@ -115,6 +115,45 @@ module PieceUtils
     end
   end
 
+  def move(args)
+    piece_obj = args.fetch(:piece_obj, nil)
+    src_cell = args.fetch(:src_cell, nil)
+    dst_cell = args.fetch(:dst_cell, nil)
+    board = args.fetch(:board, nil)
+
+    return if (piece_obj.nil? or src_cell.nil? or
+              dst_cell.nil? or board.nil?)
+
+    new_board = deep_copy(board)
+    src_row, src_col = src_cell
+    new_board[src_row][src_col] = nil
+    dst_row, dst_col = dst_cell
+    new_board[dst_row][dst_col] = piece_obj
+    new_board
+  end
+
+  def capture(args)
+    piece_obj = args.fetch(:piece_obj, nil)
+    src_cell = args.fetch(:src_cell, nil)
+    dst_cell = args.fetch(:dst_cell, nil)
+    board = args.fetch(:board, nil)
+    en_passant_cap_cell = args.fetch(:en_passant_cap_cell, nil)
+
+    return if (piece_obj.nil? or src_cell.nil? or
+              dst_cell.nil? or board.nil?)
+
+    new_board = deep_copy(board)
+    src_row, src_col = src_cell
+    new_board[src_row][src_col] = nil
+    dst_row, dst_col = dst_cell
+    new_board[dst_row][dst_col] = piece_obj
+    return new_board if en_passant_cap_cell.nil?
+
+    cap_row, cap_col = en_passant_cap_cell
+    new_board[cap_row][cap_col] = nil
+    new_board
+  end
+
   def board_to_s(board)
     piece_to_s = {
       nil => "     ",

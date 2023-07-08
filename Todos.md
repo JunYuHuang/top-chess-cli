@@ -78,6 +78,8 @@ Complete the following:
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
+- [x] `#move` method
+- [x] `#capture` method
 - [x] `#board_to_s` method
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
@@ -113,6 +115,8 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
+- [x] `#move` method
+- [x] `#capture` method
 - [x] `#board_to_s` method
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
@@ -155,12 +159,16 @@ Complete the following:
 - [x] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `BishopPiece` class (inherits from `Piece`)
 
@@ -169,12 +177,16 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `QueenPiece` class (inherits from `Piece`)
 
@@ -183,12 +195,16 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `KnightPiece` class (inherits from `Piece`)
 
@@ -197,12 +213,16 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `PawnPiece` class (inherits from `Piece`)
 
@@ -231,6 +251,8 @@ Complete the following:
 - [x] `#can_black_capture_en_passant?` method (private)
 - [x] `#white_capture_en_passant` method (private)
 - [x] `#black_capture_en_passant` method (private)
+- [ ] `#move` method
+- [ ] `#capture` method
 
 Complete the tests for the following:
 
@@ -241,6 +263,8 @@ Complete the tests for the following:
 - [x] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `KingPiece` class (inherits from `Piece`)
 
@@ -264,6 +288,8 @@ Complete the following:
 - [x] `#can_black_queenside_castle?` method (private)
 - [x] `#can_white_kingside_castle?` method (private)
 - [x] `#can_black_kingside_castle?` method (private)
+- [ ] `#move` method
+- [ ] `#capture` method
 
 Complete the tests for the following:
 
@@ -275,6 +301,8 @@ Complete the tests for the following:
 - [x] `#is_stalemated?` method
 - [x] `#can_queenside_castle?` method
 - [x] `#can_kingside_castle?` method
+- [ ] `#move` method
+- [ ] `#capture` method
 
 ## `PieceFactory` class
 
