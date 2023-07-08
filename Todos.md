@@ -31,8 +31,8 @@ Complete the following:
 - [ ] Refactor `Piece` subclasses to store their own position on the grid
 - [ ] Refactor `Game` class to store an array or hashmap of `Piece` objects rather than a matrix of them
 - [x] Refactor to not use and remove the `EmptyPiece` class
-- [ ] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
-- [ ] Add `capture` method to `Piece` subclasses (modifies board in-place or returns a new board)
+- [x] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
+- [x] Add `capture` method to `Piece` subclasses (modifies board in-place or returns a new board)
 - [x] Add `queenside_castle` method to `King` class
 - [x] Add `kingside_castle` method to `King` class
 - [x] Add `queenside_castle` method to `Rook` class
@@ -254,8 +254,8 @@ Complete the following:x
 - [x] `#can_black_capture_en_passant?` method (private)
 - [x] `#white_capture_en_passant` method (private)
 - [x] `#black_capture_en_passant` method (private)
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 Complete the tests for the following:
 
@@ -266,8 +266,8 @@ Complete the tests for the following:
 - [x] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#is_valid_promotion?` method
-- [ ] `#move` method
-- [ ] `#capture` method
+- [x] `#move` method
+- [x] `#capture` method
 
 ## `KingPiece` class (inherits from `Piece`)
 

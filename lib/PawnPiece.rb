@@ -107,6 +107,32 @@ class PawnPiece < Piece
     @did_double_step = true
   end
 
+  def move(src_cell, dst_cell, board)
+    args = {
+      src_cell: src_cell, dst_cell: dst_cell,
+      board: board, piece_obj: self
+    }
+    self.class.move(args)
+  end
+
+  def capture(src_cell, dst_cell, board)
+    args = {
+      src_cell: src_cell, dst_cell: dst_cell,
+      board: board, piece_obj: self,
+      en_passant_cap_cell: nil
+    }
+
+    # indicates that it is an en-passant capture
+    # assumes last move was the correct enemy pawn double step for en-passant captures
+    if self.class.is_empty_cell?(dst_cell, board)
+      args[:en_passant_cap_cell] = @color == :white ?
+        self.class.down_adjacent_cell(dst_cell) :
+        self.class.up_adjacent_cell(dst_cell)
+    end
+
+    self.class.capture(args)
+  end
+
   private
 
   def white_moves(src_cell, board)
