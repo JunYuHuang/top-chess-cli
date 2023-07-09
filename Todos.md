@@ -315,8 +315,8 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
-- [ ] `#spawn` method
+- [x] `.initialize` constructor
+- [x] `#spawn` method
 
 Complete the tests for the following:
 
