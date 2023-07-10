@@ -316,12 +316,12 @@ Complete the tests for the following:
 Complete the following:
 
 - [x] `.initialize` constructor
-- [x] `#spawn` method
+- [x] `#create` method
 
 Complete the tests for the following:
 
-- [ ] `.initialize` constructor
-- [ ] `#spawn` method
+- [x] `.initialize` constructor
+- [x] `#create` method
 
 ## `Game` class
 

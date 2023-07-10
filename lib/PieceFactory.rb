@@ -1,20 +1,21 @@
 require './lib/PieceUtils'
+require './lib/BishopPiece'
+require './lib/KingPiece'
+require './lib/KnightPiece'
+require './lib/PawnPiece'
+require './lib/QueenPiece'
+require './lib/RookPiece'
 
 class PieceFactory
   extend PieceUtils
 
-  attr_accessor(:pieces_dict)
-
-  def initialize(pieces_dict)
-    # `@pieces_dict` is a hashmap that maps each symbol to its
-    # respective piece class e.g. `:pawn` -> `PawnPiece` class
-    @pieces_dict = pieces_dict
-  end
-
-  def spawn(piece_type, piece_options = {})
-    return unless self.class.is_valid_piece_type?(piece_type)
-    return unless @pieces_dict[piece_type].nil?
-    res = @pieces_dict[piece_type].new(piece_options)
-    res
+  def self.create(piece_type, piece_options = {})
+    return unless is_valid_piece_type?(piece_type)
+    return BishopPiece.new(piece_options) if piece_type == :bishop
+    return KingPiece.new(piece_options) if piece_type == :king
+    return KnightPiece.new(piece_options) if piece_type == :knight
+    return PawnPiece.new(piece_options) if piece_type == :pawn
+    return QueenPiece.new(piece_options) if piece_type == :queen
+    return RookPiece.new(piece_options) if piece_type == :rook
   end
 end

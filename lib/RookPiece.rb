@@ -65,7 +65,6 @@ class RookPiece < Piece
     self.class.capture(args)
   end
 
-  # TODO - to test
   def queenside_castle(src_cell, board)
     src_row, src_col = src_cell
     args = {
@@ -77,7 +76,6 @@ class RookPiece < Piece
     self.class.move(args)
   end
 
-  # TODO - to test
   def kingside_castle(src_cell, board)
     src_row, src_col = src_cell
     args = {
