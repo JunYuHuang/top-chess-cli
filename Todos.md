@@ -331,12 +331,11 @@ Complete the following:
 - [ ] `#add_player!` method
 - [ ] `#update!` method
 - [ ] `#play!` method
-- [ ] `#is_valid_piece_color?` method
-- [ ] `#get_player` method
-- [ ] `#add_captured_piece!` method
+- [ ] `#player` method
 - [ ] `#switch_player_turns!` method
 - [ ] `#did_player_win?` method
 - [ ] `#did_tie?` method
+- [ ] `#add_captured_piece!` method
 - [ ] `#use_game_saves` method
 - [ ] `#use_console_ui` method
 - [ ] `#use_chess_move_runner` method
