@@ -11,6 +11,8 @@ class Game
   def initialize(board = nil, player_class = nil)
     @players_count = 2
     @current_player_color = nil
+    @rows = board_length
+    @cols = board_length
     @board = self.class.is_valid_board?(board) ? board : self.class.start_board
     @players = []
 
