@@ -4,13 +4,13 @@ class Game
   include PieceUtils
 
   attr_accessor(
-    :players_count, :current_player_piece, :board, :players
+    :players_count, :current_player_color, :board, :players
   )
 
   # TODO - to test
   def initialize(board = nil, player_class = nil)
     @players_count = 2
-    @current_player_piece = nil
+    @current_player_color = nil
     @board = self.class.is_valid_board?(board) ? board : self.class.start_board
     @players = []
 
@@ -55,8 +55,8 @@ class Game
   # TODO - to test
   def switch_players!
     return if @players.size != @players_count
-    return if @current_player_piece.nil?
-    @current_player_piece = @current_player_piece == :white ? :black : :white
+    return if @current_player_color.nil?
+    @current_player_color = @current_player_color == :white ? :black : :white
     nil
   end
 
