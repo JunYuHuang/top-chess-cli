@@ -383,15 +383,15 @@ Complete the tests for the following:
 Complete the following:
 
 - [ ] `.initialize` constructor
-- [ ] `.clear_UI` method
+- [x] `.clear_UI` method
 - [ ] `.print_board` method
 - [ ] `.print_captured_pieces` method
 - [ ] `.print_turn_prompt` method
 - [ ] `.print_game_end` method
-- [ ] `.print_saves_tables` method
+- [ ] `.print_saves_table` method
 - [ ] `.print_load_prompt` method
 - [ ] `.print_load_screen` method
-- [ ] `.print_setup_scren` method
+- [ ] `.print_setup_screen` method
 - [ ] `.print_turn_screen` method
 - [ ] `.print_end_screen` method
 
