@@ -1,29 +1,67 @@
 require './lib/PieceUtils'
+require 'set'
 
 class Game
-  include PieceUtils
+  extend PieceUtils
 
   attr_accessor(
-    :players_count, :current_player_color, :board, :players
+    :players_count, :current_player_color, :rows, :cols,
+    :board, :players, :history, :piece_factory_class
   )
 
   # TODO - to test
-  def initialize(board = nil, player_class = nil)
+  def initialize(options = {})
+    @piece_factory_class = options[:piece_factory_class]
+    pieces = options.fetch(:pieces, nil)
+    player_class = options.fetch(:player_class, nil)
+
     @players_count = 2
-    @current_player_color = nil
-    @rows = board_length
-    @cols = board_length
-    @board = self.class.is_valid_board?(board) ? board : self.class.start_board
+    @current_player_color = :white
     @players = []
 
-    return unless player_class
+    @rows = self.class.board_length
+    @cols = self.class.board_length
+    @board = build_start_board
 
-    @players_count.times do |i|
-      @players.push(player_class.new(
-        self,
-        "Player #{@players.size + 1}",
-        @players.empty? ? :white : :black
-      ))
+    # `@history` stores an ordered list of game state
+    # snapshots represented by hashmaps.
+    # Each hashmap has the following key-value pairs:
+    # - `:piece_color` -> `:white` or `:black`
+    #   - denotes which player's turn (by their colour) it was that turn
+    # - `:move` -> some string
+    #   - denotes the chess move that was played that turn
+    # - `:pieces` -> list of piece objects serialized as hashmaps
+    #   - represents the current state of the chess board
+    #   - each piece hashmap has the following key-value pairs:
+    # - `:cell`: 2-sized int array that represents the current
+    #     position or coordinates of the piece on the 0-indexed
+    #     matrix that represents the chess board. Represented in
+    #     the format `[row, col]`. E.g., `[0,0]` represents the
+    #     top-left corner square of the chess board at `a8`.
+    # - `:type`: symbol that represents 1 of the 6 types of
+    #     chess pieces (e.g. `:pawn` for Pawn pieces)
+    # - `:color`: self explanatory
+    # - `:is_capturable`: boolean flag that represents if the
+    #     piece can be captured or not. True for all pieces
+    #     except for King pieces.
+    # - `:did_move` (piece-specific): boolean flag for Pawn,
+    #     King, and Rook pieces
+    # - `:did_double_step` (piece-specific): boolean flag for
+    #     Pawn pieces
+    @history = []
+
+    if !pieces.nil? && are_valid_pieces?(pieces)
+      @board = build_board(pieces)
+    end
+
+    if player_class
+      @players_count.times do |i|
+        @players.push(player_class.new(
+          self,
+          "Player #{@players.size + 1}",
+          @players.empty? ? :white : :black
+        ))
+      end
     end
   end
 
@@ -58,8 +96,8 @@ class Game
   def switch_players!
     return if @players.size != @players_count
     return if @current_player_color.nil?
-    @current_player_color = @current_player_color == :white ? :black : :white
-    nil
+    # @current_player_color = @current_player_color == :white ? :black : :white
+    # nil
   end
 
   # TODO - to test
@@ -145,13 +183,12 @@ class Game
     # TODO
   end
 
-  private
-
-  def self.is_valid_board?(board, rows = 8, cols = 8)
-    return false if board.class != Array
-    return false if board.size != rows
-    return false if board.any? { |el| el.class != Array }
-    return false if board.any? { |el| el.size != cols }
+  # TODO - to test
+  def are_valid_pieces?(pieces)
+    return false if pieces.class != Array
+    return false if pieces.size != @rows * @cols / 2
+    return false if piece.any? { |el| el.class != Hash }
+    # return false if board.any? { |el| el.size != cols }
 
     # board.each do |col|
     #   return false if col.any? { |cell| !@@valid_pieces.include?(cell) }
@@ -162,13 +199,76 @@ class Game
     true
   end
 
-  # TODO - to test
-  def self.empty_board(rows = 8, cols = 8)
-    Array.new(rows) { Array.new(cols, nil) }
+  def empty_board
+    Array.new(@rows) { Array.new(@cols, nil) }
+  end
+
+  def default_piece_obj(cell)
+    row, col = cell
+    rook_cols = Set.new([0, 7])
+    knight_cols = Set.new([1, 6])
+    bishop_cols = Set.new([2, 5])
+    queen_col = 3
+    king_col = 4
+    white_pawn = [:pawn, { color: :white }]
+    white_rook = [:rook, { color: :white }]
+    white_knight = [:knight, { color: :white }]
+    white_bishop = [:bishop, { color: :white }]
+    white_queen = [:queen, { color: :white }]
+    white_king = [:king, { color: :white }]
+    black_pawn = [:pawn, { color: :black }]
+    black_rook = [:rook, { color: :black }]
+    black_knight = [:knight, { color: :black }]
+    black_bishop = [:bishop, { color: :black }]
+    black_queen = [:queen, { color: :black }]
+    black_king = [:king, { color: :black }]
+
+    factory = @piece_factory_class
+    return factory.create(*black_rook) if (
+      row == 0 && rook_cols.include?(col))
+    return factory.create(*black_knight) if (
+      row == 0 && knight_cols.include?(col))
+    return factory.create(*black_bishop) if (
+      row == 0 && bishop_cols.include?(col)
+    )
+    return factory.create(*black_queen) if (
+      row == 0 && col == queen_col
+    )
+    return factory.create(*black_king) if (
+      row == 0 && col == king_col
+    )
+    return factory.create(*black_pawn) if row == 1
+    return factory.create(*white_rook) if (
+      row == 7 && rook_cols.include?(col))
+    return factory.create(*white_knight) if (
+      row == 7 && knight_cols.include?(col))
+    return factory.create(*white_bishop) if (
+      row == 7 && bishop_cols.include?(col)
+    )
+    return factory.create(*white_queen) if (
+      row == 7 && col == queen_col
+    )
+    return factory.create(*white_king) if (
+      row == 7 && col == king_col
+    )
+    return factory.create(*white_pawn) if row == 6
+  end
+
+  def build_start_board
+    board = empty_board
+    rows_with_pieces = Set.new([0, 1, 6, 7])
+
+    @rows.times do |r|
+      @cols.times do |c|
+        next unless rows_with_pieces.include?(r)
+        board[r][c] = default_piece_obj([r, c])
+      end
+    end
+    board
   end
 
   # TODO - to test
-  def self.start_board(rows = 8, cols = 8)
-    Array.new(rows) { Array.new(cols, nil) }
+  def build_board(pieces)
+    # TODO
   end
 end

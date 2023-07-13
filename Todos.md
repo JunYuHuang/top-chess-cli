@@ -37,6 +37,7 @@ Complete the following:
 - [x] Add `kingside_castle` method to `King` class
 - [x] Add `queenside_castle` method to `Rook` class
 - [x] Add `kingside_castle` method to `Rook` class
+- [ ] Rename `PieceUtils` module to `ChessUtils`
 
 ## `Player` class
 
@@ -230,7 +231,8 @@ Complete the tests for the following:
 
 ## `PawnPiece` class (inherits from `Piece`)
 
-Complete the following:x
+Complete the following:
+
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
@@ -327,7 +329,12 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
+- [x] `.initialize` constructor
+- [x] `#empty_board` method
+- [x] `#default_piece_obj` method
+- [x] `#build_start_board` method
+- [ ] `#are_valid_pieces?` method
+- [ ] `#build_board` method
 - [ ] `#add_player!` method
 - [ ] `#update!` method
 - [ ] `#play!` method
@@ -351,11 +358,18 @@ Complete the following:
 - [ ] `#castle!` method
 - [ ] `#is_valid_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
-- [ ] `#empty_board` method (private)
-- [ ] `#start_board` method (private)
+- [ ] `#is_valid_piece?` method (private)
+- [ ] `#is_valid_pawn_piece?` method (private)
+- [ ] `#is_valid_rook_piece?` method (private)
+- [ ] `#is_valid_knight_piece?` method (private)
+- [ ] `#is_valid_bishop_piece?` method (private)
+- [ ] `#is_valid_queen_piece?` method (private)
+- [ ] `#is_valid_king_piece?` method (private)
 
 Complete the tests for the following:
 
+- [ ] `.initialize` constructor
+- [x] `#build_start_board`
 - [ ] TODO
 
 ## `ChessMoveConverter` class
