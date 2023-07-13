@@ -44,4 +44,169 @@ describe Game do
       end
     end
   end
+
+  describe "#are_valid_pieces?" do
+    it "returns false if called with nil" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = nil
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with an array of size 64" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = Array.new(64, nil)
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with an int array " do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = Array.new(5, 1)
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a hash array that has a piece hash that is missing any of the 4 required key-value pairs" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        { cell: [1,0], color: :black, type: :pawn, is_cap: "lol" }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a hash array that has a piece hash that has a string `:cell` value" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: "lol",
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a hash array that has a piece hash that has a non-int array `:cell` value" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: ["l", "o"],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a hash array that has a piece hash whose `:cell` value represents an out-of-bounds position on the chess board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [0,8],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a hash array that has a piece hash that represents a valid black knight" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [0,1],
+          color: :black,
+          type: :knight,
+          is_capturable: true
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(true)
+    end
+
+    it "returns false if called with a hash array that has a piece hash that represents a black rook whose `:did_move` value is nil" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [0,0],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: nil,
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a hash array that has a piece hash that represents a black pawn whose `:did_double_step` value is nil" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [1,0],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+          did_double_step: nil
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a hash array that has a certain valid piece hash that represents a black queen" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [0,3],
+          color: :black,
+          type: :queen,
+          is_capturable: true,
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with a hash array that has 2 certain valid piece hashes" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [1,0],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+        },
+        {
+          cell: [7,0],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+        }
+      ]
+      res = game.are_valid_pieces?(pieces)
+      expect(res).to eql(true)
+    end
+  end
 end

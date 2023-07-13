@@ -359,13 +359,14 @@ Complete the following:
 - [ ] `#is_valid_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
 - [x] `#is_valid_piece?` method (private)
-- [x] `#is_valid_pawn_piece?` method (private)
-- [x] `#is_valid_rook_piece?` method (private)
+- [x] `#has_valid_did_move?` method (private)
+- [x] `#has_valid_did_double_step?` method (private)
 
 Complete the tests for the following:
 
 - [ ] `.initialize` constructor
 - [x] `#build_start_board`
+- [x] `#are_valid_pieces?` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class

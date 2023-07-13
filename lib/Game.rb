@@ -183,17 +183,22 @@ class Game
     # TODO
   end
 
-  # TODO - to test
   def are_valid_pieces?(pieces)
     return false if pieces.class != Array
-    return false if pieces.size != @rows * @cols / 2
-    return false if piece.any? { |el| el.class != Hash }
+    return false if pieces.size > @rows * @cols / 2
+    return false if pieces.any? { |el| el.class != Hash }
 
+    # Note that we only need to specifically check if the piece is a
+    # Pawn or Rook or King because the 3 other piece types have no
+    # additional properties.
+    basic_piece_types = [:knight, :bishop, :queen]
     pieces.each do |piece|
       return false unless is_valid_piece?(piece)
-      return false if (
-        !is_valid_pawn_piece?(piece) &&
-        !is_valid_rook_piece?(piece)
+      next if basic_piece_types.include?(piece[:type])
+      return false if piece[:type] == :rook && !has_valid_did_move?(piece)
+      return false if piece[:type] == :king && !has_valid_did_move?(piece)
+      return false if piece[:type] == :pawn && (
+        !has_valid_did_move?(piece) || !has_valid_did_double_step?(piece)
       )
     end
 
@@ -275,7 +280,6 @@ class Game
 
   private
 
-  # TODO - to test
   def is_valid_piece?(piece_hash)
     cell = piece_hash.fetch(:cell, nil)
     color = piece_hash.fetch(:color, nil)
@@ -295,22 +299,13 @@ class Game
     true
   end
 
-  # TODO - to test
-  def is_valid_pawn_piece?(piece_hash)
-    did_move = piece_hash.fetch(:did_move, nil)
-    did_double_step = piece_hash.fetch(:did_double_step, nil)
-    values = [nil, true, false]
-    return false unless values.include?(did_move)
-    return false unless values.include?(did_double_step)
-    true
+  def has_valid_did_move?(piece_hash)
+    did_move = piece_hash.fetch(:did_move, false)
+    [true, false].include?(did_move)
   end
 
-  # TODO - to test
-  # same as for checking if `piece_hash` is a valid king piece
-  def is_valid_rook_piece?(piece_hash)
-    did_move = piece_hash.fetch(:did_move, nil)
-    values = [nil, true, false]
-    return false unless values.include?(did_move)
-    true
+  def has_valid_did_double_step?(piece_hash)
+    did_double_step = piece_hash.fetch(:did_double_step, false)
+    [true, false].include?(did_double_step)
   end
 end
