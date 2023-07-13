@@ -211,27 +211,29 @@
 ## Expanded Pseudocode / Partial Code
 
 - `Game` class
-  - constructor(board, player_1_class, player_2_class)
+  - constructor(options)
     - TODO
-  - build_board(board)
+  - build_board(pieces)
     - inputs
-      - `board`: a 2D array of symbols representing the board to build
-        - valid cells (`board[r][c]`):
-          - `b_pwn`: represents a Black Pawn
-          - `b_rok`: represents a Black Rook
-          - `b_nte`: represents a Black Knight
-          - `b_bsh`: represents a Black Bishop
-          - `b_qwn`: represents a Black Queen
-          - `b_kng`: represents the Black King
-          - `w_pwn`: represents a White Pawn
-          - `w_rok`: represents a White Rook
-          - `w_nte`: represents a White Knight
-          - `w_bsh`: represents a White Bishop
-          - `w_qwn`: represents a White Queen
-          - `w_kng`: represents the White King
-          - `empty`: represents an empty cell / square
+      - `pieces`: an array of hashmaps that represents each serialized piece on the board
+        - piece hashmap key-value pairs:
+          - `:cell`: 2-sized int array that represents the current
+              position or coordinates of the piece on the 0-indexed
+              matrix that represents the chess board. Represented in
+              the format `[row, col]`. E.g., `[0,0]` represents the
+              top-left corner square of the chess board at `a8`.
+          - `:type`: symbol that represents 1 of the 6 types of
+              chess pieces (e.g. `:pawn` for Pawn pieces)
+          - `:color`: self explanatory
+          - `:is_capturable`: boolean flag that represents if the
+              piece can be captured or not. True for all pieces
+              except for King pieces.
+          - `:did_move` (piece-specific): boolean flag for Pawn,
+              King, and Rook pieces
+          - `:did_double_step` (piece-specific): boolean flag for
+              Pawn pieces
     - outputs
-      - `res`: a 2D array of various Piece subclass objects built from `board`
+      - `res`: a 2D array of various Piece subclass objects built from `pieces`
   - use_game_save(game_save_obj)
     - TODO
   - use_gui(gui_obj)
