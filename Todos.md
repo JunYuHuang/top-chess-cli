@@ -334,7 +334,7 @@ Complete the following:
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#are_valid_pieces?` method
-- [ ] `#build_board` method
+- [x] `#build_board` method
 - [ ] `#add_player!` method
 - [ ] `#update!` method
 - [ ] `#play!` method
@@ -367,6 +367,7 @@ Complete the tests for the following:
 - [ ] `.initialize` constructor
 - [x] `#build_start_board`
 - [x] `#are_valid_pieces?` method
+- [x] `#build_board` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class

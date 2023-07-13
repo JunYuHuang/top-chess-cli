@@ -273,9 +273,15 @@ class Game
     board
   end
 
-  # TODO - to test
   def build_board(pieces)
-    # TODO
+    board = empty_board
+    factory = @piece_factory_class
+    pieces.each do |piece|
+      row, col = piece[:cell]
+      board[row][col] = factory.create(piece[:type], piece)
+    end
+
+    board
   end
 
   private

@@ -209,4 +209,86 @@ describe Game do
       expect(res).to eql(true)
     end
   end
+
+  describe "#build_board" do
+    it "returns the correct matrix of Piece objects if called with a certain array of valid piece hashes" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      pieces = [
+        {
+          cell: [0,0], color: :black, type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [0,1], color: :black, type: :knight,
+          is_capturable: true,
+        },
+        {
+          cell: [0,2], color: :black, type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [0,3], color: :black, type: :queen,
+          is_capturable: true,
+        },
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false,
+        },
+        {
+          cell: [1,0], color: :black, type: :pawn,
+          is_capturable: true,
+        },
+        {
+          cell: [6,0], color: :white, type: :pawn,
+          is_capturable: true,
+        },
+        {
+          cell: [7,0], color: :white, type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [7,1], color: :white, type: :knight,
+          is_capturable: true,
+        },
+        {
+          cell: [7,2], color: :white, type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [7,3], color: :white, type: :queen,
+          is_capturable: true,
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false,
+        },
+      ]
+      res = game.build_board(pieces)
+
+      rows = 8
+      cols = 8
+      exp = Array.new(rows) { Array.new(cols, nil) }
+      exp[0][0] = PieceFactory.create(:rook, { color: :black })
+      exp[0][1] = PieceFactory.create(:knight, { color: :black })
+      exp[0][2] = PieceFactory.create(:bishop, { color: :black })
+      exp[0][3] = PieceFactory.create(:queen, { color: :black })
+      exp[0][4] = PieceFactory.create(:king, { color: :black })
+      exp[1][0] = PieceFactory.create(:pawn, { color: :black })
+      exp[6][0] = PieceFactory.create(:pawn, { color: :white })
+      exp[7][0] = PieceFactory.create(:rook, { color: :white })
+      exp[7][1] = PieceFactory.create(:knight, { color: :white })
+      exp[7][2] = PieceFactory.create(:bishop, { color: :white })
+      exp[7][3] = PieceFactory.create(:queen, { color: :white })
+      exp[7][4] = PieceFactory.create(:king, { color: :white })
+
+      rows.times do |r|
+        cols.times do |c|
+          next if exp[r][c].nil?
+          expect(res[r][c].color).to eql(exp[r][c].color)
+          expect(res[r][c].type).to eql(exp[r][c].type)
+        end
+      end
+    end
+  end
 end
