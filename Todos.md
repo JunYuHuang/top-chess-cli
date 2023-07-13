@@ -340,7 +340,7 @@ Complete the following:
 - [x] `#build_start_board` method
 - [x] `#are_valid_pieces?` method
 - [x] `#build_board` method
-- [ ] `#add_player!` method
+- [x] `#add_player!` method
 - [ ] `#update!` method
 - [ ] `#play!` method
 - [ ] `#player` method
@@ -373,6 +373,7 @@ Complete the tests for the following:
 - [x] `#build_start_board`
 - [x] `#are_valid_pieces?` method
 - [x] `#build_board` method
+- [x] `#add_player!` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class

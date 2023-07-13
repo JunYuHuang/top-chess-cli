@@ -1,5 +1,6 @@
 require './lib/Game'
 require './lib/PieceFactory'
+require './lib/HumanPlayer'
 
 describe Game do
   describe "#initialize" do
@@ -10,6 +11,39 @@ describe Game do
     end
 
     # TODO - add more tests with different options
+  end
+
+  describe "#add_player!" do
+    it "does nothing if called on a game that already has 2 players" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      mock_player = nil
+      game.players = [mock_player, mock_player]
+      game.add_player!(HumanPlayer)
+      expect(game.players.size).to eql(2)
+    end
+
+    it "adds the first player if called on a game that has 0 players" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      game.add_player!(HumanPlayer)
+      player_1 =  game.players[0]
+      expect(game.players.size).to eql(1)
+      expect(player_1.name).to eql("Player 1")
+      expect(player_1.piece_color).to eql(:white)
+    end
+
+    it "adds the second player if called on a game that has 1 player" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      mock_player = nil
+      game.players = [mock_player]
+      game.add_player!(HumanPlayer)
+      player_2 =  game.players[1]
+      expect(game.players.size).to eql(2)
+      expect(player_2.name).to eql("Player 2")
+      expect(player_2.piece_color).to eql(:black)
+    end
   end
 
   describe "#build_start_board" do

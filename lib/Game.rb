@@ -26,7 +26,7 @@ class Game
     # `@history` stores an ordered list of game state
     # snapshots represented by hashmaps.
     # Each hashmap has the following key-value pairs:
-    # - `:piece_color` -> `:white` or `:black`
+    # - `:turn_by_color` -> `:white` or `:black`
     #   - denotes which player's turn (by their colour) it was that turn
     # - `:move` -> some string
     #   - denotes the chess move that was played that turn
@@ -60,8 +60,7 @@ class Game
     end
   end
 
-  # TODO - to test
-  def add_player(player_class)
+  def add_player!(player_class)
     return if @players.size >= @players_count
     @players.push(player_class.new(
       self,
