@@ -7,6 +7,13 @@ describe PawnPiece do
       pawn = PawnPiece.new
       expect(pawn).to_not eql(nil)
     end
+
+    it "returns a non-nil object with default property values if called no arguments" do
+      pawn = PawnPiece.new
+      expect(pawn.color).to eql(:white)
+      expect(pawn.did_move?).to eql(false)
+      expect(pawn.did_double_step?).to eql(false)
+    end
   end
 
   describe "#moves" do
