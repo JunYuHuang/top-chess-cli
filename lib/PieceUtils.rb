@@ -18,11 +18,6 @@ module PieceUtils
     [2, 1]      # 2 downs -> 1 right
   ]
   VALID_PROMOTION_PIECE_TYPES = Set.new([:rook, :knight, :bishop, :queen])
-  VALID_CELL_SYMBOLS = Set.new([
-    :b_pwn, :b_rok, :b_nte, :b_bsh, :b_qwn, :b_kng,
-    :w_pwn, :w_rok, :w_nte, :w_bsh, :w_qwn, :w_kng,
-    :empty
-  ])
 
   def board_length
     BOARD_LENGTH
@@ -34,11 +29,6 @@ module PieceUtils
 
   def is_valid_piece_type?(type)
     VALID_PIECE_TYPES.include?(type)
-  end
-
-  # TODO - to test
-  def is_valid_cell_symbol?(symbol)
-    VALID_CELL_SYMBOLS.include?(symbol)
   end
 
   def is_valid_row?(row)
