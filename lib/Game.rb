@@ -33,21 +33,16 @@ class Game
     # - `:pieces` -> list of piece objects serialized as hashmaps
     #   - represents the current state of the chess board
     #   - each piece hashmap has the following key-value pairs:
-    # - `:cell`: 2-sized int array that represents the current
-    #     position or coordinates of the piece on the 0-indexed
-    #     matrix that represents the chess board. Represented in
-    #     the format `[row, col]`. E.g., `[0,0]` represents the
-    #     top-left corner square of the chess board at `a8`.
-    # - `:type`: symbol that represents 1 of the 6 types of
-    #     chess pieces (e.g. `:pawn` for Pawn pieces)
-    # - `:color`: self explanatory
-    # - `:is_capturable`: boolean flag that represents if the
-    #     piece can be captured or not. True for all pieces
-    #     except for King pieces.
-    # - `:did_move` (piece-specific): boolean flag for Pawn,
-    #     King, and Rook pieces
-    # - `:did_double_step` (piece-specific): boolean flag for
-    #     Pawn pieces
+    #     - `:cell`: 2-sized int array
+    #     - symbols: `:color`, `:type`
+    #     - bools: `:is_capturable`, `:did_move`, `:did_double_step`
+    # - `:white_captured` -> stores the white player's captured
+    #   pieces as a hashmap that maps each piece type symbol to an
+    #   non-negative int
+    # - `:black_captured` -> stores the black player's captured
+    #   pieces as a hashmap that maps each piece type symbol to an
+    #   non-negative int
+
     @history = []
 
     if !pieces.nil? && are_valid_pieces?(pieces)
