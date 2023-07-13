@@ -57,6 +57,11 @@ Complete the following:
 - [ ] `#get_opponent_type` method
 - [x] `to_s` method
 
+Complete the tests for the following:
+
+- [x] `.initialize` constructor
+- [x] `to_s` method
+
 <!-- ## `ComputerPlayer` class
 
 Complete the following:

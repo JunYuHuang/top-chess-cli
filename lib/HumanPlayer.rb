@@ -1,17 +1,14 @@
 require './lib/Player'
 
 class HumanPlayer < Player
-  attr_accessor(:game, :name, :piece_color)
+  attr_accessor(:game, :name, :piece_color, :player_type)
 
   @@player_type = "Human"
 
-  # TODO - to test
   def initialize(game, name, piece_color)
     super(game, name, piece_color)
-    @piece_color = piece_color
   end
 
-  # TODO - to test
   def to_s
     "#{@piece_color.to_s.upcase} (#{@name})"
   end

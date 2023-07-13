@@ -7,6 +7,10 @@ class Player
     @piece_color = piece_color
   end
 
+  def game
+    @game
+  end
+
   def piece_color
     @piece_color
   end
