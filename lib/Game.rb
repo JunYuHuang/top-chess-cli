@@ -188,13 +188,14 @@ class Game
     return false if pieces.class != Array
     return false if pieces.size != @rows * @cols / 2
     return false if piece.any? { |el| el.class != Hash }
-    # return false if board.any? { |el| el.size != cols }
 
-    # board.each do |col|
-    #   return false if col.any? { |cell| !@@valid_pieces.include?(cell) }
-    # end
-
-    # TODO - return false if any cell is not `nil` or a `Piece` subclass object / instance
+    pieces.each do |piece|
+      return false unless is_valid_piece?(piece)
+      return false if (
+        !is_valid_pawn_piece?(piece) &&
+        !is_valid_rook_piece?(piece)
+      )
+    end
 
     true
   end
@@ -270,5 +271,46 @@ class Game
   # TODO - to test
   def build_board(pieces)
     # TODO
+  end
+
+  private
+
+  # TODO - to test
+  def is_valid_piece?(piece_hash)
+    cell = piece_hash.fetch(:cell, nil)
+    color = piece_hash.fetch(:color, nil)
+    type = piece_hash.fetch(:type, nil)
+    is_capturable = piece_hash.fetch(:is_capturable, nil)
+
+    return false if cell.nil? or color.nil? or type.nil? or is_capturable.nil?
+    return false if cell.class != Array
+    return false if cell.size != 2
+
+    row, col = cell
+    return false if row.class != Integer or col.class != Integer
+    return false unless self.class.is_inbound_cell?(cell)
+    return false unless self.class.is_valid_piece_color?(color)
+    return false unless self.class.is_valid_piece_type?(type)
+    return false unless [true, false].include?(is_capturable)
+    true
+  end
+
+  # TODO - to test
+  def is_valid_pawn_piece?(piece_hash)
+    did_move = piece_hash.fetch(:did_move, nil)
+    did_double_step = piece_hash.fetch(:did_double_step, nil)
+    values = [nil, true, false]
+    return false unless values.include?(did_move)
+    return false unless values.include?(did_double_step)
+    true
+  end
+
+  # TODO - to test
+  # same as for checking if `piece_hash` is a valid king piece
+  def is_valid_rook_piece?(piece_hash)
+    did_move = piece_hash.fetch(:did_move, nil)
+    values = [nil, true, false]
+    return false unless values.include?(did_move)
+    true
   end
 end
