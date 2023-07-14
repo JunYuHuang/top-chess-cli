@@ -70,8 +70,17 @@ class Game
   end
 
   # TODO - to test
-  def update!(options)
-    # TODO
+  def update!(state)
+    state => {
+      current_player_color:,
+      board:,
+      players:,
+      history:
+    }
+    @current_player_color = current_player_color
+    @board = build_board(board)
+    # TODO - figure out how to deserialize players array and update it
+    # TODO - figure out how to deserialize history array and update it
   end
 
   # TODO - to test

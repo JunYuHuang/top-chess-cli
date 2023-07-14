@@ -374,6 +374,7 @@ Complete the tests for the following:
 - [x] `#are_valid_pieces?` method
 - [x] `#build_board` method
 - [x] `#add_player!` method
+- [ ] `#update!` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class
