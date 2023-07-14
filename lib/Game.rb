@@ -90,17 +90,53 @@ class Game
   end
 
   # TODO - to test
-  def player(filters)
+  def player(color)
     return nil if @players.size != @players_count
-    # TODO
+    res = @players.filter { |player| player.piece_color == color }
+    res[0]
   end
 
   # TODO - to test
   def switch_players!
     return if @players.size != @players_count
     return if @current_player_color.nil?
-    # @current_player_color = @current_player_color == :white ? :black : :white
-    # nil
+    @current_player_color = @current_player_color == :white ? :black : :white
+    true
+  end
+
+  # TODO - to test
+  def did_player_win?(player)
+    return false if @players.size != @players_count
+
+    enemy_color = player.piece_color == :white ? :black : :white
+    filters = { color: enemy_color, type: :king }
+    enemy_king = self.class.pieces(@board, filters)[0]
+    enemy_king[:piece].is_checkmated?(enemy_king[:cell], @board)
+  end
+
+  # TODO - to test
+  def did_tie?
+    return false if @players.size != @players_count
+
+    # return true if white king is stalemated
+    white_king = self.class.pieces(@board, {
+      color: :white, type: :king
+    })[0]
+    return true if white_king[:piece].is_stalemated?(
+      white_king[:cell],
+      @board
+    )
+
+    # return true if black king is stalemated
+    black_king = self.class.pieces(@board, {
+      color: :black, type: :king
+    })[0]
+    return true if black_king[:piece].is_stalemated?(
+      black_king[:cell],
+      @board
+    )
+
+    false
   end
 
   # TODO - to test
@@ -154,30 +190,12 @@ class Game
   end
 
   # TODO - to test
-  def did_player_win?(player)
-    return false if @players.size != @players_count
-
-    # TODO
-    false
-  end
-
-  # TODO - to test
   def use_game_saves(args)
     # TODO
   end
 
   # TODO - to test
   def use_console_ui(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def use_chess_move_runner(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def use_command_runner(args)
     # TODO
   end
 

@@ -343,10 +343,10 @@ Complete the following:
 - [x] `#add_player!` method
 - [ ] `#update!` method
 - [ ] `#play!` method
-- [ ] `#player` method
-- [ ] `#switch_player_turns!` method
-- [ ] `#did_player_win?` method
-- [ ] `#did_tie?` method
+- [x] `#player` method
+- [x] `#switch_players!` method
+- [x] `#did_player_win?` method
+- [x] `#did_tie?` method
 - [ ] `#add_captured_piece!` method
 - [ ] `#use_game_saves` method
 - [ ] `#use_console_ui` method
@@ -375,6 +375,9 @@ Complete the tests for the following:
 - [x] `#build_board` method
 - [x] `#add_player!` method
 - [ ] `#update!` method
+- [ ] `#switch_players!` method
+- [ ] `#did_player_win?` method
+- [ ] `#did_tie?` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class
