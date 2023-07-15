@@ -131,11 +131,11 @@ describe Game do
       game = Game.new(options)
       mock_player = nil
       game.players = [mock_player]
-      res = game.did_player_win?(mock_player)
+      res = game.did_player_win?(:white)
       expect(res).to eql(false)
     end
 
-    it "returns false if called with the white player on a game with a certain board where the black king is checked but not checkmated" do
+    it "returns false if called with :white on a game with a certain board where the black king is checked but not checkmated" do
       pieces = [
         {
           cell: [0,4], color: :black, type: :king,
@@ -156,12 +156,11 @@ describe Game do
         pieces: pieces
       }
       game = Game.new(options)
-      white_player = game.player(:white)
-      res = game.did_player_win?(white_player)
+      res = game.did_player_win?(:white)
       expect(res).to eql(false)
     end
 
-    it "returns true if called with the white player on a game with a certain board where the black king is checkmated" do
+    it "returns true if called with :white on a game with a certain board where the black king is checkmated" do
       pieces = [
         {
           cell: [0,7], color: :black, type: :king,
@@ -182,8 +181,7 @@ describe Game do
         pieces: pieces
       }
       game = Game.new(options)
-      white_player = game.player(:white)
-      res = game.did_player_win?(white_player)
+      res = game.did_player_win?(:white)
       expect(res).to eql(true)
     end
   end

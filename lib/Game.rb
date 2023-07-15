@@ -102,10 +102,11 @@ class Game
     true
   end
 
-  def did_player_win?(player)
+  def did_player_win?(player_color)
     return false if @players.size != @players_count
+    return false unless self.class.is_valid_piece_color?(player_color)
 
-    enemy_color = player.piece_color == :white ? :black : :white
+    enemy_color = player_color == :white ? :black : :white
     filters = { color: enemy_color, type: :king }
     enemy_king = self.class.pieces(@board, filters)[0]
     enemy_king[:piece].is_checkmated?(enemy_king[:cell], @board)
