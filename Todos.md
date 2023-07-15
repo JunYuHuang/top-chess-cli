@@ -378,7 +378,7 @@ Complete the tests for the following:
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
-- [ ] `#did_tie?` method
+- [x] `#did_tie?` method
 - [ ] TODO
 
 ## `ChessMoveConverter` class

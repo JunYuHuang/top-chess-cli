@@ -111,7 +111,6 @@ class Game
     enemy_king[:piece].is_checkmated?(enemy_king[:cell], @board)
   end
 
-  # TODO - to test
   def did_tie?
     return false if @players.size != @players_count
 
