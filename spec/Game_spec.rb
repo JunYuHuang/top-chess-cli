@@ -1,6 +1,6 @@
 require './lib/Game'
 require './lib/PieceFactory'
-require './lib/HumanPlayer'
+require './spec/MockPlayer'
 
 describe Game do
   describe "#initialize" do
@@ -34,7 +34,7 @@ describe Game do
     it "returns a non-nil object and adds 2 players to the game if called with a hash that contains a 'Player' subclass" do
       options = {
         piece_factory_class: PieceFactory,
-        player_class: HumanPlayer
+        player_class: MockPlayer
       }
       game = Game.new(options)
       expect(game).to_not eql(nil)
@@ -50,14 +50,14 @@ describe Game do
       game = Game.new(options)
       mock_player = nil
       game.players = [mock_player, mock_player]
-      game.add_player!(HumanPlayer)
+      game.add_player!(MockPlayer)
       expect(game.players.size).to eql(2)
     end
 
     it "adds the first player if called on a game that has 0 players" do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
-      game.add_player!(HumanPlayer)
+      game.add_player!(MockPlayer)
       player_1 =  game.players[0]
       expect(game.players.size).to eql(1)
       expect(player_1.name).to eql("Player 1")
@@ -69,7 +69,7 @@ describe Game do
       game = Game.new(options)
       mock_player = nil
       game.players = [mock_player]
-      game.add_player!(HumanPlayer)
+      game.add_player!(MockPlayer)
       player_2 =  game.players[1]
       expect(game.players.size).to eql(2)
       expect(player_2.name).to eql("Player 2")
@@ -77,12 +77,11 @@ describe Game do
     end
   end
 
-  # TODO
   describe "#player" do
     it "returns the white player if called with (:white) on a game that has 2 players" do
       options = {
         piece_factory_class: PieceFactory,
-        player_class: HumanPlayer
+        player_class: MockPlayer
       }
       game = Game.new(options)
       res = game.player(:white)
@@ -92,7 +91,7 @@ describe Game do
     it "returns the black player if called with (:black) on a game that has 2 players" do
       options = {
         piece_factory_class: PieceFactory,
-        player_class: HumanPlayer
+        player_class: MockPlayer
       }
       game = Game.new(options)
       res = game.player(:black)
