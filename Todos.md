@@ -377,7 +377,7 @@ Complete the tests for the following:
 - [ ] `#update!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
-- [ ] `#did_player_win?` method
+- [x] `#did_player_win?` method
 - [ ] `#did_tie?` method
 - [ ] TODO
 

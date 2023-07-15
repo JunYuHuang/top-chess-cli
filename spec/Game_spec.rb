@@ -123,6 +123,71 @@ describe Game do
     end
   end
 
+  describe "#did_player_win?" do
+    it "returns false if called on a game with insufficient players" do
+      options = {
+        piece_factory_class: PieceFactory,
+      }
+      game = Game.new(options)
+      mock_player = nil
+      game.players = [mock_player]
+      res = game.did_player_win?(mock_player)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with the white player on a game with a certain board where the black king is checked but not checkmated" do
+      pieces = [
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false,
+        },
+        {
+          cell: [3,4], color: :white, type: :rook,
+          is_capturable: true, did_move: true
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false,
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      white_player = game.player(:white)
+      res = game.did_player_win?(white_player)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with the white player on a game with a certain board where the black king is checkmated" do
+      pieces = [
+        {
+          cell: [0,7], color: :black, type: :king,
+          is_capturable: false, did_move: true
+        },
+        {
+          cell: [0,4], color: :white, type: :rook,
+          is_capturable: true, did_move: true
+        },
+        {
+          cell: [2,7], color: :white, type: :king,
+          is_capturable: false, did_move: true
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      white_player = game.player(:white)
+      res = game.did_player_win?(white_player)
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#build_start_board" do
     it "returns the correct matrix of Piece objects if called" do
       options = { piece_factory_class: PieceFactory }

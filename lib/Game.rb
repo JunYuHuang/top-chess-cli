@@ -102,7 +102,6 @@ class Game
     true
   end
 
-  # TODO - to test
   def did_player_win?(player)
     return false if @players.size != @players_count
 
