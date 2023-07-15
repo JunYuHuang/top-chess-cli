@@ -10,6 +10,37 @@ describe Game do
       expect(game).to_not eql(nil)
     end
 
+    it "returns a non-nil object and builds a custom board if called with a hash that contains a valid pieces array" do
+      pieces = [
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false,
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false,
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      expect(game).to_not eql(nil)
+      expect(game.board[0][3].nil?).to eql(true)
+      expect(game.board[0][4].type).to eql(:king)
+    end
+
+    it "returns a non-nil object and adds 2 players to the game if called with a hash that contains a 'Player' subclass" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: HumanPlayer
+      }
+      game = Game.new(options)
+      expect(game).to_not eql(nil)
+      expect(game.players.size).to eql(2)
+    end
+
     # TODO - add more tests with different options
   end
 
@@ -45,6 +76,18 @@ describe Game do
       expect(player_2.piece_color).to eql(:black)
     end
   end
+
+  # TODO
+  # describe "#player" do
+  #   it "returns the white player if called with (:white) on a game that has 2 players" do
+  #     options = { piece_factory_class: PieceFactory }
+  #     game = Game.new(options)
+  #     mock_player = nil
+  #     game.players = [mock_player, mock_player]
+  #     game.add_player!(HumanPlayer)
+  #     expect(game.players.size).to eql(2)
+  #   end
+  # end
 
   describe "#build_start_board" do
     it "returns the correct matrix of Piece objects if called" do

@@ -369,12 +369,13 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [ ] `.initialize` constructor
+- [x] `.initialize` constructor
 - [x] `#build_start_board`
 - [x] `#are_valid_pieces?` method
 - [x] `#build_board` method
 - [x] `#add_player!` method
 - [ ] `#update!` method
+- [ ] `#player` method
 - [ ] `#switch_players!` method
 - [ ] `#did_player_win?` method
 - [ ] `#did_tie?` method
