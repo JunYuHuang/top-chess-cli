@@ -78,16 +78,27 @@ describe Game do
   end
 
   # TODO
-  # describe "#player" do
-  #   it "returns the white player if called with (:white) on a game that has 2 players" do
-  #     options = { piece_factory_class: PieceFactory }
-  #     game = Game.new(options)
-  #     mock_player = nil
-  #     game.players = [mock_player, mock_player]
-  #     game.add_player!(HumanPlayer)
-  #     expect(game.players.size).to eql(2)
-  #   end
-  # end
+  describe "#player" do
+    it "returns the white player if called with (:white) on a game that has 2 players" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: HumanPlayer
+      }
+      game = Game.new(options)
+      res = game.player(:white)
+      expect(res.piece_color).to eql(:white)
+    end
+
+    it "returns the black player if called with (:black) on a game that has 2 players" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: HumanPlayer
+      }
+      game = Game.new(options)
+      res = game.player(:black)
+      expect(res.piece_color).to eql(:black)
+    end
+  end
 
   describe "#build_start_board" do
     it "returns the correct matrix of Piece objects if called" do

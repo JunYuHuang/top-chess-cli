@@ -375,7 +375,7 @@ Complete the tests for the following:
 - [x] `#build_board` method
 - [x] `#add_player!` method
 - [ ] `#update!` method
-- [ ] `#player` method
+- [x] `#player` method
 - [ ] `#switch_players!` method
 - [ ] `#did_player_win?` method
 - [ ] `#did_tie?` method
