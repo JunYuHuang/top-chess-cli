@@ -335,23 +335,13 @@ Complete the tests for the following:
 Complete the following:
 
 - [x] `.initialize` constructor
-- [x] `#empty_board` method
-- [x] `#default_piece_obj` method
-- [x] `#build_start_board` method
-- [x] `#are_valid_pieces?` method
-- [x] `#build_board` method
 - [x] `#add_player!` method
-- [ ] `#update!` method
 - [ ] `#play!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
-- [ ] `#add_captured_piece!` method
-- [ ] `#use_game_saves` method
-- [ ] `#use_console_ui` method
-- [ ] `#use_chess_move_runner` method
-- [ ] `#use_command_runner` method
+- [ ] `#use_chess_move_parser` method
 - [ ] `#is_last_move_enemy_pawn_double_step?` method
 - [ ] `#is_valid_move?` method
 - [ ] `#move!` method
@@ -363,6 +353,15 @@ Complete the following:
 - [ ] `#castle!` method
 - [ ] `#is_valid_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
+- [x] `#are_valid_pieces?` method
+- [x] `#empty_board` method
+- [x] `#default_piece_obj` method
+- [x] `#build_start_board` method
+- [x] `#build_board` method
+- [ ] `#update!` method
+- [ ] `#use_console_ui` method
+- [ ] `#use_game_saves` method
+- [ ] `#add_captured_piece!` method
 - [x] `#is_valid_piece?` method (private)
 - [x] `#has_valid_did_move?` method (private)
 - [x] `#has_valid_did_double_step?` method (private)
@@ -370,28 +369,18 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [x] `#build_start_board`
-- [x] `#are_valid_pieces?` method
-- [x] `#build_board` method
 - [x] `#add_player!` method
-- [ ] `#update!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
+- [x] `#are_valid_pieces?` method
+- [x] `#build_start_board`
+- [x] `#build_board` method
+- [ ] `#update!` method
 - [ ] TODO
 
-## `ChessMoveConverter` class
-
-Complete the following:
-
-- [ ] TODO
-
-Complete the tests for the following:
-
-- [ ] TODO
-
-## `CommandRunner` class
+## `ChessMoveParser` class
 
 Complete the following:
 

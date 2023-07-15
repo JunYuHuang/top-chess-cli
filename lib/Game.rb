@@ -6,12 +6,14 @@ class Game
 
   attr_accessor(
     :players_count, :current_player_color, :rows, :cols,
-    :board, :players, :history, :piece_factory_class
+    :board, :players, :history, :piece_factory_class,
+    :chess_move_parser_class
   )
 
   # TODO - to test
   def initialize(options = {})
     @piece_factory_class = options[:piece_factory_class]
+    @chess_move_parser_class = options[:chess_move_parser_class]
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
 
@@ -70,20 +72,6 @@ class Game
   end
 
   # TODO - to test
-  def update!(state)
-    state => {
-      current_player_color:,
-      board:,
-      players:,
-      history:
-    }
-    @current_player_color = current_player_color
-    @board = build_board(board)
-    # TODO - figure out how to deserialize players array and update it
-    # TODO - figure out how to deserialize history array and update it
-  end
-
-  # TODO - to test
   def play
     return if @players.size != @players_count
     # TODO
@@ -137,8 +125,8 @@ class Game
   end
 
   # TODO - to test
-  def add_captured_piece!
-    # TODO
+  def use_chess_move_parser(chess_move_parser_class)
+    @chess_move_parser_class = chess_move_parser_class
   end
 
   # TODO - to test
@@ -188,16 +176,6 @@ class Game
 
   # TODO - to test
   def capture_en_passant!(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def use_game_saves(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def use_console_ui(args)
     # TODO
   end
 
@@ -305,6 +283,35 @@ class Game
     end
 
     board
+  end
+
+  # TODO - to test
+  def update!(state)
+    state => {
+      current_player_color:,
+      board:,
+      players:,
+      history:
+    }
+    @current_player_color = current_player_color
+    @board = build_board(board)
+    # TODO - figure out how to deserialize players array and update it
+    # TODO - figure out how to deserialize history array and update it
+  end
+
+  # TODO - to test
+  def use_console_ui(args)
+    # TODO
+  end
+
+  # TODO - to test
+  def use_game_saves(args)
+    # TODO
+  end
+
+  # TODO - to test
+  def add_captured_piece!(piece_obj)
+    # TODO
   end
 
   private
