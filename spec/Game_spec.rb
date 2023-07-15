@@ -99,6 +99,30 @@ describe Game do
     end
   end
 
+  describe "#switch_players!" do
+    it "sets the game's player turn to :black if called on a game whose current player turn is set to :white" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(options)
+      game.current_player_color = :white
+      game.switch_players!
+      expect(game.current_player_color).to eql(:black)
+    end
+
+    it "sets the game's player turn to :white if called on a game whose current player turn is set to :black" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(options)
+      game.current_player_color = :black
+      game.switch_players!
+      expect(game.current_player_color).to eql(:white)
+    end
+  end
+
   describe "#build_start_board" do
     it "returns the correct matrix of Piece objects if called" do
       options = { piece_factory_class: PieceFactory }

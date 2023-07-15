@@ -89,14 +89,12 @@ class Game
     # TODO
   end
 
-  # TODO - to test
   def player(color)
     return nil if @players.size != @players_count
     res = @players.filter { |player| player.piece_color == color }
     res[0]
   end
 
-  # TODO - to test
   def switch_players!
     return if @players.size != @players_count
     return if @current_player_color.nil?
@@ -137,6 +135,11 @@ class Game
     )
 
     false
+  end
+
+  # TODO - to test
+  def add_captured_piece!
+    # TODO
   end
 
   # TODO - to test
