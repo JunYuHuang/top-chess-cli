@@ -166,6 +166,50 @@
     - pieces captured by white
     - pieces captured by black
 
+## Long Algebraic Notation & Misc Edge Case Chess Notes
+
+- en-passant captures are specified exactly like a normal capture
+  - i.e. no need to append the optional `e.p.` suffix to it
+- **must promote** a pawn if it reaches the end of the board from opposite from where it started
+- need to join the start and end squares / cells with a `-` hyphen char for non-capturing moves?
+  - optional
+- need to append the `+` check or `#` checkmate suffixes for captures?
+  - optional for non-competitive or casual games
+- need to append the `+` check or `#` checkmate suffixes for non-capturing moves?
+  - optional for non-competitive or casual games
+- my custom / modified Long Algebraic Notation (first iteration)
+  - **does not specify check or checkmate** in its moves or captures
+  - examples
+    - `a2-a4`: white pawn double steps forward to square `a4`
+    - `Ra1b1`: white rook moves right to square `b1`
+    - `Bc1xg5`: white bishop captures an enemy piece at square `g5`
+    - `c7-c8=Q`: white pawn promotes to a queen after moving to square `c8`
+    - `0-0-0`: white or black queenside castle
+    - `O-O`: white or black kingside castle
+  - legend
+    - `piece_char`: a char from the set `{ '', 'R', 'N', 'B', 'Q', 'K' }`
+    - `coord`: a 2-char string with the following constraints
+      - `coord[0]`: column / file letter from the set `{ a, b, c, d, e, f, g, h }`
+      - `coord[1]`: row / rank integer from the set `{ 1, 2, 3, 4, 5, 6, 7, 8 }`
+    - `src_coord`: see `coord`
+    - `dst_coord`: see `coord`
+    - `promo_char`: a char from the set `{ R, N, B, Q }`
+  - templates
+    - move (with dash):
+      - `{piece_char}{src_coord}-{dst_coord}`
+    - move (no dash):
+      - `{piece_char}{src_coord}{dst_coord}`
+    - capture (includes en-passant captures):
+      - `{piece_char}{src_coord}x{dst_coord}`
+    - (pawn) promotion via a move (with dash):
+      - `{src_coord}-{dst_coord}={promo_char}`
+    - (pawn) promotion via a move (no dash):
+      - `{src_coord}{dst_coord}={promo_char}`
+    - (pawn) promotion via a capture:
+      - `{src_coord}x{dst_coord}={promo_char}`
+    - queenside castle: `0-0-0` or `O-O-O`
+    - kingside castle: `0-0` or `O-O`
+
 ## Game Logic and Basic Pseudocode v1 (base game with saves and loads)
 
 - if there are any existing local game save files
@@ -209,6 +253,8 @@
 - TODO
 
 ## Expanded Pseudocode / Partial Code
+
+See [Todos.md](./Todos.md) for the most up-to-date details.
 
 - `Game` class
   - constructor(options)
@@ -538,13 +584,13 @@ Enter your choice (without quotes):
 ```
 New Chess Game Setup
 
-Choose your colored piece.
-Enter 'white' or 'black' (without quotes):
-
-You chose 'white'.
-
 Choose to play against a human or a computer opponent.
 Enter 'human' or 'computer' (without quotes):
 
 You chose 'human'.
+
+Choose your colored piece.
+Enter 'white' or 'black' (without quotes):
+
+You chose 'white'.
 ```

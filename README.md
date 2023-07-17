@@ -78,3 +78,128 @@ rspec
 - Save as many in-progress games as desired when in-game as `save_<unique_integer_id>.yaml` YAML files in the `/saves` folder.
 - Load from any existing game save file.
 <!-- - TODO: Allow the human player to play against a simple AI computer player. -->
+
+## Custom Long Algebraic Notation Notes
+
+Note that this chess game uses a custom or modified version of Long Algebraic Notation for taking chess moves from player input. The following notes specify what templates and formats to use for their respective chess moves and examples to illustrate them.
+
+Legend:
+- `piece_char`: A character from the set `{ '', 'R', 'N', 'B', 'Q', 'K' }` that identifies the chess piece to move on the board for non-capturing moves and captures.
+- `coord`: A 2-character string that denotes the square on the chess board with the following constraints:
+  - `coord[0]`: The column / file letter from the set `{ a, b, c, d, e, f, g, h }`
+  - `coord[1]`: The row / rank integer character from the set `{ 1, 2, 3, 4, 5, 6, 7, 8 }`
+- `src_coord`: The source or starting square to move the specified piece to. See `coord`.
+- `dst_coord`: The destination or target square to move the specified piece to. See `coord`.
+- `promo_char`: A character from the set `{ R, N, B, Q }` that denotes the promotion piece for a pawn that reaches the furthest opposing row (relative to where it started).
+
+### (Non-Capturing) Moves
+
+#### Template Syntax
+
+```bash
+# With dash separator
+{piece_char}{src_coord}-{dst_coord}
+```
+
+OR
+
+```bash
+# Without dash separtor
+{piece_char}{src_coord}{dst_coord}
+```
+
+#### Example 1
+
+```
+a2-a4
+```
+
+Move white pawn from square `a2` two steps forward to square `a4`.
+
+#### Example 2
+
+```
+Ra1b1
+```
+
+Move white rook from square `a1` 1 step left  to square `b1`.
+
+
+### Captures
+
+#### Template Syntax
+
+```
+{piece_char}{src_coord}x{dst_coord}
+```
+
+#### Example 1
+
+```
+Bc1xg5
+```
+
+White bishop at square `c1` captures (and moves to) an enemy black piece at square `g5`.
+
+### (Pawn) Promotions
+
+#### Template Syntax
+
+```bash
+# (Pawn) Promotion via a capture
+{src_coord}x{dst_coord}={promo_piece}
+```
+
+OR
+
+```bash
+# (Pawn) Promotion via a move (with dash)
+{src_coord}-{dst_coord}={promo_piece}
+```
+
+OR
+
+```bash
+# (Pawn) Promotion via a move (no dash)
+{src_coord}{dst_coord}={promo_piece}
+```
+
+#### Example 1
+
+```
+c7-c8=Q
+```
+
+White pawn at square `c7` moves to square `c8` and promotes to a white queen.
+
+### Queenside Castles
+
+#### Template Syntax
+
+```bash
+# with numerical digit zero '0' characters
+0-0-0
+```
+
+OR
+
+```bash
+# with uppercase letter 'O' characters
+O-O-O
+```
+
+### Kingside Castles
+
+#### Template Syntax
+
+```bash
+# with numerical digit zero '0' characters
+0-0
+```
+
+OR
+
+```bash
+# with uppercase letter 'O' characters
+O-O
+```
