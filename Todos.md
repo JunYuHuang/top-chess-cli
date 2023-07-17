@@ -342,22 +342,12 @@ Complete the following:
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
 - [ ] `#use_chess_move_parser` method
-- [ ] `#is_last_move_enemy_pawn_double_step?` method
-- [ ] `#is_valid_move?` method
-- [ ] `#move!` method
-- [ ] `#is_valid_capture?` method
-- [ ] `#capture!` method
-- [ ] `#can_promote?` method
-- [ ] `#promote!` method
-- [ ] `#is_valid_castle?` method
-- [ ] `#castle!` method
-- [ ] `#is_valid_capture_en_passant?` method
-- [ ] `#capture_en_passant!` method
 - [x] `#are_valid_pieces?` method
 - [x] `#empty_board` method
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#build_board` method
+- [ ] `#is_last_move_enemy_pawn_double_step?` method
 - [ ] `#update!` method
 - [ ] `#use_console_ui` method
 - [ ] `#use_game_saves` method
@@ -380,10 +370,64 @@ Complete the tests for the following:
 - [ ] `#update!` method
 - [ ] TODO
 
-## `ChessMoveParser` class
+## `ChessMoveRunner` class
+
+This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and does the following with it:
+- Checks if the move is valid LAN syntax or not
+- Checks if the move is legal based on:
+  - The current board state
+  - Whose player's (white or black) turn it currently is
+  - The move played in the previous turn(s) e.g. for checking if the player can do an en-passant capture.
+- Executes the move and modifies the game state (assuming the move is valid LAN and legal).
 
 Complete the following:
 
+- [ ] `#initialize` constructor
+- [ ] `#is_valid_piece_char_syntax?` method
+- [ ] `#is_valid_coords_syntax?` method
+- [ ] `#is_valid_move_syntax?` method
+- [ ] `#is_valid_capture_syntax?` method
+- [ ] `#is_valid_promotion_syntax?` method
+- [ ] `#is_valid_queenside_castle_syntax?` method
+- [ ] `#is_valid_kingside_castle_syntax?` method
+- [ ] `#is_valid_syntax?` method
+- [ ] `#coords_to_matrix_cell` method
+- [ ] `#is_matching_src_piece?` method
+- [ ] `#can_move?` method
+- [ ] `#move!` method
+- [ ] `#can_capture?` method
+- [ ] `#capture!` method
+- [ ] `#must_promote?` method
+- [ ] `#is_valid_promotion?` method
+- [ ] `#promote!` method
+- [ ] `#can_castle?` method
+- [ ] `#castle!` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#queenside_castle!` method
+- [ ] `#can_kingside_castle?` method
+- [ ] `#kingside_castle!` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant!` method
+- [ ] TODO
+
+Complete the tests for the following:
+
+- [ ] `#initialize` constructor
+- [ ] TODO
+
+## `CommandRunner` class
+
+Complete the following:
+
+- [ ] `#initialize` constructor
+- [ ] `#can_start_new_game?` method
+- [ ] `#start_new_game!` method
+- [ ] `#can_save_game?` method
+- [ ] `#save_game!` method
+- [ ] `#can_load_game?` method
+- [ ] `#load_game!` method
+- [ ] `#can_setup?` method
+- [ ] `#setup!` method
 - [ ] TODO
 
 Complete the tests for the following:
