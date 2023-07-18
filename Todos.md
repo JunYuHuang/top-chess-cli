@@ -382,19 +382,19 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 
 Complete the following:
 
-- [ ] `#initialize` constructor
+- [x] `#initialize` constructor
 - [ ] `#is_valid_chess_move?` method
 - [ ] `#execute_chess_move!` method
-- [ ] `#is_valid_piece_char_syntax?` method
-- [ ] `#is_valid_coords_syntax?` method
-- [ ] `#is_valid_move_syntax?` method
-- [ ] `#is_valid_capture_syntax?` method
-- [ ] `#is_valid_promotion_syntax?` method
-- [ ] `#is_valid_queenside_castle_syntax?` method
-- [ ] `#is_valid_kingside_castle_syntax?` method
-- [ ] `#is_valid_syntax?` method
-- [ ] `#coords_to_matrix_cell` method
-- [ ] `#is_matching_src_piece?` method
+- [x] `#is_valid_piece_char_syntax?` method
+- [x] `#is_valid_coords_syntax?` method
+- [x] `#is_valid_move_syntax?` method
+- [x] `#is_valid_capture_syntax?` method
+- [x] `#is_valid_promotion_syntax?` method
+- [x] `#is_valid_queenside_castle_syntax?` method
+- [x] `#is_valid_kingside_castle_syntax?` method
+- [x] `#is_valid_syntax?` method
+- [x] `#coords_to_matrix_cell` method
+- [x] `#is_matching_src_piece?` method
 - [ ] `#can_move?` method
 - [ ] `#move!` method
 - [ ] `#can_capture?` method
@@ -413,8 +413,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [ ] `#initialize` constructor
-- [ ] TODO
+- [x] `#initialize` constructor
 
 ## `CommandRunner` class
 

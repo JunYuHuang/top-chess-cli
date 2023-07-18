@@ -36,11 +36,22 @@ Legend for the above LAN templates:
 class ChessMoveRunner
   extend PieceUtils
 
-  attr_accessor(:board)
+  ALPHA_FILE_TO_INT_COL = {
+    "a" => 0,
+    "b" => 1,
+    "c" => 2,
+    "d" => 3,
+    "e" => 4,
+    "f" => 5,
+    "g" => 6,
+    "h" => 7
+  }
+
+  attr_accessor(:game)
 
   # TODO - to test
   def initialize(game)
-    @board = game.board
+    @game = game
   end
 
   # TODO - to test
@@ -54,53 +65,87 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def is_valid_piece_char_syntax?
-    # TODO
+  def is_valid_piece_char_syntax?(syntax)
+    return false if syntax.class != String
+    syntax == "" || syntax.match?(/^(R|N|B|Q|K)$/)
   end
 
   # TODO - to test
-  def is_valid_coords_syntax?
-    # TODO
+  def is_valid_coords_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^[a-h][1-8]$/)
   end
 
   # TODO - to test
-  def is_valid_move_syntax?
-    # TODO
+  def is_valid_move_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]-?[a-h][1-8]$/)
   end
 
   # TODO - to test
-  def is_valid_capture_syntax?
-    # TODO
+  def is_valid_capture_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]x[a-h][1-8]$/)
   end
 
   # TODO - to test
-  def is_valid_promotion_syntax?
-    # TODO
+  def is_valid_promotion_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^[a-h][1-8](-|x)?[a-h](8|1)=(R|N|B|Q)$/)
   end
 
   # TODO - to test
-  def is_valid_queenside_castle_syntax?
-    # TODO
+  def is_valid_queenside_castle_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^(0-0-0)|(O-O-O)$/)
   end
 
   # TODO - to test
-  def is_valid_kingside_castle_syntax?
-    # TODO
+  def is_valid_kingside_castle_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^(0-0)|(O-O)$/)
   end
 
   # TODO - to test
-  def is_valid_syntax?
-    # TODO
+  def is_valid_syntax?(syntax)
+    return false if syntax.class != String
+    return true if is_valid_move_syntax?(syntax)
+    return true if is_valid_capture_syntax?(syntax)
+    return true if is_valid_promotion_syntax?(syntax)
+    return true if is_valid_queenside_castle_syntax?(syntax)
+    return true if is_valid_kingside_castle_syntax?(syntax)
+    false
   end
 
   # TODO - to test
-  def coords_to_matrix_cell
-    # TODO
+  def coords_to_matrix_cell(coords)
+    file, rank = coords.split("")
+    [ALPHA_FILE_TO_INT_COL[file], 8 - rank.to_i]
   end
 
   # TODO - to test
-  def is_matching_src_piece?
-    # TODO
+  def is_matching_src_piece?(args)
+    board = args.fetch(:board, @game.board)
+    src_piece = args.fetch(:src_piece, nil)
+    src_cell = args.fetch(:src_cell, nil)
+
+    return false if src_piece.nil? or src_cell.nil?
+
+    src_row, src_col
+    real_piece = board[src_row][src_col]
+    return false if real_piece.nil?
+    return false if real_piece.color != src_piece.color
+    return false if real_piece.type != src_piece.type
+    return false if real_piece.is_capturable? != src_piece.is_capturable?
+    if real_piece.respond_to?(:did_move?)
+      return false unless src_piece.respond_to?(:did_move?)
+      return false if real_piece.did_move? != src_piece.did_move?
+    end
+    if real_piece.respond_to?(:did_double_step?)
+      return false unless src_piece.respond_to?(:did_double_step?)
+      return false if real_piece.did_double_step? != src_piece.did_double_step?
+    end
+    true
   end
 
   # TODO - to test
