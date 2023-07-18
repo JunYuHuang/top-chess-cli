@@ -124,7 +124,6 @@ Ra1b1
 
 Move white rook from square `a1` 1 step left  to square `b1`.
 
-
 ### Captures
 
 #### Template Syntax
@@ -140,6 +139,10 @@ Bc1xg5
 ```
 
 White bishop at square `c1` captures (and moves to) an enemy black piece at square `g5`.
+
+### Checks and Checkmates
+
+For this game, do not specify if the move or capture result in a check or checkmates; do not append a `+` or `#` suffix to the accompanying move or capture.
 
 ### (Pawn) Promotions
 
