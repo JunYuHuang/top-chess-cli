@@ -124,7 +124,7 @@ Ra1b1
 
 Move white rook from square `a1` 1 step left  to square `b1`.
 
-### Captures
+### Captures (includes en-passant captures)
 
 #### Template Syntax
 
@@ -139,6 +139,15 @@ Bc1xg5
 ```
 
 White bishop at square `c1` captures (and moves to) an enemy black piece at square `g5`.
+
+#### Example 2
+
+```bash
+# an en-passant capture
+f5xe6
+```
+
+White pawn at square `f5` moves to square `e6` to capture en-passant the enemy black pawn that double-stepped forward (in the immediate previous turn) to square `e5` from square `e7`.
 
 ### Checks and Checkmates
 
