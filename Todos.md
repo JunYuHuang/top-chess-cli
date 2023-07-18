@@ -383,6 +383,8 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 Complete the following:
 
 - [ ] `#initialize` constructor
+- [ ] `#is_valid_chess_move?` method
+- [ ] `#execute_chess_move!` method
 - [ ] `#is_valid_piece_char_syntax?` method
 - [ ] `#is_valid_coords_syntax?` method
 - [ ] `#is_valid_move_syntax?` method
@@ -408,7 +410,6 @@ Complete the following:
 - [ ] `#kingside_castle!` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
-- [ ] TODO
 
 Complete the tests for the following:
 
