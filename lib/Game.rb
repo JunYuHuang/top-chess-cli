@@ -7,13 +7,13 @@ class Game
   attr_accessor(
     :players_count, :current_player_color, :rows, :cols,
     :board, :players, :history, :piece_factory_class,
-    :chess_move_parser_class
+    :chess_move_runner_class
   )
 
   # TODO - to test
   def initialize(options = {})
     @piece_factory_class = options[:piece_factory_class]
-    @chess_move_parser_class = options[:chess_move_parser_class]
+    @chess_move_runner_class = options[:chess_move_runner_class]
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
 
@@ -125,8 +125,8 @@ class Game
   end
 
   # TODO - to test
-  def use_chess_move_parser(chess_move_parser_class)
-    @chess_move_parser_class = chess_move_parser_class
+  def use_chess_move_parser(chess_move_runner_class)
+    @chess_move_runner_class = chess_move_runner_class
   end
 
   # TODO - to test

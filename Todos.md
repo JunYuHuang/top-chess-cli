@@ -341,7 +341,7 @@ Complete the following:
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
-- [ ] `#use_chess_move_parser` method
+- [ ] `#use_chess_move_runner` method
 - [x] `#are_valid_pieces?` method
 - [x] `#empty_board` method
 - [x] `#default_piece_obj` method
