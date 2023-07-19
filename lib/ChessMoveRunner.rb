@@ -114,27 +114,20 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def is_matching_src_piece?(args)
+  def is_matching_piece?(args)
+    return false if args.class != Hash
+
     board = args.fetch(:board, @game.board)
-    src_piece = args.fetch(:src_piece, nil)
-    src_cell = args.fetch(:src_cell, nil)
+    piece = args.fetch(:piece, nil)
+    cell = args.fetch(:cell, nil)
+    return false if piece.nil? or cell.nil?
 
-    return false if src_piece.nil? or src_cell.nil?
-
-    src_row, src_col = src_cell
-    real_piece = board[src_row][src_col]
+    row, col = cell
+    real_piece = board[row][col]
     return false if real_piece.nil?
-    return false if real_piece.color != src_piece.color
-    return false if real_piece.type != src_piece.type
-    return false if real_piece.is_capturable? != src_piece.is_capturable?
-    if real_piece.respond_to?(:did_move?)
-      return false unless src_piece.respond_to?(:did_move?)
-      return false if real_piece.did_move? != src_piece.did_move?
-    end
-    if real_piece.respond_to?(:did_double_step?)
-      return false unless src_piece.respond_to?(:did_double_step?)
-      return false if real_piece.did_double_step? != src_piece.did_double_step?
-    end
+    return false if real_piece.color != piece.color
+    return false if real_piece.type != piece.type
+
     true
   end
 

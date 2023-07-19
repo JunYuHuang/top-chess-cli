@@ -394,7 +394,7 @@ Complete the following:
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
-- [x] `#is_matching_src_piece?` method
+- [x] `#is_matching_piece?` method
 - [ ] `#can_move?` method
 - [ ] `#move!` method
 - [ ] `#can_capture?` method
@@ -425,7 +425,7 @@ Complete the tests for the following:
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
-- [ ] `#is_matching_src_piece?` method
+- [ ] `#is_matching_piece?` method
 - TODO
 
 ## `CommandRunner` class
