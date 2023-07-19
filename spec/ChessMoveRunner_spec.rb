@@ -277,4 +277,27 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#is_valid_syntax?" do
+    it "returns false if called with a non-String" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with non-valid Long AN syntax" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_syntax?('Rc7-c8=Q')
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with 'O-O'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_syntax?('O-O')
+      expect(res).to eql(true)
+    end
+  end
 end

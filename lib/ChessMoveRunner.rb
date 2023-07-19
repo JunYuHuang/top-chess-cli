@@ -98,7 +98,6 @@ class ChessMoveRunner
     syntax.match?(/^(0-0)|(O-O)$/)
   end
 
-  # TODO - to test
   def is_valid_syntax?(syntax)
     return false if syntax.class != String
     return true if is_valid_move_syntax?(syntax)
