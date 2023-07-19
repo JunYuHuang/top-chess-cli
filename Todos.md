@@ -424,7 +424,7 @@ Complete the tests for the following:
 - [x] `#is_valid_queenside_castle_syntax?` method
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
-- [ ] `#coords_to_matrix_cell` method
+- [x] `#coords_to_matrix_cell` method
 - [ ] `#is_matching_src_piece?` method
 - TODO
 

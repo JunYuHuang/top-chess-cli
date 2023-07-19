@@ -108,10 +108,9 @@ class ChessMoveRunner
     false
   end
 
-  # TODO - to test
   def coords_to_matrix_cell(coords)
     file, rank = coords.split("")
-    [ALPHA_FILE_TO_INT_COL[file], 8 - rank.to_i]
+    [8 - rank.to_i, ALPHA_FILE_TO_INT_COL[file]]
   end
 
   # TODO - to test
