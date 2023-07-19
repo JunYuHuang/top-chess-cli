@@ -49,7 +49,6 @@ class ChessMoveRunner
 
   attr_accessor(:game)
 
-  # TODO - to test
   def initialize(game)
     @game = game
   end
@@ -131,7 +130,7 @@ class ChessMoveRunner
 
     return false if src_piece.nil? or src_cell.nil?
 
-    src_row, src_col
+    src_row, src_col = src_cell
     real_piece = board[src_row][src_col]
     return false if real_piece.nil?
     return false if real_piece.color != src_piece.color

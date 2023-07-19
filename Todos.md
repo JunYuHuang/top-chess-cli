@@ -414,6 +414,19 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `#initialize` constructor
+- [ ] `#is_valid_chess_move?` method
+- [ ] `#execute_chess_move!` method
+- [ ] `#is_valid_piece_char_syntax?` method
+- [ ] `#is_valid_coords_syntax?` method
+- [ ] `#is_valid_move_syntax?` method
+- [ ] `#is_valid_capture_syntax?` method
+- [ ] `#is_valid_promotion_syntax?` method
+- [ ] `#is_valid_queenside_castle_syntax?` method
+- [ ] `#is_valid_kingside_castle_syntax?` method
+- [ ] `#is_valid_syntax?` method
+- [ ] `#coords_to_matrix_cell` method
+- [ ] `#is_matching_src_piece?` method
+- TODO
 
 ## `CommandRunner` class
 
