@@ -88,7 +88,6 @@ class ChessMoveRunner
     syntax.match?(/^[a-h][1-8](-|x)?[a-h](8|1)=(R|N|B|Q)$/)
   end
 
-  # TODO - to test
   def is_valid_queenside_castle_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^(0-0-0)|(O-O-O)$/)
