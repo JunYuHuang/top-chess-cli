@@ -157,4 +157,27 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#is_valid_capture_syntax?" do
+    it "returns false if called with a non-String" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with 'Bc1xg5'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_syntax?('Bc1xg5')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'f5xe6'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_syntax?('f5xe6')
+      expect(res).to eql(true)
+    end
+  end
 end
