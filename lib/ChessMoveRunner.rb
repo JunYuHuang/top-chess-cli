@@ -68,7 +68,6 @@ class ChessMoveRunner
     syntax == "" || syntax.match?(/^(R|N|B|Q|K)$/)
   end
 
-  # TODO - to test
   def is_valid_coords_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^[a-h][1-8]$/)
