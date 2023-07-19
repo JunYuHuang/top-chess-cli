@@ -418,7 +418,7 @@ Complete the tests for the following:
 - [ ] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
 - [x] `#is_valid_coords_syntax?` method
-- [ ] `#is_valid_move_syntax?` method
+- [x] `#is_valid_move_syntax?` method
 - [ ] `#is_valid_capture_syntax?` method
 - [ ] `#is_valid_promotion_syntax?` method
 - [ ] `#is_valid_queenside_castle_syntax?` method

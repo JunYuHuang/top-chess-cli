@@ -120,4 +120,41 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#is_valid_move_syntax?" do
+    it "returns false if called with a non-String" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_move_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with 'a2-a4'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_move_syntax?('a2-a4')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'a2a4'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_move_syntax?('a2a4')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'Qd5-b7'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_move_syntax?('Qd5-b7')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'Qd5b7'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_move_syntax?('Qd5b7')
+      expect(res).to eql(true)
+    end
+  end
 end
