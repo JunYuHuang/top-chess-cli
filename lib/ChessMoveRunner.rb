@@ -78,13 +78,11 @@ class ChessMoveRunner
     syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]-?[a-h][1-8]$/)
   end
 
-  # TODO - to test
   def is_valid_capture_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]x[a-h][1-8]$/)
   end
 
-  # TODO - to test
   def is_valid_promotion_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^[a-h][1-8](-|x)?[a-h](8|1)=(R|N|B|Q)$/)

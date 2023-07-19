@@ -180,4 +180,41 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#is_valid_promotion_syntax?" do
+    it "returns false if called with a non-String" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_promotion_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a 'Rc7-c8=Q'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new('Rc7-c8=Q')
+      res = chess_move_runner.is_valid_promotion_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with 'c7-c8=Q'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=Q')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'c7c8=Q'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=Q')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'c7xb8=Q'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_promotion_syntax?('c7xb8=Q')
+      expect(res).to eql(true)
+    end
+  end
 end
