@@ -63,7 +63,6 @@ class ChessMoveRunner
     # TODO
   end
 
-  # TODO - to test
   def is_valid_piece_char_syntax?(syntax)
     return false if syntax.class != String
     syntax == "" || syntax.match?(/^(R|N|B|Q|K)$/)
