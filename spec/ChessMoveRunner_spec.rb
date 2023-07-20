@@ -463,4 +463,48 @@ describe ChessMoveRunner do
       expect(res).to eql(exp)
     end
   end
+
+  describe "#promotion_syntax_to_hash" do
+    it "returns the correct hash if called with ('c7-c8=Q', :white)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.promotion_syntax_to_hash('c7-c8=Q', :white)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :white,
+        src_cell: [1,2],
+        dst_cell: [0,2],
+        promo_piece_type: :queen
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('h2h1=B', :black)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.promotion_syntax_to_hash('h2h1=B', :black)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :black,
+        src_cell: [6,7],
+        dst_cell: [7,7],
+        promo_piece_type: :bishop
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('h2xg1=N', :black)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.promotion_syntax_to_hash('h2xg1=N', :black)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :black,
+        src_cell: [6,7],
+        dst_cell: [7,6],
+        promo_piece_type: :knight
+      }
+      expect(res).to eql(exp)
+    end
+  end
 end

@@ -169,9 +169,20 @@ class ChessMoveRunner
     move_syntax_to_hash(syntax, src_piece_color)
   end
 
-  # TODO - to test
-  def promotion_syntax_to_hash
-    # TODO
+  # assumes syntax is valid
+  def promotion_syntax_to_hash(syntax, src_piece_color = turn_color)
+    src_coords = COORDS_REGEX.match(syntax)[0]
+    dst_coords = COORDS_REGEX.match(syntax, 2)[0]
+    src_piece_char = PIECE_CHAR_REGEX.match(syntax[0...1])
+    src_piece_char = src_piece_char ? src_piece_char[0] : ''
+    promo_piece_char = PIECE_CHAR_REGEX.match(syntax, 5)[0]
+    res = {
+      src_piece_type: piece_char_to_type(src_piece_char),
+      src_piece_color: src_piece_color,
+      src_cell: coords_to_matrix_cell(src_coords),
+      dst_cell: coords_to_matrix_cell(dst_coords),
+      promo_piece_type: piece_char_to_type(promo_piece_char)
+    }
   end
 
   # TODO - to test

@@ -399,7 +399,7 @@ Complete the following:
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [ ] `#promotion_syntax_to_hash` method
+- [x] `#promotion_syntax_to_hash` method
 - [ ] `#can_move?` method
 - [ ] `#move!` method
 - [ ] `#can_capture?` method
@@ -433,7 +433,7 @@ Complete the tests for the following:
 - [ ] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [ ] `#promotion_syntax_to_hash` method
+- [x] `#promotion_syntax_to_hash` method
 - TODO
 
 ## `CommandRunner` class
