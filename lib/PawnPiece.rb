@@ -100,6 +100,12 @@ class PawnPiece < Piece
     self.class.is_valid_promotion?(piece_type)
   end
 
+  def is_double_step?(src_cell, dst_cell, board)
+    return false unless moves(src_cell, board).include?(dst_cell)
+    cells = [src_cell, dst_cell]
+    self.class.count_col_cells_amid_two_cells(*cells) == 1
+  end
+
   def did_double_step?
     @did_double_step
   end

@@ -245,6 +245,7 @@ Complete the following:
 - [x] `#captures` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
+- [x] `#is_double_step?` method
 - [x] `#did_double_step?` method
 - [x] `#double_stepped!` method
 - [x] `#is_promotable?` method
@@ -271,6 +272,7 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
+- [x] `#is_double_step?` method
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant` method
 - [x] `#is_promotable?` method
