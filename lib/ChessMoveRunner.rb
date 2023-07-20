@@ -47,6 +47,15 @@ class ChessMoveRunner
     "h" => 7
   }
 
+  PIECE_CHAR_TO_SYMBOL = {
+    "" => :pawn,
+    "R" => :rook,
+    "N" => :knight,
+    "B" => :bishop,
+    "Q" => :queen,
+    "K" => :king
+  }
+
   attr_accessor(:game)
 
   def initialize(game)
@@ -114,6 +123,11 @@ class ChessMoveRunner
   end
 
   # TODO - to test
+  def piece_char_to_piece_type(char)
+    PIECE_CHAR_TO_SYMBOL[char]
+  end
+
+  # TODO - to test
   def is_matching_piece?(args)
     return false if args.class != Hash
 
@@ -129,6 +143,21 @@ class ChessMoveRunner
     return false if real_piece.type != piece.type
 
     true
+  end
+
+  # TODO - to test
+  def move_syntax_to_hash
+    # TODO
+  end
+
+  # TODO - to test
+  def capture_syntax_to_hash
+    # TODO
+  end
+
+  # TODO - to test
+  def promotion_syntax_to_hash
+    # TODO
   end
 
   # TODO - to test
