@@ -99,12 +99,12 @@ class ChessMoveRunner
 
   def is_valid_queenside_castle_syntax?(syntax)
     return false if syntax.class != String
-    syntax.match?(/^(0-0-0)|(O-O-O)$/)
+    syntax.match?(/^((0-0-0)|(O-O-O))$/)
   end
 
   def is_valid_kingside_castle_syntax?(syntax)
     return false if syntax.class != String
-    syntax.match?(/^(0-0)|(O-O)$/)
+    syntax.match?(/^((0-0)|(O-O))$/)
   end
 
   def is_valid_syntax?(syntax)

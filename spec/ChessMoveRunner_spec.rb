@@ -233,6 +233,27 @@ describe ChessMoveRunner do
       expect(res).to eql(false)
     end
 
+    it "returns false if called with '0-0'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_queenside_castle_syntax?('0-0')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'O-O'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_queenside_castle_syntax?('O-O')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'O-O-O-O'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_queenside_castle_syntax?('O-O-O-O')
+      expect(res).to eql(false)
+    end
+
     it "returns true if called with '0-0-0'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
@@ -260,6 +281,20 @@ describe ChessMoveRunner do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
       res = chess_move_runner.is_valid_kingside_castle_syntax?('o-o')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with '0-0-0'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_kingside_castle_syntax?('0-0-0')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'O-O-O'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_kingside_castle_syntax?('O-O-O')
       expect(res).to eql(false)
     end
 
