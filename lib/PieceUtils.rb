@@ -115,6 +115,12 @@ module PieceUtils
     end
   end
 
+  def count_col_cells_amid_two_cells(src_cell, dst_cell)
+    src_row, src_col = src_cell
+    dst_row, dst_col = dst_cell
+    (dst_row - src_row).abs - 1
+  end
+
   def move(args)
     piece_obj = args.fetch(:piece_obj, nil)
     src_cell = args.fetch(:src_cell, nil)

@@ -84,6 +84,7 @@ Complete the following:
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
+- [x] `#count_col_cells_amid_two_cells`
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#board_to_s` method
@@ -121,6 +122,7 @@ Complete the tests for the following (indirectly via `Piece` subclasses that use
 - [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
+- [x] `#count_col_cells_amid_two_cells`
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#board_to_s` method

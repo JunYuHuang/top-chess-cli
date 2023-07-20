@@ -100,4 +100,30 @@ describe "PieceUtils" do
       expect(res).to eql(expected)
     end
   end
+
+  describe "#count_col_cells_amid_two_cells" do
+    it "returns 0 if called with ([0,0],[1,0])" do
+      cells = [[0,0],[1,0]]
+      res = PieceUtilsClass.count_col_cells_amid_two_cells(*cells)
+      expect(res).to eql(0)
+    end
+
+    it "returns -1 if called with ([0,0],[0,0])" do
+      cells = [[0,0],[0,0]]
+      res = PieceUtilsClass.count_col_cells_amid_two_cells(*cells)
+      expect(res).to eql(-1)
+    end
+
+    it "returns -1 if called with ([7,0],[5,0])" do
+      cells = [[7,0],[5,0]]
+      res = PieceUtilsClass.count_col_cells_amid_two_cells(*cells)
+      expect(res).to eql(1)
+    end
+
+    it "returns -1 if called with ([5,0],[7,0])" do
+      cells = [[5,0],[7,0]]
+      res = PieceUtilsClass.count_col_cells_amid_two_cells(*cells)
+      expect(res).to eql(1)
+    end
+  end
 end
