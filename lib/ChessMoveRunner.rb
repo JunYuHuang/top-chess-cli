@@ -123,7 +123,7 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def piece_char_to_piece_type(char)
+  def piece_char_to_type(char)
     PIECE_CHAR_TO_SYMBOL[char]
   end
 
