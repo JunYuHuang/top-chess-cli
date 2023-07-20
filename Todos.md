@@ -400,7 +400,7 @@ Complete the following:
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
 - [x] `#promotion_syntax_to_hash` method
-- [ ] `#can_move?` method
+- [x] `#can_move?` method
 - [ ] `#move!` method
 - [ ] `#can_capture?` method
 - [ ] `#capture!` method
@@ -434,6 +434,7 @@ Complete the tests for the following:
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
 - [x] `#promotion_syntax_to_hash` method
+- [x] `#can_move?` method
 - TODO
 
 ## `CommandRunner` class

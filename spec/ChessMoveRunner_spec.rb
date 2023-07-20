@@ -2,6 +2,7 @@ require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
 require './spec/MockPlayer'
+require './spec/PieceUtilsClass'
 
 describe ChessMoveRunner do
   describe "#initialize" do
@@ -578,6 +579,62 @@ describe ChessMoveRunner do
         promo_piece_type: :knight
       }
       expect(res).to eql(exp)
+    end
+  end
+
+  describe "#can_move?" do
+    it "returns false if called with 'asd13fa' on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.can_move?('asd13fa')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid move syntax on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.can_move?('a2-a3')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Ra1a2', :white) on a valid game with the default starting boardand 'a2' is not an empty square" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('Ra1a2', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Ra1a2', :black) on a valid game with the default starting board and 'a1' is not a square occupied by a black rook piece" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('Ra1a2', :black)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('a2-a5', :white) on a valid game with the default starting board and 'a5' is NOT a square that the white pawn can move to in the current turn" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('a2-a5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('a2a4', :white) on a valid game with the default starting board and 'a4' is a square that the white pawn can move to in the current turn" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('a2a4', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('a2a3', :white) on a valid game with the default starting board and 'a3' is a square that the white pawn can move to in the current turn" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('a2a3', :white)
+      expect(res).to eql(true)
     end
   end
 end
