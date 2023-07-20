@@ -127,20 +127,20 @@ class ChessMoveRunner
     PIECE_CHAR_TO_SYMBOL[char]
   end
 
-  # TODO - to test
   def is_matching_piece?(args)
     return false if args.class != Hash
 
     board = args.fetch(:board, @game.board)
-    piece = args.fetch(:piece, nil)
+    piece_type = args.fetch(:piece_type, nil)
+    piece_color = args.fetch(:piece_color, nil)
     cell = args.fetch(:cell, nil)
-    return false if piece.nil? or cell.nil?
+    return false if piece_type.nil? or piece_color.nil? or cell.nil?
 
     row, col = cell
     real_piece = board[row][col]
     return false if real_piece.nil?
-    return false if real_piece.color != piece.color
-    return false if real_piece.type != piece.type
+    return false if real_piece.color != piece_color
+    return false if real_piece.type != piece_type
 
     true
   end
@@ -164,7 +164,7 @@ class ChessMoveRunner
     }
   end
 
-  # is an alias for `ChessMoveRunner#move_syntax_to_hash
+  # is an alias for `ChessMoveRunner#move_syntax_to_hash`
   def capture_syntax_to_hash(syntax, src_piece_color = turn_color)
     move_syntax_to_hash(syntax, src_piece_color)
   end

@@ -380,6 +380,79 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#is_matching_piece?" do
+    it "returns false if called with nil" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_matching_piece?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a dict that is missing a required key on a valid game" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      args = {
+        piece_type: :pawn,
+        piece_color: :white,
+      }
+      res = chess_move_runner.is_matching_piece?(args)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a dict with a cell value that references an empty cell on a valid game" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      args = {
+        piece_type: :pawn,
+        piece_color: :white,
+        cell: [4,0]
+      }
+      res = chess_move_runner.is_matching_piece?(args)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a dict with a cell value that references a piece with a mismatched color on the board on a valid game" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      args = {
+        piece_type: :pawn,
+        piece_color: :black,
+        cell: [6,0]
+      }
+      res = chess_move_runner.is_matching_piece?(args)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a dict with a cell value that references a piece with a mismatched type on the board on a valid game" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      args = {
+        piece_type: :king,
+        piece_color: :white,
+        cell: [6,0]
+      }
+      res = chess_move_runner.is_matching_piece?(args)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a dict with a cell value that references a matching piece on the board on a valid game" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      args = {
+        piece_type: :pawn,
+        piece_color: :white,
+        cell: [6,0]
+      }
+      res = chess_move_runner.is_matching_piece?(args)
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#move_syntax_to_hash" do
     it "returns the correct hash if called with ('a2-a4', :white)" do
       mock_game = nil
