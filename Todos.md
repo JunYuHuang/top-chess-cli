@@ -398,7 +398,7 @@ Complete the following:
 - [x] `#is_matching_piece?` method
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
-- [ ] `#capture_syntax_to_hash` method
+- [x] `#capture_syntax_to_hash` method
 - [ ] `#promotion_syntax_to_hash` method
 - [ ] `#can_move?` method
 - [ ] `#move!` method
@@ -432,7 +432,7 @@ Complete the tests for the following:
 - [x] `#coords_to_matrix_cell` method
 - [ ] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
-- [ ] `#capture_syntax_to_hash` method
+- [x] `#capture_syntax_to_hash` method
 - [ ] `#promotion_syntax_to_hash` method
 - TODO
 

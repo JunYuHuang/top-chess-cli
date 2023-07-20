@@ -145,7 +145,6 @@ class ChessMoveRunner
     true
   end
 
-  # TODO - to test
   def turn_color
     return @game.current_player_color if @game
     :white
@@ -165,9 +164,9 @@ class ChessMoveRunner
     }
   end
 
-  # TODO - to test
-  def capture_syntax_to_hash
-    # TODO
+  # is an alias for `ChessMoveRunner#move_syntax_to_hash
+  def capture_syntax_to_hash(syntax, src_piece_color = turn_color)
+    move_syntax_to_hash(syntax, src_piece_color)
   end
 
   # TODO - to test

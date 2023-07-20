@@ -433,4 +433,33 @@ describe ChessMoveRunner do
       expect(res).to eql(exp)
     end
   end
+
+  describe "#capture_syntax_to_hash" do
+    it "returns the correct hash if called with ('Bc1xg5', :white)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.capture_syntax_to_hash('Bc1xg5', :white)
+      exp = {
+        src_piece_type: :bishop,
+        src_piece_color: :white,
+        src_cell: [7,2],
+        dst_cell: [3,6]
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('Bc1xg5') on a game whose turn is the black player's" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.capture_syntax_to_hash('Bc1xg5', :black)
+      exp = {
+        src_piece_type: :bishop,
+        src_piece_color: :black,
+        src_cell: [7,2],
+        dst_cell: [3,6]
+      }
+      expect(res).to eql(exp)
+    end
+  end
 end
