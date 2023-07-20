@@ -5,7 +5,7 @@ class PawnPiece < Piece
   extend PieceUtils
 
   attr_accessor(
-    :default_options, :did_move, :one_step, :two_steps
+    :default_options, :did_move, :did_double_step, :one_step, :two_steps
   )
 
   @@one_step = { max_steps: 1 }
