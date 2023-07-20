@@ -46,7 +46,6 @@ class ChessMoveRunner
     "g" => 6,
     "h" => 7
   }
-
   PIECE_CHAR_TO_SYMBOL = {
     "" => :pawn,
     "R" => :rook,
@@ -55,6 +54,8 @@ class ChessMoveRunner
     "Q" => :queen,
     "K" => :king
   }
+  COORDS_REGEX = /[a-h][1-8]/
+  PIECE_CHAR_REGEX = /(R|N|B|Q|K)/
 
   attr_accessor(:game)
 
@@ -122,7 +123,6 @@ class ChessMoveRunner
     [8 - rank.to_i, ALPHA_FILE_TO_INT_COL[file]]
   end
 
-  # TODO - to test
   def piece_char_to_type(char)
     PIECE_CHAR_TO_SYMBOL[char]
   end
@@ -146,8 +146,23 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def move_syntax_to_hash
-    # TODO
+  def turn_color
+    return @game.current_player_color if @game
+    :white
+  end
+
+  # assumes syntax is valid
+  def move_syntax_to_hash(syntax, src_piece_color = turn_color)
+    src_coords = COORDS_REGEX.match(syntax)[0]
+    dst_coords = COORDS_REGEX.match(syntax, 2)[0]
+    src_piece_char = PIECE_CHAR_REGEX.match(syntax)
+    src_piece_char = src_piece_char ? src_piece_char[0] : ''
+    res = {
+      src_piece_type: piece_char_to_type(src_piece_char),
+      src_piece_color: src_piece_color,
+      src_cell: coords_to_matrix_cell(src_coords),
+      dst_cell: coords_to_matrix_cell(dst_coords),
+    }
   end
 
   # TODO - to test

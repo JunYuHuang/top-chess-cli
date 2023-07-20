@@ -396,7 +396,8 @@ Complete the following:
 - [x] `#coords_to_matrix_cell` method
 - [x] `#piece_char_to_type` method
 - [x] `#is_matching_piece?` method
-- [ ] `#move_syntax_to_hash` method
+- [x] `#turn_color` method
+- [x] `#move_syntax_to_hash` method
 - [ ] `#capture_syntax_to_hash` method
 - [ ] `#promotion_syntax_to_hash` method
 - [ ] `#can_move?` method
@@ -429,9 +430,8 @@ Complete the tests for the following:
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
-- [ ] `#piece_char_to_type` method
 - [ ] `#is_matching_piece?` method
-- [ ] `#move_syntax_to_hash` method
+- [x] `#move_syntax_to_hash` method
 - [ ] `#capture_syntax_to_hash` method
 - [ ] `#promotion_syntax_to_hash` method
 - TODO

@@ -379,4 +379,58 @@ describe ChessMoveRunner do
       expect(res).to eql([3,5])
     end
   end
+
+  describe "#move_syntax_to_hash" do
+    it "returns the correct hash if called with ('a2-a4', :white)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.move_syntax_to_hash('a2-a4', :white)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :white,
+        src_cell: [6,0],
+        dst_cell: [4,0]
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('a2a4', :white)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.move_syntax_to_hash('a2a4', :white)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :white,
+        src_cell: [6,0],
+        dst_cell: [4,0]
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('Ra8b8', :black)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.move_syntax_to_hash('Ra8b8', :black)
+      exp = {
+        src_piece_type: :rook,
+        src_piece_color: :black,
+        src_cell: [0,0],
+        dst_cell: [0,1]
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('Qa8-b8', :black)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.move_syntax_to_hash('Qa8-b8', :black)
+      exp = {
+        src_piece_type: :queen,
+        src_piece_color: :black,
+        src_cell: [0,0],
+        dst_cell: [0,1]
+      }
+      expect(res).to eql(exp)
+    end
+  end
 end
