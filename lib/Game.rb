@@ -130,56 +130,6 @@ class Game
   end
 
   # TODO - to test
-  def is_valid_move?(options)
-    # TODO
-  end
-
-  # TODO - to test
-  def move!(options)
-    # TODO
-  end
-
-  # TODO - to test
-  def is_valid_capture?(options)
-    # TODO
-  end
-
-  # TODO - to test
-  def capture!(options)
-    # TODO
-  end
-
-  # TODO - to test
-  def can_promote?(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def promote!(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def is_valid_castle?(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def castle!(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def is_valid_capture_en_passant?(args)
-    # TODO
-  end
-
-  # TODO - to test
-  def capture_en_passant!(args)
-    # TODO
-  end
-
-  # TODO - to test
   def is_last_move_enemy_pawn_2_step(args)
     # TODO
   end
