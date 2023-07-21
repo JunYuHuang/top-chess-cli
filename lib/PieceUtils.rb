@@ -236,7 +236,7 @@ module PieceUtils
       true
     end
 
-    res.filter! { |piece_hash| passes_filters?(filters, piece_hash) }
+    res.filter { |piece_hash| passes_filters?(filters, piece_hash) }
   end
 
   def remove_pieces(board, filters)

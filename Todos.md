@@ -111,7 +111,7 @@ Complete the following:
 - [x] `#l_shaped_moves` method
 - [x] `#l_shaped_captures` method
 
-Complete the tests for the following (indirectly via `Piece` subclasses that use this module):
+Complete the tests for the following (directly or indirectly via `Piece` subclasses that use this module):
 
 - [x] `#is_valid_piece_color?` method
 - [x] `#is_valid_piece_type?` method
@@ -405,7 +405,7 @@ Complete the following:
 - [x] `#capture_syntax_to_hash` method
 - [x] `#promotion_syntax_to_hash` method
 - [x] `#can_move?` method
-- [ ] `#move!` method
+- [x] `#move!` method
 - [ ] `#can_capture?` method
 - [ ] `#capture!` method
 - [ ] `#must_promote?` method
@@ -439,6 +439,7 @@ Complete the tests for the following:
 - [x] `#capture_syntax_to_hash` method
 - [x] `#promotion_syntax_to_hash` method
 - [x] `#can_move?` method
+- [ ] `#move!` method
 - TODO
 
 ## `CommandRunner` class

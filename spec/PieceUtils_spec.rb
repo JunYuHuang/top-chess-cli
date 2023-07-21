@@ -101,6 +101,69 @@ describe "PieceUtils" do
     end
   end
 
+  describe "#pieces" do
+    it "returns an array of the correct piece hashes if called with a certain board and a certain filter" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      8.times do |col|
+        board[6][col] = white_pawn
+      end
+      filters = { color: :white }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(8)
+      res.each do |piece_hash|
+        expect(piece_hash[:piece].class).to eql(MockPiece)
+        expect(piece_hash[:cell].class).to eql(Array)
+      end
+    end
+
+    it "returns an array of the correct piece hashes if called with a certain board and a certain filter" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      board[6][0] = white_pawn
+      board[1][0] = black_pawn
+      filters = { color: :white }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(1)
+    end
+
+    it "returns an array of the correct piece hashes if called with a certain board and a certain filter" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      black_king = MockPiece.new({ color: :black, type: :king })
+      board[6][0] = white_pawn
+      board[1][0] = black_pawn
+      board[0][4] = black_king
+      filters = { type: :pawn }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(2)
+    end
+
+    it "returns an array of the correct piece hashes if called with a certain board and a certain filter" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      board[6][0] = white_pawn
+      board[7][0] = white_rook
+      filters = { type: :rook }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(1)
+    end
+
+    it "returns an array of the correct piece hashes if called with a certain board and a certain filter" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      board[6][0] = white_pawn
+      board[7][0] = white_rook
+      filters = { color: :black }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(0)
+    end
+  end
+
   describe "#count_col_cells_amid_two_cells" do
     it "returns 0 if called with ([0,0],[1,0])" do
       cells = [[0,0],[1,0]]
