@@ -411,8 +411,6 @@ Complete the following:
 - [ ] `#must_promote?` method
 - [ ] `#is_valid_promotion?` method
 - [ ] `#promote!` method
-- [ ] `#can_castle?` method
-- [ ] `#castle!` method
 - [ ] `#can_queenside_castle?` method
 - [ ] `#queenside_castle!` method
 - [ ] `#can_kingside_castle?` method
@@ -439,7 +437,7 @@ Complete the tests for the following:
 - [x] `#capture_syntax_to_hash` method
 - [x] `#promotion_syntax_to_hash` method
 - [x] `#can_move?` method
-- [ ] `#move!` method
+- [x] `#move!` method
 - TODO
 
 ## `CommandRunner` class

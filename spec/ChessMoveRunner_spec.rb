@@ -597,7 +597,7 @@ describe ChessMoveRunner do
       expect(res).to eql(false)
     end
 
-    it "returns false if called with ('Ra1a2', :white) on a valid game with the default starting boardand 'a2' is not an empty square" do
+    it "returns false if called with ('Ra1a2', :white) on a valid game with the default starting board and 'a2' is not an empty square" do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
@@ -635,6 +635,70 @@ describe ChessMoveRunner do
       chess_move_runner = ChessMoveRunner.new(game)
       res = chess_move_runner.can_move?('a2a3', :white)
       expect(res).to eql(true)
+    end
+  end
+
+  describe "#move!" do
+    it "does nothing if called with ('a2-a5', :white) on a valid game with the default starting board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.move!('a2-a5', :white)
+      expect(game.board[6][0].nil?).to eql(false)
+      expect(game.board[3][0].nil?).to eql(true)
+    end
+
+    it "correctly modifies the game board if called with ('a2-a3', :white) on a valid game with the default starting board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.move!('a2-a3', :white)
+      old_cell = game.board[6][0]
+      white_pawn = game.board[5][0]
+      expect(old_cell.nil?).to eql(true)
+      expect(white_pawn.color).to eql(:white)
+      expect(white_pawn.type).to eql(:pawn)
+      expect(white_pawn.did_move?).to eql(true)
+      expect(white_pawn.did_double_step?).to eql(false)
+    end
+
+    it "correctly modifies the game board if called with ('a2-a4', :white) on a valid game with the default starting board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.move!('a2-a4', :white)
+      old_cell = game.board[6][0]
+      white_pawn = game.board[4][0]
+      expect(old_cell.nil?).to eql(true)
+      expect(white_pawn.color).to eql(:white)
+      expect(white_pawn.type).to eql(:pawn)
+      expect(white_pawn.did_move?).to eql(true)
+      expect(white_pawn.did_double_step?).to eql(true)
+    end
+
+    it "correctly modifies the game board if called with ('Rh1h5', :white) on a valid game with a custom board that only has the white rook that did not move before" do
+      pieces = [
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.move!('Rh1h5', :white)
+      old_cell = game.board[7][7]
+      white_rook = game.board[3][7]
+      expect(old_cell.nil?).to eql(true)
+      expect(white_rook.color).to eql(:white)
+      expect(white_rook.type).to eql(:rook)
+      expect(white_rook.did_move?).to eql(true)
     end
   end
 end

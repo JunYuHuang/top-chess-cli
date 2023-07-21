@@ -208,9 +208,47 @@ class ChessMoveRunner
     piece[:piece].moves(src_cell, @game.board).include?(dst_cell)
   end
 
-  # TODO - to test
-  def move!
-    # TODO
+  def move!(syntax, src_piece_color = turn_color)
+    return unless can_move?(syntax, src_piece_color)
+
+    data = move_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:, src_cell:, dst_cell:
+    }
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    piece = self.class.pieces(@game.board, filters)[0]
+
+    # update boolean flags on the piece as needed
+
+    # Note that for the pawn piece which is the only piece with the
+    # `@did_double_step` instance property, this flag must be checked and
+    # possibly modified BEFORE checking and possibly modifying the pawn's
+    # `@did_move`instance property due to how the
+    # `PawnPiece#is_double_step?` method works; If the pawn piece moved
+    # already, then it can no longer double step (forward). This means
+    # that even if the pawn did not move yet and double stepped in this
+    # (chess) move / turn, its `@did_double_step` instance boolean
+    # variable will NOT be correctly set to `true` but instead remain as
+    # `false`.
+    if piece[:piece].respond_to?(:did_double_step?)
+      args = [src_cell, dst_cell, @game.board]
+      is_double_step = piece[:piece].is_double_step?(*args)
+      piece[:piece].double_stepped! if is_double_step
+    end
+
+    if piece[:piece].respond_to?(:did_move?)
+      piece[:piece].moved!
+    end
+
+    # modify the board state
+    args = {
+      piece_obj: piece[:piece],
+      src_cell: src_cell,
+      dst_cell: dst_cell,
+      board: @game.board
+    }
+    @game.board = self.class.move(args)
   end
 
   # TODO - to test
