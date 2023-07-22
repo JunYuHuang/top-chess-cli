@@ -417,6 +417,7 @@ Complete the following:
 - [ ] `#kingside_castle!` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
+- [ ] `#set_pawns_non_capturable_en_passant!` method
 
 Complete the tests for the following:
 
@@ -440,6 +441,7 @@ Complete the tests for the following:
 - [x] `#move!` method
 - [ ] `#can_capture?` method
 - [ ] `#capture!` method
+- [ ] `#must_promote?` method
 - TODO
 
 ## `CommandRunner` class

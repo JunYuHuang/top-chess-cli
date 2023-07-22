@@ -326,8 +326,32 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def must_promote?
+  def must_promote?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_promotion_syntax?(syntax)
+    return false unless @game
+
+    data = promotion_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:,
+      src_cell:, dst_cell:, promo_piece_type:
+    }
     # TODO
+    # move_regex = /^[a-h][1-8]-?[a-h][1-8].+$/
+    # capture_regex = /^[a-h][1-8]x[a-h][1-8].+$/
+
+    # return false unless self.class.is_empty_cell?(dst_cell, @game.board)
+
+    # args = {
+    #   piece_type: src_piece_type,
+    #   piece_color: src_piece_color,
+    #   cell: src_cell
+    # }
+    # return false unless is_matching_piece?(args)
+
+    # src_row, src_col = src_cell
+    # filters = { row: src_row, col: src_col }
+    # piece = self.class.pieces(@game.board, filters)[0]
+    # piece[:piece].moves(src_cell, @game.board).include?(dst_cell)
   end
 
   # TODO - to test
