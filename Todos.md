@@ -409,12 +409,12 @@ Complete the following:
 - [x] `#can_capture?` method
 - [x] `#capture!` method
 - [ ] `#must_promote?` method
-- [ ] `#is_valid_promotion?` method
+- [ ] `#can_promote?` method
 - [ ] `#promote!` method
-- [ ] `#can_queenside_castle?` method
-- [ ] `#queenside_castle!` method
-- [ ] `#can_kingside_castle?` method
-- [ ] `#kingside_castle!` method
+- [x] `#can_queenside_castle?` method
+- [x] `#queenside_castle!` method
+- [x] `#can_kingside_castle?` method
+- [x] `#kingside_castle!` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
@@ -442,6 +442,12 @@ Complete the tests for the following:
 - [ ] `#can_capture?` method
 - [ ] `#capture!` method
 - [ ] `#must_promote?` method
+- [ ] `#can_promote?` method
+- [ ] `#promote!` method
+- [ ] `#can_queenside_castle?` method
+- [ ] `#queenside_castle!` method
+- [ ] `#can_kingside_castle?` method
+- [ ] `#kingside_castle!` method
 - TODO
 
 ## `CommandRunner` class

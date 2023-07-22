@@ -360,33 +360,67 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def can_castle?
-    # TODO
+  def can_queenside_castle?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_queenside_castle_syntax?(syntax)
+    return false unless @game
+
+    king_filter = { color: src_piece_color, type: :king }
+    res = self.class.pieces(@game.board, king_filter)
+    return false if res.size != 0
+
+    king = res[0]
+    king[:piece].can_queenside_castle?(king[:cell], @game.board)
   end
 
   # TODO - to test
-  def castle!
-    # TODO
+  def queenside_castle!(syntax, src_piece_color = turn_color)
+    return unless can_queenside_castle?(syntax, src_piece_color)
+
+    # update boolean flags on the king and rook pieces
+    king_filter = { color: src_piece_color, type: :king }
+    king = self.class.pieces(@game.board, king_filter)[0]
+    king[:piece].moved!
+
+    rook_filter = { color: src_piece_color, type: :rook, col: 0 }
+    rook = self.class.pieces(@game.board, rook_filter)
+    rook[:piece].moved!
+
+    # create the new board state and update it on the game object
+    board_with_castled_king = king[:piece].queenside_castle(king[:cell], @game.board)
+    castled_board = rook[:piece].queenside_castle(rook[:cell], board_with_castled_king)
+    @game.board = castled_board
   end
 
   # TODO - to test
-  def can_queenside_castle?
-    # TODO
+  def can_kingside_castle?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_kingside_castle_syntax?(syntax)
+    return false unless @game
+
+    king_filter = { color: src_piece_color, type: :king }
+    res = self.class.pieces(@game.board, king_filter)
+    return false if res.size != 0
+
+    king = res[0]
+    king[:piece].can_kingside_castle?(king[:cell], @game.board)
   end
 
   # TODO - to test
-  def queenside_castle!
-    # TODO
-  end
+  def kingside_castle!(syntax, src_piece_color = turn_color)
+    return unless can_kingside_castle?(syntax, src_piece_color)
 
-  # TODO - to test
-  def can_kingside_castle?
-    # TODO
-  end
+    # update boolean flags on the king and rook pieces
+    king_filter = { color: src_piece_color, type: :king }
+    king = self.class.pieces(@game.board, king_filter)[0]
+    king[:piece].moved!
 
-  # TODO - to test
-  def kingside_castle!
-    # TODO
+    rook_filter = { color: src_piece_color, type: :rook, col: 7 }
+    rook = self.class.pieces(@game.board, rook_filter)
+    rook[:piece].moved!
+
+    # create the new board state and update it on the game object
+    board_with_castled_king = king[:piece].kingside_castle(king[:cell], @game.board)
+    castled_board = rook[:piece].kingside_castle(rook[:cell], board_with_castled_king)
+    @game.board = castled_board
   end
 
   # TODO - to test
