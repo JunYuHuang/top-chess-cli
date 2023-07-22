@@ -182,102 +182,102 @@ describe ChessMoveRunner do
     end
   end
 
-  describe "#is_valid_promotion_syntax?" do
+  describe "#is_valid_promote_syntax?" do
     it "returns false if called with a non-String" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?(nil)
+      res = chess_move_runner.is_valid_promote_syntax?(nil)
       expect(res).to eql(false)
     end
 
     it "returns false if called with a 'Rc7-c8=Q'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new('Rc7-c8=Q')
-      res = chess_move_runner.is_valid_promotion_syntax?('Rc7-c8=Q')
+      res = chess_move_runner.is_valid_promote_syntax?('Rc7-c8=Q')
       expect(res).to eql(false)
     end
 
     it "returns false if called with 'c7-c8=K'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=K')
+      res = chess_move_runner.is_valid_promote_syntax?('c7-c8=K')
       expect(res).to eql(false)
     end
 
     it "returns false if called with 'c6-c8=Q'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c6-c8=Q')
+      res = chess_move_runner.is_valid_promote_syntax?('c6-c8=Q')
       expect(res).to eql(false)
     end
 
     it "returns true if called with 'c7-c8=R'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=R')
+      res = chess_move_runner.is_valid_promote_syntax?('c7-c8=R')
       expect(res).to eql(true)
     end
 
     it "returns true if called with 'c7-c8=N'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=N')
+      res = chess_move_runner.is_valid_promote_syntax?('c7-c8=N')
       expect(res).to eql(true)
     end
 
     it "returns true if called with 'c7c8=B'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c7-c8=B')
+      res = chess_move_runner.is_valid_promote_syntax?('c7-c8=B')
       expect(res).to eql(true)
     end
 
     it "returns true if called with 'c7xb8=Q'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('c7xb8=Q')
+      res = chess_move_runner.is_valid_promote_syntax?('c7xb8=Q')
       expect(res).to eql(true)
     end
 
     it "returns false if called with a 'Rf2-f1=Q'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new('Rf2-f1=Q')
-      res = chess_move_runner.is_valid_promotion_syntax?(nil)
+      res = chess_move_runner.is_valid_promote_syntax?(nil)
       expect(res).to eql(false)
     end
 
     it "returns false if called with 'f3-f1=Q'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('f3-f1=Q')
+      res = chess_move_runner.is_valid_promote_syntax?('f3-f1=Q')
       expect(res).to eql(false)
     end
 
     it "returns false if called with 'f2-f1=K'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('f2-f1=K')
+      res = chess_move_runner.is_valid_promote_syntax?('f2-f1=K')
       expect(res).to eql(false)
     end
 
     it "returns true if called with 'f2-f1=R'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('f2-f1=R')
+      res = chess_move_runner.is_valid_promote_syntax?('f2-f1=R')
       expect(res).to eql(true)
     end
 
     it "returns true if called with 'f2f1=N'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('f2f1=N')
+      res = chess_move_runner.is_valid_promote_syntax?('f2f1=N')
       expect(res).to eql(true)
     end
 
     it "returns true if called with 'f2xg1=B'" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.is_valid_promotion_syntax?('f2xg1=B')
+      res = chess_move_runner.is_valid_promote_syntax?('f2xg1=B')
       expect(res).to eql(true)
     end
   end

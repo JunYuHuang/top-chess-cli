@@ -93,7 +93,7 @@ class ChessMoveRunner
     syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]x[a-h][1-8]$/)
   end
 
-  def is_valid_promotion_syntax?(syntax)
+  def is_valid_promote_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^[a-h](7(-|x)?[a-h]8|2(-|x)?[a-h]1)=(R|N|B|Q)$/)
   end
@@ -112,7 +112,7 @@ class ChessMoveRunner
     return false if syntax.class != String
     return true if is_valid_move_syntax?(syntax)
     return true if is_valid_capture_syntax?(syntax)
-    return true if is_valid_promotion_syntax?(syntax)
+    return true if is_valid_promote_syntax?(syntax)
     return true if is_valid_queenside_castle_syntax?(syntax)
     return true if is_valid_kingside_castle_syntax?(syntax)
     false
@@ -327,7 +327,7 @@ class ChessMoveRunner
 
   # TODO - to test
   def must_promote?(syntax, src_piece_color = turn_color)
-    return false unless is_valid_promotion_syntax?(syntax)
+    return false unless is_valid_promote_syntax?(syntax)
     return false unless @game
 
     data = promotion_syntax_to_hash(syntax, src_piece_color)
