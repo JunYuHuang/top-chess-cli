@@ -81,7 +81,6 @@ Complete the following:
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
@@ -119,7 +118,6 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_empty_cell?` method
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [x] `#at_last_row?` method
 - [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
