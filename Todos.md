@@ -406,7 +406,7 @@ Complete the following:
 - [x] `#move!` method
 - [x] `#can_capture?` method
 - [x] `#capture!` method
-- [ ] `#must_promote?` method
+- [x] `#must_promote?` method
 - [ ] `#can_promote?` method
 - [ ] `#promote!` method
 - [x] `#can_queenside_castle?` method
@@ -439,7 +439,7 @@ Complete the tests for the following:
 - [x] `#move!` method
 - [ ] `#can_capture?` method
 - [ ] `#capture!` method
-- [ ] `#must_promote?` method
+- [x] `#must_promote?` method
 - [ ] `#can_promote?` method
 - [ ] `#promote!` method
 - [ ] `#can_queenside_castle?` method

@@ -326,7 +326,22 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def must_promote?(syntax, src_piece_color = turn_color)
+  def must_promote?(src_cell)
+    return false unless @game
+    return false unless self.class.is_inbound_cell?(src_cell)
+
+    src_row, src_col = src_cell
+    filter = { row: src_row, col: src_col }
+    pieces = self.class.pieces(@game.board, filter)
+    return false if pieces.size != 1
+
+    pawn = pieces[0]
+    return false if pawn[:piece].type != :pawn
+    pawn[:piece].is_promotable?(src_cell, @game.board)
+  end
+
+  # TODO - to test
+  def can_promote?(syntax, src_piece_color = turn_color)
     return false unless is_valid_promote_syntax?(syntax)
     return false unless @game
 

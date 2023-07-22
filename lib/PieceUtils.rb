@@ -43,6 +43,7 @@ module PieceUtils
 
   def is_inbound_cell?(cell)
     row, col = cell
+    return false if row.class != Integer or col.class != Integer
     return false if row < 0 or row >= BOARD_LENGTH
     return false if col < 0 or col >= BOARD_LENGTH
     true

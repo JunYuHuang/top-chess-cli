@@ -764,4 +764,120 @@ describe ChessMoveRunner do
       expect(white_rook.did_move?).to eql(true)
     end
   end
+
+  describe "#must_promote?" do
+    it "returns false if called with anything on a ChessMoveRunner object that has a null game object property" do
+      chess_move_runner = ChessMoveRunner.new(nil)
+      res = chess_move_runner.must_promote?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with an invalid cell on a ChessMoveRunner object that has a valid game object" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([0,-1])
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell that references a non-Pawn piece on a ChessMoveRunner object that has a valid game object" do
+      pieces = [
+        {
+          cell: [1,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([1,7])
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell that references a white pawn and is not in the 2nd top-most row on a ChessMoveRunner object that has a valid game object" do
+      pieces = [
+        {
+          cell: [0,7],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([0,7])
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid cell that references a black pawn and is not in the 2nd bottom-most row on a ChessMoveRunner object that has a valid game object" do
+      pieces = [
+        {
+          cell: [5,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([5,2])
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a valid cell that references a white pawn and is in the 2nd top-most row on a ChessMoveRunner object that has a valid game object" do
+      pieces = [
+        {
+          cell: [1,7],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([1,7])
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with a valid cell that references a black pawn and is in the 2nd bottom-most row on a ChessMoveRunner object that has a valid game object" do
+      pieces = [
+        {
+          cell: [6,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.must_promote?([6,2])
+      expect(res).to eql(true)
+    end
+  end
 end
