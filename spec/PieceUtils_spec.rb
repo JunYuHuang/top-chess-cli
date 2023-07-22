@@ -19,7 +19,7 @@ describe "PieceUtils" do
   end
 
   describe "#move" do
-    it "returns nil called with any missing arguments" do
+    it "returns nil if called with any missing arguments" do
       board = Array.new(8) { Array.new(8, nil) }
       white_pawn = MockPiece.new({ color: :white, type: :pawn })
       board[6][2] = white_pawn
@@ -50,7 +50,7 @@ describe "PieceUtils" do
   end
 
   describe "#capture" do
-    it "returns nil called with any missing arguments" do
+    it "returns nil if called with any missing arguments" do
       board = Array.new(8) { Array.new(8, nil) }
       white_pawn = MockPiece.new({ color: :white, type: :pawn })
       board[6][2] = white_pawn
