@@ -403,7 +403,7 @@ Complete the following:
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [x] `#promotion_syntax_to_hash` method
+- [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
 - [x] `#can_capture?` method
@@ -436,7 +436,7 @@ Complete the tests for the following:
 - [x] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [x] `#promotion_syntax_to_hash` method
+- [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
 - [ ] `#can_capture?` method

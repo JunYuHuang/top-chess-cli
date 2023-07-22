@@ -601,11 +601,11 @@ describe ChessMoveRunner do
     end
   end
 
-  describe "#promotion_syntax_to_hash" do
+  describe "#promote_syntax_to_hash" do
     it "returns the correct hash if called with ('c7-c8=Q', :white)" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.promotion_syntax_to_hash('c7-c8=Q', :white)
+      res = chess_move_runner.promote_syntax_to_hash('c7-c8=Q', :white)
       exp = {
         src_piece_type: :pawn,
         src_piece_color: :white,
@@ -619,7 +619,7 @@ describe ChessMoveRunner do
     it "returns the correct hash if called with ('h2h1=B', :black)" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.promotion_syntax_to_hash('h2h1=B', :black)
+      res = chess_move_runner.promote_syntax_to_hash('h2h1=B', :black)
       exp = {
         src_piece_type: :pawn,
         src_piece_color: :black,
@@ -633,7 +633,7 @@ describe ChessMoveRunner do
     it "returns the correct hash if called with ('h2xg1=N', :black)" do
       mock_game = nil
       chess_move_runner = ChessMoveRunner.new(mock_game)
-      res = chess_move_runner.promotion_syntax_to_hash('h2xg1=N', :black)
+      res = chess_move_runner.promote_syntax_to_hash('h2xg1=N', :black)
       exp = {
         src_piece_type: :pawn,
         src_piece_color: :black,

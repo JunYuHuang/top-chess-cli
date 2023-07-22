@@ -170,7 +170,7 @@ class ChessMoveRunner
   end
 
   # assumes syntax is valid
-  def promotion_syntax_to_hash(syntax, src_piece_color = turn_color)
+  def promote_syntax_to_hash(syntax, src_piece_color = turn_color)
     src_coords = COORDS_REGEX.match(syntax)[0]
     dst_coords = COORDS_REGEX.match(syntax, 2)[0]
     src_piece_char = PIECE_CHAR_REGEX.match(syntax[0...1])
@@ -330,7 +330,7 @@ class ChessMoveRunner
     return false unless is_valid_promote_syntax?(syntax)
     return false unless @game
 
-    data = promotion_syntax_to_hash(syntax, src_piece_color)
+    data = promote_syntax_to_hash(syntax, src_piece_color)
     data => {
       src_piece_type:, src_piece_color:,
       src_cell:, dst_cell:, promo_piece_type:
