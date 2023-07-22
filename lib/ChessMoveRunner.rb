@@ -340,7 +340,6 @@ class ChessMoveRunner
     pawn[:piece].is_promotable?(src_cell, @game.board)
   end
 
-  # TODO - to test
   def can_promote?(syntax, src_piece_color = turn_color)
     return false unless is_valid_promote_syntax?(syntax)
     return false unless @game
@@ -350,23 +349,23 @@ class ChessMoveRunner
       src_piece_type:, src_piece_color:,
       src_cell:, dst_cell:, promo_piece_type:
     }
-    # TODO
-    # move_regex = /^[a-h][1-8]-?[a-h][1-8].+$/
-    # capture_regex = /^[a-h][1-8]x[a-h][1-8].+$/
+    args = {
+      piece_type: src_piece_type,
+      piece_color: src_piece_color,
+      cell: src_cell
+    }
+    return false unless is_matching_piece?(args)
+    return false unless must_promote?(src_cell)
 
-    # return false unless self.class.is_empty_cell?(dst_cell, @game.board)
-
-    # args = {
-    #   piece_type: src_piece_type,
-    #   piece_color: src_piece_color,
-    #   cell: src_cell
-    # }
-    # return false unless is_matching_piece?(args)
-
-    # src_row, src_col = src_cell
-    # filters = { row: src_row, col: src_col }
-    # piece = self.class.pieces(@game.board, filters)[0]
-    # piece[:piece].moves(src_cell, @game.board).include?(dst_cell)
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    pawn = self.class.pieces(@game.board, filters)[0]
+    pawn_moves = pawn[:piece].moves(src_cell, @game.board)
+    pawn_captures= pawn[:piece].captures(src_cell, @game.board)
+    is_capture_promotion = syntax.include?('x')
+    is_capture_promotion ?
+      pawn_captures.include?(dst_cell) :
+      pawn_moves.include?(dst_cell)
   end
 
   # TODO - to test

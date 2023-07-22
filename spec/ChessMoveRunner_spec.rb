@@ -960,4 +960,255 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#can_promote?" do
+    it "returns false if called with ('b6-b7=R', :white) on a ChessMoveRunner object that has a valid game object whose square 'b6' is actually a white rook" do
+      pieces = [
+        {
+          cell: [2,1],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b6-b7=R', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('b6-b7=Q', :white) on a ChessMoveRunner object that has a valid game object whose square 'b6' is a white pawn" do
+      pieces = [
+        {
+          cell: [2,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b6-b7=Q', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('b7b8=Q', :white) on a ChessMoveRunner object that has a valid game object whose square 'b7' is a white pawn and square 'b8' is a black knight" do
+      pieces = [
+        {
+          cell: [1,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [0,1],
+          color: :black,
+          type: :knight,
+          is_capturable: true,
+          did_move: false,
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b7b8=Q', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('b7b8=Q', :white) on a ChessMoveRunner object that has a valid game object whose square 'b7' is a white pawn" do
+      pieces = [
+        {
+          cell: [1,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b7b8=Q', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('b7-b8=R', :white) on a ChessMoveRunner object that has a valid game object whose square 'b7' is a white pawn" do
+      pieces = [
+        {
+          cell: [1,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b7-b8=R', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('b7xa8=B', :white) on a ChessMoveRunner object that has a valid game object whose square 'b7' is a white pawn and square 'a8' is a black rook" do
+      pieces = [
+        {
+          cell: [1,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [0,0],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('b7xa8=B', :white)
+      expect(res).to eql(true)
+    end
+
+    # TODO
+    it "returns false if called with ('g3-g2=Q', :black) on a ChessMoveRunner object that has a valid game object whose square 'g3' is a black pawn" do
+      pieces = [
+        {
+          cell: [5,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('g3-g2=Q', :black)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('g2g1=Q', :black) on a ChessMoveRunner object that has a valid game object whose square 'g2' is a black pawn and square 'g1' is a white knight" do
+      pieces = [
+        {
+          cell: [6,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,6],
+          color: :white,
+          type: :knight,
+          is_capturable: true,
+          did_move: false,
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('g2g1=Q', :black)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('g2g1=Q', :black) on a ChessMoveRunner object that has a valid game object whose square 'g2' is a black pawn" do
+      pieces = [
+        {
+          cell: [6,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('g2g1=Q', :black)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('g2-g1=R', :black) on a ChessMoveRunner object that has a valid game object whose square 'g2' is a black pawn" do
+      pieces = [
+        {
+          cell: [6,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('g2-g1=R', :black)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('g2xh1=B', :black) on a ChessMoveRunner object that has a valid game object whose square 'g2' is a black pawn and square 'h1' is a white rook" do
+      pieces = [
+        {
+          cell: [6,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_promote?('g2xh1=B', :black)
+      expect(res).to eql(true)
+    end
+  end
 end
