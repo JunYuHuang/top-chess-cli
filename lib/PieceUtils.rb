@@ -17,7 +17,6 @@ module PieceUtils
     [2, -1],    # 2 downs -> 1 left
     [2, 1]      # 2 downs -> 1 right
   ]
-  VALID_PROMOTION_PIECE_TYPES = Set.new([:rook, :knight, :bishop, :queen])
 
   def board_length
     BOARD_LENGTH
@@ -84,10 +83,6 @@ module PieceUtils
     return false unless is_valid_piece_color?(dst_piece.color)
     return false unless is_valid_piece_type?(dst_piece.type)
     src_piece.color != dst_piece.color
-  end
-
-  def is_valid_promotion?(piece_type)
-    VALID_PROMOTION_PIECE_TYPES.include?(piece_type)
   end
 
   def deep_copy(obj)

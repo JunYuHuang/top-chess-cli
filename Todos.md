@@ -81,7 +81,6 @@ Complete the following:
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
 - [x] `#move` method
@@ -118,7 +117,6 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_empty_cell?` method
 - [ ] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
-- [x] `#is_valid_promotion?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
 - [x] `#move` method
@@ -247,7 +245,6 @@ Complete the following:
 - [x] `#did_double_step?` method
 - [x] `#double_stepped!` method
 - [x] `#is_promotable?` method
-- [x] `#is_valid_promotion?` method
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant` method
 - [x] `#black_moves` method (private)
@@ -274,7 +271,6 @@ Complete the tests for the following:
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant` method
 - [x] `#is_promotable?` method
-- [x] `#is_valid_promotion?` method
 - [x] `#move` method
 - [x] `#capture` method
 

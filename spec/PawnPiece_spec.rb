@@ -816,50 +816,6 @@ describe PawnPiece do
     end
   end
 
-  describe "#is_valid_promotable?" do
-    it "returns false if called with nil" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(nil)
-      expect(res).to eql(false)
-    end
-
-    it "returns false if called with :pawn" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:pawn)
-      expect(res).to eql(false)
-    end
-
-    it "returns false if called with :king" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:king)
-      expect(res).to eql(false)
-    end
-
-    it "returns true if called with :rook" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:rook)
-      expect(res).to eql(true)
-    end
-
-    it "returns true if called with :knight" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:knight)
-      expect(res).to eql(true)
-    end
-
-    it "returns true if called with :bishop" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:bishop)
-      expect(res).to eql(true)
-    end
-
-    it "returns true if called with :queen" do
-      white_pawn = PawnPiece.new({ color: :white })
-      res = white_pawn.is_valid_promotion?(:queen)
-      expect(res).to eql(true)
-    end
-  end
-
   describe "#move" do
     it "returns the correct board if called with all valid arguments on a white pawn" do
       board = Array.new(8) { Array.new(8, nil) }

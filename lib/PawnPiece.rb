@@ -110,10 +110,6 @@ class PawnPiece < Piece
       src_row == self.class.board_length - 2
   end
 
-  def is_valid_promotion?(piece_type)
-    self.class.is_valid_promotion?(piece_type)
-  end
-
   def is_double_step?(src_cell, dst_cell, board)
     return false unless moves(src_cell, board).include?(dst_cell)
     cells = [src_cell, dst_cell]
