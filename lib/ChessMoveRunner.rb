@@ -252,13 +252,77 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def can_capture?
-    # TODO
+  def can_capture?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_capture_syntax?(syntax)
+    return false unless @game
+
+    data = capture_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:, src_cell:, dst_cell:
+    }
+
+    if src_piece_type != :pawn
+      return false if self.class.is_empty_cell?(dst_cell, @game.board)
+
+      dst_row, dst_col = dst_cell
+      filters = { row: dst_row, col: dst_col }
+      res = self.class.pieces(@game.board, filter)
+      return false if res.size == 0
+
+      capturee_piece = res[0]
+      enemy_color = src_piece_color == :white ? :black : :white
+      return false if capturee_piece[:piece].color != enemy_color
+      return false unless capturee_piece[:piece].is_capturable?
+    else
+      # TODO - check for possible en-passant capture if the capturer
+      # piece is a pawn
+    end
+
+    args = {
+      piece_type: src_piece_type,
+      piece_color: src_piece_color,
+      cell: src_cell
+    }
+    return false unless is_matching_piece?(args)
+
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    capturer_piece = self.class.pieces(@game.board, filters)[0]
+    capturer_piece[:piece].captures(src_cell, @game.board).include?(dst_cell)
   end
 
   # TODO - to test
-  def capture!
-    # TODO
+  def capture!(syntax, src_piece_color = turn_color)
+    return unless can_capture?(syntax, src_piece_color)
+
+    data = capture_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:, src_cell:, dst_cell:
+    }
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    capturer_piece = self.class.pieces(@game.board, filters)[0]
+
+    # update boolean flags on the piece as needed
+    if capturer_piece[:piece].respond_to?(:did_move?)
+      capturer_piece[:piece].moved!
+    end
+
+    # TODO - If the capturer piece is a pawn and the capture is an
+    # en-passant capture - `dst_cell` is empty but its adjacent top cell
+    # (if capturer is a black pawn) or its adjacent bottom cell (if
+    # capturer is a white pawn) is the to-be-captured enemy pawn -
+    # set the enemy capturee pawn's cell to null in the new board.
+
+    # modify the board state
+    args = {
+      piece_obj: capturer_piece[:piece],
+      src_cell: src_cell,
+      dst_cell: dst_cell,
+      board: @game.board,
+      en_passant_cap_cell: nil # TODO
+    }
+    @game.board = self.class.capture(args)
   end
 
   # TODO - to test

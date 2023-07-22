@@ -406,8 +406,8 @@ Complete the following:
 - [x] `#promotion_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
-- [ ] `#can_capture?` method
-- [ ] `#capture!` method
+- [x] `#can_capture?` method
+- [x] `#capture!` method
 - [ ] `#must_promote?` method
 - [ ] `#is_valid_promotion?` method
 - [ ] `#promote!` method
@@ -438,6 +438,8 @@ Complete the tests for the following:
 - [x] `#promotion_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
+- [ ] `#can_capture?` method
+- [ ] `#capture!` method
 - TODO
 
 ## `CommandRunner` class
