@@ -95,7 +95,7 @@ class ChessMoveRunner
 
   def is_valid_promotion_syntax?(syntax)
     return false if syntax.class != String
-    syntax.match?(/^[a-h][1-8](-|x)?[a-h](8|1)=(R|N|B|Q)$/)
+    syntax.match?(/^[a-h](7(-|x)?[a-h]8|2(-|x)?[a-h]1)=(R|N|B|Q)$/)
   end
 
   def is_valid_queenside_castle_syntax?(syntax)
