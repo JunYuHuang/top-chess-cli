@@ -93,7 +93,21 @@ class PawnPiece < Piece
   end
 
   def is_promotable?(src_cell, board)
-    self.class.at_last_row?(src_cell, board)
+    return false unless self.class.is_inbound_cell?(src_cell)
+    return false if self.class.is_empty_cell?(src_cell, board)
+
+    src_row, src_col = src_cell
+    filter = { row: src_row, col: src_col }
+    pieces = self.class.pieces(board, filter)
+    return false if pieces.size != 1
+
+    itself_on_board = pieces[0]
+    return false if itself_on_board[:piece] != self
+    return false unless self.class.is_valid_piece_color?(@color)
+
+    @color == :white ?
+      src_row == 1 :
+      src_row == self.class.board_length - 2
   end
 
   def is_valid_promotion?(piece_type)

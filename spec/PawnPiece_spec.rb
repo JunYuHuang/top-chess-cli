@@ -778,25 +778,41 @@ describe PawnPiece do
       expect(white_pawn.is_promotable?([6,4], board)).to eql(false)
     end
 
-    it "returns false if called with a valid cell and a board on a pawn obj with an invalid color" do
-      pawn = PawnPiece.new({ color: :blue })
+    it "returns false if called with a cell that does not match where the pawn actually is and a board" do
+      white_pawn = PawnPiece.new({ color: :white })
+      other_white_pawn = PawnPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
-      board[6][3] = pawn
-      expect(pawn.is_promotable?([6,3], board)).to eql(false)
+      board[6][3] = white_pawn
+      board[6][4] = other_white_pawn
+      expect(white_pawn.is_promotable?([6,4], board)).to eql(false)
     end
 
-    it "returns true if called with a cell in the top row and a board on a white pawn" do
+    it "returns false if called with a cell in the top row and a board on a white pawn" do
       white_pawn = PawnPiece.new({ color: :white, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
       board[0][3] = white_pawn
-      expect(white_pawn.is_promotable?([0,3], board)).to eql(true)
+      expect(white_pawn.is_promotable?([0,3], board)).to eql(false)
     end
 
-    it "returns true if called with a cell in the bottom row and a board on a black pawn" do
+    it "returns false if called with a cell in the bottom row and a board on a black pawn" do
       black_pawn = PawnPiece.new({ color: :black, did_move: true })
       board = Array.new(8) { Array.new(8, nil) }
       board[7][3] = black_pawn
-      expect(black_pawn.is_promotable?([7,3], board)).to eql(true)
+      expect(black_pawn.is_promotable?([7,3], board)).to eql(false)
+    end
+
+    it "returns true if called with a cell in the 2nd top-most row and a board on a white pawn" do
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[1][5] = white_pawn
+      expect(white_pawn.is_promotable?([1,5], board)).to eql(true)
+    end
+
+    it "returns true if called with a cell in the 2nd bottom-most row and a board on a black pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[6][4] = black_pawn
+      expect(black_pawn.is_promotable?([6,4], board)).to eql(true)
     end
   end
 
