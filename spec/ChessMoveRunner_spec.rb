@@ -699,6 +699,86 @@ describe ChessMoveRunner do
       res = chess_move_runner.can_move?('a2a3', :white)
       expect(res).to eql(true)
     end
+
+    it "returns false if called with ('d7d8', :white) on a valid game with a custom board and 'd7' has a white pawn that must promote" do
+      pieces = [
+        {
+          cell: [1,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('d7d8', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('d6-d7', :white) on a valid game with a custom board and 'd6' has a white pawn that cannot promote" do
+      pieces = [
+        {
+          cell: [2,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('d6-d7', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns false if called with ('e2e1', :black) on a valid game with a custom board and 'e2' has a black pawn that must promote" do
+      pieces = [
+        {
+          cell: [6,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('e2e1', :black)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('e3-e2', :black) on a valid game with a custom board and 'e3' has a black pawn that cannot promote" do
+      pieces = [
+        {
+          cell: [5,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_move?('e3-e2', :black)
+      expect(res).to eql(true)
+    end
   end
 
   describe "#move!" do

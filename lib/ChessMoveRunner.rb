@@ -201,6 +201,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
+    return false if must_promote?(src_cell)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
@@ -325,7 +326,6 @@ class ChessMoveRunner
     @game.board = self.class.capture(args)
   end
 
-  # TODO - to test
   def must_promote?(src_cell)
     return false unless @game
     return false unless self.class.is_inbound_cell?(src_cell)
