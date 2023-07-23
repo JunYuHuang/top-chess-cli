@@ -1096,7 +1096,6 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
 
-    # TODO
     it "returns false if called with ('g3-g2=Q', :black) on a ChessMoveRunner object that has a valid game object whose square 'g3' is a black pawn" do
       pieces = [
         {
@@ -1209,6 +1208,111 @@ describe ChessMoveRunner do
       chess_move_runner = ChessMoveRunner.new(game)
       res = chess_move_runner.can_promote?('g2xh1=B', :black)
       expect(res).to eql(true)
+    end
+  end
+
+  describe "#promote!" do
+    it "does nothing if called with ('b6-b7=Q', :white) on a ChessMoveRunner object that has a valid game object whose square 'b6' is a white pawn" do
+      pieces = [
+        {
+          cell: [2,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.promote!('b6-b7=Q', :white)
+      src_cell = game.board[2][1]
+      dst_cell = game.board[1][1]
+      expect(src_cell.nil?).to eql(false)
+      expect(dst_cell.nil?).to eql(true)
+    end
+
+    it "modifies the game board correctly if called with ('b7-b8=R', :white) on a ChessMoveRunner object that has a valid game object whose square 'b7' is a white pawn" do
+      pieces = [
+        {
+          cell: [1,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.promote!('b7-b8=R', :white)
+      src_cell = game.board[1][1]
+      dst_cell = game.board[0][1]
+      expect(src_cell.nil?).to eql(true)
+      expect(dst_cell.nil?).to eql(false)
+      expect(dst_cell.color).to eql(:white)
+      expect(dst_cell.type).to eql(:rook)
+    end
+
+    it "does nothing if called with ('g3-g2=Q', :black) on a ChessMoveRunner object that has a valid game object whose square 'g3' is a black pawn" do
+      pieces = [
+        {
+          cell: [5,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.promote!('g3-g2=Q', :black)
+      src_cell = game.board[5][6]
+      dst_cell = game.board[6][6]
+      expect(src_cell.nil?).to eql(false)
+      expect(dst_cell.nil?).to eql(true)
+    end
+
+    it "modifies the game board correctly if called with ('g2xh1=B', :black) on a ChessMoveRunner object that has a valid game object whose square 'g2' is a black pawn and square 'h1' is a white rook" do
+      pieces = [
+        {
+          cell: [6,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.promote!('g2xh1=B', :black)
+      src_cell = game.board[6][6]
+      dst_cell = game.board[7][7]
+      expect(src_cell.nil?).to eql(true)
+      expect(dst_cell.nil?).to eql(false)
+      expect(dst_cell.color).to eql(:black)
+      expect(dst_cell.type).to eql(:bishop)
     end
   end
 end

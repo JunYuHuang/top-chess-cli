@@ -368,31 +368,26 @@ class ChessMoveRunner
       pawn_moves.include?(dst_cell)
   end
 
-  # TODO - to test
   def promote!(syntax, src_piece_color = turn_color)
-    # return unless can_move?(syntax, src_piece_color)
+    return unless can_promote?(syntax, src_piece_color)
 
-    # data = move_syntax_to_hash(syntax, src_piece_color)
-    # data => {
-    #   src_piece_type:, src_piece_color:, src_cell:, dst_cell:
-    # }
-    # src_row, src_col = src_cell
-    # filters = { row: src_row, col: src_col }
-    # piece = self.class.pieces(@game.board, filters)[0]
+    data = promote_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:,
+      src_cell:, dst_cell:, promo_piece_type:
+    }
+    src_row, src_col = src_cell
+    new_board = self.class.deep_copy(@game.board)
+    new_board[src_row][src_col] = nil
 
-    # # update boolean flags on the piece as needed
-    # if piece[:piece].respond_to?(:did_move?)
-    #   piece[:piece].moved!
-    # end
+    factory = @game.piece_factory_class
+    options = { color: src_piece_color }
+    dst_row, dst_col = dst_cell
+    new_board[dst_row][dst_col] = factory.create(
+      promo_piece_type, options
+    )
 
-    # # modify the board state
-    # args = {
-    #   piece_obj: piece[:piece],
-    #   src_cell: src_cell,
-    #   dst_cell: dst_cell,
-    #   board: @game.board
-    # }
-    # @game.board = self.class.move(args)
+    @game.board = new_board
   end
 
   # TODO - to test
