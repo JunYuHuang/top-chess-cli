@@ -420,7 +420,6 @@ class ChessMoveRunner
     @game.board = castled_board
   end
 
-  # TODO - to test
   def can_kingside_castle?(syntax, src_piece_color = turn_color)
     return false unless is_valid_kingside_castle_syntax?(syntax)
     return false unless @game

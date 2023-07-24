@@ -440,7 +440,7 @@ Complete the tests for the following:
 - [x] `#promote!` method
 - [x] `#can_queenside_castle?` method
 - [x] `#queenside_castle!` method
-- [ ] `#can_kingside_castle?` method
+- [x] `#can_kingside_castle?` method
 - [ ] `#kingside_castle!` method
 - TODO
 
