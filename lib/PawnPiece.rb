@@ -4,31 +4,30 @@ require './lib/PieceUtils'
 class PawnPiece < Piece
   extend PieceUtils
 
+  DEFAULT_OPTIONS = {
+    color: :white,
+    did_move: false,
+    did_double_step: false
+  }
+
   attr_accessor(
-    :default_options, :did_move, :did_double_step, :one_step, :two_steps
+    :did_move, :did_double_step, :one_step, :two_steps
   )
 
   @@one_step = { max_steps: 1 }
 
   @@two_steps = { max_steps: 2 }
 
-  def initialize(options = {})
-    default_options = {
-      color: :white,
-      did_move: false,
-      did_double_step: false
-    }
-
-    options = default_options.merge(options)
+  def initialize(options = DEFAULT_OPTIONS)
     passed_options = {
-      color: options.fetch(:color, @@default_options[:color]),
+      color: options.fetch(:color, DEFAULT_OPTIONS[:color]),
       type: :pawn,
       is_capturable: true
     }
 
     super(passed_options)
-    @did_move = options[:did_move]
-    @did_double_step = options[:did_double_step]
+    @did_move = options.fetch(:did_move, DEFAULT_OPTIONS[:did_move])
+    @did_double_step = options.fetch(:did_double_step, DEFAULT_OPTIONS[:did_double_step])
   end
 
   def moves(src_cell, board)
