@@ -390,14 +390,13 @@ class ChessMoveRunner
     @game.board = new_board
   end
 
-  # TODO - to test
   def can_queenside_castle?(syntax, src_piece_color = turn_color)
     return false unless is_valid_queenside_castle_syntax?(syntax)
     return false unless @game
 
     king_filter = { color: src_piece_color, type: :king }
     res = self.class.pieces(@game.board, king_filter)
-    return false if res.size != 0
+    return false if res.size != 1
 
     king = res[0]
     king[:piece].can_queenside_castle?(king[:cell], @game.board)
@@ -429,7 +428,7 @@ class ChessMoveRunner
 
     king_filter = { color: src_piece_color, type: :king }
     res = self.class.pieces(@game.board, king_filter)
-    return false if res.size != 0
+    return false if res.size != 1
 
     king = res[0]
     king[:piece].can_kingside_castle?(king[:cell], @game.board)

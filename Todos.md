@@ -438,7 +438,7 @@ Complete the tests for the following:
 - [x] `#must_promote?` method
 - [x] `#can_promote?` method
 - [x] `#promote!` method
-- [ ] `#can_queenside_castle?` method
+- [x] `#can_queenside_castle?` method
 - [ ] `#queenside_castle!` method
 - [ ] `#can_kingside_castle?` method
 - [ ] `#kingside_castle!` method

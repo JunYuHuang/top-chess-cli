@@ -1,7 +1,6 @@
 require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
-require './spec/MockPlayer'
 require './spec/PieceUtilsClass'
 
 describe ChessMoveRunner do
@@ -1313,6 +1312,130 @@ describe ChessMoveRunner do
       expect(dst_cell.nil?).to eql(false)
       expect(dst_cell.color).to eql(:black)
       expect(dst_cell.type).to eql(:bishop)
+    end
+  end
+
+  describe "#can_queenside_castle?" do
+    it "returns false if called with ('0-0-0', :white) on a ChessMoveRunner object that has a valid game object with a certain board that has a black rook that checks the white king" do
+      pieces = [
+        {
+          cell: [2,2],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,0],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_queenside_castle?('0-0-0', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('O-O-O', :white) on a ChessMoveRunner object that has a valid game object with a certain board that has a white rook and the white king" do
+      pieces = [
+        {
+          cell: [7,0],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_queenside_castle?('O-O-O', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns false if called with ('O-O-O', :black) on a ChessMoveRunner object that has a valid game object with a certain board that has a white rook that checks the black king" do
+      pieces = [
+        {
+          cell: [5,2],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [0,0],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_queenside_castle?('O-O-O', :black)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('0-0-0', :black) on a ChessMoveRunner object that has a valid game object with a certain board that has a black rook and the black king" do
+      pieces = [
+        {
+          cell: [0,0],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_queenside_castle?('0-0-0', :black)
+      expect(res).to eql(true)
     end
   end
 end
