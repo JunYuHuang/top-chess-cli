@@ -268,6 +268,8 @@ class ChessMoveRunner
   end
 
   # TODO - to test
+  # Note that this only handles normal, non-en-passant captures.
+  # En-passant captures are checked in a separate method.
   def can_capture?(syntax, src_piece_color = turn_color)
     return false unless is_valid_capture_syntax?(syntax)
     return false unless @game
@@ -277,22 +279,12 @@ class ChessMoveRunner
       src_piece_type:, src_piece_color:, src_cell:, dst_cell:
     }
 
-    if src_piece_type != :pawn
-      return false if self.class.is_empty_cell?(dst_cell, @game.board)
+    return false if self.class.is_empty_cell?(dst_cell, @game.board)
 
-      dst_row, dst_col = dst_cell
-      filters = { row: dst_row, col: dst_col }
-      res = self.class.pieces(@game.board, filter)
-      return false if res.size == 0
-
-      capturee_piece = res[0]
-      enemy_color = src_piece_color == :white ? :black : :white
-      return false if capturee_piece[:piece].color != enemy_color
-      return false unless capturee_piece[:piece].is_capturable?
-    else
-      # TODO - check for possible en-passant capture if the capturer
-      # piece is a pawn
-    end
+    dst_row, dst_col = dst_cell
+    capturee_filters = { row: dst_row, col: dst_col }
+    res = self.class.pieces(@game.board, capturee_filters)
+    return false if res.size != 1
 
     args = {
       piece_type: src_piece_type,
@@ -300,14 +292,22 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
+    return false if must_promote?(src_cell)
+
+    capturee_piece = res[0]
+    return false if self.class.is_ally_piece_cell?(src_cell, dst_cell, @game.board)
+    return false unless capturee_piece[:piece].is_capturable?
 
     src_row, src_col = src_cell
-    filters = { row: src_row, col: src_col }
-    capturer_piece = self.class.pieces(@game.board, filters)[0]
+    capturer_filters = { row: src_row, col: src_col }
+    capturer_piece = self.class.pieces(@game.board, capturer_filters)[0]
+
     capturer_piece[:piece].captures(src_cell, @game.board).include?(dst_cell)
   end
 
   # TODO - to test
+  # Note that this only handles normal, non-en-passant captures.
+  # En-passant captures are execute in a separate method.
   def capture!(syntax, src_piece_color = turn_color)
     return unless can_capture?(syntax, src_piece_color)
 

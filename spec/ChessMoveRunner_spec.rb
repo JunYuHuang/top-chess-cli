@@ -644,6 +644,243 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#can_capture?" do
+    it "returns false if called with a valid move syntax on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.can_capture?('a2xb3')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Bc1xg5', :white) on a valid game with a certain board and 'g5' is an empty square" do
+      pieces = [
+        {
+          cell: [7,2],
+          color: :white,
+          type: :bishop,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Bc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Bc1xg5', :white) on a valid game with a certain board and 'c1' is not a square occupied by a white bishop piece and 'g5' is occupied by a black non-king piece" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :black,
+          type: :queen,
+          is_capturable: true
+        },
+        {
+          cell: [7,2],
+          color: :white,
+          type: :queen,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Bc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Bc1xg5', :white) on a valid game with a certain board and 'g5' is occupied by a white piece" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        },
+        {
+          cell: [7,2],
+          color: :white,
+          type: :bishop,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Bc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Bc1xg5', :white) on a valid game with a certain board and 'g5' is occupied by a black king piece" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :black,
+          type: :king,
+          is_capturable: false
+        },
+        {
+          cell: [7,2],
+          color: :white,
+          type: :bishop,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Bc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Rc1xg5', :white) on a valid game with a certain board and 'g5' is a square occupied by a black non-king piece that the white rook cannot capture in the current turn" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        },
+        {
+          cell: [7,2],
+          color: :white,
+          type: :rook,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Rc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('Qc1xg5', :white) on a valid game with a certain board and 'f4' is a square occupied by a black non-king piece that blocks the white queen on square 'c1' from capturing the black non-king piece on square 'g5'" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        },
+        {
+          cell: [4,5],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        },
+        {
+          cell: [7,2],
+          color: :white,
+          type: :queen,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('Qc1xg5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('d7xe8', :white) on a valid game with a custom board and 'd7' is a square occupied by a white pawn that must promote and 'e8' is a square occupied by a non-king black piece" do
+      pieces = [
+        {
+          cell: [0,4],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [1,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('d7xe8', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('d6xe7', :white) on a valid game with a custom board and 'd6' is a square occupied by a white pawn that cannot promote and 'e7' is a square occupied by a non-king black piece" do
+      pieces = [
+        {
+          cell: [1,4],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [2,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('d6xe7', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('e3xd2', :black) on a valid game with a custom board and 'e3' is a square occupied by a black pawn that cannot promote and 'd2' is a square occupied by a white non-king piece" do
+      pieces = [
+        {
+          cell: [6,3],
+          color: :white,
+          type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [5,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture?('e3xd2', :black)
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#can_move?" do
     it "returns false if called with 'asd13fa' on a mock game" do
       mock_game = nil

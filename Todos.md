@@ -115,7 +115,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_valid_piece_type?` method
 - [x] `#is_inbound_cell?` method (possibly not needed?)
 - [x] `#is_empty_cell?` method
-- [ ] `#is_ally_piece_cell?` method
+- [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
@@ -381,8 +381,8 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 Complete the following:
 
 - [x] `#initialize` constructor
-- [x] `#is_valid_chess_move?` method
-- [x] `#execute_chess_move!` method
+- [ ] `#is_valid_chess_move?` method
+- [ ] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
 - [x] `#is_valid_coords_syntax?` method
 - [x] `#is_valid_move_syntax?` method
@@ -433,7 +433,7 @@ Complete the tests for the following:
 - [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
-- [ ] `#can_capture?` method
+- [x] `#can_capture?` method
 - [ ] `#capture!` method
 - [x] `#must_promote?` method
 - [x] `#can_promote?` method
@@ -442,7 +442,9 @@ Complete the tests for the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
-- TODO
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant!` method
+- [ ] `#set_pawns_non_capturable_en_passant!` method
 
 ## `CommandRunner` class
 

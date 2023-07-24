@@ -54,7 +54,6 @@ module PieceUtils
     piece.nil?
   end
 
-  # TODO - to test
   def is_ally_piece_cell?(src_cell, dst_cell, board)
     return false if is_empty_cell?(src_cell, board)
     return false if is_empty_cell?(dst_cell, board)
