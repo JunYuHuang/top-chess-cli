@@ -432,7 +432,6 @@ class ChessMoveRunner
     king[:piece].can_kingside_castle?(king[:cell], @game.board)
   end
 
-  # TODO - to test
   def kingside_castle!(syntax, src_piece_color = turn_color)
     return unless can_kingside_castle?(syntax, src_piece_color)
 

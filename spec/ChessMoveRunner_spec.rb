@@ -1716,4 +1716,158 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#kingside_castle!" do
+    it "does nothing if called with ('0-0', :white) on a ChessMoveRunner object that has a valid game object with a certain board that has a black rook that checks the white king" do
+      pieces = [
+        {
+          cell: [2,6],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.kingside_castle!('0-0', :white)
+      white_rook = game.board[7][7]
+      white_king = game.board[7][4]
+      expect(white_rook.type).to eql(:rook)
+      expect(white_king.type).to eql(:king)
+    end
+
+    it "modifies the game board correctly if called with ('O-O', :white) on a ChessMoveRunner object that has a valid game object with a certain board that has a white rook and the white king" do
+      pieces = [
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.kingside_castle!('O-O', :white)
+      old_rook_cell = game.board[7][7]
+      old_king_cell = game.board[7][4]
+      new_rook_cell = game.board[7][5]
+      new_king_cell = game.board[7][6]
+      expect(old_rook_cell.nil?).to eql(true)
+      expect(old_king_cell.nil?).to eql(true)
+      expect(new_rook_cell.nil?).to eql(false)
+      expect(new_rook_cell.type).to eql(:rook)
+      expect(new_rook_cell.color).to eql(:white)
+      expect(new_rook_cell.did_move?).to eql(true)
+      expect(new_king_cell.type).to eql(:king)
+      expect(new_king_cell.color).to eql(:white)
+      expect(new_king_cell.did_move?).to eql(true)
+    end
+
+    it "does nothing if called with ('O-O', :black) on a ChessMoveRunner object that has a valid game object with a certain board that has a white rook that checks the black king" do
+      pieces = [
+        {
+          cell: [5,6],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [0,7],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.kingside_castle!('O-O', :black)
+      black_rook = game.board[0][7]
+      black_king = game.board[0][4]
+      expect(black_rook.type).to eql(:rook)
+      expect(black_king.type).to eql(:king)
+    end
+
+    it "modifies the game board correctly if called with ('0-0', :black) on a ChessMoveRunner object that has a valid game object with a certain board that has a black rook and the black king" do
+      pieces = [
+        {
+          cell: [0,7],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.kingside_castle!('0-0', :black)
+      old_rook_cell = game.board[0][7]
+      old_king_cell = game.board[0][4]
+      new_rook_cell = game.board[0][5]
+      new_king_cell = game.board[0][6]
+      expect(old_rook_cell.nil?).to eql(true)
+      expect(old_king_cell.nil?).to eql(true)
+      expect(new_rook_cell.nil?).to eql(false)
+      expect(new_rook_cell.type).to eql(:rook)
+      expect(new_rook_cell.color).to eql(:black)
+      expect(new_rook_cell.did_move?).to eql(true)
+      expect(new_king_cell.type).to eql(:king)
+      expect(new_king_cell.color).to eql(:black)
+      expect(new_king_cell.did_move?).to eql(true)
+    end
+  end
 end

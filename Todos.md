@@ -441,7 +441,7 @@ Complete the tests for the following:
 - [x] `#can_queenside_castle?` method
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
-- [ ] `#kingside_castle!` method
+- [x] `#kingside_castle!` method
 - TODO
 
 ## `CommandRunner` class
