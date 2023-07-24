@@ -402,7 +402,6 @@ class ChessMoveRunner
     king[:piece].can_queenside_castle?(king[:cell], @game.board)
   end
 
-  # TODO - to test
   def queenside_castle!(syntax, src_piece_color = turn_color)
     return unless can_queenside_castle?(syntax, src_piece_color)
 
@@ -412,7 +411,7 @@ class ChessMoveRunner
     king[:piece].moved!
 
     rook_filter = { color: src_piece_color, type: :rook, col: 0 }
-    rook = self.class.pieces(@game.board, rook_filter)
+    rook = self.class.pieces(@game.board, rook_filter)[0]
     rook[:piece].moved!
 
     # create the new board state and update it on the game object
@@ -444,7 +443,7 @@ class ChessMoveRunner
     king[:piece].moved!
 
     rook_filter = { color: src_piece_color, type: :rook, col: 7 }
-    rook = self.class.pieces(@game.board, rook_filter)
+    rook = self.class.pieces(@game.board, rook_filter)[0]
     rook[:piece].moved!
 
     # create the new board state and update it on the game object
