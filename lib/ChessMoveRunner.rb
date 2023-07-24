@@ -64,13 +64,28 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def is_valid_chess_move?
-    # TODO
+  def is_valid_chess_move?(syntax, src_piece_color = turn_color)
+    return true if can_move?(syntax, src_piece_color)
+    return true if can_capture?(syntax, src_piece_color)
+    return true if can_promote?(syntax, src_piece_color)
+    return true if can_queenside_castle?(syntax, src_piece_color)
+    return true if can_kingside_castle?(syntax, src_piece_color)
+    false
   end
 
   # TODO - to test
-  def execute_chess_move!
-    # TODO
+  def execute_chess_move!(syntax, src_piece_color = turn_color)
+    if can_move?(syntax, src_piece_color)
+      move!(syntax, src_piece_color)
+    elsif can_capture?(syntax, src_piece_color)
+      capture!(syntax, src_piece_color)
+    elsif can_promote?(syntax, src_piece_color)
+      promote!(syntax, src_piece_color)
+    elsif can_queenside_castle?(syntax, src_piece_color)
+      can_queenside_castle!(syntax, src_piece_color)
+    elsif can_kingside_castle?(syntax, src_piece_color)
+      kingside_castle!(syntax, src_piece_color)
+    end
   end
 
   def is_valid_piece_char_syntax?(syntax)
