@@ -11,7 +11,8 @@ class PawnPiece < Piece
   }
 
   attr_accessor(
-    :did_move, :did_double_step, :one_step, :two_steps
+    :did_move, :did_double_step,
+    :is_capturable_en_passant, :one_step, :two_steps
   )
 
   @@one_step = { max_steps: 1 }
@@ -22,12 +23,17 @@ class PawnPiece < Piece
     passed_options = {
       color: options.fetch(:color, DEFAULT_OPTIONS[:color]),
       type: :pawn,
-      is_capturable: true
+      is_capturable: true,
+      is_capturable_en_passant: false
     }
 
     super(passed_options)
     @did_move = options.fetch(:did_move, DEFAULT_OPTIONS[:did_move])
     @did_double_step = options.fetch(:did_double_step, DEFAULT_OPTIONS[:did_double_step])
+    @is_capturable_en_passant = options.fetch(
+      :is_capturable_en_passant,
+      DEFAULT_OPTIONS[:is_capturable_en_passant]
+    )
   end
 
   def moves(src_cell, board)
@@ -37,6 +43,7 @@ class PawnPiece < Piece
       black_moves(src_cell, board)
   end
 
+  # TODO - to rework and retest to include en-passant target cells
   def captures(src_cell, board)
     return [] unless self.class.is_valid_piece_color?(@color)
     @color == :white ?
@@ -44,15 +51,26 @@ class PawnPiece < Piece
       black_captures(src_cell, board)
   end
 
-  def can_capture_en_passant?(args, &is_proper_last_move)
+  def is_capturable_en_passant?
+    @is_capturable_en_passant
+  end
+
+  def set_is_capturable_en_passant!(bool = false)
+    return if bool == @is_capturable_en_passant
+    @is_capturable_en_passant = bool
+  end
+
+  # TODO - to rework and retest
+  def can_capture_en_passant?(args)
     src_cell = args.fetch(:src_cell, nil)
-    captive_cell = args.fetch(:captive_cell, nil)
+    dst_cell = args.fetch(:dst_cell, nil)
     board = args.fetch(:board, nil)
-    return false if src_cell.nil? or captive_cell.nil? or board.nil?
+    # captive_cell =
+    return false if src_cell.nil? or dst_cell.nil? or board.nil?
     return false unless self.class.is_inbound_cell?(src_cell)
-    return false if self.class.is_empty_cell?(src_cell, board)
     return false unless self.class.is_inbound_cell?(captive_cell)
-    return false if self.class.is_empty_cell?(captive_cell, board)
+    return false if self.class.is_empty_cell?(src_cell, board)
+    return false unless self.class.is_empty_cell?(captive_cell, board)
     return false unless self.class.is_valid_piece_color?(@color)
     return false unless self.class.is_enemy_piece_cell?(src_cell, captive_cell, board)
     return false unless self.class.is_piece_type?(src_cell, board, :pawn)
@@ -68,6 +86,7 @@ class PawnPiece < Piece
       can_black_capture_en_passant?(args, &is_proper_last_move)
   end
 
+  # TODO - to rework and retest
   # returns dest. cell (not captive pawn cell) of pawn capturer
   def capture_en_passant(args, &is_proper_last_move)
     src_cell = args.fetch(:src_cell, nil)
@@ -91,6 +110,21 @@ class PawnPiece < Piece
     @did_move = true
   end
 
+  def is_double_step?(src_cell, dst_cell, board)
+    return false unless moves(src_cell, board).include?(dst_cell)
+    cells = [src_cell, dst_cell]
+    self.class.count_col_cells_amid_two_cells(*cells) == 1
+  end
+
+  def did_double_step?
+    @did_double_step
+  end
+
+  def double_stepped!
+    return if @did_double_step
+    @did_double_step = true
+  end
+
   def is_promotable?(src_cell, board)
     return false unless self.class.is_inbound_cell?(src_cell)
     return false if self.class.is_empty_cell?(src_cell, board)
@@ -107,21 +141,6 @@ class PawnPiece < Piece
     @color == :white ?
       src_row == 1 :
       src_row == self.class.board_length - 2
-  end
-
-  def is_double_step?(src_cell, dst_cell, board)
-    return false unless moves(src_cell, board).include?(dst_cell)
-    cells = [src_cell, dst_cell]
-    self.class.count_col_cells_amid_two_cells(*cells) == 1
-  end
-
-  def did_double_step?
-    @did_double_step
-  end
-
-  def double_stepped!
-    return if @did_double_step
-    @did_double_step = true
   end
 
   def move(src_cell, dst_cell, board)

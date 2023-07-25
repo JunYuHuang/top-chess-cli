@@ -240,16 +240,17 @@ Complete the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [x] `#captures` method
+- [ ] `#captures` method
+- [x] `#is_capturable_en_passant?` method
+- [x] `#set_is_capturable_en_passant!` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_double_step?` method
 - [x] `#did_double_step?` method
 - [x] `#double_stepped!` method
-- [ ] `#is_capturable_en_passant?` method
 - [x] `#is_promotable?` method
-- [ ] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
@@ -269,11 +270,10 @@ Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [x] `#captures` method
-- [x] `#is_double_step?` method
-- [ ] `#is_capturable_en_passant?` method
+- [ ] `#captures` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
+- [x] `#is_double_step?` method
 - [x] `#is_promotable?` method
 - [x] `#move` method
 - [x] `#capture` method
