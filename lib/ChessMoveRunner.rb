@@ -258,13 +258,7 @@ class ChessMoveRunner
     end
 
     # modify the board state
-    args = {
-      piece_obj: piece[:piece],
-      src_cell: src_cell,
-      dst_cell: dst_cell,
-      board: @game.board
-    }
-    @game.board = self.class.move(args)
+    @game.board = piece[:piece].move(src_cell, dst_cell, @game.board)
   end
 
   # Note that this only handles normal, non-en-passant captures.
