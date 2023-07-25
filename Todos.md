@@ -33,11 +33,13 @@ Complete the following:
 - [x] Refactor to not use and remove the `EmptyPiece` class
 - [x] Add `move` method to `Piece` subclasses (modifies board in-place or returns a new board)
 - [x] Add `capture` method to `Piece` subclasses (modifies board in-place or returns a new board)
-- [x] Add `queenside_castle` method to `King` class
-- [x] Add `kingside_castle` method to `King` class
-- [x] Add `queenside_castle` method to `Rook` class
-- [x] Add `kingside_castle` method to `Rook` class
+- [x] Add `queenside_castle` method to `KingPiece` class
+- [x] Add `kingside_castle` method to `KingPiece` class
+- [x] Add `queenside_castle` method to `RookPiece` class
+- [x] Add `kingside_castle` method to `RookPiece` class
 - [ ] Rename `PieceUtils` module to `ChessUtils`
+- [ ] Rework `PawnPiece#capture_en_passant` method to return a new chess board matrix of `Piece` subclass objects given only the `src_cell`, `dst_cell` (not the cell of the to-be-captured enemy pawn), and `board`
+- [ ] Rework `PawnPiece#can_capture_en_passant?` method to depend on the to-be-captured enemy pawn's `@is_capturable_en_passant` instance boolean flag variable instead of taking a block callback method parameter and take the empty target destination cell (not the cell of the to-be-captured enemy pawn) instead of the captive cell as part of its arguments
 
 ## `Player` class
 
@@ -244,9 +246,10 @@ Complete the following:
 - [x] `#is_double_step?` method
 - [x] `#did_double_step?` method
 - [x] `#double_stepped!` method
+- [ ] `#is_capturable_en_passant?` method
 - [x] `#is_promotable?` method
-- [x] `#can_capture_en_passant?` method
-- [x] `#capture_en_passant` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
@@ -268,8 +271,9 @@ Complete the tests for the following:
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#is_double_step?` method
-- [x] `#can_capture_en_passant?` method
-- [x] `#capture_en_passant` method
+- [ ] `#is_capturable_en_passant?` method
+- [ ] `#can_capture_en_passant?` method
+- [ ] `#capture_en_passant` method
 - [x] `#is_promotable?` method
 - [x] `#move` method
 - [x] `#capture` method
@@ -387,6 +391,7 @@ Complete the following:
 - [x] `#is_valid_coords_syntax?` method
 - [x] `#is_valid_move_syntax?` method
 - [x] `#is_valid_capture_syntax?` method
+- [ ] `#is_valid_capture_en_passant_syntax?` method
 - [x] `#is_valid_promote_syntax?` method
 - [x] `#is_valid_queenside_castle_syntax?` method
 - [x] `#is_valid_kingside_castle_syntax?` method
@@ -397,6 +402,7 @@ Complete the following:
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
+- [ ] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
@@ -409,6 +415,7 @@ Complete the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
+- [ ] `#is_move_pawn_double_step?` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
@@ -422,6 +429,7 @@ Complete the tests for the following:
 - [x] `#is_valid_coords_syntax?` method
 - [x] `#is_valid_move_syntax?` method
 - [x] `#is_valid_capture_syntax?` method
+- [ ] `#is_valid_capture_en_passant_syntax?` method
 - [x] `#is_valid_promote_syntax?` method
 - [x] `#is_valid_queenside_castle_syntax?` method
 - [x] `#is_valid_kingside_castle_syntax?` method
@@ -430,6 +438,7 @@ Complete the tests for the following:
 - [x] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
+- [ ] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
@@ -442,6 +451,7 @@ Complete the tests for the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
+- [ ] `#is_move_pawn_double_step?` method
 - [ ] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
