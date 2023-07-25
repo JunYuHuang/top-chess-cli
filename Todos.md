@@ -385,13 +385,13 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 Complete the following:
 
 - [x] `#initialize` constructor
-- [ ] `#is_valid_chess_move?` method
-- [ ] `#execute_chess_move!` method
+- [x] `#is_valid_chess_move?` method
+- [x] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
 - [x] `#is_valid_coords_syntax?` method
 - [x] `#is_valid_move_syntax?` method
 - [x] `#is_valid_capture_syntax?` method
-- [ ] `#is_valid_capture_en_passant_syntax?` method
+- [x] `#is_valid_capture_en_passant_syntax?` method
 - [x] `#is_valid_promote_syntax?` method
 - [x] `#is_valid_queenside_castle_syntax?` method
 - [x] `#is_valid_kingside_castle_syntax?` method
@@ -402,7 +402,7 @@ Complete the following:
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [ ] `#capture_en_passant_syntax_to_hash` method
+- [x] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
@@ -415,10 +415,10 @@ Complete the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
-- [ ] `#is_move_pawn_double_step?` method
-- [ ] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant!` method
-- [ ] `#set_pawns_non_capturable_en_passant!` method
+- [x] `#is_move_pawn_double_step?` method
+- [x] `#can_capture_en_passant?` method
+- [x] `#capture_en_passant!` method
+- [x] `#set_pawns_non_capturable_en_passant!` method
 
 Complete the tests for the following:
 

@@ -66,6 +66,7 @@ class ChessMoveRunner
   # TODO - to test
   def is_valid_chess_move?(syntax, src_piece_color = turn_color)
     return true if can_move?(syntax, src_piece_color)
+    return true if can_capture_en_passant?(syntax, src_piece_color)
     return true if can_capture?(syntax, src_piece_color)
     return true if can_promote?(syntax, src_piece_color)
     return true if can_queenside_castle?(syntax, src_piece_color)
@@ -77,6 +78,8 @@ class ChessMoveRunner
   def execute_chess_move!(syntax, src_piece_color = turn_color)
     if can_move?(syntax, src_piece_color)
       move!(syntax, src_piece_color)
+    elsif can_capture_en_passant?(syntax, src_piece_color)
+      capture_en_passant!(syntax, src_piece_color)
     elsif can_capture?(syntax, src_piece_color)
       capture!(syntax, src_piece_color)
     elsif can_promote?(syntax, src_piece_color)
@@ -106,6 +109,12 @@ class ChessMoveRunner
   def is_valid_capture_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]x[a-h][1-8]$/)
+  end
+
+  # TODO - to test
+  def is_valid_capture_en_passant_syntax?(syntax)
+    return false if syntax.class != String
+    syntax.match?(/^[a-h](4x[a-h]3|5x[a-h]6)(\se\.p\.)?$/)
   end
 
   def is_valid_promote_syntax?(syntax)
@@ -182,6 +191,23 @@ class ChessMoveRunner
   # is an alias for `ChessMoveRunner#move_syntax_to_hash`
   def capture_syntax_to_hash(syntax, src_piece_color = turn_color)
     move_syntax_to_hash(syntax, src_piece_color)
+  end
+
+  # TODO - to test
+  # assumes syntax is valid
+  def capture_en_passant_syntax_to_hash(syntax, src_piece_color = turn_color)
+    src_coords = COORDS_REGEX.match(syntax)[0]
+    dst_coords = COORDS_REGEX.match(syntax, 2)[0]
+    captive_cell = coords_to_matrix_cell(dst_coords)
+    captive_cell = src_piece_color == :white ?
+      self.class.down_adjacent_cell(captive_cell) :
+      self.class.up_adjacent_cell(captive_cell)
+    res = {
+      src_piece_color: src_piece_color,
+      src_cell: coords_to_matrix_cell(src_coords),
+      dst_cell: coords_to_matrix_cell(dst_coords),
+      captive_cell: captive_cell
+    }
   end
 
   # assumes syntax is valid
@@ -447,12 +473,91 @@ class ChessMoveRunner
   end
 
   # TODO - to test
-  def can_capture_en_passant?
-    # TODO
+  def is_move_pawn_double_step?(
+    syntax, src_piece_color = turn_color, board = @game.board
+  )
+    return false unless is_valid_move_syntax?(syntax)
+    return false unless board
+
+    data = move_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_type:, src_piece_color:, src_cell:, dst_cell:
+    }
+    args = {
+      piece_type: :pawn,
+      piece_color: src_piece_color,
+      cell: src_cell
+    }
+    return false unless is_matching_piece?(args)
+    return false if should_promote?(src_cell)
+
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    pawn = self.class.pieces(board, filters)[0]
+    return false unless pawn[:piece].moves(src_cell, board).include?(dst_cell)
+
+    self.class.count_col_cells_amid_two_cells(src_cell, dst_cell) == 1
   end
 
   # TODO - to test
-  def capture_en_passant!
-    # TODO
+  def can_capture_en_passant?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_capture_en_passant_syntax?(syntax)
+    return false unless @game
+
+    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_color:, src_cell:, dst_cell:, captive_cell:
+    }
+
+    args = {
+      piece_type: :pawn,
+      piece_color: src_piece_color,
+      cell: src_cell
+    }
+    return false unless is_matching_piece?(args)
+
+    src_row, src_col = src_cell
+    capturer_filters = { row: src_row, col: src_col }
+    capturer_pawn = self.class.pieces(@game.board, capturer_filters)[0]
+
+    capturer_pawn[:piece].captures(src_cell, @game.board).include?(dst_cell)
+  end
+
+  # TODO - to test
+  def capture_en_passant!(syntax, src_piece_color = turn_color)
+    return unless can_capture_en_passant?(syntax, src_piece_color)
+
+    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_color:, src_cell:, dst_cell:, captive_cell:
+    }
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    capturer_piece = self.class.pieces(@game.board, filters)[0]
+
+    # update boolean flags on the piece as needed
+    if capturer_piece[:piece].respond_to?(:did_move?)
+      capturer_piece[:piece].moved!
+    end
+
+    # modify the board state
+    @game.board = capturer_piece[:piece].capture(
+      src_cell, dst_cell, @game.board
+    )
+  end
+
+  # TODO - to test
+  def set_pawns_non_capturable_en_passant!(current_turn_color = turn_color)
+    prev_turn_color = current_turn_color == :white ? :black : :white
+    enemy_pawns_filter = {
+      color: prev_turn_color,
+      type: :pawn,
+      row: current_turn_color == :white ? 3 : 4,
+    }
+    pawns = self.class.pieces(@game.board, enemy_pawns_filters)
+    return if pawns.size == 0
+    pawns.each do |pawn|
+      pawn[:piece].set_is_capturable_en_passant(false)
+    end
   end
 end
