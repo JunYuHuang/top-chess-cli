@@ -1122,10 +1122,10 @@ describe ChessMoveRunner do
     end
   end
 
-  describe "#must_promote?" do
+  describe "#should_promote?" do
     it "returns false if called with anything on a ChessMoveRunner object that has a null game object property" do
       chess_move_runner = ChessMoveRunner.new(nil)
-      res = chess_move_runner.must_promote?(nil)
+      res = chess_move_runner.should_promote?(nil)
       expect(res).to eql(false)
     end
 
@@ -1133,7 +1133,7 @@ describe ChessMoveRunner do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([0,-1])
+      res = chess_move_runner.should_promote?([0,-1])
       expect(res).to eql(false)
     end
 
@@ -1153,7 +1153,7 @@ describe ChessMoveRunner do
       }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([1,7])
+      res = chess_move_runner.should_promote?([1,7])
       expect(res).to eql(false)
     end
 
@@ -1173,7 +1173,7 @@ describe ChessMoveRunner do
       }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([0,7])
+      res = chess_move_runner.should_promote?([0,7])
       expect(res).to eql(false)
     end
 
@@ -1193,7 +1193,7 @@ describe ChessMoveRunner do
       }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([5,2])
+      res = chess_move_runner.should_promote?([5,2])
       expect(res).to eql(false)
     end
 
@@ -1213,7 +1213,7 @@ describe ChessMoveRunner do
       }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([1,7])
+      res = chess_move_runner.should_promote?([1,7])
       expect(res).to eql(true)
     end
 
@@ -1233,7 +1233,7 @@ describe ChessMoveRunner do
       }
       game = Game.new(options)
       chess_move_runner = ChessMoveRunner.new(game)
-      res = chess_move_runner.must_promote?([6,2])
+      res = chess_move_runner.should_promote?([6,2])
       expect(res).to eql(true)
     end
   end

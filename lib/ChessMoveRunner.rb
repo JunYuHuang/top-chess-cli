@@ -216,7 +216,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false if must_promote?(src_cell)
+    return false if should_promote?(src_cell)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
@@ -285,7 +285,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false if must_promote?(src_cell)
+    return false if should_promote?(src_cell)
 
     capturee_piece = res[0]
     return false if self.class.is_ally_piece_cell?(src_cell, dst_cell, @game.board)
@@ -322,7 +322,7 @@ class ChessMoveRunner
     )
   end
 
-  def must_promote?(src_cell)
+  def should_promote?(src_cell)
     return false unless @game
     return false unless self.class.is_inbound_cell?(src_cell)
 
@@ -351,7 +351,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false unless must_promote?(src_cell)
+    return false unless should_promote?(src_cell)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
