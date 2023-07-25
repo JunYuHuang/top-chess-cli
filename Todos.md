@@ -434,7 +434,7 @@ Complete the tests for the following:
 - [x] `#can_move?` method
 - [x] `#move!` method
 - [x] `#can_capture?` method
-- [ ] `#capture!` method
+- [x] `#capture!` method
 - [x] `#must_promote?` method
 - [x] `#can_promote?` method
 - [x] `#promote!` method

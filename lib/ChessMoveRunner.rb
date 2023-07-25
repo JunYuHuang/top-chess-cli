@@ -267,7 +267,6 @@ class ChessMoveRunner
     @game.board = self.class.move(args)
   end
 
-  # TODO - to test
   # Note that this only handles normal, non-en-passant captures.
   # En-passant captures are checked in a separate method.
   def can_capture?(syntax, src_piece_color = turn_color)
@@ -305,7 +304,6 @@ class ChessMoveRunner
     capturer_piece[:piece].captures(src_cell, @game.board).include?(dst_cell)
   end
 
-  # TODO - to test
   # Note that this only handles normal, non-en-passant captures.
   # En-passant captures are execute in a separate method.
   def capture!(syntax, src_piece_color = turn_color)
@@ -324,21 +322,10 @@ class ChessMoveRunner
       capturer_piece[:piece].moved!
     end
 
-    # TODO - If the capturer piece is a pawn and the capture is an
-    # en-passant capture - `dst_cell` is empty but its adjacent top cell
-    # (if capturer is a black pawn) or its adjacent bottom cell (if
-    # capturer is a white pawn) is the to-be-captured enemy pawn -
-    # set the enemy capturee pawn's cell to null in the new board.
-
     # modify the board state
-    args = {
-      piece_obj: capturer_piece[:piece],
-      src_cell: src_cell,
-      dst_cell: dst_cell,
-      board: @game.board,
-      en_passant_cap_cell: nil # TODO
-    }
-    @game.board = self.class.capture(args)
+    @game.board = capturer_piece[:piece].capture(
+      src_cell, dst_cell, @game.board
+    )
   end
 
   def must_promote?(src_cell)
