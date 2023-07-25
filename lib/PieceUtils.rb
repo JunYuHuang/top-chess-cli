@@ -188,6 +188,26 @@ module PieceUtils
     return board[src_row][src_col].color == piece_color
   end
 
+  # TODO - to test
+  # Is a modified version of `ChessMoveRunner#is_matching_piece?`
+  def is_matching_piece?(args)
+    return false if args.class != Hash
+
+    board = args.fetch(:board, nil)
+    piece_type = args.fetch(:piece_type, nil)
+    piece_color = args.fetch(:piece_color, nil)
+    cell = args.fetch(:cell, nil)
+    return false if board.nil? or piece_type.nil? or piece_color.nil? or cell.nil?
+
+    row, col = cell
+    real_piece = board[row][col]
+    return false if is_empty_cell?(cell, board)
+    return false if real_piece.color != piece_color
+    return false if real_piece.type != piece_type
+
+    true
+  end
+
   def pieces(board, filters)
     res = []
 
@@ -262,16 +282,18 @@ module PieceUtils
     src_row == row
   end
 
-  def is_left_adjacent?(src_cell, dst_cell)
-    src_row, src_col = src_cell
-    dst_row, dst_col = dst_cell
-    dst_col == src_col - 1
+  def is_left_adjacent?(origin_cell, target_cell)
+    origin_row, origin_col = origin_cell
+    target_row, target_col = target_cell
+    return false if origin_row != target_row
+    target_col == origin_col - 1
   end
 
-  def is_right_adjacent?(src_cell, dst_cell)
-    src_row, src_col = src_cell
-    dst_row, dst_col = dst_cell
-    dst_col == src_col + 1
+  def is_right_adjacent?(origin_cell, target_cell)
+    origin_row, origin_col = origin_cell
+    target_row, target_col = target_cell
+    return false if origin_row != target_row
+    target_col == origin_col + 1
   end
 
   def up_adjacent_cell(src_cell)

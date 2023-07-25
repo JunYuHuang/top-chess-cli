@@ -65,40 +65,52 @@ class PawnPiece < Piece
     src_cell = args.fetch(:src_cell, nil)
     dst_cell = args.fetch(:dst_cell, nil)
     board = args.fetch(:board, nil)
-    # captive_cell =
     return false if src_cell.nil? or dst_cell.nil? or board.nil?
     return false unless self.class.is_inbound_cell?(src_cell)
-    return false unless self.class.is_inbound_cell?(captive_cell)
+    return false unless self.class.is_inbound_cell?(dst_cell)
     return false if self.class.is_empty_cell?(src_cell, board)
-    return false unless self.class.is_empty_cell?(captive_cell, board)
-    return false unless self.class.is_valid_piece_color?(@color)
-    return false unless self.class.is_enemy_piece_cell?(src_cell, captive_cell, board)
-    return false unless self.class.is_piece_type?(src_cell, board, :pawn)
-    return false unless self.class.is_piece_color?(src_cell, board, @color)
-    return false unless self.class.is_piece_type?(captive_cell, board, :pawn)
+    return false unless self.class.is_empty_cell?(dst_cell, board)
+    # TODO - (optional) check if dst_cell is directly adjacent to src_cell
+    # in the negative or positive diagonal
 
-    cap_row, cap_col = captive_cell
-    return false unless self.class.in_row?(src_cell, cap_row)
-    return false unless block_given?
+    capturer_args = { piece_type: :pawn, piece_color: @color, cell: src_cell }
+    return false unless self.class.is_matching_piece?(capturer_args)
+    return false if @color == :white && !self.class.in_row?(src_cell, 3)
+    return false if @color == :black && !self.class.in_row?(src_cell, 4)
 
-    @color == :white ?
-      can_white_capture_en_passant?(args, &is_proper_last_move) :
-      can_black_capture_en_passant?(args, &is_proper_last_move)
+    captive_cell = @color == :white ?
+      self.class.down_adjacent_cell(dst_cell) :
+      self.class.up_adjacent_cell(dst_cell)
+    return false unless self.class.is_inbound_cell?(captive_cell)
+
+    captive_args = {
+      piece_type: :pawn,
+      piece_color: @color == :white ? :black : :white,
+      cell: captive_cell
+    }
+    return false unless self.class.is_matching_piece?(captive_args)
+
+    return false unless (
+      self.class.is_left_adjacent(src_cell, captive_cell) or
+      self.class.is_right_adjacent(src_cell, captive_cell)
+    )
+
+    captive_row, captive_col = captive_cell
+    capturee_filter = { row: captive_row, col: captive_col }
+    capturee_pawn = self.class.pieces(board, capturee_filter)[0]
+    return false unless capturee_pawn[:piece].did_double_step?
+
+    capturee_pawn[:piece].is_capturable_en_passant?
   end
 
   # TODO - to rework and retest
-  # returns dest. cell (not captive pawn cell) of pawn capturer
-  def capture_en_passant(args, &is_proper_last_move)
+  def capture_en_passant(args)
     src_cell = args.fetch(:src_cell, nil)
-    captive_cell = args.fetch(:captive_cell, nil)
+    dst_cell = args.fetch(:dst_cell, nil)
     board = args.fetch(:board, nil)
-    return if src_cell.nil? or captive_cell.nil? or board.nil?
-    return unless self.class.is_valid_piece_color?(@color)
-    return unless can_capture_en_passant?(args, &is_proper_last_move)
+    return unless can_capture_en_passant?(args)
 
-    @color == :white ?
-      white_capture_en_passant(args, &is_proper_last_move) :
-      black_capture_en_passant(args, &is_proper_last_move)
+    capture(src_cell, dst_cell, board)
   end
 
   def did_move?
@@ -181,120 +193,126 @@ class PawnPiece < Piece
     self.class.down_moves(src_cell, board, options)
   end
 
+  # TODO - to rework (include en-passant captures) and retest
   def white_captures(src_cell, board)
     res = [
       self.class.up_left_capture(src_cell, board, @@one_step),
       self.class.up_right_capture(src_cell, board, @@one_step),
     ]
+    # TODO - add en-passant left and right capture cells to
+    # `res` if they apply
     res.filter { |cell| !cell.nil? }
   end
 
+  # TODO - to rework (include en-passant captures) and retest
   def black_captures(src_cell, board)
     res = [
       self.class.down_left_capture(src_cell, board, @@one_step),
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
+    # TODO - add en-passant left and right capture cells to
+    # `res` if they apply
     res.filter { |cell| !cell.nil? }
   end
 
-  def can_white_capture_en_passant_left?(args, &is_proper_last_move)
-    args => { src_cell:, captive_cell:, board: }
+  # def can_white_capture_en_passant_left?(args, &is_proper_last_move)
+  #   args => { src_cell:, captive_cell:, board: }
 
-    return false unless self.class.in_row?(src_cell, 3)
-    return false unless self.class.in_row?(captive_cell, 3)
-    return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
+  #   return false unless self.class.in_row?(src_cell, 3)
+  #   return false unless self.class.in_row?(captive_cell, 3)
+  #   return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
 
-    cap_row, cap_col = captive_cell
-    top_adjacent = [cap_row - 1, cap_col]
-    return false unless self.class.is_empty_cell?(top_adjacent, board)
+  #   cap_row, cap_col = captive_cell
+  #   top_adjacent = [cap_row - 1, cap_col]
+  #   return false unless self.class.is_empty_cell?(top_adjacent, board)
 
-    enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
-    return false unless enemy_pawn[:piece].did_double_step?
+  #   enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
+  #   return false unless enemy_pawn[:piece].did_double_step?
 
-    return false unless is_proper_last_move.call(args)
+  #   return false unless is_proper_last_move.call(args)
 
-    true
-  end
+  #   true
+  # end
 
-  def can_black_capture_en_passant_left?(args, &is_proper_last_move)
-    args => { src_cell:, captive_cell:, board: }
+  # def can_black_capture_en_passant_left?(args, &is_proper_last_move)
+  #   args => { src_cell:, captive_cell:, board: }
 
-    return false unless self.class.in_row?(src_cell, 4)
-    return false unless self.class.in_row?(captive_cell, 4)
-    return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
+  #   return false unless self.class.in_row?(src_cell, 4)
+  #   return false unless self.class.in_row?(captive_cell, 4)
+  #   return false unless self.class.is_left_adjacent?(src_cell, captive_cell)
 
-    cap_row, cap_col = captive_cell
-    bot_adjacent = [cap_row + 1, cap_col]
-    return false unless self.class.is_empty_cell?(bot_adjacent, board)
+  #   cap_row, cap_col = captive_cell
+  #   bot_adjacent = [cap_row + 1, cap_col]
+  #   return false unless self.class.is_empty_cell?(bot_adjacent, board)
 
-    enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
-    return false unless enemy_pawn[:piece].did_double_step?
+  #   enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
+  #   return false unless enemy_pawn[:piece].did_double_step?
 
-    return false unless is_proper_last_move.call(args)
+  #   return false unless is_proper_last_move.call(args)
 
-    true
-  end
+  #   true
+  # end
 
-  def can_white_capture_en_passant_right?(args, &is_proper_last_move)
-    args => { src_cell:, captive_cell:, board: }
+  # def can_white_capture_en_passant_right?(args, &is_proper_last_move)
+  #   args => { src_cell:, captive_cell:, board: }
 
-    return false unless self.class.in_row?(src_cell, 3)
-    return false unless self.class.in_row?(captive_cell, 3)
-    return false unless self.class.is_right_adjacent?(src_cell, captive_cell)
+  #   return false unless self.class.in_row?(src_cell, 3)
+  #   return false unless self.class.in_row?(captive_cell, 3)
+  #   return false unless self.class.is_right_adjacent?(src_cell, captive_cell)
 
-    cap_row, cap_col = captive_cell
-    top_adjacent = [cap_row - 1, cap_col]
-    return false unless self.class.is_empty_cell?(top_adjacent, board)
+  #   cap_row, cap_col = captive_cell
+  #   top_adjacent = [cap_row - 1, cap_col]
+  #   return false unless self.class.is_empty_cell?(top_adjacent, board)
 
-    enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
-    return false unless enemy_pawn[:piece].did_double_step?
+  #   enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
+  #   return false unless enemy_pawn[:piece].did_double_step?
 
-    return false unless is_proper_last_move.call(args)
+  #   return false unless is_proper_last_move.call(args)
 
-    true
-  end
+  #   true
+  # end
 
-  def can_black_capture_en_passant_right?(args, &is_proper_last_move)
-    args => { src_cell:, captive_cell:, board: }
+  # def can_black_capture_en_passant_right?(args, &is_proper_last_move)
+  #   args => { src_cell:, captive_cell:, board: }
 
-    return false unless self.class.in_row?(src_cell, 4)
-    return false unless self.class.in_row?(captive_cell, 4)
-    return false unless self.class.is_right_adjacent?(src_cell, captive_cell)
+  #   return false unless self.class.in_row?(src_cell, 4)
+  #   return false unless self.class.in_row?(captive_cell, 4)
+  #   return false unless self.class.is_right_adjacent?(src_cell, captive_cell)
 
-    cap_row, cap_col = captive_cell
-    bot_adjacent = [cap_row + 1, cap_col]
-    return false unless self.class.is_empty_cell?(bot_adjacent, board)
+  #   cap_row, cap_col = captive_cell
+  #   bot_adjacent = [cap_row + 1, cap_col]
+  #   return false unless self.class.is_empty_cell?(bot_adjacent, board)
 
-    enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
-    return false unless enemy_pawn[:piece].did_double_step?
+  #   enemy_pawn = self.class.pieces(board, { row: cap_row, col: cap_col })[0]
+  #   return false unless enemy_pawn[:piece].did_double_step?
 
-    return false unless is_proper_last_move.call(args)
+  #   return false unless is_proper_last_move.call(args)
 
-    true
-  end
+  #   true
+  # end
 
-  def can_white_capture_en_passant?(args, &is_proper_last_move)
-    return true if can_white_capture_en_passant_left?(args, &is_proper_last_move)
-    return true if can_white_capture_en_passant_right?(args, &is_proper_last_move)
-    false
-  end
+  # def can_white_capture_en_passant?(args, &is_proper_last_move)
+  #   return true if can_white_capture_en_passant_left?(args, &is_proper_last_move)
+  #   return true if can_white_capture_en_passant_right?(args, &is_proper_last_move)
+  #   false
+  # end
 
-  def can_black_capture_en_passant?(args, &is_proper_last_move)
-    return true if can_black_capture_en_passant_left?(args, &is_proper_last_move)
-    return true if can_black_capture_en_passant_right?(args, &is_proper_last_move)
-    false
-  end
+  # def can_black_capture_en_passant?(args, &is_proper_last_move)
+  #   return true if can_black_capture_en_passant_left?(args, &is_proper_last_move)
+  #   return true if can_black_capture_en_passant_right?(args, &is_proper_last_move)
+  #   false
+  # end
 
-  def white_capture_en_passant(args, &is_proper_last_move)
-    can_capture = can_white_capture_en_passant?(args, &is_proper_last_move)
-    captive_cell = args.fetch(:captive_cell, nil)
-    can_capture ? self.class.up_adjacent_cell(captive_cell) : nil
-  end
+  # def white_capture_en_passant(args, &is_proper_last_move)
+  #   can_capture = can_white_capture_en_passant?(args, &is_proper_last_move)
+  #   captive_cell = args.fetch(:captive_cell, nil)
+  #   can_capture ? self.class.up_adjacent_cell(captive_cell) : nil
+  # end
 
-  def black_capture_en_passant(args, &is_proper_last_move)
-    can_capture = can_black_capture_en_passant?(args, &is_proper_last_move)
-    captive_cell = args.fetch(:captive_cell, nil)
-    can_capture ? self.class.down_adjacent_cell(captive_cell) : nil
-  end
+  # def black_capture_en_passant(args, &is_proper_last_move)
+  #   can_capture = can_black_capture_en_passant?(args, &is_proper_last_move)
+  #   captive_cell = args.fetch(:captive_cell, nil)
+  #   can_capture ? self.class.down_adjacent_cell(captive_cell) : nil
+  # end
 end
 

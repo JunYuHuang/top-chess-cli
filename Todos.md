@@ -90,6 +90,7 @@ Complete the following:
 - [x] `#board_to_s` method
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
+- [x] `#is_matching_piece?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#up_moves` method
@@ -126,6 +127,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#board_to_s` method
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
+- [ ] `#is_matching_piece?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#up_moves` method
@@ -243,8 +245,8 @@ Complete the following:
 - [ ] `#captures` method
 - [x] `#is_capturable_en_passant?` method
 - [x] `#set_is_capturable_en_passant!` method
-- [ ] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant` method
+- [x] `#can_capture_en_passant?` method
+- [x] `#capture_en_passant` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_double_step?` method
