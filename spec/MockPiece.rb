@@ -119,6 +119,7 @@ class MockPiece < Piece
     res.filter { |cell| !cell.nil? }
   end
 
+  # Excludes mocked en-passant captures (cells)
   def pawn_captures(src_cell, board)
     return [] unless self.class.is_valid_piece_color?(@color)
     @color == :white ?

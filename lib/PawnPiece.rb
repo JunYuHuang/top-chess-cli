@@ -7,12 +7,11 @@ class PawnPiece < Piece
   DEFAULT_OPTIONS = {
     color: :white,
     did_move: false,
-    did_double_step: false
+    is_capturable_en_passant: false
   }
 
   attr_accessor(
-    :did_move, :did_double_step,
-    :is_capturable_en_passant, :one_step, :two_steps
+    :did_move, :is_capturable_en_passant, :one_step, :two_steps
   )
 
   @@one_step = { max_steps: 1 }
@@ -24,12 +23,10 @@ class PawnPiece < Piece
       color: options.fetch(:color, DEFAULT_OPTIONS[:color]),
       type: :pawn,
       is_capturable: true,
-      is_capturable_en_passant: false
     }
 
     super(passed_options)
     @did_move = options.fetch(:did_move, DEFAULT_OPTIONS[:did_move])
-    @did_double_step = options.fetch(:did_double_step, DEFAULT_OPTIONS[:did_double_step])
     @is_capturable_en_passant = options.fetch(
       :is_capturable_en_passant,
       DEFAULT_OPTIONS[:is_capturable_en_passant]
@@ -61,9 +58,9 @@ class PawnPiece < Piece
     @is_capturable_en_passant
   end
 
-  def set_is_capturable_en_passant!(bool = false)
-    return if bool == @is_capturable_en_passant
-    @is_capturable_en_passant = bool
+  def set_is_capturable_en_passant!(bool_value = false)
+    return if bool_value == @is_capturable_en_passant
+    @is_capturable_en_passant = bool_value
   end
 
   def can_capture_en_passant?(args)
@@ -101,7 +98,6 @@ class PawnPiece < Piece
     captive_row, captive_col = captive_cell
     capturee_filter = { row: captive_row, col: captive_col }
     capturee_pawn = self.class.pieces(board, capturee_filter)[0]
-    return false unless capturee_pawn[:piece].did_double_step?
 
     capturee_pawn[:piece].is_capturable_en_passant?
   end
@@ -119,15 +115,6 @@ class PawnPiece < Piece
     return false unless moves(src_cell, board).include?(dst_cell)
     cells = [src_cell, dst_cell]
     self.class.count_col_cells_amid_two_cells(*cells) == 1
-  end
-
-  def did_double_step?
-    @did_double_step
-  end
-
-  def double_stepped!
-    return if @did_double_step
-    @did_double_step = true
   end
 
   def is_promotable?(src_cell, board)

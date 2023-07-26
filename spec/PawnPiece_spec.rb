@@ -1,6 +1,5 @@
 require './lib/PawnPiece'
 require './spec/MockPiece'
-require './spec/PieceUtilsClass'
 
 describe PawnPiece do
   describe "#initialize" do
@@ -13,7 +12,7 @@ describe PawnPiece do
       pawn = PawnPiece.new
       expect(pawn.color).to eql(:white)
       expect(pawn.did_move?).to eql(false)
-      expect(pawn.did_double_step?).to eql(false)
+      expect(pawn.is_capturable_en_passant?).to eql(false)
     end
   end
 
@@ -196,7 +195,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -214,7 +213,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -232,7 +231,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -250,7 +249,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
       white_pawn = PawnPiece.new({
-        color: :white, did_double_step: true,
+        color: :white,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -268,7 +267,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
       white_pawn = PawnPiece.new({
-        color: :white, did_double_step: true,
+        color: :white,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -286,7 +285,7 @@ describe PawnPiece do
 
     it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
       white_pawn = PawnPiece.new({
-        color: :white, did_double_step: true,
+        color: :white,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -513,26 +512,9 @@ describe PawnPiece do
       expect(res).to eql(false)
     end
 
-    it "returns false if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is  directly left or right adjacent to the cell of the white pawn it is called on but is occupied by an enemy pawn that did not double step" do
+    it "returns false if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is  directly left or right adjacent to the cell of the white pawn it is called on but is occupied by an enemy pawn is not marked as capturable en-passant" do
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: false
-      })
-      white_pawn = PawnPiece.new({ color: :white })
-      board = Array.new(8) { Array.new(8, nil) }
-      board[3][4] = black_pawn
-      board[3][5] = white_pawn
-      args = {
-        src_cell: [3,5],
-        dst_cell: [2,4],
-        board: board
-      }
-      res = white_pawn.can_capture_en_passant?(args)
-      expect(res).to eql(false)
-    end
-
-    it "returns false if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is  directly left or right adjacent to the cell of the white pawn it is called on but is occupied by an enemy pawn that double stepped but is not marked as capturable en-passant" do
-      black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: false
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -548,10 +530,9 @@ describe PawnPiece do
       expect(res).to eql(false)
     end
 
-    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the white pawn it is called on and is occupied by an enemy pawn that double stepped and is marked as capturable en-passant" do
+    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the white pawn it is called on and is occupied by an enemy pawn that is marked as capturable en-passant" do
       black_pawn = PawnPiece.new({
         color: :black,
-        did_double_step: true,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -567,10 +548,9 @@ describe PawnPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the white pawn it is called on and is occupied by an enemy pawn that double stepped and is marked as capturable en-passant" do
+    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the white pawn it is called on and is occupied by an enemy pawn that is marked as capturable en-passant" do
       black_pawn = PawnPiece.new({
         color: :black,
-        did_double_step: true,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -586,10 +566,9 @@ describe PawnPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the black pawn it is called on and is occupied by an enemy pawn that double stepped and is marked as capturable en-passant" do
+    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the black pawn it is called on and is occupied by an enemy pawn that is marked as capturable en-passant" do
       white_pawn = PawnPiece.new({
         color: :white,
-        did_double_step: true,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -605,10 +584,9 @@ describe PawnPiece do
       expect(res).to eql(true)
     end
 
-    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the black pawn it is called on and is occupied by an enemy pawn that double stepped and is marked as capturable en-passant" do
+    it "returns true if called with a valid arg hash whose dst_cell results in a calculated captive_cell that is directly left or right adjacent to the cell of the black pawn it is called on and is occupied by an enemy pawn that is marked as capturable en-passant" do
       white_pawn = PawnPiece.new({
         color: :white,
-        did_double_step: true,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -708,7 +686,7 @@ describe PawnPiece do
     it "returns the correct board if called with all valid arguments for an en-passant capture on a white pawn " do
       board = Array.new(8) { Array.new(8, nil) }
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -723,7 +701,7 @@ describe PawnPiece do
     it "returns the correct board if called with all valid arguments for an en-passant capture on a white pawn " do
       board = Array.new(8) { Array.new(8, nil) }
       black_pawn = PawnPiece.new({
-        color: :black, did_double_step: true,
+        color: :black,
         is_capturable_en_passant: true
       })
       white_pawn = PawnPiece.new({ color: :white })
@@ -738,7 +716,7 @@ describe PawnPiece do
     it "returns the correct board if called with all valid arguments for an en-passant capture on a black pawn " do
       board = Array.new(8) { Array.new(8, nil) }
       white_pawn = PawnPiece.new({
-        color: :white, did_double_step: true,
+        color: :white,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })
@@ -753,7 +731,7 @@ describe PawnPiece do
     it "returns the correct board if called with all valid arguments for an en-passant capture on a black pawn " do
       board = Array.new(8) { Array.new(8, nil) }
       white_pawn = PawnPiece.new({
-        color: :white, did_double_step: true,
+        color: :white,
         is_capturable_en_passant: true
       })
       black_pawn = PawnPiece.new({ color: :black })

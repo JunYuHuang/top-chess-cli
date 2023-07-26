@@ -38,8 +38,7 @@ Complete the following:
 - [x] Add `queenside_castle` method to `RookPiece` class
 - [x] Add `kingside_castle` method to `RookPiece` class
 - [ ] Rename `PieceUtils` module to `ChessUtils`
-- [ ] Rework `PawnPiece#capture_en_passant` method to return a new chess board matrix of `Piece` subclass objects given only the `src_cell`, `dst_cell` (not the cell of the to-be-captured enemy pawn), and `board`
-- [ ] Rework `PawnPiece#can_capture_en_passant?` method to depend on the to-be-captured enemy pawn's `@is_capturable_en_passant` instance boolean flag variable instead of taking a block callback method parameter and take the empty target destination cell (not the cell of the to-be-captured enemy pawn) instead of the captive cell as part of its arguments
+- [x] Remove `PawnPiece`'s `@did_double_step` instance variable, its affected methods, and updated all other classes that reference it to not use it or depend on `@is_capturable_en_passant` instead
 
 ## `Player` class
 
@@ -251,8 +250,6 @@ Complete the following:
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_double_step?` method
-- [x] `#did_double_step?` method
-- [x] `#double_stepped!` method
 - [x] `#is_promotable?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
@@ -355,8 +352,7 @@ Complete the following:
 - [ ] `#use_game_saves` method
 - [ ] `#add_captured_piece!` method
 - [x] `#is_valid_piece?` method (private)
-- [x] `#has_valid_did_move?` method (private)
-- [x] `#has_valid_did_double_step?` method (private)
+- [x] `#is_bool_key?` method (private)
 
 Complete the tests for the following:
 

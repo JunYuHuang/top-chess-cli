@@ -443,7 +443,7 @@ describe Game do
       expect(res).to eql(false)
     end
 
-    it "returns false if called with a hash array that has a piece hash that represents a black pawn whose `:did_double_step` value is nil" do
+    it "returns false if called with a hash array that has a piece hash that represents a black pawn whose `:is_capturable_en_passant` value is nil" do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
       pieces = [
@@ -453,7 +453,7 @@ describe Game do
           type: :pawn,
           is_capturable: true,
           did_move: false,
-          did_double_step: nil
+          is_capturable_en_passant: nil
         }
       ]
       res = game.are_valid_pieces?(pieces)

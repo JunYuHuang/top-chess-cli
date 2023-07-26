@@ -1,7 +1,6 @@
 require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
-require './spec/PieceUtilsClass'
 
 describe ChessMoveRunner do
   describe "#initialize" do
@@ -801,7 +800,7 @@ describe ChessMoveRunner do
       expect(white_pawn.color).to eql(:white)
       expect(white_pawn.type).to eql(:pawn)
       expect(white_pawn.did_move?).to eql(true)
-      expect(white_pawn.did_double_step?).to eql(false)
+      expect(white_pawn.is_capturable_en_passant?).to eql(false)
     end
 
     it "correctly modifies the game board if called with ('a2-a4', :white) on a valid game with the default starting board" do
@@ -815,7 +814,7 @@ describe ChessMoveRunner do
       expect(white_pawn.color).to eql(:white)
       expect(white_pawn.type).to eql(:pawn)
       expect(white_pawn.did_move?).to eql(true)
-      expect(white_pawn.did_double_step?).to eql(true)
+      expect(white_pawn.is_capturable_en_passant?).to eql(true)
     end
 
     it "correctly modifies the game board if called with ('Rh1h5', :white) on a valid game with a custom board that only has the white rook that did not move before" do

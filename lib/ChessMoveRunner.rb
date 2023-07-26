@@ -264,19 +264,19 @@ class ChessMoveRunner
     # update boolean flags on the piece as needed
 
     # Note that for the pawn piece which is the only piece with the
-    # `@did_double_step` instance property, this flag must be checked and
-    # possibly modified BEFORE checking and possibly modifying the pawn's
-    # `@did_move`instance property due to how the
+    # `@is_capturable_en_passant` instance property, this flag must be
+    # checked and possibly modified BEFORE checking and possibly
+    # modifying the pawn's `@did_move`instance property due to how the
     # `PawnPiece#is_double_step?` method works; If the pawn piece moved
     # already, then it can no longer double step (forward). This means
     # that even if the pawn did not move yet and double stepped in this
-    # (chess) move / turn, its `@did_double_step` instance boolean
-    # variable will NOT be correctly set to `true` but instead remain as
-    # `false`.
-    if piece[:piece].respond_to?(:did_double_step?)
+    # (chess) move / turn, its `@is_capturable_en_passant` instance
+    # boolean variable will NOT be correctly set to `true` but instead
+    # remain as `false`.
+    if piece[:piece].respond_to?(:is_capturable_en_passant?)
       args = [src_cell, dst_cell, @game.board]
       is_double_step = piece[:piece].is_double_step?(*args)
-      piece[:piece].double_stepped! if is_double_step
+      piece[:piece].set_is_capturable_en_passant!(true) if is_double_step
     end
 
     if piece[:piece].respond_to?(:did_move?)

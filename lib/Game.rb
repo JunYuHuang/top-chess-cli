@@ -146,10 +146,15 @@ class Game
     pieces.each do |piece|
       return false unless is_valid_piece?(piece)
       next if basic_piece_types.include?(piece[:type])
-      return false if piece[:type] == :rook && !has_valid_did_move?(piece)
-      return false if piece[:type] == :king && !has_valid_did_move?(piece)
+      return false if (
+        piece[:type] == :rook && !is_bool_key?(piece, :did_move)
+      )
+      return false if (
+        piece[:type] == :king && !is_bool_key?(piece, :did_move)
+      )
       return false if piece[:type] == :pawn && (
-        !has_valid_did_move?(piece) || !has_valid_did_double_step?(piece)
+        !is_bool_key?(piece, :did_move) ||
+        !is_bool_key?(piece, :is_capturable_en_passant)
       )
     end
 
@@ -285,13 +290,8 @@ class Game
     true
   end
 
-  def has_valid_did_move?(piece_hash)
-    did_move = piece_hash.fetch(:did_move, false)
-    [true, false].include?(did_move)
-  end
-
-  def has_valid_did_double_step?(piece_hash)
-    did_double_step = piece_hash.fetch(:did_double_step, false)
-    [true, false].include?(did_double_step)
+  def is_bool_key?(hash, key)
+    key = hash.fetch(key, false)
+    [true, false].include?(key)
   end
 end
