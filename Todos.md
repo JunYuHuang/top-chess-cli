@@ -249,7 +249,7 @@ Complete the following:
 - [x] `#capture_en_passant` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
-- [x] `#is_double_step?` method
+- [x] `#is_double_step_forward?` method
 - [x] `#is_promotable?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
@@ -269,7 +269,7 @@ Complete the tests for the following:
 - [x] `#captures_en_passant`
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant` method
-- [x] `#is_double_step?` method
+- [x] `#is_double_step_forward?` method
 - [x] `#is_promotable?` method
 - [x] `#move` method
 - [x] `#capture` method

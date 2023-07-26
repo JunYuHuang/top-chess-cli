@@ -302,14 +302,14 @@ describe PawnPiece do
     end
   end
 
-  describe "#is_double_step?" do
+  describe "#is_double_step_forward?" do
     it "returns false if called with ([6,0], [3,0]) and an otherwise empty board on a white pawn that has not moved yet" do
       white_pawn = PawnPiece.new({ color: :white })
       board = Array.new(8) { Array.new(8, nil) }
       board[6][0] = white_pawn
 
       args = [[6,0], [3,0], board]
-      res = white_pawn.is_double_step?(*args)
+      res = white_pawn.is_double_step_forward?(*args)
       expect(res).to eql(false)
     end
 
@@ -319,7 +319,7 @@ describe PawnPiece do
       board[6][0] = white_pawn
 
       args = [[6,0], [5,0], board]
-      res = white_pawn.is_double_step?(*args)
+      res = white_pawn.is_double_step_forward?(*args)
       expect(res).to eql(false)
     end
 
@@ -329,7 +329,7 @@ describe PawnPiece do
       board[6][0] = white_pawn
 
       args = [[6,0], [4,0], board]
-      res = white_pawn.is_double_step?(*args)
+      res = white_pawn.is_double_step_forward?(*args)
       expect(res).to eql(true)
     end
 
@@ -339,7 +339,7 @@ describe PawnPiece do
       board[1][3] = black_pawn
 
       args = [[1,3], [3,3], board]
-      res = black_pawn.is_double_step?(*args)
+      res = black_pawn.is_double_step_forward?(*args)
       expect(res).to eql(true)
     end
   end

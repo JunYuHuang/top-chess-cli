@@ -111,7 +111,7 @@ class PawnPiece < Piece
     @did_move = true
   end
 
-  def is_double_step?(src_cell, dst_cell, board)
+  def is_double_step_forward?(src_cell, dst_cell, board)
     return false unless moves(src_cell, board).include?(dst_cell)
     cells = [src_cell, dst_cell]
     self.class.count_col_cells_amid_two_cells(*cells) == 1
