@@ -242,11 +242,12 @@ Complete the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
+- [ ] `#captures_en_passant` method
 - [x] `#is_capturable_en_passant?` method
 - [x] `#set_is_capturable_en_passant!` method
 - [x] `#can_capture_en_passant?` method
-- [x] `#capture_en_passant` method
+- [ ] `#capture_en_passant` method
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_double_step?` method
@@ -259,18 +260,21 @@ Complete the following:
 - [x] `#white_captures` method (private)
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#captures_en_passant` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
-- [ ] `#captures` method
+- [x] `#captures` method
+- [ ] `#captures_en_passant`
 - [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
 - [x] `#is_double_step?` method
 - [x] `#is_promotable?` method
 - [x] `#move` method
 - [x] `#capture` method
+- [x] `#capture_en_passant` method
 
 ## `KingPiece` class (inherits from `Piece`)
 

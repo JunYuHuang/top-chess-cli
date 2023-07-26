@@ -43,7 +43,6 @@ class PawnPiece < Piece
       black_moves(src_cell, board)
   end
 
-  # TODO - to rework and retest to include en-passant target cells
   def captures(src_cell, board)
     return [] unless self.class.is_valid_piece_color?(@color)
     @color == :white ?
@@ -160,21 +159,28 @@ class PawnPiece < Piece
     self.class.move(args)
   end
 
+  # assumes capture is valid
   def capture(src_cell, dst_cell, board)
     args = {
       src_cell: src_cell, dst_cell: dst_cell,
       board: board, piece_obj: self,
-      en_passant_cap_cell: nil
     }
+    self.class.capture(args)
+  end
 
-    # indicates that it is an en-passant capture
-    # assumes last move was the correct enemy pawn double step for en-passant captures
-    if self.class.is_empty_cell?(dst_cell, board)
-      args[:en_passant_cap_cell] = @color == :white ?
-        self.class.down_adjacent_cell(dst_cell) :
-        self.class.up_adjacent_cell(dst_cell)
-    end
+  def capture_en_passant(src_cell, dst_cell, board)
+    return unless can_capture_en_passant?({
+      src_cell: src_cell, dst_cell: dst_cell, board: board
+    })
 
+    en_passant_capture_cell = @color == :white ?
+      self.class.down_adjacent_cell(dst_cell) :
+      self.class.up_adjacent_cell(dst_cell)
+    args = {
+      src_cell: src_cell, dst_cell: dst_cell,
+      board: board, piece_obj: self,
+      en_passant_cap_cell: en_passant_capture_cell
+    }
     self.class.capture(args)
   end
 

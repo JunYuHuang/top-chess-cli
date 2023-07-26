@@ -684,14 +684,19 @@ describe PawnPiece do
       expected[2][4] = white_pawn
       expect(res).to eql(expected)
     end
+  end
 
+  describe "#capture_en_passant" do
     it "returns the correct board if called with all valid arguments for an en-passant capture on a white pawn " do
       board = Array.new(8) { Array.new(8, nil) }
-      black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
+      black_pawn = PawnPiece.new({
+        color: :black, did_double_step: true,
+        is_capturable_en_passant: true
+      })
       white_pawn = PawnPiece.new({ color: :white })
       board[3][4] = black_pawn
       board[3][5] = white_pawn
-      res = white_pawn.capture([3,5], [2,4], board)
+      res = white_pawn.capture_en_passant([3,5], [2,4], board)
       expected = Array.new(8) { Array.new(8, nil) }
       expected[2][4] = white_pawn
       expect(res).to eql(expected)
@@ -699,11 +704,14 @@ describe PawnPiece do
 
     it "returns the correct board if called with all valid arguments for an en-passant capture on a white pawn " do
       board = Array.new(8) { Array.new(8, nil) }
-      black_pawn = PawnPiece.new({ color: :black, did_double_step: true })
+      black_pawn = PawnPiece.new({
+        color: :black, did_double_step: true,
+        is_capturable_en_passant: true
+      })
       white_pawn = PawnPiece.new({ color: :white })
       board[3][6] = black_pawn
       board[3][5] = white_pawn
-      res = white_pawn.capture([3,5], [2,6], board)
+      res = white_pawn.capture_en_passant([3,5], [2,6], board)
       expected = Array.new(8) { Array.new(8, nil) }
       expected[2][6] = white_pawn
       expect(res).to eql(expected)
@@ -711,11 +719,14 @@ describe PawnPiece do
 
     it "returns the correct board if called with all valid arguments for an en-passant capture on a black pawn " do
       board = Array.new(8) { Array.new(8, nil) }
-      white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
+      white_pawn = PawnPiece.new({
+        color: :white, did_double_step: true,
+        is_capturable_en_passant: true
+      })
       black_pawn = PawnPiece.new({ color: :black })
       board[4][1] = white_pawn
       board[4][2] = black_pawn
-      res = black_pawn.capture([4,2], [5,1], board)
+      res = black_pawn.capture_en_passant([4,2], [5,1], board)
       expected = Array.new(8) { Array.new(8, nil) }
       expected[5][1] = black_pawn
       expect(res).to eql(expected)
@@ -723,11 +734,14 @@ describe PawnPiece do
 
     it "returns the correct board if called with all valid arguments for an en-passant capture on a black pawn " do
       board = Array.new(8) { Array.new(8, nil) }
-      white_pawn = PawnPiece.new({ color: :white, did_double_step: true })
+      white_pawn = PawnPiece.new({
+        color: :white, did_double_step: true,
+        is_capturable_en_passant: true
+      })
       black_pawn = PawnPiece.new({ color: :black })
       board[4][3] = white_pawn
       board[4][2] = black_pawn
-      res = black_pawn.capture([4,2], [5,3], board)
+      res = black_pawn.capture_en_passant([4,2], [5,3], board)
       expected = Array.new(8) { Array.new(8, nil) }
       expected[5][3] = black_pawn
       expect(res).to eql(expected)
