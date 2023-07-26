@@ -127,7 +127,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#board_to_s` method
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
-- [ ] `#is_matching_piece?` method
+- [x] `#is_matching_piece?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#up_moves` method
@@ -257,6 +257,8 @@ Complete the following:
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
 - [x] `#white_captures` method (private)
+- [x] `#move` method
+- [x] `#capture` method
 - [x] `#can_white_capture_en_passant_left?` method (private)
 - [x] `#can_white_capture_en_passant_right?` method (private)
 - [x] `#can_black_capture_en_passant_left?` method (private)
@@ -265,15 +267,13 @@ Complete the following:
 - [x] `#can_black_capture_en_passant?` method (private)
 - [x] `#white_capture_en_passant` method (private)
 - [x] `#black_capture_en_passant` method (private)
-- [x] `#move` method
-- [x] `#capture` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [ ] `#captures` method
-- [ ] `#can_capture_en_passant?` method
+- [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
 - [x] `#is_double_step?` method
 - [x] `#is_promotable?` method

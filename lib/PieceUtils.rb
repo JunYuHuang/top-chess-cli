@@ -188,7 +188,6 @@ module PieceUtils
     return board[src_row][src_col].color == piece_color
   end
 
-  # TODO - to test
   # Is a modified version of `ChessMoveRunner#is_matching_piece?`
   def is_matching_piece?(args)
     return false if args.class != Hash
