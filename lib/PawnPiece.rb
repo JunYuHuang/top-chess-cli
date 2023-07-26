@@ -106,16 +106,6 @@ class PawnPiece < Piece
     capturee_pawn[:piece].is_capturable_en_passant?
   end
 
-  # TODO - to rework and retest
-  def capture_en_passant(args)
-    src_cell = args.fetch(:src_cell, nil)
-    dst_cell = args.fetch(:dst_cell, nil)
-    board = args.fetch(:board, nil)
-    return unless can_capture_en_passant?(args)
-
-    capture(src_cell, dst_cell, board)
-  end
-
   def did_move?
     @did_move
   end
