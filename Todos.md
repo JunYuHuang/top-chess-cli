@@ -259,14 +259,6 @@ Complete the following:
 - [x] `#white_captures` method (private)
 - [x] `#move` method
 - [x] `#capture` method
-- [x] `#can_white_capture_en_passant_left?` method (private)
-- [x] `#can_white_capture_en_passant_right?` method (private)
-- [x] `#can_black_capture_en_passant_left?` method (private)
-- [x] `#can_black_capture_en_passant_right?` method (private)
-- [x] `#can_white_capture_en_passant?` method (private)
-- [x] `#can_black_capture_en_passant?` method (private)
-- [x] `#white_capture_en_passant` method (private)
-- [x] `#black_capture_en_passant` method (private)
 
 Complete the tests for the following:
 
