@@ -173,6 +173,136 @@ describe PawnPiece do
     end
   end
 
+  describe "#captures_en_passant" do
+    it "returns an empty int matrix if called with a valid cell and an otherwise empty board on a white pawn" do
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][5] = white_pawn
+
+      res = white_pawn.captures_en_passant([3,5], board)
+      expect(res.size).to eql(0)
+      expect(res).to eql([])
+    end
+
+    it "returns an empty int matrix if called with a valid cell and an otherwise empty board on a black pawn" do
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][2] = black_pawn
+
+      res = black_pawn.captures_en_passant([4,2], board)
+      expect(res.size).to eql(0)
+      expect(res).to eql([])
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
+      black_pawn = PawnPiece.new({
+        color: :black, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][4] = black_pawn
+      board[3][5] = white_pawn
+
+      res = white_pawn.captures_en_passant([3,5], board)
+      exp = [[2,4]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
+      black_pawn = PawnPiece.new({
+        color: :black, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][6] = black_pawn
+      board[3][5] = white_pawn
+
+      res = white_pawn.captures_en_passant([3,5], board)
+      exp = [[2,6]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a white pawn" do
+      black_pawn = PawnPiece.new({
+        color: :black, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[3][6] = black_pawn
+      board[3][7] = white_pawn
+
+      res = white_pawn.captures_en_passant([3,7], board)
+      exp = [[2,6]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
+      white_pawn = PawnPiece.new({
+        color: :white, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][1] = white_pawn
+      board[4][2] = black_pawn
+
+      res = black_pawn.captures_en_passant([4,2], board)
+      exp = [[5,1]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
+      white_pawn = PawnPiece.new({
+        color: :white, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][3] = white_pawn
+      board[4][2] = black_pawn
+
+      res = black_pawn.captures_en_passant([4,2], board)
+      exp = [[5,3]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a valid cell and a certain board with a white pawn and a black pawn on a black pawn" do
+      white_pawn = PawnPiece.new({
+        color: :white, did_double_step: true,
+        is_capturable_en_passant: true
+      })
+      black_pawn = PawnPiece.new({ color: :black })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[4][1] = white_pawn
+      board[4][0] = black_pawn
+
+      res = black_pawn.captures_en_passant([4,0], board)
+      exp = [[5,1]]
+      expect(res.size).to eql(exp.size)
+      exp.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+  end
+
   describe "#is_double_step?" do
     it "returns false if called with ([6,0], [3,0]) and an otherwise empty board on a white pawn that has not moved yet" do
       white_pawn = PawnPiece.new({ color: :white })

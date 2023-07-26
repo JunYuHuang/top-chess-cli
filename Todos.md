@@ -243,7 +243,7 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#captures_en_passant` method
+- [x] `#captures_en_passant` method
 - [x] `#is_capturable_en_passant?` method
 - [x] `#set_is_capturable_en_passant!` method
 - [x] `#can_capture_en_passant?` method
@@ -258,6 +258,8 @@ Complete the following:
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
 - [x] `#white_captures` method (private)
+- [x] `#black_captures_en_passant` method (private)
+- [x] `#white_captures_en_passant` method (private)
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#captures_en_passant` method
@@ -267,7 +269,7 @@ Complete the tests for the following:
 - [x] `.initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
-- [ ] `#captures_en_passant`
+- [x] `#captures_en_passant`
 - [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant` method
 - [x] `#is_double_step?` method

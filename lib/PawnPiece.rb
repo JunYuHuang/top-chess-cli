@@ -50,6 +50,13 @@ class PawnPiece < Piece
       black_captures(src_cell, board)
   end
 
+  def captures_en_passant(src_cell, board)
+    return [] unless self.class.is_valid_piece_color?(@color)
+    @color == :white ?
+      white_captures_en_passant(src_cell, board) :
+      black_captures_en_passant(src_cell, board)
+  end
+
   def is_capturable_en_passant?
     @is_capturable_en_passant
   end
@@ -196,38 +203,56 @@ class PawnPiece < Piece
     self.class.down_moves(src_cell, board, options)
   end
 
-  # TODO - to rework (include en-passant captures) and retest
   def white_captures(src_cell, board)
     res = [
       self.class.up_left_capture(src_cell, board, @@one_step),
       self.class.up_right_capture(src_cell, board, @@one_step),
     ]
-    # up_left_cell = self.class.up_left_moves(src_cell, @@one_step)[0]
-    # res.push(up_left_cell) if can_capture_en_passant?({
-    #   src_cell: src_cell, dst_cell: up_left_cell, board: board
-    # })
-    # up_right_cell = self.class.up_right_moves(src_cell, @@one_step)[0]
-    # res.push(up_right_cell) if can_capture_en_passant?({
-    #   src_cell: src_cell, dst_cell: up_right_cell, board: board
-    # })
     res.filter { |cell| !cell.nil? }
   end
 
-  # TODO - to rework (include en-passant captures) and retest
   def black_captures(src_cell, board)
     res = [
       self.class.down_left_capture(src_cell, board, @@one_step),
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
-    # down_left_cell = self.class.down_left_moves(src_cell, @@one_step)[0]
-    # res.push(down_left_cell) if can_capture_en_passant?({
-    #   src_cell: src_cell, dst_cell: down_left_cell, board: board
-    # })
-    # down_right_cell = self.class.down_right_moves(src_cell, @@one_step)[0]
-    # res.push(down_right_cell) if can_capture_en_passant?({
-    #   src_cell: src_cell, dst_cell: down_right_cell, board: board
-    # })
     res.filter { |cell| !cell.nil? }
+  end
+
+  def white_captures_en_passant(src_cell, board)
+    res = []
+
+    up_left_cell = self.class.up_left_moves(src_cell, board, @@one_step)[0]
+    up_left_args = {
+      src_cell: src_cell, dst_cell: up_left_cell, board: board
+    }
+    res.push(up_left_cell) if can_capture_en_passant?(up_left_args)
+
+    up_right_cell = self.class.up_right_moves(src_cell, board, @@one_step)[0]
+    up_right_args = {
+      src_cell: src_cell, dst_cell: up_right_cell, board: board
+    }
+    res.push(up_right_cell) if can_capture_en_passant?(up_right_args)
+
+    res
+  end
+
+  def black_captures_en_passant(src_cell, board)
+    res = []
+
+    down_left_cell = self.class.down_left_moves(src_cell, board, @@one_step)[0]
+    down_left_args = {
+      src_cell: src_cell, dst_cell: down_left_cell, board: board
+    }
+    res.push(down_left_cell) if can_capture_en_passant?(down_left_args)
+
+    down_right_cell = self.class.down_right_moves(src_cell, board, @@one_step)[0]
+    down_right_args = {
+      src_cell: src_cell, dst_cell: down_right_cell, board: board
+    }
+    res.push(down_right_cell) if can_capture_en_passant?(down_right_args)
+
+    res
   end
 end
 
