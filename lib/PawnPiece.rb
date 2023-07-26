@@ -199,8 +199,14 @@ class PawnPiece < Piece
       self.class.up_left_capture(src_cell, board, @@one_step),
       self.class.up_right_capture(src_cell, board, @@one_step),
     ]
-    # TODO - add en-passant left and right capture cells to
-    # `res` if they apply
+    # up_left_cell = self.class.up_left_moves(src_cell, @@one_step)[0]
+    # res.push(up_left_cell) if can_capture_en_passant?({
+    #   src_cell: src_cell, dst_cell: up_left_cell, board: board
+    # })
+    # up_right_cell = self.class.up_right_moves(src_cell, @@one_step)[0]
+    # res.push(up_right_cell) if can_capture_en_passant?({
+    #   src_cell: src_cell, dst_cell: up_right_cell, board: board
+    # })
     res.filter { |cell| !cell.nil? }
   end
 
@@ -210,8 +216,14 @@ class PawnPiece < Piece
       self.class.down_left_capture(src_cell, board, @@one_step),
       self.class.down_right_capture(src_cell, board, @@one_step),
     ]
-    # TODO - add en-passant left and right capture cells to
-    # `res` if they apply
+    # down_left_cell = self.class.down_left_moves(src_cell, @@one_step)[0]
+    # res.push(down_left_cell) if can_capture_en_passant?({
+    #   src_cell: src_cell, dst_cell: down_left_cell, board: board
+    # })
+    # down_right_cell = self.class.down_right_moves(src_cell, @@one_step)[0]
+    # res.push(down_right_cell) if can_capture_en_passant?({
+    #   src_cell: src_cell, dst_cell: down_right_cell, board: board
+    # })
     res.filter { |cell| !cell.nil? }
   end
 
