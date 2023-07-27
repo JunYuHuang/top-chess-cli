@@ -425,7 +425,7 @@ Complete the tests for the following:
 - [x] `#is_valid_coords_syntax?` method
 - [x] `#is_valid_move_syntax?` method
 - [x] `#is_valid_capture_syntax?` method
-- [ ] `#is_valid_capture_en_passant_syntax?` method
+- [x] `#is_valid_capture_en_passant_syntax?` method
 - [x] `#is_valid_promote_syntax?` method
 - [x] `#is_valid_queenside_castle_syntax?` method
 - [x] `#is_valid_kingside_castle_syntax?` method

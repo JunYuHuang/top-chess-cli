@@ -111,7 +111,6 @@ class ChessMoveRunner
     syntax.match?(/^(R|N|B|Q|K)?[a-h][1-8]x[a-h][1-8]$/)
   end
 
-  # TODO - to test
   def is_valid_capture_en_passant_syntax?(syntax)
     return false if syntax.class != String
     syntax.match?(/^[a-h](4x[a-h]3|5x[a-h]6)(\se\.p\.)?$/)
@@ -188,7 +187,6 @@ class ChessMoveRunner
     }
   end
 
-  # is an alias for `ChessMoveRunner#move_syntax_to_hash`
   def capture_syntax_to_hash(syntax, src_piece_color = turn_color)
     move_syntax_to_hash(syntax, src_piece_color)
   end

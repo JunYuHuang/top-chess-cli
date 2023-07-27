@@ -180,6 +180,57 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#is_valid_capture_en_passant_syntax?" do
+    it "returns false if called with a non-String" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?(nil)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'Bf5xg6'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('Bf5xg6')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'f4xg5'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('f4xg5')
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with 'f5xg6'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('f5xg6')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'f5xe6'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('f5xe6')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'c4xd3'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('c4xd3')
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with 'c4xb3'" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_valid_capture_en_passant_syntax?('c4xb3')
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#is_valid_promote_syntax?" do
     it "returns false if called with a non-String" do
       mock_game = nil
