@@ -457,6 +457,48 @@ class ChessMoveRunner
     @game.board = castled_board
   end
 
+  def can_capture_en_passant?(syntax, src_piece_color = turn_color)
+    return false unless is_valid_capture_en_passant_syntax?(syntax)
+    return false unless @game
+
+    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
+    data => { src_piece_color:, src_cell:, dst_cell: }
+
+    args = {
+      piece_type: :pawn,
+      piece_color: src_piece_color,
+      cell: src_cell
+    }
+    return false unless is_matching_piece?(args)
+
+    src_row, src_col = src_cell
+    capturer_filters = { row: src_row, col: src_col }
+    capturer_pawn = self.class.pieces(@game.board, capturer_filters)[0]
+    capturer_pawn[:piece].captures_en_passant(src_cell, @game.board).include?(dst_cell)
+  end
+
+  def capture_en_passant!(syntax, src_piece_color = turn_color)
+    return unless can_capture_en_passant?(syntax, src_piece_color)
+
+    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
+    data => {
+      src_piece_color:, src_cell:, dst_cell:
+    }
+    src_row, src_col = src_cell
+    filters = { row: src_row, col: src_col }
+    capturer_pawn = self.class.pieces(@game.board, filters)[0]
+
+    # update boolean flags on the piece as needed
+    if capturer_pawn[:piece].respond_to?(:did_move?)
+      capturer_pawn[:piece].moved!
+    end
+
+    # modify the board state
+    @game.board = capturer_pawn[:piece].capture_en_passant(
+      src_cell, dst_cell, @game.board
+    )
+  end
+
   # TODO - to test
   def is_move_pawn_double_step?(
     syntax, src_piece_color = turn_color, board = @game.board
@@ -482,49 +524,6 @@ class ChessMoveRunner
     return false unless pawn[:piece].moves(src_cell, board).include?(dst_cell)
 
     self.class.count_col_cells_amid_two_cells(src_cell, dst_cell) == 1
-  end
-
-  def can_capture_en_passant?(syntax, src_piece_color = turn_color)
-    return false unless is_valid_capture_en_passant_syntax?(syntax)
-    return false unless @game
-
-    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
-    data => { src_piece_color:, src_cell:, dst_cell: }
-
-    args = {
-      piece_type: :pawn,
-      piece_color: src_piece_color,
-      cell: src_cell
-    }
-    return false unless is_matching_piece?(args)
-
-    src_row, src_col = src_cell
-    capturer_filters = { row: src_row, col: src_col }
-    capturer_pawn = self.class.pieces(@game.board, capturer_filters)[0]
-    capturer_pawn[:piece].captures_en_passant(src_cell, @game.board).include?(dst_cell)
-  end
-
-  # TODO - to test
-  def capture_en_passant!(syntax, src_piece_color = turn_color)
-    return unless can_capture_en_passant?(syntax, src_piece_color)
-
-    data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
-    data => {
-      src_piece_color:, src_cell:, dst_cell:, captive_cell:
-    }
-    src_row, src_col = src_cell
-    filters = { row: src_row, col: src_col }
-    capturer_piece = self.class.pieces(@game.board, filters)[0]
-
-    # update boolean flags on the piece as needed
-    if capturer_piece[:piece].respond_to?(:did_move?)
-      capturer_piece[:piece].moved!
-    end
-
-    # modify the board state
-    @game.board = capturer_piece[:piece].capture(
-      src_cell, dst_cell, @game.board
-    )
   end
 
   # TODO - to test

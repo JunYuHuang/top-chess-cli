@@ -447,9 +447,9 @@ Complete the tests for the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
-- [ ] `#is_move_pawn_double_step?` method
 - [x] `#can_capture_en_passant?` method
-- [ ] `#capture_en_passant!` method
+- [x] `#capture_en_passant!` method
+- [ ] `#is_move_pawn_double_step?` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
 
 ## `CommandRunner` class

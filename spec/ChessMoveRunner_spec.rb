@@ -2334,4 +2334,176 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#capture_en_passant!" do
+    it "does nothing if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is not marked as capturable en-passant (i.e. it did not double step forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.capture_en_passant!('f5xe6', :white)
+      black_pawn = game.board[3][4]
+      white_pawn = game.board[3][5]
+      expect(black_pawn.nil?).to eql(false)
+      expect(black_pawn.color).to eql(:black)
+      expect(black_pawn.type).to eql(:pawn)
+      expect(white_pawn.nil?).to eql(false)
+      expect(white_pawn.color).to eql(:white)
+      expect(white_pawn.type).to eql(:pawn)
+      expect(white_pawn.did_move?).to eql(false)
+    end
+
+    it "modifies the board correctly if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.capture_en_passant!('f5xe6', :white)
+      captive_cell = game.board[3][4]
+      old_white_pawn_cell = game.board[3][5]
+      new_white_pawn_cell = game.board[2][4]
+      expect(captive_cell.nil?).to eql(true)
+      expect(old_white_pawn_cell.nil?).to eql(true)
+      expect(new_white_pawn_cell.nil?).to eql(false)
+      expect(new_white_pawn_cell.color).to eql(:white)
+      expect(new_white_pawn_cell.type).to eql(:pawn)
+      expect(new_white_pawn_cell.did_move?).to eql(true)
+    end
+
+    it "modifies the board correctly if called with ('f5xg6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'g5' is a square occupied by a black pawn that is as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [3,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.capture_en_passant!('f5xg6', :white)
+      captive_cell = game.board[3][6]
+      old_white_pawn_cell = game.board[3][5]
+      new_white_pawn_cell = game.board[2][6]
+      expect(captive_cell.nil?).to eql(true)
+      expect(old_white_pawn_cell.nil?).to eql(true)
+      expect(new_white_pawn_cell.nil?).to eql(false)
+      expect(new_white_pawn_cell.color).to eql(:white)
+      expect(new_white_pawn_cell.type).to eql(:pawn)
+      expect(new_white_pawn_cell.did_move?).to eql(true)
+    end
+
+    it "modifies the board correctly if called with ('c4xd3', :black) on a valid game with a certain board and 'c4' is a square occupied by a black pawn and 'd4' is a square occupied by a white pawn that is as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [4,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [4,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.capture_en_passant!('c4xd3', :black)
+      captive_cell = game.board[4][3]
+      old_black_pawn_cell = game.board[4][2]
+      new_black_pawn_cell = game.board[5][3]
+      expect(captive_cell.nil?).to eql(true)
+      expect(old_black_pawn_cell.nil?).to eql(true)
+      expect(new_black_pawn_cell.nil?).to eql(false)
+      expect(new_black_pawn_cell.color).to eql(:black)
+      expect(new_black_pawn_cell.type).to eql(:pawn)
+      expect(new_black_pawn_cell.did_move?).to eql(true)
+    end
+
+    it "modifies the board correctly if called with ('c4xb3', :black) on a valid game with a certain board and 'c4' is a square occupied by a black pawn and 'b4' is a square occupied by a white pawn that is as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [4,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [4,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.capture_en_passant!('c4xb3', :black)
+      captive_cell = game.board[4][1]
+      old_black_pawn_cell = game.board[4][2]
+      new_black_pawn_cell = game.board[5][1]
+      expect(captive_cell.nil?).to eql(true)
+      expect(old_black_pawn_cell.nil?).to eql(true)
+      expect(new_black_pawn_cell.nil?).to eql(false)
+      expect(new_black_pawn_cell.color).to eql(:black)
+      expect(new_black_pawn_cell.type).to eql(:pawn)
+      expect(new_black_pawn_cell.did_move?).to eql(true)
+    end
+  end
 end
