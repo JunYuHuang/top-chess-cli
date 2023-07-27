@@ -346,7 +346,6 @@ Complete the following:
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#build_board` method
-- [ ] `#is_last_move_enemy_pawn_double_step?` method
 - [ ] `#update!` method
 - [ ] `#use_console_ui` method
 - [ ] `#use_game_saves` method

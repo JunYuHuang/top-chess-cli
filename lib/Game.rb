@@ -6,46 +6,27 @@ class Game
 
   attr_accessor(
     :players_count, :current_player_color, :rows, :cols,
-    :board, :players, :history, :piece_factory_class,
-    :chess_move_runner_class
+    :board, :players, :white_captured, :black_captured,
+    :piece_factory, :chess_move_runner, :console_ui
   )
 
   # TODO - to test
   def initialize(options = {})
-    @piece_factory_class = options[:piece_factory_class]
-    @chess_move_runner_class = options[:chess_move_runner_class]
+    @piece_factory = options[:piece_factory_class]
+    @chess_move_runner = options[:chess_move_runner_class]
+    @console_ui = options.fetch(:console_ui_class, nil)
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
 
     @players_count = 2
     @current_player_color = :white
     @players = []
+    @white_captured = {}
+    @black_captured = {}
 
     @rows = self.class.board_length
     @cols = self.class.board_length
     @board = build_start_board
-
-    # `@history` stores an ordered list of game state
-    # snapshots represented by hashmaps.
-    # Each hashmap has the following key-value pairs:
-    # - `:turn_by_color` -> `:white` or `:black`
-    #   - denotes which player's turn (by their colour) it was that turn
-    # - `:move` -> some string
-    #   - denotes the chess move that was played that turn
-    # - `:pieces` -> list of piece objects serialized as hashmaps
-    #   - represents the current state of the chess board
-    #   - each piece hashmap has the following key-value pairs:
-    #     - `:cell`: 2-sized int array
-    #     - symbols: `:color`, `:type`
-    #     - bools: `:is_capturable`, `:did_move`, `:did_double_step`
-    # - `:white_captured` -> stores the white player's captured
-    #   pieces as a hashmap that maps each piece type symbol to an
-    #   non-negative int
-    # - `:black_captured` -> stores the black player's captured
-    #   pieces as a hashmap that maps each piece type symbol to an
-    #   non-negative int
-
-    @history = []
 
     if !pieces.nil? && are_valid_pieces?(pieces)
       @board = build_board(pieces)
@@ -125,13 +106,9 @@ class Game
   end
 
   # TODO - to test
-  def use_chess_move_parser(chess_move_runner_class)
-    @chess_move_runner_class = chess_move_runner_class
-  end
-
-  # TODO - to test
-  def is_last_move_enemy_pawn_2_step(args)
-    # TODO
+  def use_chess_move_runner(chess_move_runner_class)
+    return if @chess_move_runner
+    @chess_move_runner = chess_move_runner_class.new(self)
   end
 
   def are_valid_pieces?(pieces)
@@ -185,35 +162,34 @@ class Game
     black_queen = [:queen, { color: :black }]
     black_king = [:king, { color: :black }]
 
-    factory = @piece_factory_class
-    return factory.create(*black_rook) if (
+    return @piece_factory.create(*black_rook) if (
       row == 0 && rook_cols.include?(col))
-    return factory.create(*black_knight) if (
+    return @piece_factory.create(*black_knight) if (
       row == 0 && knight_cols.include?(col))
-    return factory.create(*black_bishop) if (
+    return @piece_factory.create(*black_bishop) if (
       row == 0 && bishop_cols.include?(col)
     )
-    return factory.create(*black_queen) if (
+    return @piece_factory.create(*black_queen) if (
       row == 0 && col == queen_col
     )
-    return factory.create(*black_king) if (
+    return @piece_factory.create(*black_king) if (
       row == 0 && col == king_col
     )
-    return factory.create(*black_pawn) if row == 1
-    return factory.create(*white_rook) if (
+    return @piece_factory.create(*black_pawn) if row == 1
+    return @piece_factory.create(*white_rook) if (
       row == 7 && rook_cols.include?(col))
-    return factory.create(*white_knight) if (
+    return @piece_factory.create(*white_knight) if (
       row == 7 && knight_cols.include?(col))
-    return factory.create(*white_bishop) if (
+    return @piece_factory.create(*white_bishop) if (
       row == 7 && bishop_cols.include?(col)
     )
-    return factory.create(*white_queen) if (
+    return @piece_factory.create(*white_queen) if (
       row == 7 && col == queen_col
     )
-    return factory.create(*white_king) if (
+    return @piece_factory.create(*white_king) if (
       row == 7 && col == king_col
     )
-    return factory.create(*white_pawn) if row == 6
+    return @piece_factory.create(*white_pawn) if row == 6
   end
 
   def build_start_board
@@ -231,10 +207,9 @@ class Game
 
   def build_board(pieces)
     board = empty_board
-    factory = @piece_factory_class
     pieces.each do |piece|
       row, col = piece[:cell]
-      board[row][col] = factory.create(piece[:type], piece)
+      board[row][col] = @piece_factory.create(piece[:type], piece)
     end
 
     board
@@ -255,8 +230,9 @@ class Game
   end
 
   # TODO - to test
-  def use_console_ui(args)
-    # TODO
+  def use_console_ui(console_ui_class)
+    return if @console_ui
+    @console_ui = console_ui_class.new(self)
   end
 
   # TODO - to test

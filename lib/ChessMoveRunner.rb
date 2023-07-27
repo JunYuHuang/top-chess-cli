@@ -385,7 +385,7 @@ class ChessMoveRunner
     new_board = self.class.deep_copy(@game.board)
     new_board[src_row][src_col] = nil
 
-    factory = @game.piece_factory_class
+    factory = @game.piece_factory
     options = { color: src_piece_color }
     dst_row, dst_col = dst_cell
     new_board[dst_row][dst_col] = factory.create(
