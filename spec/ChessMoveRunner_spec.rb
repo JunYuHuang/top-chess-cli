@@ -1,6 +1,7 @@
 require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
+require './spec/PieceUtilsClass'
 
 describe ChessMoveRunner do
   describe "#initialize" do
@@ -2504,6 +2505,122 @@ describe ChessMoveRunner do
       expect(new_black_pawn_cell.color).to eql(:black)
       expect(new_black_pawn_cell.type).to eql(:pawn)
       expect(new_black_pawn_cell.did_move?).to eql(true)
+    end
+  end
+
+  describe "#is_move_pawn_double_step?" do
+    it "returns false if called with 'asd13fa' on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_move_pawn_double_step?('asd13fa')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a valid move syntax on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.is_move_pawn_double_step?('a2-a3')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('a2a3', :white) on a valid game with a certain board and 'a2' is an empty square" do
+      pieces = [
+        {
+          cell: [6,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.is_move_pawn_double_step?('a2a3', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('a2a3', :white) on a valid game with a certain board and 'a2' is not a square occupied by a white pawn" do
+      pieces = [
+        {
+          cell: [6,0],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.is_move_pawn_double_step?('a2a3', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('a3a5', :white) on a valid game with a certain board and 'a3' is a square occupied by a white pawn that moved before" do
+      pieces = [
+        {
+          cell: [5,0],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.is_move_pawn_double_step?('a3a5', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('a2a4', :white) on a valid game with a certain board and 'a2' is a square occupied by a white pawn that has not moved yet" do
+      pieces = [
+        {
+          cell: [6,0],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.is_move_pawn_double_step?('a2a4', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('h7h5', :black) on a valid game with a certain board and 'h7' is a square occupied by a black pawn that has not moved yet" do
+      pieces = [
+        {
+          cell: [1,7],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.is_move_pawn_double_step?('h7h5', :black)
+      expect(res).to eql(true)
     end
   end
 end

@@ -449,8 +449,25 @@ Complete the tests for the following:
 - [x] `#kingside_castle!` method
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant!` method
-- [ ] `#is_move_pawn_double_step?` method
+- [x] `#is_move_pawn_double_step?` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
+
+## `ConsoleUI` class
+
+Complete the following:
+
+- [ ] `.initialize` constructor
+- [x] `.clear_UI` method
+- [ ] `.print_board` method
+- [ ] `.print_captured_pieces` method
+- [ ] `.print_turn_prompt` method
+- [ ] `.print_game_end` method
+- [ ] `.print_saves_table` method
+- [ ] `.print_load_prompt` method
+- [ ] `.print_load_screen` method
+- [ ] `.print_setup_screen` method
+- [ ] `.print_turn_screen` method
+- [ ] `.print_end_screen` method
 
 ## `CommandRunner` class
 
@@ -470,23 +487,6 @@ Complete the following:
 Complete the tests for the following:
 
 - [ ] TODO
-
-## `ConsoleUI` class
-
-Complete the following:
-
-- [ ] `.initialize` constructor
-- [x] `.clear_UI` method
-- [ ] `.print_board` method
-- [ ] `.print_captured_pieces` method
-- [ ] `.print_turn_prompt` method
-- [ ] `.print_game_end` method
-- [ ] `.print_saves_table` method
-- [ ] `.print_load_prompt` method
-- [ ] `.print_load_screen` method
-- [ ] `.print_setup_screen` method
-- [ ] `.print_turn_screen` method
-- [ ] `.print_end_screen` method
 
 ## `GameSave` class
 

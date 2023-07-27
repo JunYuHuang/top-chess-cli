@@ -499,12 +499,12 @@ class ChessMoveRunner
     )
   end
 
-  # TODO - to test
   def is_move_pawn_double_step?(
-    syntax, src_piece_color = turn_color, board = @game.board
+    syntax, src_piece_color = turn_color, board = nil
   )
-    return false unless is_valid_move_syntax?(syntax)
+    board = @game ? @game.board : nil
     return false unless board
+    return false unless is_valid_move_syntax?(syntax)
 
     data = move_syntax_to_hash(syntax, src_piece_color)
     data => {
@@ -516,14 +516,13 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false if should_promote?(src_cell)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
     pawn = self.class.pieces(board, filters)[0]
     return false unless pawn[:piece].moves(src_cell, board).include?(dst_cell)
 
-    self.class.count_col_cells_amid_two_cells(src_cell, dst_cell) == 1
+    pawn[:piece].is_double_step_forward?(src_cell, dst_cell, board)
   end
 
   # TODO - to test
@@ -537,7 +536,7 @@ class ChessMoveRunner
     pawns = self.class.pieces(@game.board, enemy_pawns_filters)
     return if pawns.size == 0
     pawns.each do |pawn|
-      pawn[:piece].set_is_capturable_en_passant(false)
+      pawn[:piece].set_is_capturable_en_passant!(false)
     end
   end
 end
