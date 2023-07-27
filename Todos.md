@@ -450,7 +450,7 @@ Complete the tests for the following:
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant!` method
 - [x] `#is_move_pawn_double_step?` method
-- [ ] `#set_pawns_non_capturable_en_passant!` method
+- [x] `#set_enemy_pawns_non_capturable_en_passant!` method
 
 ## `ConsoleUI` class
 

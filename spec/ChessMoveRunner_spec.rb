@@ -2623,4 +2623,85 @@ describe ChessMoveRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#set_enemy_pawns_non_capturable_en_passant!" do
+    it "does nothing if called with :white on a valid game with a certain board with a white pawn and a black pawn" do
+      pieces = [
+        {
+          cell: [1,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [6,6],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+          is_capturable_en_passant: false
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(:white)
+      black_pawn_c7 = game.board[1][2]
+      white_pawn_g2 = game.board[6][6]
+      expect(black_pawn_c7.nil?).to eql(false)
+      expect(black_pawn_c7.is_capturable_en_passant?).to eql(false)
+      expect(white_pawn_g2.nil?).to eql(false)
+      expect(white_pawn_g2.is_capturable_en_passant?).to eql(false)
+    end
+
+    it "modifies the board correctly if called with :black on a valid game with a certain board with a white pawn and a black pawn" do
+      pieces = [
+        {
+          cell: [1,5],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [3,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [4,6],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: true
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(:black)
+      black_pawn_f7 = game.board[1][5]
+      black_pawn_c5 = game.board[3][2]
+      white_pawn_g4 = game.board[4][6]
+      expect(black_pawn_f7.nil?).to eql(false)
+      expect(black_pawn_f7.is_capturable_en_passant?).to eql(false)
+      expect(black_pawn_c5.nil?).to eql(false)
+      expect(black_pawn_c5.is_capturable_en_passant?).to eql(false)
+      expect(white_pawn_g4.nil?).to eql(false)
+      expect(white_pawn_g4.is_capturable_en_passant?).to eql(true)
+    end
+  end
 end

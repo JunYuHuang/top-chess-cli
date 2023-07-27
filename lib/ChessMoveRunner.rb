@@ -525,15 +525,16 @@ class ChessMoveRunner
     pawn[:piece].is_double_step_forward?(src_cell, dst_cell, board)
   end
 
-  # TODO - to test
-  def set_pawns_non_capturable_en_passant!(current_turn_color = turn_color)
-    prev_turn_color = current_turn_color == :white ? :black : :white
-    enemy_pawns_filter = {
-      color: prev_turn_color,
-      type: :pawn,
-      row: current_turn_color == :white ? 3 : 4,
-    }
-    pawns = self.class.pieces(@game.board, enemy_pawns_filters)
+  # Should be called after any chess move is played to uphold the
+  # rules of en-passant eligibility.
+  def set_enemy_pawns_non_capturable_en_passant!(enemy_color = nil)
+    enemy_color = turn_color == :white ? :black : :white if !enemy_color
+
+    # black pawns that double stepped will be in row index 3 (rank 5)
+    # white pawns that double stepped will be in row index 4 (rank 4)
+    row = enemy_color == :white ? 4 : 3
+    enemy_pawns_filter = { color: enemy_color, type: :pawn, row: row }
+    pawns = self.class.pieces(@game.board, enemy_pawns_filter)
     return if pawns.size == 0
     pawns.each do |pawn|
       pawn[:piece].set_is_capturable_en_passant!(false)
