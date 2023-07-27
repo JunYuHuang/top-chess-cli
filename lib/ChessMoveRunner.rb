@@ -73,7 +73,6 @@ class ChessMoveRunner
     false
   end
 
-  # TODO - to test
   def execute_chess_move!(syntax, src_piece_color = turn_color)
     if can_move?(syntax, src_piece_color)
       move!(syntax, src_piece_color)

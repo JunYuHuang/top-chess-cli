@@ -1,7 +1,6 @@
 require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
-require './spec/PieceUtilsClass'
 
 describe ChessMoveRunner do
   describe "#initialize" do
@@ -104,6 +103,106 @@ describe ChessMoveRunner do
       chess_move_runner = ChessMoveRunner.new(game)
       res = chess_move_runner.can_chess_move?('e3xd2', :black)
       expect(res).to eql(true)
+    end
+  end
+
+  describe "#execute_chess_move!" do
+    it "does nothing if called with ('d7xe8', :white) on a valid game with a custom board and 'd7' is a square occupied by a white pawn that must promote and 'e8' is a square occupied by a non-king black piece" do
+      pieces = [
+        {
+          cell: [0,4],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [1,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.execute_chess_move!('d7xe8', :white)
+      black_rook = game.board[0][4]
+      white_pawn = game.board[1][3]
+      expect(black_rook.nil?).to eql(false)
+      expect(black_rook.type).to eql(:rook)
+      expect(white_pawn.nil?).to eql(false)
+      expect(white_pawn.type).to eql(:pawn)
+    end
+
+    it "modifies the board correctly if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is marked as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.execute_chess_move!('f5xe6', :white)
+      black_pawn = game.board[3][4]
+      white_pawn_old_cell = game.board[3][5]
+      white_pawn_new_cell = game.board[2][4]
+      expect(black_pawn.nil?).to eql(true)
+      expect(white_pawn_old_cell.nil?).to eql(true)
+      expect(white_pawn_new_cell.nil?).to eql(false)
+      expect(white_pawn_new_cell.type).to eql(:pawn)
+      expect(white_pawn_new_cell.did_move).to eql(true)
+    end
+
+    it "modifies the board correctly if called with ('e3xd2', :black) on a valid game with a custom board and 'e3' is a square occupied by a black pawn and 'd2' is a square occupied by a white non-king piece" do
+      pieces = [
+        {
+          cell: [6,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [5,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      chess_move_runner.execute_chess_move!('e3xd2', :black)
+      black_pawn_old_cell = game.board[5][4]
+      black_pawn_new_cell = game.board[6][3]
+      expect(black_pawn_old_cell.nil?).to eql(true)
+      expect(black_pawn_new_cell.nil?).to eql(false)
+      expect(black_pawn_new_cell.type).to eql(:pawn)
+      expect(black_pawn_new_cell.color).to eql(:black)
     end
   end
 
