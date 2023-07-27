@@ -19,6 +19,94 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#can_chess_move?" do
+    it "returns false if called with a valid move syntax on a mock game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.can_chess_move?('a2xb3')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('d7xe8', :white) on a valid game with a custom board and 'd7' is a square occupied by a white pawn that must promote and 'e8' is a square occupied by a non-king black piece" do
+      pieces = [
+        {
+          cell: [0,4],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [1,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_chess_move?('d7xe8', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is marked as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_chess_move?('f5xe6', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('e3xd2', :black) on a valid game with a custom board and 'e3' is a square occupied by a black pawn and 'd2' is a square occupied by a white non-king piece" do
+      pieces = [
+        {
+          cell: [6,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [5,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_chess_move?('e3xd2', :black)
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#is_valid_piece_char_syntax?" do
     it "returns false if called with a non-String" do
       mock_game = nil

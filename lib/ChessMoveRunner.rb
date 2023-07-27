@@ -63,8 +63,7 @@ class ChessMoveRunner
     @game = game
   end
 
-  # TODO - to test
-  def is_valid_chess_move?(syntax, src_piece_color = turn_color)
+  def can_chess_move?(syntax, src_piece_color = turn_color)
     return true if can_move?(syntax, src_piece_color)
     return true if can_capture_en_passant?(syntax, src_piece_color)
     return true if can_capture?(syntax, src_piece_color)

@@ -381,7 +381,7 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 Complete the following:
 
 - [x] `#initialize` constructor
-- [x] `#is_valid_chess_move?` method
+- [x] `#can_chess_move?` method
 - [x] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
 - [x] `#is_valid_coords_syntax?` method
@@ -419,7 +419,7 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `#initialize` constructor
-- [ ] `#is_valid_chess_move?` method
+- [x] `#can_chess_move?` method
 - [ ] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
 - [x] `#is_valid_coords_syntax?` method
