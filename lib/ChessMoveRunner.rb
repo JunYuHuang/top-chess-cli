@@ -191,21 +191,8 @@ class ChessMoveRunner
     move_syntax_to_hash(syntax, src_piece_color)
   end
 
-  # TODO - to test
-  # assumes syntax is valid
   def capture_en_passant_syntax_to_hash(syntax, src_piece_color = turn_color)
-    src_coords = COORDS_REGEX.match(syntax)[0]
-    dst_coords = COORDS_REGEX.match(syntax, 2)[0]
-    captive_cell = coords_to_matrix_cell(dst_coords)
-    captive_cell = src_piece_color == :white ?
-      self.class.down_adjacent_cell(captive_cell) :
-      self.class.up_adjacent_cell(captive_cell)
-    res = {
-      src_piece_color: src_piece_color,
-      src_cell: coords_to_matrix_cell(src_coords),
-      dst_cell: coords_to_matrix_cell(dst_coords),
-      captive_cell: captive_cell
-    }
+    move_syntax_to_hash(syntax, src_piece_color)
   end
 
   # assumes syntax is valid
@@ -503,9 +490,7 @@ class ChessMoveRunner
     return false unless @game
 
     data = capture_en_passant_syntax_to_hash(syntax, src_piece_color)
-    data => {
-      src_piece_color:, src_cell:, dst_cell:, captive_cell:
-    }
+    data => { src_piece_color:, src_cell:, dst_cell: }
 
     args = {
       piece_type: :pawn,
@@ -517,8 +502,7 @@ class ChessMoveRunner
     src_row, src_col = src_cell
     capturer_filters = { row: src_row, col: src_col }
     capturer_pawn = self.class.pieces(@game.board, capturer_filters)[0]
-
-    capturer_pawn[:piece].captures(src_cell, @game.board).include?(dst_cell)
+    capturer_pawn[:piece].captures_en_passant(src_cell, @game.board).include?(dst_cell)
   end
 
   # TODO - to test

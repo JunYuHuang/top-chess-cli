@@ -650,6 +650,36 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#capture_en_passant_syntax_to_hash" do
+    it "returns the correct hash if called with ('f5xg6', :white)" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.capture_en_passant_syntax_to_hash('f5xg6', :white)
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :white,
+        src_cell: [3,5],
+        dst_cell: [2,6]
+      }
+      expect(res).to eql(exp)
+    end
+
+    it "returns the correct hash if called with ('c4xd3') on a game whose turn is the black player's" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      game.current_player_color = :black
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.capture_en_passant_syntax_to_hash('c4xd3')
+      exp = {
+        src_piece_type: :pawn,
+        src_piece_color: :black,
+        src_cell: [4,2],
+        dst_cell: [5,3]
+      }
+      expect(res).to eql(exp)
+    end
+  end
+
   describe "#promote_syntax_to_hash" do
     it "returns the correct hash if called with ('c7-c8=Q', :white)" do
       mock_game = nil

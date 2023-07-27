@@ -434,7 +434,7 @@ Complete the tests for the following:
 - [x] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
-- [ ] `#capture_en_passant_syntax_to_hash` method
+- [x] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
 - [x] `#can_move?` method
 - [x] `#move!` method
