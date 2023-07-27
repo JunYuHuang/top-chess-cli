@@ -484,7 +484,6 @@ class ChessMoveRunner
     self.class.count_col_cells_amid_two_cells(src_cell, dst_cell) == 1
   end
 
-  # TODO - to test
   def can_capture_en_passant?(syntax, src_piece_color = turn_color)
     return false unless is_valid_capture_en_passant_syntax?(syntax)
     return false unless @game

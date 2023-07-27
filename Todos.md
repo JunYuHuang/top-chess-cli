@@ -448,7 +448,7 @@ Complete the tests for the following:
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
 - [ ] `#is_move_pawn_double_step?` method
-- [ ] `#can_capture_en_passant?` method
+- [x] `#can_capture_en_passant?` method
 - [ ] `#capture_en_passant!` method
 - [ ] `#set_pawns_non_capturable_en_passant!` method
 

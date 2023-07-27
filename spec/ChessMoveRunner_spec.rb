@@ -2228,4 +2228,110 @@ describe ChessMoveRunner do
       expect(new_king_cell.did_move?).to eql(true)
     end
   end
+
+  describe "#can_capture_en_passant?" do
+    it "returns false if called with a valid move syntax on a mock invalid game" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.can_capture_en_passant?('f5xe6')
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is not a square occupied by a white pawn" do
+      pieces = [
+        {
+          cell: [3,5],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture_en_passant?('f5xe6', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is not marked as capturable en-passant (i.e. it did not double step forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture_en_passant?('f5xe6', :white)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with ('f5xe6', :white) on a valid game with a certain board and 'f5' is a square occupied by a white pawn and 'e5' is a square occupied by a black pawn that is marked as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture_en_passant?('f5xe6', :white)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with ('c4xb3', :black) on a valid game with a certain board and 'f5' is a square occupied by a black pawn and 'e5' is a square occupied by a white pawn that is marked as capturable en-passant (i.e. it double stepped forward last move)" do
+      pieces = [
+        {
+          cell: [4,1],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [4,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      res = chess_move_runner.can_capture_en_passant?('c4xb3', :black)
+      expect(res).to eql(true)
+    end
+  end
 end
