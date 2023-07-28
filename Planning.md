@@ -528,7 +528,7 @@ Enter your move in Long Algebraic Notation
 or '!save' to save the game:
 ```
 
-### End Screen
+### End Screen - White Victory
 
 ```
     a    b    c    d    e    f    g    h
@@ -555,8 +555,37 @@ BLACK's captures: wP x 8, wB x 2, wN x 2, wR x 2
 WHITE's captures: bP x 7, bB x 2, bN x 2, bR x 2, bQ x 1
 
 WHITE (Human Player 1) has checkmated BLACK (Human Player 2).
-
 Game ended: 1-0 WHITE (Human Player 1) won!
+```
+
+### End Screen - Tie / Draw
+
+```
+    a    b    c    d    e    f    g    h
+  ╔════╤════╤════╤════╤════╤════╤════╤════╗
+8 ║    │░░░░│    │░░░░│    │░░░░│    │ bK ║ 8
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+7 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 7
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+6 ║    │░░░░│    │░░░░│    │░░░░│ wR │ wK ║ 6
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+5 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 5
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+4 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 4
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+3 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 3
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+2 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 2
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+1 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 1
+  ╚════╧════╧════╧════╧════╧════╧════╧════╝
+    a    b    c    d    e    f    g    h
+
+BLACK's captures: wP x 8, wB x 2, wN x 2, wR x 1, wQ x 1
+WHITE's captures: bP x 8, bB x 2, bN x 2, bR x 2, bQ x 1
+
+BLACK (Human Player 2) is stalemated.
+Game ended: ½-½ The game is a draw!
 ```
 
 ### Load Screen (appears if have 1+ game saves)
