@@ -41,9 +41,42 @@ class ConsoleUI
     puts(res.join(''))
   end
 
-  # TODO - to test
   def print_captured_pieces
     return unless @game
+
+    black_captures = ["BLACK's captures: "]
+    white_pieces = []
+    w_pawns = captured_piece_str(:black, :pawn)
+    white_pieces.push(w_pawns) if w_pawns.size > 0
+    w_bishops = captured_piece_str(:black, :bishop)
+    white_pieces.push(w_bishops) if w_bishops.size > 0
+    w_knights = captured_piece_str(:black, :knight)
+    white_pieces.push(w_knights) if w_knights.size > 0
+    w_rooks = captured_piece_str(:black, :rook)
+    white_pieces.push(w_rooks) if w_rooks.size > 0
+    w_queens = captured_piece_str(:black, :queen)
+    white_pieces.push(w_queens) if w_queens.size > 0
+    black_captures.push(white_pieces.join(', '))
+
+    white_captures = ["WHITE's captures: "]
+    black_pieces = []
+    b_pawns = captured_piece_str(:white, :pawn)
+    black_pieces.push(b_pawns) if b_pawns.size > 0
+    b_bishops = captured_piece_str(:white, :bishop)
+    black_pieces.push(b_bishops) if b_bishops.size > 0
+    b_knights = captured_piece_str(:white, :knight)
+    black_pieces.push(b_knights) if b_knights.size > 0
+    b_rooks = captured_piece_str(:white, :rook)
+    black_pieces.push(b_rooks) if b_rooks.size > 0
+    b_queens = captured_piece_str(:white, :queen)
+    black_pieces.push(b_queens) if b_queens.size > 0
+    white_captures.push(black_pieces.join(', '))
+
+    res = [
+      black_captures.join(''), "\n",
+      white_captures.join(''), "\n", "\n"
+    ]
+    puts(res.join(''))
   end
 
   # TODO - to test
@@ -140,6 +173,20 @@ class ConsoleUI
     end
 
     res.push(BORDER_VERTICAL_SIDE, " ", rank)
+    res.join('')
+  end
+
+  def captured_piece_str(capturer_color, captive_type)
+    count = capturer_color == :white ?
+      @game.white_captured.fetch(captive_type, 0) :
+      @game.black_captured.fetch(captive_type, 0)
+    return "" if count < 1
+    res = [
+      COLOR_TO_STR[capturer_color],
+      PIECE_TO_STR[captive_type],
+      " x ",
+      count.to_s
+    ]
     res.join('')
   end
 end

@@ -458,7 +458,7 @@ Complete the following:
 - [x] `.initialize` constructor
 - [x] `#clear_UI` method
 - [x] `#print_board` method
-- [ ] `#print_captured_pieces` method
+- [x] `#print_captured_pieces` method
 - [ ] `#print_turn_prompt` method
 - [ ] `#print_game_end` method
 - [ ] `#print_saves_table` method
@@ -471,6 +471,7 @@ Complete the following:
 - [x] `#empty_cell_str` method (protected)
 - [x] `#piece_cell_str` method (protected)
 - [x] `#rank_str` method (protected)
+- [x] `#captured_piece_str` method (protected)
 
 ## `CommandRunner` class
 

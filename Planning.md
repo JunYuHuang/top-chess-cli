@@ -519,7 +519,8 @@ BLACK's captured pieces:
 WHITE's captured pieces:
 
 It is WHITE (Human Player 1)'s turn.
-[if applies: '❕ Move your checked king to an unchecked or safe square.']
+[if applies: '❕ Your king is checked; move your
+king out of check to another square.']
 ✅ Started new game.
 ❌ 'asdf' is an illegal move or an invalid command. Try again.
 Enter your move in Long Algebraic Notation
