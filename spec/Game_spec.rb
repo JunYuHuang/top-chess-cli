@@ -60,7 +60,7 @@ describe Game do
       game.add_player!(MockPlayer)
       player_1 =  game.players[0]
       expect(game.players.size).to eql(1)
-      expect(player_1.name).to eql("Player 1")
+      expect(player_1.name).to eql("WHITE (Human Player 1)")
       expect(player_1.piece_color).to eql(:white)
     end
 
@@ -72,7 +72,7 @@ describe Game do
       game.add_player!(MockPlayer)
       player_2 =  game.players[1]
       expect(game.players.size).to eql(2)
-      expect(player_2.name).to eql("Player 2")
+      expect(player_2.name).to eql("BLACK (Human Player 2)")
       expect(player_2.piece_color).to eql(:black)
     end
   end

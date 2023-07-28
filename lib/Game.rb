@@ -34,22 +34,36 @@ class Game
 
     if player_class
       @players_count.times do |i|
-        @players.push(player_class.new(
-          self,
-          "Player #{@players.size + 1}",
-          @players.empty? ? :white : :black
-        ))
+        new_player = player_class.new({
+          game: self,
+          type: :human,
+          piece_color: @players.empty? ? :white : :black
+        })
+        new_name = [
+          "#{new_player.piece_color.to_s.upcase} (",
+          "#{new_player.type.to_s.capitalize} Player ",
+          "#{@players.size + 1})"
+        ]
+        new_player.name = new_name.join('')
+        @players.push(new_player)
       end
     end
   end
 
   def add_player!(player_class)
     return if @players.size >= @players_count
-    @players.push(player_class.new(
-      self,
-      "Player #{@players.size + 1}",
-      @players.empty? ? :white : :black
-    ))
+    new_player = player_class.new({
+      game: self,
+      type: :human,
+      piece_color: @players.empty? ? :white : :black
+    })
+    new_name = [
+      "#{new_player.piece_color.to_s.upcase} (",
+      "#{new_player.type.to_s.capitalize} Player ",
+      "#{@players.size + 1})"
+    ]
+    new_player.name = new_name.join('')
+    @players.push(new_player)
   end
 
   # TODO - to test

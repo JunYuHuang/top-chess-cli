@@ -5,16 +5,25 @@ require './lib/Player'
 =end
 
 class MockPlayer < Player
-  attr_accessor(:game, :name, :piece_color)
+  DEFAULTS = {
+    game: nil, type: :none, name: nil, piece_color: nil
+  }
 
-  def initialize(game, name, piece_color)
-    @game = game
-    @name = name
-    @piece_color = piece_color
+  attr_accessor(:game, :type, :name, :piece_color)
+
+  def initialize(args)
+    @game = args.fetch(:game, DEFAULTS[:game])
+    @type = args.fetch(:type, DEFAULTS[:type])
+    @name = args.fetch(:name, DEFAULTS[:name])
+    @piece_color = args.fetch(:piece_color, DEFAULTS[:piece_color])
   end
 
   def game
     @game
+  end
+
+  def type
+    @type
   end
 
   def piece_color
