@@ -45,6 +45,8 @@ Complete the following:
 Complete the following:
 
 - [x] `.initialize` constructor
+- [x] `#game` method
+- [x] `#type` method
 - [x] `#piece_color` method
 - [x] `#name` method
 

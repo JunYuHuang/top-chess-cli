@@ -1,16 +1,21 @@
 require './lib/Player'
 
 class HumanPlayer < Player
-  attr_accessor(:game, :name, :piece_color, :player_type)
+  DEFAULTS = { name: nil, piece_color: :white }
 
-  @@player_type = "Human"
-
-  def initialize(game, name, piece_color)
-    super(game, name, piece_color)
+  def initialize(args)
+    passed_args = {
+      game: args[:game],
+      type: :human,
+      name: args.fetch(:name, DEFAULTS[:name]),
+      piece_color: args.fetch(:piece_color, DEFAULTS[:piece_color])
+    }
+    super(passed_args)
   end
 
   def to_s
-    "#{@piece_color.to_s.upcase} (#{@name})"
+    return @name if @name
+    "#{@piece_color.to_s.upcase} (#{@type.capitalize} Player)"
   end
 
   # TODO - to test
