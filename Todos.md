@@ -342,16 +342,16 @@ Complete the following:
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
-- [ ] `#use_chess_move_runner` method
+- [x] `#use_chess_move_runner` method
 - [x] `#are_valid_pieces?` method
 - [x] `#empty_board` method
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#build_board` method
 - [ ] `#update!` method
-- [ ] `#use_console_ui` method
+- [x] `#use_console_ui` method
 - [ ] `#use_game_saves` method
-- [ ] `#add_captured_piece!` method
+- [x] `#add_captured_piece!` method
 - [x] `#is_valid_piece?` method (private)
 - [x] `#is_bool_key?` method (private)
 
@@ -367,6 +367,7 @@ Complete the tests for the following:
 - [x] `#build_start_board`
 - [x] `#build_board` method
 - [ ] `#update!` method
+- [x] `#add_captured_piece!` method
 - [ ] TODO
 
 ## `ChessMoveRunner` class

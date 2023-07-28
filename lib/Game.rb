@@ -254,9 +254,19 @@ class Game
     # TODO
   end
 
-  # TODO - to test
-  def add_captured_piece!(piece_obj)
-    # TODO
+  def add_captured_piece!(captive_cell)
+    return unless self.class.is_inbound_cell?(captive_cell)
+    return if self.class.is_empty_cell?(captive_cell, @board)
+
+    row, col = captive_cell
+    piece = @board[row][col]
+    if piece.color == :white
+      count = @black_captured.fetch(piece.type, 0)
+      @black_captured[piece.type] = count + 1
+    else
+      count = @white_captured.fetch(piece.type, 0)
+      @white_captured[piece.type] = count + 1
+    end
   end
 
   private

@@ -578,4 +578,63 @@ describe Game do
       end
     end
   end
+
+  describe "#add_captured_piece!" do
+    it "does nothing if called with an invalid cell on a valid game with the default starting board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      game.add_captured_piece!([0,9])
+      expect(game.white_captured.size).to eql(0)
+      expect(game.black_captured.size).to eql(0)
+    end
+
+    it "does nothing if called with an empty cell on a valid game with the default starting board" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      game.add_captured_piece!([3,0])
+      expect(game.white_captured.size).to eql(0)
+      expect(game.black_captured.size).to eql(0)
+    end
+
+    it "modifies the game state properly if called with a valid cell that has a piece on it on a valid game with a custom board" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_captured_piece!([3,4])
+      expect(game.white_captured.size).to eql(0)
+      expect(game.black_captured.size).to eql(1)
+      expect(game.black_captured[:rook]).to eql(1)
+    end
+
+    it "modifies the game state properly if called with a valid cell that has a piece on it on a valid game with a custom board" do
+      pieces = [
+        {
+          cell: [5,3],
+          color: :black,
+          type: :queen,
+          is_capturable: true
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_captured_piece!([5,3])
+      expect(game.white_captured.size).to eql(1)
+      expect(game.white_captured[:queen]).to eql(1)
+      expect(game.black_captured.size).to eql(0)
+    end
+  end
 end
