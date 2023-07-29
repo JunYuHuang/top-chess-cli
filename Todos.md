@@ -462,14 +462,14 @@ Complete the following:
 - [x] `#clear_UI` method
 - [x] `#print_board` method
 - [x] `#print_captured_pieces` method
-- [ ] `#print_turn_prompt` method
-- [ ] `#print_game_end` method
+- [x] `#print_turn_prompt` method
+- [x] `#print_game_end` method
 - [ ] `#print_saves_table` method
 - [ ] `#print_load_prompt` method
 - [ ] `#print_load_screen` method
 - [ ] `#print_setup_screen` method
-- [ ] `#print_turn_screen` method
-- [ ] `#print_end_screen` method
+- [x] `#print_turn_screen` method
+- [x] `#print_end_screen` method
 - [x] `#row_to_rank` method (protected)
 - [x] `#empty_cell_str` method (protected)
 - [x] `#piece_cell_str` method (protected)

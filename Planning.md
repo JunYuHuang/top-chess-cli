@@ -492,7 +492,7 @@ See [Todos.md](./Todos.md) for the most up-to-date details.
 
 ## UI Design
 
-### Turn Screen
+### Turn Screen - Start Of Game
 
 ```
     a    b    c    d    e    f    g    h
@@ -515,17 +515,51 @@ See [Todos.md](./Todos.md) for the most up-to-date details.
   ╚════╧════╧════╧════╧════╧════╧════╧════╝
     a    b    c    d    e    f    g    h
 
-BLACK's captured pieces:
-WHITE's captured pieces:
+BLACK's captures:
+WHITE's captures:
 
-It is WHITE (Human Player 1)'s turn.
-[if applies: '❕ Your king is checked; move your
-king out of check to another square.']
 ✅ Started new game.
-❌ 'asdf' is an illegal move or an invalid command. Try again.
-Enter your move in Long Algebraic Notation
-(e.g. 'e1e4')
+It is WHITE (Human Player 1)'s turn.
+
+Enter your move in Long Algebraic Notation (e.g. 'e2e3'
+to move your pawn from 'e2' to 'e3' as WHITE)
 or '!save' to save the game:
+❌ 'asdf' is an illegal move or invalid command. Try again.
+```
+
+### Turn Screen - Black Is Stalemated
+
+```
+    a    b    c    d    e    f    g    h
+  ╔════╤════╤════╤════╤════╤════╤════╤════╗
+8 ║    │░░░░│    │░░░░│ bK │░░░░│    │░░░░║ 8
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+7 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 7
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+6 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 6
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+5 ║░░░░│    │░░░░│    │ wR │    │░░░░│    ║ 5
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+4 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 4
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+3 ║░░░░│    │░░░░│    │░░░░│    │░░░░│    ║ 3
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+2 ║    │░░░░│    │░░░░│    │░░░░│    │░░░░║ 2
+  ╟────┼────┼────┼────┼────┼────┼────┼────╢
+1 ║░░░░│    │░░░░│    │ wK │    │░░░░│    ║ 1
+  ╚════╧════╧════╧════╧════╧════╧════╧════╝
+    a    b    c    d    e    f    g    h
+
+BLACK's captures: wP x 8, wB x 2, wN x 2, wR x 1, wQ x 1
+WHITE's captures: bP x 8, bB x 2, bN x 2, bR x 2, bQ x 1
+
+
+It is BLACK (Human Player 2)'s turn.
+❕ Move your king out of check to another square.
+Enter your move in Long Algebraic Notation (e.g. 'e2e3'
+to move your pawn from 'e2' to 'e3' as WHITE)
+or '!save' to save the game:
+
 ```
 
 ### End Screen - White Victory

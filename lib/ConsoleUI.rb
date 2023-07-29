@@ -79,14 +79,70 @@ class ConsoleUI
     puts(res.join(''))
   end
 
-  # TODO - to test
-  def print_turn_prompt
+  def print_turn_prompt(is_valid_input, last_input = "")
     return unless @game
+    return if @game.players.size != @game.players_count
+
+    player = @game.player(@game.current_player_color)
+    king = @game.class.pieces(@game.board, {
+      color: @game.current_player_color, type: :king
+    })[0]
+    is_king_checked = king[:piece].is_checked?(king[:cell], @game.board)
+    king_checked_msg = "❕Move your king out of check to another square."
+    invalid_input_msg = "❌ '#{last_input}' is an illegal move or invalid command. Try again."
+
+    res = [
+      # TODO: game save load / start message at start of game
+      "It is #{player.to_s}'s turn.\n",
+      "#{ is_king_checked ? king_checked_msg : "" }\n",
+      "Enter your move in Long Algebraic Notation (e.g. 'e2e3'\n",
+      "to move your pawn from 'e2' to 'e3' as WHITE)\n",
+      # "or 'save!' to save the game:\n",
+      "#{ is_valid_input ? "" : invalid_input_msg }\n",
+    ]
+    puts(res.join(''))
   end
 
-  # TODO - to test
-  def print_game_end
+  def print_game_end(winner_color = nil)
     return unless @game
+
+    # handle stalemates and ties
+    unless winner_color
+      white_king = @game.class.pieces(@game.board, {
+        color: :white, type: :king
+      })[0]
+      is_white_stalemated = white_king[:piece].is_stalemated?(
+        white_king[:cell], @game.board
+      )
+      black_king = @game.class.pieces(@game.board, {
+        color: :black, type: :king
+      })[0]
+      is_black_stalemated = black_king[:piece].is_stalemated?(
+        black_king[:cell], @game.board
+      )
+      is_stalemate = is_white_stalemated || is_black_stalemated
+      stalemated_player = is_white_stalemated ?
+        @game.player(:white) : @game.player(:black)
+      stalemate_msg = "#{stalemated_player.to_s} is stalemated.\n"
+
+      res = [
+        "#{ is_stalemate ? stalemate_msg : "" }",
+        "Game ended: ½-½ The game is a draw!\n"
+      ]
+      puts(res.join(''))
+      return
+    end
+
+    # handle wins
+    winner_player = @game.player(winner_color)
+    loser_color = winner_color == :white ? :black : :white
+    loser_player = @game.player(loser_color)
+    game_res = winner_color == :white ? "1-0" : "0-1"
+    res = [
+      "#{winner_player.to_s} has checkmated #{loser_player.to_s}.\n",
+      "Game ended: #{game_res} #{winner_player.to_s} won!"
+    ]
+    puts(res.join(''))
   end
 
   # TODO - to test
@@ -109,14 +165,20 @@ class ConsoleUI
     return unless @game
   end
 
-  # TODO - to test
-  def print_turn_screen
+  def print_turn_screen(is_valid_input, last_input = "")
     return unless @game
+
+    print_board
+    print_captured_pieces
+    print_turn_prompt(is_valid_input, last_input)
   end
 
-  # TODO - to test
-  def print_end_screen
+  def print_end_screen(winner_color = nil)
     return unless @game
+
+    print_board
+    print_captured_pieces
+    print_game_end(winner_color)
   end
 
   protected
