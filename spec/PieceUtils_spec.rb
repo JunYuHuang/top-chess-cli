@@ -248,4 +248,31 @@ describe "PieceUtils" do
       end
     end
   end
+
+  describe "#en_passant_captive_cell" do
+    it "returns nil if called with ([2,8], :white)" do
+      res = PieceUtilsClass.en_passant_captive_cell([2,8], :white)
+      expect(res).to eql(nil)
+    end
+
+    it "returns [3,4] if called with ([2,4], :white)" do
+      res = PieceUtilsClass.en_passant_captive_cell([2,4], :white)
+      expect(res).to eql([3,4])
+    end
+
+    it "returns [3,6] if called with ([2,6], :white)" do
+      res = PieceUtilsClass.en_passant_captive_cell([2,6], :white)
+      expect(res).to eql([3,6])
+    end
+
+    it "returns [4,1] if called with ([5,1], :black)" do
+      res = PieceUtilsClass.en_passant_captive_cell([5,1], :black)
+      expect(res).to eql([4,1])
+    end
+
+    it "returns [4,3] if called with ([5,3], :black)" do
+      res = PieceUtilsClass.en_passant_captive_cell([5,3], :black)
+      expect(res).to eql([4,3])
+    end
+  end
 end

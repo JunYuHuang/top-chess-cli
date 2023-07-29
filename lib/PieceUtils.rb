@@ -326,7 +326,6 @@ module PieceUtils
     res
   end
 
-  # TODO - to test
   def en_passant_captive_cell(dst_cell, capturer_color)
     return unless is_inbound_cell?(dst_cell)
     return unless is_valid_piece_color?(capturer_color)
@@ -334,6 +333,7 @@ module PieceUtils
     captive_cell = capturer_color == :white ?
       down_adjacent_cell(dst_cell) :
       up_adjacent_cell(dst_cell)
+    is_inbound_cell?(captive_cell) ? captive_cell : nil
   end
 
   def up_moves(src_cell, board, options = DEFAULT_MOVE_OPTIONS)
