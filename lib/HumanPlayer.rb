@@ -19,9 +19,22 @@ class HumanPlayer < Player
   end
 
   # TODO - to test
-  def get_turn_input
-    return if @game.nil?
-    # TODO
+  def input
+    return unless @game
+
+    is_valid_input = true
+    last_input = nil
+    loop do
+      @game.console_ui.print_turn_screen(is_valid_input, last_input)
+      player_input = gets.chomp
+
+      if @game.can_input?(player_input)
+        return player_input
+      end
+
+      is_valid_input = false
+      last_input = player_input
+    end
   end
 
   # TODO - to test

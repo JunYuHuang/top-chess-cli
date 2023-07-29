@@ -55,15 +55,15 @@ Complete the following:
 Complete the following:
 
 - [x] `.initialize` constructor
-- [ ] `#get_turn_input` method
+- [x] `#input` method
 - [ ] `#get_start_option` method
 - [ ] `#get_opponent_type` method
-- [x] `to_s` method
+- [x] `#to_s` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [x] `to_s` method
+- [x] `#to_s` method
 
 <!-- ## `ComputerPlayer` class
 
@@ -94,6 +94,12 @@ Complete the following:
 - [x] `#is_matching_piece?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
+- [x] `#in_row?` method
+- [x] `#is_left_adjacent?` method
+- [x] `#is_right_adjacent?` method
+- [x] `#up_adjacent_cell` method
+- [x] `#down_adjacenet_cell` method
+- [x] `#en_passant_captive_cell` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -131,6 +137,12 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_matching_piece?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
+- [x] `#in_row?` method
+- [x] `#is_left_adjacent?` method
+- [x] `#is_right_adjacent?` method
+- [x] `#up_adjacent_cell` method
+- [x] `#down_adjacenet_cell` method
+- [x] `#en_passant_captive_cell` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
 - [x] `#down_moves` method
@@ -337,7 +349,9 @@ Complete the following:
 
 - [x] `.initialize` constructor
 - [x] `#add_player!` method
-- [ ] `#play!` method
+- [x] `#play!` method
+- [x] `#can_input?` method
+- [x] `#execute_input!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
@@ -359,6 +373,8 @@ Complete the tests for the following:
 
 - [x] `.initialize` constructor
 - [x] `#add_player!` method
+- [ ] `#can_input?` method
+- [ ] `#execute_input!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method

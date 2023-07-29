@@ -13,8 +13,10 @@ class Game
   # TODO - to test
   def initialize(options = {})
     @piece_factory = options[:piece_factory_class]
-    @chess_move_runner = options[:chess_move_runner_class]
-    @console_ui = options.fetch(:console_ui_class, nil)
+    console_ui_class = options.fetch(:console_ui_class, nil)
+    chess_move_runner_class = options.fetch(
+      :chess_move_runner_class, nil
+    )
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
 
@@ -48,6 +50,14 @@ class Game
         @players.push(new_player)
       end
     end
+
+    if chess_move_runner_class
+      @chess_move_runner = chess_move_runner_class.new(self)
+    end
+
+    if console_ui_class
+      @console_ui = console_ui_class.new(self)
+    end
   end
 
   def add_player!(player_class)
@@ -66,10 +76,65 @@ class Game
     @players.push(new_player)
   end
 
-  # TODO - to test
+  # TODO - to test manually
   def play
     return if @players.size != @players_count
-    # TODO
+
+    loop do
+      # TODO - fix `KingPiece#did_stalemate?` method
+      # if did_tie?
+      #   @console_ui.print_end_screen
+      #   return
+      if did_player_win?(:white)
+        @console_ui.print_end_screen(:white)
+        return
+      elsif did_player_win?(:black)
+        @console_ui.print_end_screen(:black)
+        return
+      end
+
+      current_player = player(@current_player_color)
+      execute_input!(current_player.input)
+      switch_players!
+    end
+  end
+
+  # TODO - to test
+  def can_input?(input)
+    return false if @players.size != @players_count
+    return false if @chess_move_runner.nil? or @console_ui.nil?
+    return true if @chess_move_runner.can_chess_move?(input)
+    false
+  end
+
+  # TODO - to test
+  def execute_input!(input)
+    return if @players.size != @players_count
+    return if @chess_move_runner.nil? or @console_ui.nil?
+
+    # Update the white or black captured pieces state
+    # if the chess move will remove a piece from the board.
+    if @chess_move_runner.can_capture?(input)
+      res = @chess_move_runner.capture_syntax_to_hash(input)
+      add_captured_piece!(res[:dst_cell])
+    elsif @chess_move_runner.can_capture_en_passant?(input)
+      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input)
+      # captive_cell = @current_player_color == :white ?
+      #   self.class.down_adjacent_cell(res[:dst_cell]) :
+      #   self.class.up_adjacent_cell(res[:dst_cell])
+      captive_cell = self.class.en_passant_captive_cell(
+        res[:dst_cell], @current_player_color
+      )
+      add_captured_piece!(captive_cell)
+    elsif @chess_move_runner.can_promote?(input)
+      res = @chess_move_runner.promote_syntax_to_hash(input)
+      is_empty = self.class.is_empty_cell?(res[:dst_cell], @board)
+      add_captured_piece!(res[:dst_cell]) unless is_empty
+    end
+
+    if @chess_move_runner.can_chess_move?(input)
+      @chess_move_runner.execute_chess_move!(input)
+    end
   end
 
   def player(color)

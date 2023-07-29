@@ -96,7 +96,7 @@ class ConsoleUI
       "It is #{player.to_s}'s turn.\n",
       "#{ is_king_checked ? king_checked_msg : "" }\n",
       "Enter your move in Long Algebraic Notation (e.g. 'e2e3'\n",
-      "to move your pawn from 'e2' to 'e3' as WHITE)\n",
+      "to move your pawn from 'e2' to 'e3' as WHITE):\n",
       # "or 'save!' to save the game:\n",
       "#{ is_valid_input ? "" : invalid_input_msg }\n",
     ]
@@ -168,6 +168,7 @@ class ConsoleUI
   def print_turn_screen(is_valid_input, last_input = "")
     return unless @game
 
+    clear_UI
     print_board
     print_captured_pieces
     print_turn_prompt(is_valid_input, last_input)
@@ -176,6 +177,7 @@ class ConsoleUI
   def print_end_screen(winner_color = nil)
     return unless @game
 
+    clear_UI
     print_board
     print_captured_pieces
     print_game_end(winner_color)
