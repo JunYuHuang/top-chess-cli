@@ -101,9 +101,13 @@ class KingPiece < Piece
     moves(src_cell, board).size == 0
   end
 
-  # TODO - to fix
   def is_stalemated?(src_cell, board)
     return false if is_checked?(src_cell, board)
+
+    adj_cells = self.class.adjacent_cells(src_cell)
+    return false if adj_cells.all? do |cell|
+      !self.class.is_empty_cell?(cell, board)
+    end
     moves(src_cell, board).size == 0
   end
 

@@ -431,6 +431,132 @@ describe KingPiece do
       res = black_king.is_stalemated?([0,7], board)
       expect(res).to eql(true)
     end
+
+    it "returns false if called on a black king with a valid cell and a certain board with itself, a white rook, a white king, and 2 black pawns " do
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+      board[1][6] = black_pawn
+      board[1][7] = black_pawn
+
+      res = black_king.is_stalemated?([0,7], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called on a black king with a valid cell and a certain board with itself, a white rook, a white king, 2 black pawns, and a black queen" do
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_king = KingPiece.new({ color: :white })
+      black_king = KingPiece.new({ color: :black })
+      black_queen = MockPiece.new({ color: :black, type: :queen })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = white_rook
+      board[2][7] = white_king
+      board[0][7] = black_king
+      board[1][5] = black_queen
+      board[1][6] = black_pawn
+      board[1][7] = black_pawn
+
+      res = black_king.is_stalemated?([0,7], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called on a black king with a valid cell and a certain board with itself, a white queen, and a white king" do
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = KingPiece.new({ color: :white, did_move: true })
+      black_king = KingPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[2][6] = white_queen
+      board[7][0] = white_king
+      board[0][7] = black_king
+
+      res = black_king.is_stalemated?([0,7], board)
+      expect(res).to eql(true)
+    end
+
+    it "returns false if called on a black king with a valid cell and a certain board with itself, a black queen, a black bishop, and 3 black pawns" do
+      black_queen = MockPiece.new({ color: :black, type: :queen })
+      black_king = KingPiece.new({ color: :black })
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][3] = black_queen
+      board[0][4] = black_king
+      board[0][5] = black_bishop
+      board[1][3] = black_pawn
+      board[1][4] = black_pawn
+      board[1][5] = black_pawn
+
+      res = black_king.is_stalemated?([0,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called on a white king with a valid cell and a certain board with itself, a white queen, a white bishop, and 3 white pawns" do
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = KingPiece.new({ color: :white })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][3] = white_queen
+      board[7][4] = white_king
+      board[7][5] = white_bishop
+      board[6][3] = white_pawn
+      board[6][4] = white_pawn
+      board[6][5] = white_pawn
+
+      res = white_king.is_stalemated?([7,4], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called on a black king with a valid cell and a certain board with itself, a white pawn, and a white king" do
+      black_king = KingPiece.new({ color: :black, did_move: true })
+      white_king = KingPiece.new({ color: :white, did_move: true })
+      white_pawn = MockPiece.new({
+        color: :white, type: :pawn, did_move: true
+      })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][5] = black_king
+      board[1][5] = white_pawn
+      board[2][5] = white_king
+
+      res = black_king.is_stalemated?([0,5], board)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called on a black king with a valid cell and a certain board with itself, a black pawn, a white queen, and a white king" do
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      black_king = KingPiece.new({ color: :black, did_move: true })
+      white_king = KingPiece.new({ color: :white, did_move: true })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][0] = black_king
+      board[6][0] = black_pawn
+      board[5][1] = white_queen
+      board[3][6] = white_king
+
+      res = black_king.is_stalemated?([7,0], board)
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called on a black king with a valid cell and a certain board with itself, a white pawn, a white bishop, and a white king" do
+      white_pawn = MockPiece.new({ color: :white, type: :pawn, did_move: true })
+      black_king = KingPiece.new({ color: :black, did_move: true })
+      white_king = KingPiece.new({ color: :white, did_move: true })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = black_king
+      board[1][0] = white_pawn
+      board[4][5] = white_bishop
+      board[2][0] = white_king
+
+      res = black_king.is_stalemated?([0,0], board)
+      expect(res).to eql(true)
+    end
   end
 
   describe "#can_queenside_castle?" do
