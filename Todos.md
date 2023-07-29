@@ -98,7 +98,8 @@ Complete the following:
 - [x] `#is_left_adjacent?` method
 - [x] `#is_right_adjacent?` method
 - [x] `#up_adjacent_cell` method
-- [x] `#down_adjacenet_cell` method
+- [x] `#down_adjacent_cell` method
+- [x] `#adjacent_cells` method
 - [x] `#en_passant_captive_cell` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method
@@ -141,7 +142,8 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_left_adjacent?` method
 - [x] `#is_right_adjacent?` method
 - [x] `#up_adjacent_cell` method
-- [x] `#down_adjacenet_cell` method
+- [x] `#down_adjacent_cell` method
+- [x] `#adjacent_cells` method
 - [x] `#en_passant_captive_cell` method
 - [x] `#up_moves` method
 - [x] `#up_capture` method

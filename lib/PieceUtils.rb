@@ -17,6 +17,16 @@ module PieceUtils
     [2, -1],    # 2 downs -> 1 left
     [2, 1]      # 2 downs -> 1 right
   ]
+  ENCLOSING_CELL_OFFSETS = [
+    [-1, -1],   # top left
+    [-1, 0],    # top
+    [-1, 1],    # top right
+    [0, -1],    # left
+    [0, 1],     # right
+    [1, -1],    # bot left
+    [1, 0],     # bot
+    [1, 1],     # bot right
+  ]
 
   def board_length
     BOARD_LENGTH
@@ -303,6 +313,17 @@ module PieceUtils
   def down_adjacent_cell(src_cell)
     src_row, src_col = src_cell
     [src_row + 1, src_col]
+  end
+
+  def adjacent_cells(src_cell)
+    src_row, src_col = src_cell
+    res = []
+    ENCLOSING_CELL_OFFSETS.each do |offset_cell|
+      offset_row, offset_col = offset_cell
+      adj_cell = [src_row + offset_row, src_col + offset_col]
+      res.push(adj_cell) if is_inbound_cell?(adj_cell)
+    end
+    res
   end
 
   # TODO - to test

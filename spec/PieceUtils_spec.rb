@@ -189,4 +189,63 @@ describe "PieceUtils" do
       expect(res).to eql(1)
     end
   end
+
+  describe "#adjacent_cells" do
+    it "returns the correct int matrix array if called with [0,0]" do
+      res = PieceUtilsClass.adjacent_cells([0,0])
+      expected = [
+        [0, 1],     # right
+        [1, 0],     # bot
+        [1, 1],     # bot right
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix array if called with [0,7]" do
+      res = PieceUtilsClass.adjacent_cells([0,7])
+      expected = [
+        [0, 6],     # left
+        [1, 6],     # bot left
+        [1, 7],     # bot
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix array if called with [7,7]" do
+      res = PieceUtilsClass.adjacent_cells([7,7])
+      expected = [
+        [6, 6],     # top left
+        [6, 7],     # top
+        [7, 6],     # left
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix array if called with [3,3]" do
+      res = PieceUtilsClass.adjacent_cells([3,3])
+      expected = [
+        [2, 2],     # top left
+        [2, 3],     # top
+        [2, 4],     # top right
+        [3, 2],     # left
+        [3, 4],     # right
+        [4, 2],     # bot left
+        [4, 3],     # bot
+        [4, 4],     # bot right
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+  end
 end
