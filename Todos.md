@@ -489,6 +489,7 @@ Complete the following:
 - [x] `#print_turn_screen` method
 - [x] `#print_end_screen` method
 - [x] `#row_to_rank` method (protected)
+- [x] `#is_dark_cell?` method (protected)
 - [x] `#empty_cell_str` method (protected)
 - [x] `#piece_cell_str` method (protected)
 - [x] `#rank_str` method (protected)

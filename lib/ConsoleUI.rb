@@ -7,6 +7,7 @@ class ConsoleUI
   }
   LIGHT_SQUARE = "    "
   DARK_SQUARE = "░░░░"
+  DARK_SQUARE_CHAR = "░"
   FILE_LABELS = "    a    b    c    d    e    f    g    h"
   BORDER_VERTICAL_SIDE = "║"
   FILE_DIVIDER = "│"
@@ -190,15 +191,17 @@ class ConsoleUI
     @game.rows - row
   end
 
-  def empty_cell_str(row, col)
-    return unless @game
-
+  def is_dark_cell?(row, col)
     is_even = ->(n) { n % 2 == 0 }
     is_odd = ->(n) { n % 2 != 0 }
-    return LIGHT_SQUARE if is_even.call(row) && is_even.call(col)
-    return DARK_SQUARE if is_even.call(row) && is_odd.call(col)
-    return DARK_SQUARE if is_odd.call(row) && is_even.call(col)
-    return LIGHT_SQUARE if is_odd.call(row) && is_odd.call(col)
+    return true if is_even.call(row) && is_odd.call(col)
+    return true if is_odd.call(row) && is_even.call(col)
+    false
+  end
+
+  def empty_cell_str(row, col)
+    return unless @game
+    is_dark_cell?(row, col) ? DARK_SQUARE : LIGHT_SQUARE
   end
 
   def piece_cell_str(row, col)
@@ -206,10 +209,10 @@ class ConsoleUI
 
     piece_obj = @game.board[row][col]
     res = [
-      " ",
+      "#{ is_dark_cell?(row, col) ? DARK_SQUARE_CHAR : " "}",
       COLOR_TO_STR[piece_obj.color],
       PIECE_TO_STR[piece_obj.type],
-      " "
+      "#{ is_dark_cell?(row, col) ? DARK_SQUARE_CHAR : " "}",
     ]
     res.join('')
   end
