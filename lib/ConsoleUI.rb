@@ -3,7 +3,7 @@ require 'set'
 class ConsoleUI
   COLOR_TO_STR = { white: "w", black: "b" }
   PIECE_TO_STR = {
-    pawn: "P", rook: "R", knight: "K", bishop: "B", queen: "Q", king: "K"
+    pawn: "P", rook: "R", knight: "N", bishop: "B", queen: "Q", king: "K"
   }
   LIGHT_SQUARE = "    "
   DARK_SQUARE = "░░░░"

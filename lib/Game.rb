@@ -81,11 +81,10 @@ class Game
     return if @players.size != @players_count
 
     loop do
-      # TODO - fix `KingPiece#did_stalemate?` method
-      # if did_tie?
-      #   @console_ui.print_end_screen
-      #   return
-      if did_player_win?(:white)
+      if did_tie?
+        @console_ui.print_end_screen
+        return
+      elsif did_player_win?(:white)
         @console_ui.print_end_screen(:white)
         return
       elsif did_player_win?(:black)
@@ -114,11 +113,11 @@ class Game
 
     # Update the white or black captured pieces state
     # if the chess move will remove a piece from the board.
-    if @chess_move_runner.can_capture?(input)
-      res = @chess_move_runner.capture_syntax_to_hash(input)
+    if @chess_move_runner.can_capture?(input, @current_player_color)
+      res = @chess_move_runner.capture_syntax_to_hash(input, @current_player_color)
       add_captured_piece!(res[:dst_cell])
-    elsif @chess_move_runner.can_capture_en_passant?(input)
-      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input)
+    elsif @chess_move_runner.can_capture_en_passant?(input, @current_player_color)
+      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input, @current_player_color)
       # captive_cell = @current_player_color == :white ?
       #   self.class.down_adjacent_cell(res[:dst_cell]) :
       #   self.class.up_adjacent_cell(res[:dst_cell])
@@ -126,14 +125,15 @@ class Game
         res[:dst_cell], @current_player_color
       )
       add_captured_piece!(captive_cell)
-    elsif @chess_move_runner.can_promote?(input)
-      res = @chess_move_runner.promote_syntax_to_hash(input)
+    elsif @chess_move_runner.can_promote?(input, @current_player_color)
+      res = @chess_move_runner.promote_syntax_to_hash(input, @current_player_color)
       is_empty = self.class.is_empty_cell?(res[:dst_cell], @board)
       add_captured_piece!(res[:dst_cell]) unless is_empty
     end
 
-    if @chess_move_runner.can_chess_move?(input)
-      @chess_move_runner.execute_chess_move!(input)
+    if @chess_move_runner.can_chess_move?(input, @current_player_color)
+      @chess_move_runner.execute_chess_move!(input, @current_player_color)
+      @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(@current_player_color)
     end
   end
 
