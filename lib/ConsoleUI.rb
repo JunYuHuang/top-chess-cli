@@ -84,9 +84,9 @@ class ConsoleUI
     return unless @game
     return if @game.players.size != @game.players_count
 
-    player = @game.player(@game.current_player_color)
+    player = @game.player(@game.turn_color)
     king = @game.class.pieces(@game.board, {
-      color: @game.current_player_color, type: :king
+      color: @game.turn_color, type: :king
     })[0]
     is_king_checked = king[:piece].is_checked?(king[:cell], @game.board)
     king_checked_msg = "❕Move your king out of check to another square."

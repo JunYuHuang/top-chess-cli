@@ -167,7 +167,7 @@ class ChessMoveRunner
   end
 
   def turn_color
-    return @game.current_player_color if @game
+    return @game.turn_color if @game
     :white
   end
 

@@ -106,9 +106,9 @@ describe Game do
         player_class: MockPlayer
       }
       game = Game.new(options)
-      game.current_player_color = :white
+      game.turn_color = :white
       game.switch_players!
-      expect(game.current_player_color).to eql(:black)
+      expect(game.turn_color).to eql(:black)
     end
 
     it "sets the game's player turn to :white if called on a game whose current player turn is set to :black" do
@@ -117,9 +117,9 @@ describe Game do
         player_class: MockPlayer
       }
       game = Game.new(options)
-      game.current_player_color = :black
+      game.turn_color = :black
       game.switch_players!
-      expect(game.current_player_color).to eql(:white)
+      expect(game.turn_color).to eql(:white)
     end
   end
 

@@ -825,7 +825,7 @@ describe ChessMoveRunner do
     it "returns the correct hash if called with ('Bc1xg5') on a game whose turn is the black player's" do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
-      game.current_player_color = :black
+      game.turn_color = :black
       chess_move_runner = ChessMoveRunner.new(game)
       res = chess_move_runner.capture_syntax_to_hash('Bc1xg5')
       exp = {
@@ -855,7 +855,7 @@ describe ChessMoveRunner do
     it "returns the correct hash if called with ('c4xd3') on a game whose turn is the black player's" do
       options = { piece_factory_class: PieceFactory }
       game = Game.new(options)
-      game.current_player_color = :black
+      game.turn_color = :black
       chess_move_runner = ChessMoveRunner.new(game)
       res = chess_move_runner.capture_en_passant_syntax_to_hash('c4xd3')
       exp = {

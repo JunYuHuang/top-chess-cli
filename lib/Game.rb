@@ -5,7 +5,7 @@ class Game
   extend PieceUtils
 
   attr_accessor(
-    :players_count, :current_player_color, :rows, :cols,
+    :players_count, :turn_color, :rows, :cols,
     :board, :players, :white_captured, :black_captured,
     :piece_factory, :chess_move_runner, :console_ui
   )
@@ -21,7 +21,7 @@ class Game
     player_class = options.fetch(:player_class, nil)
 
     @players_count = 2
-    @current_player_color = :white
+    @turn_color = :white
     @players = []
     @white_captured = {}
     @black_captured = {}
@@ -92,7 +92,7 @@ class Game
         return
       end
 
-      current_player = player(@current_player_color)
+      current_player = player(@turn_color)
       execute_input!(current_player.input)
       switch_players!
     end
@@ -113,27 +113,27 @@ class Game
 
     # Update the white or black captured pieces state
     # if the chess move will remove a piece from the board.
-    if @chess_move_runner.can_capture?(input, @current_player_color)
-      res = @chess_move_runner.capture_syntax_to_hash(input, @current_player_color)
+    if @chess_move_runner.can_capture?(input, @turn_color)
+      res = @chess_move_runner.capture_syntax_to_hash(input, @turn_color)
       add_captured_piece!(res[:dst_cell])
-    elsif @chess_move_runner.can_capture_en_passant?(input, @current_player_color)
-      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input, @current_player_color)
-      # captive_cell = @current_player_color == :white ?
+    elsif @chess_move_runner.can_capture_en_passant?(input, @turn_color)
+      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input, @turn_color)
+      # captive_cell = @turn_color == :white ?
       #   self.class.down_adjacent_cell(res[:dst_cell]) :
       #   self.class.up_adjacent_cell(res[:dst_cell])
       captive_cell = self.class.en_passant_captive_cell(
-        res[:dst_cell], @current_player_color
+        res[:dst_cell], @turn_color
       )
       add_captured_piece!(captive_cell)
-    elsif @chess_move_runner.can_promote?(input, @current_player_color)
-      res = @chess_move_runner.promote_syntax_to_hash(input, @current_player_color)
+    elsif @chess_move_runner.can_promote?(input, @turn_color)
+      res = @chess_move_runner.promote_syntax_to_hash(input, @turn_color)
       is_empty = self.class.is_empty_cell?(res[:dst_cell], @board)
       add_captured_piece!(res[:dst_cell]) unless is_empty
     end
 
-    if @chess_move_runner.can_chess_move?(input, @current_player_color)
-      @chess_move_runner.execute_chess_move!(input, @current_player_color)
-      @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(@current_player_color)
+    if @chess_move_runner.can_chess_move?(input, @turn_color)
+      @chess_move_runner.execute_chess_move!(input, @turn_color)
+      @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(@turn_color)
     end
   end
 
@@ -145,8 +145,8 @@ class Game
 
   def switch_players!
     return if @players.size != @players_count
-    return if @current_player_color.nil?
-    @current_player_color = @current_player_color == :white ? :black : :white
+    return if @turn_color.nil?
+    @turn_color = @turn_color == :white ? :black : :white
     true
   end
 
@@ -302,7 +302,7 @@ class Game
       players:,
       history:
     }
-    @current_player_color = current_player_color
+    @turn_color = current_player_color
     @board = build_board(board)
     # TODO - figure out how to deserialize players array and update it
     # TODO - figure out how to deserialize history array and update it
