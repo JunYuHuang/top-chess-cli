@@ -91,7 +91,7 @@ class PawnPiece < Piece
 
     captive_args = {
       board: board, piece_type: :pawn, cell: captive_cell,
-      piece_color: @color == :white ? :black : :white
+      piece_color: self.class.enemy_color(@color)
     }
     return false unless self.class.is_matching_piece?(captive_args)
 

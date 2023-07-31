@@ -526,7 +526,7 @@ class ChessMoveRunner
   # Should be called after any chess move is played to uphold the
   # rules of en-passant eligibility.
   def set_enemy_pawns_non_capturable_en_passant!(enemy_color = nil)
-    enemy_color = turn_color == :white ? :black : :white if !enemy_color
+    enemy_color = self.class.enemy_color(turn_color) if !enemy_color
 
     # black pawns that double stepped will be in row index 3 (rank 5)
     # white pawns that double stepped will be in row index 4 (rank 4)

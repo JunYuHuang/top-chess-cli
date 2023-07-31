@@ -80,7 +80,7 @@ class KingPiece < Piece
     src_row, src_col = src_cell
     board_copy[src_row][src_col] = self
 
-    filter = @color == :white ? { color: :black } : { color: :white }
+    filter = { color: self.class.enemy_color(@color) }
     enemy_pieces = self.class.pieces(board, filter)
     enemy_pieces.each do |enemy|
       enemy_captures = []

@@ -136,7 +136,7 @@ class ConsoleUI
 
     # handle wins
     winner_player = @game.player(winner_color)
-    loser_color = winner_color == :white ? :black : :white
+    loser_color = @game.enemy_color(winner_color)
     loser_player = @game.player(loser_color)
     game_res = winner_color == :white ? "1-0" : "0-1"
     res = [

@@ -143,16 +143,17 @@ class Game
   def switch_players!
     return if @players.size != @players_count
     return if @turn_color.nil?
-    @turn_color = @turn_color == :white ? :black : :white
+    @turn_color = self.class.enemy_color(@turn_color)
     true
   end
 
-  def did_player_win?(player_color)
+  def did_player_win?(player_color = @turn_color)
     return false if @players.size != @players_count
     return false unless self.class.is_valid_piece_color?(player_color)
 
-    enemy_color = player_color == :white ? :black : :white
-    filters = { color: enemy_color, type: :king }
+    filters = {
+      color: self.class.enemy_color(player_color), type: :king
+    }
     enemy_king = self.class.pieces(@board, filters)[0]
     enemy_king[:piece].is_checkmated?(enemy_king[:cell], @board)
   end
