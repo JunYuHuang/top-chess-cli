@@ -77,7 +77,7 @@ class Game
   end
 
   # TODO - to test manually
-  def play
+  def play!
     return if @players.size != @players_count
 
     loop do
