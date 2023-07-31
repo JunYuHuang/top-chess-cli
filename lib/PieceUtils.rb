@@ -114,6 +114,11 @@ module PieceUtils
     (dst_row - src_row).abs - 1
   end
 
+  def enemy_color(color)
+    return nil unless is_valid_piece_color?(color)
+    color == :white ? :black : :white
+  end
+
   def move(args)
     piece_obj = args.fetch(:piece_obj, nil)
     src_cell = args.fetch(:src_cell, nil)

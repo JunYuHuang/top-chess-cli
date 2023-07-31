@@ -86,6 +86,7 @@ Complete the following:
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
+- [x] `#enemy_color` method
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#board_to_s` method
@@ -130,6 +131,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells`
+- [x] `#enemy_color` method
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#board_to_s` method

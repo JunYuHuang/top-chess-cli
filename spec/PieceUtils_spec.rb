@@ -190,6 +190,23 @@ describe "PieceUtils" do
     end
   end
 
+  describe "#enemy_color" do
+    it "returns nil if called with an invalid color" do
+      res = PieceUtilsClass.enemy_color(:yellow)
+      expect(res).to eql(nil)
+    end
+
+    it "returns :white if called with :black" do
+      res = PieceUtilsClass.enemy_color(:black)
+      expect(res).to eql(:white)
+    end
+
+    it "returns :black if called with :white" do
+      res = PieceUtilsClass.enemy_color(:white)
+      expect(res).to eql(:black)
+    end
+  end
+
   describe "#adjacent_cells" do
     it "returns the correct int matrix array if called with [0,0]" do
       res = PieceUtilsClass.adjacent_cells([0,0])
