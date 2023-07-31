@@ -118,9 +118,6 @@ class Game
       add_captured_piece!(res[:dst_cell])
     elsif @chess_move_runner.can_capture_en_passant?(input, @turn_color)
       res = @chess_move_runner.capture_en_passant_syntax_to_hash(input, @turn_color)
-      # captive_cell = @turn_color == :white ?
-      #   self.class.down_adjacent_cell(res[:dst_cell]) :
-      #   self.class.up_adjacent_cell(res[:dst_cell])
       captive_cell = self.class.en_passant_captive_cell(
         res[:dst_cell], @turn_color
       )
@@ -184,20 +181,14 @@ class Game
     false
   end
 
-  # TODO - to test
-  def use_chess_move_runner(chess_move_runner_class)
-    return if @chess_move_runner
-    @chess_move_runner = chess_move_runner_class.new(self)
-  end
-
   def are_valid_pieces?(pieces)
     return false if pieces.class != Array
     return false if pieces.size > @rows * @cols / 2
     return false if pieces.any? { |el| el.class != Hash }
 
-    # Note that we only need to specifically check if the piece is a
-    # Pawn or Rook or King because the 3 other piece types have no
-    # additional properties.
+    # Note that we only need to specifically check if the piece
+    # is a Pawn or Rook or King because the 3 other piece types
+    # have no additional properties.
     basic_piece_types = [:knight, :bishop, :queen]
     pieces.each do |piece|
       return false unless is_valid_piece?(piece)
@@ -297,21 +288,15 @@ class Game
   # TODO - to test
   def update!(state)
     state => {
-      current_player_color:,
+      turn_color:,
       board:,
       players:,
       history:
     }
-    @turn_color = current_player_color
+    @turn_color = turn_color
     @board = build_board(board)
     # TODO - figure out how to deserialize players array and update it
     # TODO - figure out how to deserialize history array and update it
-  end
-
-  # TODO - to test
-  def use_console_ui(console_ui_class)
-    return if @console_ui
-    @console_ui = console_ui_class.new(self)
   end
 
   # TODO - to test
