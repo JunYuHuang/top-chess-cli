@@ -497,32 +497,6 @@ class ChessMoveRunner
     )
   end
 
-  def is_move_pawn_double_step?(
-    syntax, src_piece_color = turn_color, board = nil
-  )
-    board = @game ? @game.board : nil
-    return false unless board
-    return false unless is_valid_move_syntax?(syntax)
-
-    data = move_syntax_to_hash(syntax, src_piece_color)
-    data => {
-      src_piece_type:, src_piece_color:, src_cell:, dst_cell:
-    }
-    args = {
-      piece_type: :pawn,
-      piece_color: src_piece_color,
-      cell: src_cell
-    }
-    return false unless is_matching_piece?(args)
-
-    src_row, src_col = src_cell
-    filters = { row: src_row, col: src_col }
-    pawn = self.class.pieces(board, filters)[0]
-    return false unless pawn[:piece].moves(src_cell, board).include?(dst_cell)
-
-    pawn[:piece].is_double_step_forward?(src_cell, dst_cell, board)
-  end
-
   # Should be called after any chess move is played to uphold the
   # rules of en-passant eligibility.
   def set_enemy_pawns_non_capturable_en_passant!(enemy_color = nil)

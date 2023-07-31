@@ -433,7 +433,6 @@ Complete the following:
 - [x] `#queenside_castle!` method
 - [x] `#can_kingside_castle?` method
 - [x] `#kingside_castle!` method
-- [x] `#is_move_pawn_double_step?` method
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant!` method
 - [x] `#set_enemy_pawns_non_capturable_en_passant!` method
@@ -471,7 +470,6 @@ Complete the tests for the following:
 - [x] `#kingside_castle!` method
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant!` method
-- [x] `#is_move_pawn_double_step?` method
 - [x] `#set_enemy_pawns_non_capturable_en_passant!` method
 
 ## `ConsoleUI` class
