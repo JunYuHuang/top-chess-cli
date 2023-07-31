@@ -113,24 +113,24 @@ class Game
 
     # Update the white or black captured pieces state
     # if the chess move will remove a piece from the board.
-    if @chess_move_runner.can_capture?(input, @turn_color)
-      res = @chess_move_runner.capture_syntax_to_hash(input, @turn_color)
+    if @chess_move_runner.can_capture?(input)
+      res = @chess_move_runner.capture_syntax_to_hash(input)
       add_captured_piece!(res[:dst_cell])
-    elsif @chess_move_runner.can_capture_en_passant?(input, @turn_color)
-      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input, @turn_color)
+    elsif @chess_move_runner.can_capture_en_passant?(input)
+      res = @chess_move_runner.capture_en_passant_syntax_to_hash(input)
       captive_cell = self.class.en_passant_captive_cell(
         res[:dst_cell], @turn_color
       )
       add_captured_piece!(captive_cell)
-    elsif @chess_move_runner.can_promote?(input, @turn_color)
-      res = @chess_move_runner.promote_syntax_to_hash(input, @turn_color)
+    elsif @chess_move_runner.can_promote?(input)
+      res = @chess_move_runner.promote_syntax_to_hash(input)
       is_empty = self.class.is_empty_cell?(res[:dst_cell], @board)
       add_captured_piece!(res[:dst_cell]) unless is_empty
     end
 
-    if @chess_move_runner.can_chess_move?(input, @turn_color)
-      @chess_move_runner.execute_chess_move!(input, @turn_color)
-      @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(@turn_color)
+    if @chess_move_runner.can_chess_move?(input)
+      @chess_move_runner.execute_chess_move!(input)
+      @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(self.class.enemy_color(@turn_color))
     end
   end
 

@@ -357,6 +357,8 @@ Complete the following:
 - [x] `#can_input?` method
 - [x] `#execute_input!` method
 - [x] `#player` method
+- [x] `#can_input?` method
+- [x] `#execute_input!` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
 - [x] `#did_tie?` method
