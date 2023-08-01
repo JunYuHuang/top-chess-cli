@@ -64,12 +64,10 @@ Complete the following:
 - [x] `#input` method
 - [ ] `#get_start_option` method
 - [ ] `#get_opponent_type` method
-- [x] `#to_s` method
 
 Complete the tests for the following:
 
 - [x] `.initialize` constructor
-- [x] `#to_s` method
 
 <!-- ## `ComputerPlayer` class
 

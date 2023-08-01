@@ -13,11 +13,6 @@ class HumanPlayer < Player
     super(passed_args)
   end
 
-  def to_s
-    return @name if @name
-    "#{@piece_color.to_s.upcase} (#{@type.capitalize} Player)"
-  end
-
   # TODO - to test
   def input
     return unless @game
