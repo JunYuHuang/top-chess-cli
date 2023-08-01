@@ -37,10 +37,6 @@ class Player
   end
 
   def to_hash
-    {
-      "piece_color" => @piece_color.to_s,
-      "type" => @type.to_s,
-      "name" => @name.to_s
-    }
+    { piece_color: @piece_color, type: @type, name: @name }
   end
 end

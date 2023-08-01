@@ -28,9 +28,9 @@ describe Player do
     it "returns the correct hash if called on a Player object instantiated with no explicit arguments" do
       player = Player.new
       expected = {
-        "piece_color" => "invalid_color",
-        "type" => "invalid",
-        "name" => "Unnamed Player"
+        piece_color: :invalid_color,
+        type: :invalid,
+        name: "Unnamed Player"
       }
       expect(player.to_hash).to eql(expected)
     end
@@ -42,11 +42,7 @@ describe Player do
         name: "WHITE (Human Player 1)"
       }
       player = Player.new(options)
-      expected = {
-        "piece_color" => "white",
-        "type" => "human",
-        "name" => "WHITE (Human Player 1)"
-      }
+      expected = options
       expect(player.to_hash).to eql(expected)
     end
   end
