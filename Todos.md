@@ -371,8 +371,8 @@ Complete the following:
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#build_board` method
-- [ ] `#build_pieces` method
-- [ ] `#simple_state` method
+- [x] `#build_pieces` method
+- [x] `#simple_state` method
 - [ ] `#update!` method
 - [ ] `#use_game_saves` method
 - [x] `#add_captured_piece!` method

@@ -287,17 +287,83 @@ class Game
   end
 
   # TODO - to test
+  # assumes board is valid
+  def build_pieces(board = @board)
+    return unless board
+
+    def to_piece_hash(cell, board)
+      return if cell.nil? or board.nil?
+
+      row, col = cell
+      piece_obj = board[row][col]
+      piece_hash = {
+        cell: [row, col],
+        color: piece_obj.color,
+        type: piece_obj.type,
+        is_capturable: piece_obj.is_capturable?
+      }
+      if piece_obj.respond_to?(:did_move?)
+        piece_hash[:did_move] = piece_obj.did_move?
+      end
+      if piece_obj.respond_to?(:is_capturable_en_passant?)
+        piece_hash[:is_capturable_en_passant] = piece_obj.is_capturable_en_passant?
+      end
+      piece_hash
+    end
+
+    pieces = []
+    @rows.times do |r|
+      @cols.times do |c|
+        next if self.class.is_empty_cell?([r,c], board)
+        pieces.push(to_piece_hash([r,c], board))
+      end
+    end
+
+    pieces
+  end
+
+  # TODO - to test
+  def simple_state
+    return if @players.size != @players_count
+
+    {
+      turn_color: @turn_color,
+      players: [
+        player(:white).to_hash,
+        player(:black).to_hash,
+      ],
+      pieces: build_pieces(@board),
+      white_captured: {
+        pawn: @white_captured.fetch(:pawn, 0),
+        rook: @white_captured.fetch(:rook, 0),
+        knight: @white_captured.fetch(:knight, 0),
+        bishop: @white_captured.fetch(:bishop, 0),
+        queen: @white_captured.fetch(:queen, 0),
+      },
+      black_captured: {
+        pawn: @black_captured.fetch(:pawn, 0),
+        rook: @black_captured.fetch(:rook, 0),
+        knight: @black_captured.fetch(:knight, 0),
+        bishop: @black_captured.fetch(:bishop, 0),
+        queen: @black_captured.fetch(:queen, 0),
+      }
+    }
+  end
+
+  # TODO - to test
   def update!(state)
     state => {
       turn_color:,
-      board:,
       players:,
-      history:
+      pieces:,
+      white_captured:,
+      black_captured:,
     }
     @turn_color = turn_color
-    @board = build_board(board)
-    # TODO - figure out how to deserialize players array and update it
-    # TODO - figure out how to deserialize history array and update it
+    @players = [] # TODO - serialize players array
+    @board = build_board(pieces)
+    @white_captured = white_captured
+    @black_captured = black_captured
   end
 
   # TODO - to test
