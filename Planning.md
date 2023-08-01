@@ -328,82 +328,84 @@ See [Todos.md](./Todos.md) for the most up-to-date details.
 Each save file is saved as a YAML file with the following metadata:
 
 ```yaml
-# String that represents the current player's turn by their game
-# piece color. Either `white` or `black`.
-turn_color: white
+# Symbol that represents the current player's turn by their game
+# piece color. Either `:white` or `:black`.
+:turn_color: :white
 
 
 # Array of hashes that represents each player of the game.
-players:
+:players:
 
   # Hash that represents the first player.
-  - player_1:
+  - :player_1:
 
-    # String that represents what side (by color) the player is playing
-    # as. Either `white` or `black`.
-    piece_color: white
+    # Symbol that represents what side (by color) the player is playing
+    # as. Either `:white` or `:black`.
+    :piece_color: :white
 
-    # String that represents the type of player. Either `human` or
+    # Symbol that represents the type of player. Either `human` or
     # `computer` (for when the `ComputerPlayer` class is done).
-    type: human
+    :type: :human
 
     # String that represents the in-game name of the player set by the
     # `Game` class. Adheres to the following naming format / scheme:
     # `{COLOR} ({Player_type} Player {player_type_count})`.
-    name: WHITE (Human Player 1)
+    :name: WHITE (Human Player 1)
 
 
-  # Same data structure as `player_1` but for the second player.
-  - player_2:
+  # Same data structure as `:player_1` but for the second player.
+  - :player_2:
     # ...
 
 
 # Array of hashes that represents each piece (with their
 # current state) on the chess board.
-pieces:
+:pieces:
 
-  - piece_1:
+  - :piece_1:
 
     # 0-indexed [row, col] position of the piece on the chess board
     # as an integer array of size 2. Both `row` and `col` are integers
     # in the range [0, 7] inclusive. E.g., [0, 0] is the square 'a8'.
-    cell: [1, 3]
+    :cell:
+      - 1
+      - 3
 
-    # Color of the chess piece as a string.
-    # Is either `white` or `black`.
-    color: black
+    # Color of the chess piece as a symbol.
+    # Is either `:white` or `:black`.
+    :color: :black
 
-    # Type of chess piece as a string. Is one of the following:
-    # `pawn`, `rook`, `knight`, `bishop`, `queen` or `king`.
-    type: pawn
+    # Type of chess piece as a symbol. Is one of the following:
+    # `:pawn`, `:rook`, `:knight`, `:bishop`, `:queen` or `:king`.
+    :type: :pawn
 
     # Boolean flag that indicates if the chess piece can be captured
     # by an enemy piece or not. True for all chess piece types except
     # for Kings. Is either `true` or `false`.
-    is_capturable: true
+    :is_capturable: true
 
     # Boolean flag that indicates if the chess piece has moved from its
     # initially starting position or not. Only present on Rook, King,
     # and Pawn pieces that dictate their available moves or captures
     # (i.e., castling and whether pawns can move 2 squares forward or do
     # an en-passant capture). Is either `true` or `false`.
-    did_move: false
+    :did_move: false
 
     # Boolean flag that indicates if the chess piece can be captured
     # en-passant by an enemy pawn. Only present on Pawn pieces. Is
     # either `true` or `false`.
-    is_capturable_en_passant: false
+    :is_capturable_en_passant: false
 
 
-  - piece_N:
+  - :piece_N:
     # ...
 
 
 # Hashmap or dictionary of the enemy (black) chess pieces by type
 # that White has captured. Holds 5 key-value pairs that represent pairs
 # of capturable piece types and how many of each has been captured by
-# White. Each key is a string that is either `pawn`, `rook`, `knight`,
-# `bishop` or `queen`. The value of each key is an integer that ranges
+# White. Each key is a symbol that is either `:pawn`, `:rook`, `:knight`,
+# `:bishop` or `:queen`. The value of each key is an integer that ranges
 # from 0 to however many of that chess piece type was captured. Excluding
 # pawn promotions, the normal ranges for each piece are as follows:
 # - pawn:   [0, 8] inclusive
@@ -411,17 +413,17 @@ pieces:
 # - knight: [0, 2] inclusive
 # - bishop: [0, 2] inclusive
 # - queen:  [0, 1] inclusive
-white_captured:
-  pawn: 3
-  rook: 0
-  knight: 1
-  bishop: 0
-  queen: 0
+:white_captured:
+  :pawn: 3
+  :rook: 0
+  :knight: 1
+  :bishop: 0
+  :queen: 0
 
 
 # Same data structure as `white_captured` but for enemy (white) chess
 # pieces by type that Black has captured.
-black_captured:
+:black_captured:
   # ...
 ```
 
