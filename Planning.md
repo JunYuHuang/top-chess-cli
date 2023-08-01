@@ -490,6 +490,81 @@ See [Todos.md](./Todos.md) for the most up-to-date details.
   - load_save(game_obj, save_name)
     - TODO
 
+## Save File Anatomy
+
+Each save file is saved as a YAML file with the following metadata:
+
+```yaml
+# Either `white` or `black`.
+turn_color: white
+
+# An array of hashes that represents each piece (with their
+# current state) on the chess board.
+pieces:
+
+  - piece_1:
+
+    # 0-indexed [row, col] position of the piece on the chess board
+    # as an integer array of size 2. Both `row` and `col` are integers
+    # in the range [0, 7] inclusive. E.g., [0, 0] is the square 'a8'.
+    cell: [1, 3]
+
+    # Color of the chess piece as a string.
+    # Is either `white` or `black`.
+    color: black
+
+    # Type of chess piece as a string. Is one of the following:
+    # `pawn`, `rook`, `knight`, `bishop`, `queen` or `king`.
+    type: pawn
+
+    # Boolean flag that indicates if the chess piece can be captured
+    # by an enemy piece or not. True for all chess piece types except
+    # for Kings. Is either `true` or `false`.
+    is_capturable: true
+
+    # Boolean flag that indicates if the chess piece has moved from its
+    # initially starting position or not. Only present on Rook, King,
+    # and Pawn pieces that dictate their available moves or captures
+    # (i.e., castling and whether pawns can move 2 squares forward or do
+    # an en-passant capture). Is either `true` or `false`.
+    did_move: false
+
+    # Boolean flag that indicates if the chess piece can be captured
+    # en-passant by an enemy pawn. Only present on Pawn pieces. Is
+    # either `true` or `false`.
+    is_capturable_en_passant: false
+
+
+  - piece_N:
+    # ...
+
+# Hashmap or dictionary of the enemy (black) chess pieces by type
+# that White has captured. Holds 5 key-value pairs that represent pairs
+# of capturable piece types and how many of each has been captured by
+# White. Each key is a string that is either `pawn`, `rook`, `knight`,
+# `bishop` or `queen`. The value of each key is an integer that ranges
+# from 0 to however how of that chess piece type was captured. Excluding
+# pawn promotions, the normal ranges for each piece are as follows:
+# - pawn: [0, 8] inclusive
+# - rook: [0, 2] inclusive
+# - knight: [0, 2] inclusive
+# - bishop: [0, 2] inclusive
+# - queen: [0, 1] inclusive
+white_captured:
+  pawn: 3
+  rook: 0
+  knight: 1
+  bishop: 0
+  queen: 0
+
+# Same data structure as `white_captured` but for enemy (white) chess
+# pieces by type that Black has captured.
+black_captured:
+  # ...
+```
+
+Save files are saved in the `./saves` directory as YAML files with the `save_{unique_id}.yaml` naming scheme format.
+
 ## UI Design
 
 ### Turn Screen - Start Of Game
