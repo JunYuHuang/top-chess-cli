@@ -495,10 +495,37 @@ See [Todos.md](./Todos.md) for the most up-to-date details.
 Each save file is saved as a YAML file with the following metadata:
 
 ```yaml
-# Either `white` or `black`.
+# String that represents the current player's turn by their game
+# piece color. Either `white` or `black`.
 turn_color: white
 
-# An array of hashes that represents each piece (with their
+
+# Array of hashes that represents each player of the game.
+players:
+
+  # Hash that represents the first player.
+  - player_1:
+
+    # String that represents what side (by color) the player is playing
+    # as. Either `white` or `black`.
+    piece_color: white
+
+    # String that represents the type of player. Either `human` or
+    # `computer` (for when the `ComputerPlayer` class is done).
+    type: human
+
+    # String that represents the in-game name of the player set by the
+    # `Game` class. Adheres to the following naming format / scheme:
+    # `{COLOR} ({Player_type} Player {player_type_count})`.
+    name: WHITE (Human Player 1)
+
+
+  # Same data structure as `player_1` but for the second player.
+  - player_2:
+    # ...
+
+
+# Array of hashes that represents each piece (with their
 # current state) on the chess board.
 pieces:
 
@@ -538,6 +565,7 @@ pieces:
   - piece_N:
     # ...
 
+
 # Hashmap or dictionary of the enemy (black) chess pieces by type
 # that White has captured. Holds 5 key-value pairs that represent pairs
 # of capturable piece types and how many of each has been captured by
@@ -556,6 +584,7 @@ white_captured:
   knight: 1
   bishop: 0
   queen: 0
+
 
 # Same data structure as `white_captured` but for enemy (white) chess
 # pieces by type that Black has captured.
