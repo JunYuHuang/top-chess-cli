@@ -49,6 +49,12 @@ Complete the following:
 - [x] `#type` method
 - [x] `#piece_color` method
 - [x] `#name` method
+- [x] `#to_s` method
+- [x] `#to_hash` method
+
+Complete the tests for the following:
+- [x] `#to_s` method
+- [x] `#to_hash` method
 
 ## `HumanPlayer` class
 
@@ -367,6 +373,8 @@ Complete the following:
 - [x] `#default_piece_obj` method
 - [x] `#build_start_board` method
 - [x] `#build_board` method
+- [ ] `#build_pieces` method
+- [ ] `#simple_state` method
 - [ ] `#update!` method
 - [ ] `#use_game_saves` method
 - [x] `#add_captured_piece!` method
@@ -386,6 +394,8 @@ Complete the tests for the following:
 - [x] `#are_valid_pieces?` method
 - [x] `#build_start_board`
 - [x] `#build_board` method
+- [ ] `#build_pieces` method
+- [ ] `#simple_state` method
 - [ ] `#update!` method
 - [x] `#add_captured_piece!` method
 - [ ] TODO
