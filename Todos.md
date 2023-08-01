@@ -527,25 +527,16 @@ Complete the tests for the following:
 Complete the following:
 
 - [ ] `.initialize` constructor
-- [ ] `#path` constructor
-- [ ] `#set_path` method
-- [ ] `#save_prefix` method
-- [ ] `#set_save_prefix` method
+- [ ] `#saves_folder_exists?` method
+- [ ] `#save_exists?` method
 - [ ] `#count_saves` method
-- [ ] `get_save_names_list` method
-- [ ] `#does_save_exist?` method
+- [ ] `save_names_list` method
+- [ ] `#unique_save_id` method
 - [ ] `#create_save` method
-- [ ] `#load_save` method
+- [ ] `#open_save` method
+- [ ] `#delete_save` method
 
 Complete the tests for the following:
 
 - [ ] `.initialize` constructor
-- [ ] `#path` constructor
-- [ ] `#set_path` method
-- [ ] `#save_prefix` method
-- [ ] `#set_save_prefix` method
-- [ ] `#count_saves` method
-- [ ] `get_save_names_list` method
-- [ ] `#does_save_exist?` method
-- [ ] `#create_save` method
-- [ ] `#load_save` method
+- [ ] TODO
