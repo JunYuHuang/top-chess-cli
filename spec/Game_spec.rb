@@ -666,6 +666,82 @@ describe Game do
     end
   end
 
+  describe "#simple_state" do
+    it "returns nil if called on a valid game with insufficient players" do
+      options = {
+        piece_factory_class: PieceFactory,
+      }
+      game = Game.new(options)
+      res = game.simple_state
+      expect(res).to eql(nil)
+    end
+
+    it "returns the correct hash if called on a valid game with 2 players and a custom board" do
+      pieces = [
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false
+        },
+        {
+          cell: [3,4], color: :white, type: :rook,
+          is_capturable: true, did_move: true
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer,
+        pieces: pieces,
+        turn_color: :black,
+        white_captured: {
+          pawn: 8, bishop: 2, knight: 2, rook: 2, queen: 1
+        },
+        black_captured: {
+          pawn: 8, bishop: 2, knight: 2, rook: 1, queen: 1
+        }
+      }
+      game = Game.new(options)
+      res = game.simple_state
+      expected = {
+        turn_color: :black,
+        players: [
+          {
+            piece_color: :white, type: :human,
+            name: "WHITE (Human Player 1)"
+          },
+          {
+            piece_color: :black, type: :human,
+            name: "BLACK (Human Player 2)"
+          }
+        ],
+        pieces: [
+          {
+            cell: [0,4], color: :black, type: :king,
+            is_capturable: false, did_move: false
+          },
+          {
+            cell: [3,4], color: :white, type: :rook,
+            is_capturable: true, did_move: true
+          },
+          {
+            cell: [7,4], color: :white, type: :king,
+            is_capturable: false, did_move: false
+          }
+        ],
+        white_captured: {
+          pawn: 8, bishop: 2, knight: 2, rook: 2, queen: 1
+        },
+        black_captured: {
+          pawn: 8, bishop: 2, knight: 2, rook: 1, queen: 1
+        }
+      }
+      expect(res).to eql(expected)
+    end
+  end
+
   describe "#add_captured_piece!" do
     it "does nothing if called with an invalid cell on a valid game with the default starting board" do
       options = { piece_factory_class: PieceFactory }

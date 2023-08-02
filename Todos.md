@@ -393,7 +393,7 @@ Complete the tests for the following:
 - [x] `#build_start_board`
 - [x] `#build_board` method
 - [x] `#build_pieces` method
-- [ ] `#simple_state` method
+- [x] `#simple_state` method
 - [ ] `#update!` method
 - [x] `#add_captured_piece!` method
 - [ ] TODO

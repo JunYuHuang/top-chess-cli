@@ -21,10 +21,10 @@ class Game
     player_class = options.fetch(:player_class, nil)
 
     @players_count = 2
-    @turn_color = :white
+    @turn_color = options.fetch(:turn_color, :white)
     @players = []
-    @white_captured = {}
-    @black_captured = {}
+    @white_captured = options.fetch(:white_captured, {})
+    @black_captured = options.fetch(:black_captured, {})
 
     @rows = self.class.board_length
     @cols = self.class.board_length
@@ -320,7 +320,6 @@ class Game
     pieces
   end
 
-  # TODO - to test
   def simple_state
     return if @players.size != @players_count
 
