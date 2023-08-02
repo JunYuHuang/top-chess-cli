@@ -26,10 +26,9 @@ class GameSave
     File.exist?("#{@path}/#{save_name}#{@file_extension}")
   end
 
-  # TODO - to test
   def count_saves(prefix = @name_prefix)
-    return 0 unless does_folder_exist?
-    Dir.glob("#{@path}/#{prefix}#{@file_extension}").length
+    return 0 unless saves_folder_exists?
+    Dir.glob("#{@path}/#{prefix}*#{@file_extension}").length
   end
 
   # TODO - to test

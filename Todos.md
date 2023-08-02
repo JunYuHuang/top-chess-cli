@@ -543,7 +543,7 @@ Complete the tests for the following:
 
 - [x] `::initialize` constructor
 - [x] `#save_exists?` method
-- [ ] `#count_saves` method
+- [x] `#count_saves` method
 - [ ] `#saves_list` method
 - [ ] `#create_save` method
 - [ ] `#open_save` method
