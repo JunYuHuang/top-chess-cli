@@ -544,7 +544,7 @@ Complete the tests for the following:
 - [x] `::initialize` constructor
 - [x] `#save_exists?` method
 - [x] `#count_saves` method
-- [ ] `#saves_list` method
+- [x] `#saves_list` method
 - [ ] `#create_save` method
 - [ ] `#open_save` method
 - [ ] `#delete_saves_folder` method

@@ -170,4 +170,68 @@ describe GameSave do
       expect(game_save.count_saves).to eql(3)
     end
   end
+
+  describe "#saves_list" do
+    it "returns an empty array if called and the 'saves' folder does not exist" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      expect(game_save.saves_list).to eql([])
+    end
+
+    it "returns an empty array if called and the 'saves' folder exists but is empty" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      Dir.mkdir(saves_path)
+      expect(game_save.saves_list).to eql([])
+    end
+
+    it "returns the correct string array if called with limit 3 and the 'saves' folder has 5 save files" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      Dir.mkdir(saves_path)
+      create_test_saves(saves_path, 5)
+      res = game_save.saves_list(3)
+      expected = ["test_save_0", "test_save_1", "test_save_2"]
+      expect(res.size).to eql(expected.size)
+      expected.each do |save_name|
+        expect(res.include?(save_name)).to eql(true)
+      end
+    end
+  end
 end

@@ -31,8 +31,7 @@ class GameSave
     Dir.glob("#{@path}/#{prefix}*#{@file_extension}").length
   end
 
-  # TODO - to test
-  def saves_list(prefix = @name_prefix, limit = 0)
+  def saves_list(limit = 0, prefix = @name_prefix)
     return [] unless saves_folder_exists?
     res = Dir.glob("#{@path}/#{prefix}*#{@file_extension}")
     res = res.map do |save_path|
