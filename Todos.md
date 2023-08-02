@@ -545,5 +545,5 @@ Complete the tests for the following:
 - [x] `#count_saves` method
 - [x] `#saves_list` method
 - [x] `#create_save` method
-- [ ] `#open_save` method
+- [x] `#open_save` method
 - [ ] `#unique_save_id` method (protected)

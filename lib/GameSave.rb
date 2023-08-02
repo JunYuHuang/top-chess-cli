@@ -55,8 +55,9 @@ class GameSave
     save_name
   end
 
-  # TODO - to test
   def open_save(save_name)
+    return unless save_exists?(save_name)
+
     file = File.open(
       "#{@path}/#{save_name}#{@file_extension}", "r"
     )

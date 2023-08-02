@@ -306,4 +306,54 @@ describe GameSave do
       expect(saves_count).to eql(3)
     end
   end
+
+  describe "#open_save" do
+    it "returns nil if called with a save file name whose file does not exist in the 'saves' folder" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      expect(game_save.open_save('test_save_0')).to eql(nil)
+    end
+
+    it "returns the correct hash if called with a save file name whose file exists in the 'saves' folder" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      delete_saves_folder(saves_path)
+      game_save = GameSave.new(game_save_options)
+      game_save.create_save
+      res = game_save.open_save("test_save_0")
+      expect(res.size).to eql(5)
+      expect(res[:turn_color].class).to eql(Symbol)
+      expect(res[:turn_color]).to eql(:white)
+      expect(res[:players].class).to eql(Array)
+      expect(res[:players].size).to eql(2)
+      expect(res[:pieces].class).to eql(Array)
+      expect(res[:pieces].size).to eql(32)
+      expect(res[:white_captured].class).to eql(Hash)
+      expect(res[:white_captured].size).to eql(5)
+      expect(res[:black_captured].class).to eql(Hash)
+      expect(res[:black_captured].size).to eql(5)
+    end
+  end
 end
