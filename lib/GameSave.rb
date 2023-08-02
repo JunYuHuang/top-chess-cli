@@ -42,8 +42,9 @@ class GameSave
     limit > 0 ? res.take(limit) : res
   end
 
-  # TODO - to test
   def create_save(game = @game, prefix = @name_prefix)
+    return "" unless game
+
     create_saves_folder unless saves_folder_exists?
     save_name = "#{prefix}#{unique_save_id(prefix)}"
     save = File.new(

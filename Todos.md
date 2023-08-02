@@ -545,7 +545,7 @@ Complete the tests for the following:
 - [x] `#save_exists?` method
 - [x] `#count_saves` method
 - [x] `#saves_list` method
-- [ ] `#create_save` method
+- [x] `#create_save` method
 - [ ] `#open_save` method
 - [ ] `#delete_saves_folder` method
 - [ ] `#unique_save_id` method (protected)
