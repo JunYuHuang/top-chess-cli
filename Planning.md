@@ -466,7 +466,7 @@ or '!save' to save the game:
 ❌ 'asdf' is an illegal move or invalid command. Try again.
 ```
 
-### Turn Screen - Black Is Stalemated
+### Turn Screen - Black Is Checked
 
 ```
     a    b    c    d    e    f    g    h
@@ -531,7 +531,7 @@ WHITE (Human Player 1) has checkmated BLACK (Human Player 2).
 Game ended: 1-0 WHITE (Human Player 1) won!
 ```
 
-### End Screen - Tie / Draw
+### End Screen - Tie / Draw (Black Is Stalemated)
 
 ```
     a    b    c    d    e    f    g    h
