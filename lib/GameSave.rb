@@ -10,7 +10,6 @@ class GameSave
 
   attr_accessor(:path, :file_extension, :name_prefix, :game)
 
-  # TODO - to test
   def initialize(options = DEFAULTS)
     @path = options.fetch(:path, DEFAULTS[:path])
     @file_extension = options.fetch(
