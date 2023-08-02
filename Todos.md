@@ -508,8 +508,8 @@ Complete the following:
 Complete the following:
 
 - [ ] `.initialize` constructor
-- [ ] `#can_start_new_game?` method
-- [ ] `#start_new_game!` method
+- [ ] `#can_new_game?` method
+- [ ] `#new_game!` method
 - [ ] `#can_save_game?` method
 - [ ] `#save_game!` method
 - [ ] `#can_load_game?` method
@@ -526,17 +526,30 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
-- [ ] `#saves_folder_exists?` method
-- [ ] `#save_exists?` method
-- [ ] `#count_saves` method
-- [ ] `save_names_list` method
-- [ ] `#unique_save_id` method
-- [ ] `#create_save` method
-- [ ] `#open_save` method
-- [ ] `#delete_save` method
+- [x] `.initialize` constructor
+- [x] `#save_exists?` method
+- [x] `#count_saves` method
+- [x] `#saves_list` method
+- [x] `#create_save` method
+- [x] `#open_save` method
+- [x] `#delete_saves_folder` method
+- [x] `#saves_folder_exists?` method (protected)
+- [x] `#create_saves_folder` method (protected)
+- [x] `#unique_save_id` method (protected)
+- [x] `#encode` method (protected)
+- [x] `#decode` method (protected)
 
 Complete the tests for the following:
 
 - [ ] `.initialize` constructor
-- [ ] TODO
+- [ ] `#save_exists?` method
+- [ ] `#count_saves` method
+- [ ] `#saves_list` method
+- [ ] `#create_save` method
+- [ ] `#open_save` method
+- [ ] `#delete_saves_folder` method
+- [ ] `#saves_folder_exists?` method (protected)
+- [ ] `#create_saves_folder` method (protected)
+- [ ] `#unique_save_id` method (protected)
+- [ ] `#encode` method (protected)
+- [ ] `#decode` method (protected)
