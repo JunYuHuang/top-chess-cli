@@ -542,14 +542,10 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `::initialize` constructor
-- [ ] `#save_exists?` method
+- [x] `#save_exists?` method
 - [ ] `#count_saves` method
 - [ ] `#saves_list` method
 - [ ] `#create_save` method
 - [ ] `#open_save` method
 - [ ] `#delete_saves_folder` method
-- [ ] `#saves_folder_exists?` method (protected)
-- [ ] `#create_saves_folder` method (protected)
 - [ ] `#unique_save_id` method (protected)
-- [ ] `#encode` method (protected)
-- [ ] `#decode` method (protected)

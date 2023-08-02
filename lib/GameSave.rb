@@ -21,7 +21,6 @@ class GameSave
     @game = options.fetch(:game, DEFAULTS[:game])
   end
 
-  # TODO - to test
   def save_exists?(save_name)
     return false unless saves_folder_exists?
     File.exist?("#{@path}/#{save_name}#{@file_extension}")
@@ -76,12 +75,10 @@ class GameSave
 
   protected
 
-  # TODO - to test
   def saves_folder_exists?
     Dir.exist?(@path)
   end
 
-  # TODO - to test
   def create_saves_folder
     Dir.mkdir(@path)
   end
@@ -96,13 +93,11 @@ class GameSave
     id
   end
 
-  # TODO - to test
   def encode(game = @game)
     return if game.nil?
     YAML.dump(game.simple_state)
   end
 
-  # TODO - to test
   def decode(string)
     YAML.load(string)
   end

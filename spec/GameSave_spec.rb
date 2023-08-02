@@ -52,4 +52,63 @@ describe GameSave do
       expect(game_save).to_not eql(nil)
     end
   end
+
+  describe "#save_exists?" do
+    it "returns false if called and the 'saves' folder does not exist" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      expect(game_save.save_exists?("test_save_0")).to eql(false)
+    end
+
+    it "returns false if called and the 'saves' folder exists but is empty" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      Dir.mkdir(saves_path)
+      expect(game_save.save_exists?("test_save_0")).to eql(false)
+    end
+
+    it "returns true if called and the file './test_saves/test_save_0.yaml' exists" do
+      game_options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(game_options)
+      saves_path = "./test_saves"
+      game_save_options = {
+        path: saves_path,
+        file_extension: '.yaml',
+        name_prefix: 'test_save_',
+        game: game
+      }
+      game_save = GameSave.new(game_save_options)
+      delete_saves_folder(saves_path)
+      Dir.mkdir(saves_path)
+      create_test_saves(saves_path, 1)
+      expect(game_save.save_exists?("test_save_0")).to eql(true)
+    end
+  end
 end
