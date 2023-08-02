@@ -65,13 +65,6 @@ class GameSave
     res
   end
 
-  # TODO - to test
-  def delete_saves_folder
-    saves = Dir.glob("#{@path}/*")
-    saves.each { |f| File.delete(f) } if saves.size > 0
-    Dir.rmdir(@path) if Dir.exist?(@path)
-  end
-
   protected
 
   def saves_folder_exists?

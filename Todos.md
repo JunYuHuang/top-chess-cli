@@ -532,7 +532,6 @@ Complete the following:
 - [x] `#saves_list` method
 - [x] `#create_save` method
 - [x] `#open_save` method
-- [x] `#delete_saves_folder` method
 - [x] `#saves_folder_exists?` method (protected)
 - [x] `#create_saves_folder` method (protected)
 - [x] `#unique_save_id` method (protected)
@@ -547,5 +546,4 @@ Complete the tests for the following:
 - [x] `#saves_list` method
 - [x] `#create_save` method
 - [ ] `#open_save` method
-- [ ] `#delete_saves_folder` method
 - [ ] `#unique_save_id` method (protected)
