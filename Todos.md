@@ -373,7 +373,7 @@ Complete the following:
 - [x] `#build_board` method
 - [x] `#build_pieces` method
 - [x] `#simple_state` method
-- [ ] `#update!` method
+- [x] `#update!` method
 - [ ] `#use_game_saves` method
 - [x] `#add_captured_piece!` method
 - [x] `#is_valid_piece?` method (private)

@@ -357,7 +357,15 @@ class Game
       black_captured:,
     }
     @turn_color = turn_color
-    @players = [] # TODO - serialize players array
+    @players = []
+    players.each do |player_hash|
+      player_obj = player_class.new({
+        piece_color: player_hash[:piece_color],
+        type: player_hash[:type],
+        name: player_hash[:name]
+      })
+      @players.push(player_obj)
+    end
     @board = build_board(pieces)
     @white_captured = white_captured
     @black_captured = black_captured
