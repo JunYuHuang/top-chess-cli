@@ -286,7 +286,6 @@ class Game
     board
   end
 
-  # TODO - to test
   # assumes board is valid
   def build_pieces(board = @board)
     return unless board
@@ -318,7 +317,6 @@ class Game
         pieces.push(to_piece_hash([r,c], board))
       end
     end
-
     pieces
   end
 

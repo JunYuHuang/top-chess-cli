@@ -579,6 +579,93 @@ describe Game do
     end
   end
 
+  describe "#build_pieces" do
+    it "returns the correct array of hashes if called on a valid game with a custom board" do
+      pieces = [
+        {
+          cell: [0,0], color: :black, type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [0,1], color: :black, type: :knight,
+          is_capturable: true,
+        },
+        {
+          cell: [0,2], color: :black, type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [0,3], color: :black, type: :queen,
+          is_capturable: true,
+        },
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false,
+        },
+        {
+          cell: [1,0], color: :black, type: :pawn,
+          is_capturable: true,
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false,
+        },
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      res = game.build_pieces
+
+      expected = [
+        {
+          cell: [0,0], color: :black, type: :rook,
+          is_capturable: true, did_move: false
+        },
+        {
+          cell: [0,1], color: :black, type: :knight,
+          is_capturable: true,
+        },
+        {
+          cell: [0,2], color: :black, type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [0,3], color: :black, type: :queen,
+          is_capturable: true,
+        },
+        {
+          cell: [0,4], color: :black, type: :king,
+          is_capturable: false, did_move: false
+        },
+        {
+          cell: [1,0], color: :black, type: :pawn,
+          is_capturable: true, did_move: false,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [7,4], color: :white, type: :king,
+          is_capturable: false, did_move: false
+        },
+      ]
+      expect(res.size).to eql(expected.size)
+      expected.each do |piece_hash|
+        expect(res.include?(piece_hash)).to eql(true)
+      end
+    end
+
+    it "returns an empty array if called on a valid game with a custom board with no pieces" do
+      options = {
+        piece_factory_class: PieceFactory,
+        pieces: []
+      }
+      game = Game.new(options)
+      res = game.build_pieces
+      expect(res.size).to eql(0)
+    end
+  end
+
   describe "#add_captured_piece!" do
     it "does nothing if called with an invalid cell on a valid game with the default starting board" do
       options = { piece_factory_class: PieceFactory }
