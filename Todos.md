@@ -44,7 +44,7 @@ Complete the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#game` method
 - [x] `#type` method
 - [x] `#piece_color` method
@@ -60,20 +60,20 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#input` method
 - [ ] `#get_start_option` method
 - [ ] `#get_opponent_type` method
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 
 <!-- ## `ComputerPlayer` class
 
 Complete the following:
 
-- [ ] `.initialize` constructor
+- [ ] `::initialize` constructor
 - [ ] `#get_turn_input` method
 - [ ] `#get_random_move` method (private)
 - [ ] `to_s` method -->
@@ -174,7 +174,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#color` method
 - [x] `#type` method
 - [x] `#is_capturable?` method
@@ -183,7 +183,7 @@ Complete the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#did_move?` method
@@ -195,7 +195,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -207,7 +207,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -215,7 +215,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -225,7 +225,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -233,7 +233,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -243,7 +243,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -251,7 +251,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#move` method
@@ -261,7 +261,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#captures_en_passant` method
@@ -285,7 +285,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#captures_en_passant`
@@ -301,7 +301,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#did_move?` method
@@ -326,7 +326,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#moves` method
 - [x] `#captures` method
 - [x] `#is_checked?` method
@@ -343,19 +343,19 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#create` method
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#create` method
 
 ## `Game` class
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#add_player!` method
 - [x] `#play!` method
 - [x] `#can_input?` method
@@ -381,7 +381,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#add_player!` method
 - [ ] `#can_input?` method
 - [ ] `#execute_input!` method
@@ -410,7 +410,7 @@ This class takes a chess move in Long Algebraic Notation (Long AN or LAN) and do
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#can_chess_move?` method
 - [x] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
@@ -447,7 +447,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#can_chess_move?` method
 - [x] `#execute_chess_move!` method
 - [x] `#is_valid_piece_char_syntax?` method
@@ -484,7 +484,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#clear_UI` method
 - [x] `#print_board` method
 - [x] `#print_captured_pieces` method
@@ -507,7 +507,7 @@ Complete the following:
 
 Complete the following:
 
-- [ ] `.initialize` constructor
+- [ ] `::initialize` constructor
 - [ ] `#can_new_game?` method
 - [ ] `#new_game!` method
 - [ ] `#can_save_game?` method
@@ -526,7 +526,7 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [x] `.initialize` constructor
+- [x] `::initialize` constructor
 - [x] `#save_exists?` method
 - [x] `#count_saves` method
 - [x] `#saves_list` method
@@ -541,7 +541,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [ ] `.initialize` constructor
+- [x] `::initialize` constructor
 - [ ] `#save_exists?` method
 - [ ] `#count_saves` method
 - [ ] `#saves_list` method
