@@ -76,7 +76,6 @@ class GameSave
     Dir.mkdir(@path)
   end
 
-  # TODO - to test
   def unique_save_id(prefix = @name_prefix)
     id = 0
     loop do
