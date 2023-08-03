@@ -152,7 +152,7 @@
       - start a new game
       - load from a previously saved game
   - game config / setup screen (implement only if completed AI computer bot player)
-    - choose which piece to play as
+    - choose which coloured piece or side to play as
       - TODO
     - choose to play against another human or computer player
       - TODO
