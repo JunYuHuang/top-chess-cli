@@ -8,7 +8,7 @@ class Game
     :players_count, :turn_color, :rows, :cols,
     :board, :players, :white_captured, :black_captured,
     :piece_factory, :chess_move_runner, :console_ui,
-    :game_save
+    :human_player_class, :computer_player_class, :game_save
   )
 
   # TODO - to test
@@ -20,6 +20,8 @@ class Game
     )
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
+    @human_player_class = options.fetch(:human_player_class, nil)
+    @computer_player_class = options.fetch(:computer_player_class, nil)
     game_save_class = options.fetch(:game_save_class, nil)
 
     @players_count = 2

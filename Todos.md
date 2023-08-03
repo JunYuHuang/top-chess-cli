@@ -506,15 +506,23 @@ Complete the following:
 
 Complete the following:
 
-- [ ] `::initialize` constructor
+- [x] `::initialize` constructor
+- [x] `#set_load_mode` method
+- [x] `#set_setup_mode` method
+- [x] `#set_in_game_mode` method
+- [x] `#set_post_game_mode` method
+- [ ] `#game_meets_prereqs?` method
+- [ ] `#can_command?` method
+- [ ] `#execute_command!` method
 - [ ] `#can_new_game?` method
 - [ ] `#new_game!` method
 - [ ] `#can_save_game?` method
 - [ ] `#save_game!` method
 - [ ] `#can_load_game?` method
 - [ ] `#load_game!` method
-- [ ] `#can_setup?` method
-- [ ] `#setup!` method
+- [ ] `#can_pick_enemy_type?` method
+- [ ] `#can_pick_color?` method
+- [ ] `#setup_game!` method
 - [ ] TODO
 
 Complete the tests for the following:
