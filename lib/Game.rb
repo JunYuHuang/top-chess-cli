@@ -7,7 +7,8 @@ class Game
   attr_accessor(
     :players_count, :turn_color, :rows, :cols,
     :board, :players, :white_captured, :black_captured,
-    :piece_factory, :chess_move_runner, :console_ui
+    :piece_factory, :chess_move_runner, :console_ui,
+    :game_save
   )
 
   # TODO - to test
@@ -19,6 +20,7 @@ class Game
     )
     pieces = options.fetch(:pieces, nil)
     player_class = options.fetch(:player_class, nil)
+    game_save_class = options.fetch(:game_save_class, nil)
 
     @players_count = 2
     @turn_color = options.fetch(:turn_color, :white)
@@ -57,6 +59,10 @@ class Game
 
     if console_ui_class
       @console_ui = console_ui_class.new(self)
+    end
+
+    if game_save_class
+      @game_save = game_save_class.new({ game: self })
     end
   end
 
@@ -369,11 +375,6 @@ class Game
     @board = build_board(pieces)
     @white_captured = white_captured
     @black_captured = black_captured
-  end
-
-  # TODO - to test
-  def use_game_saves(args)
-    # TODO
   end
 
   def add_captured_piece!(captive_cell)

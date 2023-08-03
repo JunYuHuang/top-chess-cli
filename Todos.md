@@ -374,7 +374,6 @@ Complete the following:
 - [x] `#build_pieces` method
 - [x] `#simple_state` method
 - [x] `#update!` method
-- [ ] `#use_game_saves` method
 - [x] `#add_captured_piece!` method
 - [x] `#is_valid_piece?` method (private)
 - [x] `#is_bool_key?` method (private)
