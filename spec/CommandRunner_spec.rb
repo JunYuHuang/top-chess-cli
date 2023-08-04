@@ -2,6 +2,7 @@ require './lib/ChessMoveRunner'
 require './lib/Game'
 require './lib/PieceFactory'
 require './lib/GameSave'
+require './spec/MockPlayer'
 require './lib/CommandRunner'
 
 describe CommandRunner do

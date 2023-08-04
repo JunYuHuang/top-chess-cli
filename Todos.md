@@ -507,10 +507,25 @@ Complete the following:
 Complete the following:
 
 - [x] `::initialize` constructor
-- [x] `#set_load_mode` method
-- [x] `#set_setup_mode` method
-- [x] `#set_in_game_mode` method
-- [x] `#set_post_game_mode` method
+- [x] `#set_load_mode!` method
+- [x] `#set_setup_mode!` method
+- [x] `#set_in_game_mode!` method
+- [x] `#set_post_game_mode!` method
+- [x] `#game_meets_prereqs?` method
+- [x] `#can_command?` method
+- [x] `#execute_command!` method
+- [x] `#can_new_game?` method
+- [x] `#new_game!` method
+- [x] `#can_save_game?` method
+- [x] `#save_game!` method
+- [x] `#can_load_game?` method
+- [x] `#load_game!` method
+<!-- - [ ] `#can_pick_enemy_type?` method -->
+<!-- - [ ] `#can_pick_color?` method -->
+<!-- - [ ] `#setup_game!` method -->
+
+Complete the tests for the following:
+
 - [ ] `#game_meets_prereqs?` method
 - [ ] `#can_command?` method
 - [ ] `#execute_command!` method
@@ -520,13 +535,6 @@ Complete the following:
 - [ ] `#save_game!` method
 - [ ] `#can_load_game?` method
 - [ ] `#load_game!` method
-- [ ] `#can_pick_enemy_type?` method
-- [ ] `#can_pick_color?` method
-- [ ] `#setup_game!` method
-- [ ] TODO
-
-Complete the tests for the following:
-
 - [ ] TODO
 
 ## `GameSave` class

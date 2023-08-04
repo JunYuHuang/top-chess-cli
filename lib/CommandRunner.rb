@@ -12,29 +12,28 @@ class CommandRunner
 
   attr_accessor(:game, :app_mode)
 
-  # TODO - to test
   def initialize(args)
     @game = args.fetch(:game, DEFAULTS[:game])
     @app_mode = args.fetch(:game, DEFAULTS[:app_mode])
   end
 
-  # TODO - to test
-  def set_load_mode
+  def set_load_mode!
+    return if @app_mode == APP_MODES[:load]
     @app_mode = APP_MODES[:load]
   end
 
-  # TODO - to test
-  def set_setup_mode
+  def set_setup_mode!
+    return if @app_mode == APP_MODES[:setup]
     @app_mode = APP_MODES[:setup]
   end
 
-  # TODO - to test
-  def set_in_game_mode
+  def set_in_game_mode!
+    return if @app_mode == APP_MODES[:in_game]
     @app_mode = APP_MODES[:in_game]
   end
 
-  # TODO - to test
-  def set_post_game_mode
+  def set_post_game_mode!
+    return if @app_mode == APP_MODES[:post_game]
     @app_mode = APP_MODES[:post_game]
   end
 
@@ -53,13 +52,23 @@ class CommandRunner
   # TODO - to test
   def can_command?(syntax)
     return false unless game_meets_prereqs?
-    # TODO
+    return true if can_new_game?(syntax)
+    return true if can_save_game?(syntax)
+    return true if can_load_game?(syntax)
+    false
   end
 
   # TODO - to test
   def execute_command!(syntax)
     return unless can_command?(syntax)
-    # TODO
+
+    if can_new_game?(syntax)
+      new_game!(syntax)
+    elsif can_save_game?(syntax)
+      save_game!(syntax)
+    elsif can_load_game?(syntax)
+      load_game!(syntax)
+    end
   end
 
   # TODO - to test
@@ -86,6 +95,7 @@ class CommandRunner
   def save_game!(syntax)
     return unless can_save_game?(syntax)
     name = @game.game_save.create_save
+    set_in_game_mode!
   end
 
   # TODO - to test
@@ -105,6 +115,7 @@ class CommandRunner
     command, save_name = syntax.split(" ")
     save_state = @game.game_save.open_save(save_name)
     @game.update!(save_state)
+    set_in_game_mode!
   end
 
   # TODO - to test
