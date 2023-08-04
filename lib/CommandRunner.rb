@@ -1,7 +1,7 @@
 require 'set'
 
 class CommandRunner
-  APP_MODES = { load: 0, setup: 1, in_game: 2, post_game: 3 }
+  APP_MODES = { load: :load, setup: :setup, in_game: :in_game, post_game: :post_game }
   DEFAULTS = { game: nil, app_mode: APP_MODES[:load] }
   COMMANDS = {
     new_game: "!new", load_game: "!load", save_game: "!save"

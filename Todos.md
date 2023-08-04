@@ -530,7 +530,7 @@ Complete the tests for the following:
 - [ ] `#can_command?` method
 - [ ] `#execute_command!` method
 - [x] `#can_new_game?` method
-- [ ] `#new_game!` method
+- [x] `#new_game!` method
 - [ ] `#can_save_game?` method
 - [ ] `#save_game!` method
 - [ ] `#can_load_game?` method
