@@ -71,7 +71,6 @@ class CommandRunner
     end
   end
 
-  # TODO - to test
   def can_new_game?(syntax)
     return false unless game_meets_prereqs?
     return false unless @app_mode == APP_MODES[:load]

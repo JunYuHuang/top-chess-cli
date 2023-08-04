@@ -529,7 +529,7 @@ Complete the tests for the following:
 - [x] `#game_meets_prereqs?` method
 - [ ] `#can_command?` method
 - [ ] `#execute_command!` method
-- [ ] `#can_new_game?` method
+- [x] `#can_new_game?` method
 - [ ] `#new_game!` method
 - [ ] `#can_save_game?` method
 - [ ] `#save_game!` method

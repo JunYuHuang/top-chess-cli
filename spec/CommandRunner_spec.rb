@@ -50,4 +50,48 @@ describe CommandRunner do
       expect(res).to eql(true)
     end
   end
+
+  describe "#can_new_game?" do
+    it "returns false if called with '!new' on a CommandRunner object that is not in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_setup_mode!
+      res = command_runner.can_new_game?("!new")
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'new game' on a CommandRunner object that is in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_load_mode!
+      res = command_runner.can_new_game?("new game")
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with '!new' on a CommandRunner object that is in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_load_mode!
+      res = command_runner.can_new_game?("!new")
+      expect(res).to eql(true)
+    end
+  end
 end
