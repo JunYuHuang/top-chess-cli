@@ -37,9 +37,9 @@ class CommandRunner
     @app_mode = APP_MODES[:post_game]
   end
 
-  # TODO - to test
   def game_meets_prereqs?(game = @game)
     return false unless game
+    return false unless game.piece_factory
     return false unless game.game_save
     return false unless game.human_player_class
     # TODO - to implement `ComputerPlayer` class

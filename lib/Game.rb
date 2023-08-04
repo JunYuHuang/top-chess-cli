@@ -8,7 +8,8 @@ class Game
     :players_count, :turn_color, :rows, :cols,
     :board, :players, :white_captured, :black_captured,
     :piece_factory, :chess_move_runner, :console_ui,
-    :human_player_class, :computer_player_class, :game_save
+    :human_player_class, :computer_player_class, :game_save,
+    :command_runner
   )
 
   # TODO - to test
@@ -23,6 +24,7 @@ class Game
     @human_player_class = options.fetch(:human_player_class, nil)
     @computer_player_class = options.fetch(:computer_player_class, nil)
     game_save_class = options.fetch(:game_save_class, nil)
+    command_runner_class = options.fetch(:command_runner_class, nil)
 
     @players_count = 2
     @turn_color = options.fetch(:turn_color, :white)
@@ -66,6 +68,10 @@ class Game
     if game_save_class
       @game_save = game_save_class.new({ game: self })
     end
+
+    if command_runner_class
+      @command_runner = command_runner_class.new({ game: self })
+    end
   end
 
   def add_player!(player_class)
@@ -82,6 +88,24 @@ class Game
     ]
     new_player.name = new_name.join('')
     @players.push(new_player)
+  end
+
+  # TODO - to test
+  def load!
+    return if @game_save.nil? or @command_runner.nil?
+    return if @human_player_class.nil?
+    return if @game_save.count_saves < 1
+
+    last_input = ""
+    is_valid_input = true
+    loop do
+      last_input = gets.chomp
+      if @command_runner.can_command?(last_input)
+        @command_runner.execute_command!(last_input)
+        return
+      end
+      is_valid_input = false
+    end
   end
 
   # TODO - to test manually
@@ -111,6 +135,8 @@ class Game
     return false if @players.size != @players_count
     return false if @chess_move_runner.nil? or @console_ui.nil?
     return true if @chess_move_runner.can_chess_move?(input)
+    return false if @command_runner.nil?
+    return true if @command_runner.can_command?(input)
     false
   end
 
@@ -139,6 +165,8 @@ class Game
     if @chess_move_runner.can_chess_move?(input)
       @chess_move_runner.execute_chess_move!(input)
       @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(self.class.enemy_color(@turn_color))
+    elsif @command_runner.can_command?(input)
+      @command_runner.execute_command!(input)
     end
   end
 
@@ -367,7 +395,11 @@ class Game
     @turn_color = turn_color
     @players = []
     players.each do |player_hash|
-      player_obj = player_class.new({
+      right_player_class = player_hash[:type] == :human ?
+        @human_player_class :
+        @computer_player_class
+      player_obj = right_player_class.new({
+        game: self,
         piece_color: player_hash[:piece_color],
         type: player_hash[:type],
         name: player_hash[:name]

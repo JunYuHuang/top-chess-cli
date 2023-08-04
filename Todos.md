@@ -526,7 +526,7 @@ Complete the following:
 
 Complete the tests for the following:
 
-- [ ] `#game_meets_prereqs?` method
+- [x] `#game_meets_prereqs?` method
 - [ ] `#can_command?` method
 - [ ] `#execute_command!` method
 - [ ] `#can_new_game?` method
