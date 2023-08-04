@@ -83,18 +83,16 @@ class CommandRunner
     set_in_game_mode!
   end
 
-  # TODO - to test
   def can_save_game?(syntax)
     return false unless game_meets_prereqs?
     return false unless @app_mode == APP_MODES[:in_game]
     syntax == COMMANDS[:save_game]
   end
 
-  # TODO - to test
   def save_game!(syntax)
     return unless can_save_game?(syntax)
-    name = @game.game_save.create_save
     set_in_game_mode!
+    name = @game.game_save.create_save
   end
 
   # TODO - to test

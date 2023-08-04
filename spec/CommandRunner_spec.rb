@@ -111,4 +111,69 @@ describe CommandRunner do
       expect(res).to eql(:in_game)
     end
   end
+
+  describe "#can_save_game?" do
+    it "returns false if called with '!save' on a CommandRunner object that is not in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_load_mode!
+      res = command_runner.can_save_game?("!save")
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with 'save game' on a CommandRunner object that is in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_in_game_mode!
+      res = command_runner.can_save_game?("save game")
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with '!save' on a CommandRunner object that is in the correct app mode that has a valid game object that has all the required dependencies " do
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_in_game_mode!
+      res = command_runner.can_save_game?("!save")
+      expect(res).to eql(true)
+    end
+  end
+
+  describe "#save_game!" do
+    it "sets its app mode to the in-game mode if called with '!save' on a CommandRunner object that is in the correct app mode that has a valid game object that has all the required dependencies " do
+      saves_path = "./test_saves"
+      delete_saves_folder(saves_path)
+      options = {
+        piece_factory_class: PieceFactory,
+        game_save_class: GameSave,
+        player_class: MockPlayer,
+        human_player_class: MockPlayer,
+      }
+      game = Game.new(options)
+      game.game_save.path = saves_path
+      game.game_save.name_prefix = "test_save_"
+      command_runner = CommandRunner.new({ game: game })
+      command_runner.set_in_game_mode!
+      res = command_runner.save_game!("!save")
+      expect(res.include?("test_save_")).to eql(true)
+      expect(command_runner.app_mode).to eql(:in_game)
+    end
+  end
 end

@@ -531,11 +531,10 @@ Complete the tests for the following:
 - [ ] `#execute_command!` method
 - [x] `#can_new_game?` method
 - [x] `#new_game!` method
-- [ ] `#can_save_game?` method
-- [ ] `#save_game!` method
+- [x] `#can_save_game?` method
+- [x] `#save_game!` method
 - [ ] `#can_load_game?` method
 - [ ] `#load_game!` method
-- [ ] TODO
 
 ## `GameSave` class
 
