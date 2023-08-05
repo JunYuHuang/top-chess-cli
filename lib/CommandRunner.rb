@@ -95,7 +95,6 @@ class CommandRunner
     name = @game.game_save.create_save
   end
 
-  # TODO - to test
   def can_load_game?(syntax)
     return false unless game_meets_prereqs?
     return false unless @app_mode == APP_MODES[:load]
@@ -105,7 +104,6 @@ class CommandRunner
     @game.game_save.save_exists?(save_name)
   end
 
-  # TODO - to test
   def load_game!(syntax)
     return unless can_load_game?(syntax)
 

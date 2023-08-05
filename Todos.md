@@ -533,8 +533,8 @@ Complete the tests for the following:
 - [x] `#new_game!` method
 - [x] `#can_save_game?` method
 - [x] `#save_game!` method
-- [ ] `#can_load_game?` method
-- [ ] `#load_game!` method
+- [x] `#can_load_game?` method
+- [x] `#load_game!` method
 
 ## `GameSave` class
 
