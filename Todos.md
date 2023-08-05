@@ -489,9 +489,9 @@ Complete the following:
 - [x] `#print_captured_pieces` method
 - [x] `#print_turn_prompt` method
 - [x] `#print_game_end` method
-- [ ] `#print_saves_table` method
-- [ ] `#print_load_prompt` method
-- [ ] `#print_load_screen` method
+- [x] `#print_saves_table` method
+- [x] `#print_load_prompt` method
+- [x] `#print_load_screen` method
 - [ ] `#print_setup_screen` method
 - [x] `#print_turn_screen` method
 - [x] `#print_end_screen` method

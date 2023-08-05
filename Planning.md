@@ -577,9 +577,9 @@ You have 3 Chess game save files.
 Load a game from a save file or start a new game.
 
 Enter '!new' to start a new game.
-Enter '!load <save file name>' to resume playing from a game save.
-❌ '!loadz' is not a valid choice. Try again.
-Enter your choice (without quotes):
+Enter '!load <save file name>' to resume playing from a saved game.
+Enter your command (without quotes):
+❌ '!loadz' is not a valid command. Try again.
 ```
 
 ### Setup Screen

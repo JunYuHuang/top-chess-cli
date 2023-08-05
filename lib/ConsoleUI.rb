@@ -98,7 +98,7 @@ class ConsoleUI
       "#{ is_king_checked ? king_checked_msg : "" }\n",
       "Enter your move in Long Algebraic Notation (e.g. 'e2e3'\n",
       "to move your pawn from 'e2' to 'e3' as WHITE):\n",
-      # "or 'save!' to save the game:\n",
+      "or 'save!' to save the game:\n",
       "#{ is_valid_input ? "" : invalid_input_msg }\n",
     ]
     puts(res.join(''))
@@ -146,19 +146,65 @@ class ConsoleUI
     puts(res.join(''))
   end
 
-  # TODO - to test
   def print_saves_table
     return unless @game
+    return unless @game.game_save
+
+    row_width = 21
+    empty_row = "|                     |\n"
+    res = [
+      " _____________________\n",
+      "| Chess Game Saves    |\n",
+      "|_____________________|\n",
+    ]
+    save_names = @game.game_save.saves_list(3)
+
+    3.times do |i|
+      row = nil
+      if save_names[i]
+        size = save_names[i].size
+        row = "| #{save_names[i]}" +
+          " " * (row_width - size - 1) +
+          "|\n"
+      else
+        row = empty_row
+      end
+      res.push(row)
+    end
+
+    more_saves = @game.game_save.count_saves - save_names.size
+    last_text_row = empty_row
+    if more_saves > 0
+      more_saves_text = "and #{more_saves} more save#{more_saves > 1 ? "s" : ""}"
+      last_text_row = "| " + more_saves_text +
+        " " * (row_width - more_saves_text.size - 1) + "|\n"
+    end
+    res.push(last_text_row)
+    res.push("|_____________________|\n\n")
+    puts(res.join)
   end
 
-  # TODO - to test
-  def print_load_prompt
+  def print_load_prompt(is_valid, input)
     return unless @game
+    return unless @game.game_save
+
+    res = [
+      "You have #{@game.game_save.count_saves} Chess game save file#{@game.game_save.count_saves == 1 ? "" : "s"}.\n",
+      "Load a game from a save file or start a new game.\n\n",
+      "Enter '!new' to start a new game.\n",
+      "Enter '!load <save_name>' to resume playing from a saved game.\n",
+      "Enter your command (without quotes):\n",
+      "#{ is_valid ? "" : "❌ '#{input}' is an invalid command. Try again."}\n",
+    ]
+    puts(res.join)
   end
 
-  # TODO - to test
-  def print_load_screen
+  def print_load_screen(is_valid, input)
     return unless @game
+    return unless @game.game_save
+    clear_UI
+    print_saves_table
+    print_load_prompt(is_valid, input)
   end
 
   # TODO - to test

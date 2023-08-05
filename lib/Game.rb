@@ -90,19 +90,24 @@ class Game
     @players.push(new_player)
   end
 
-  # TODO - to test
+  # TODO - to test manually
   def load!
     return if @game_save.nil? or @command_runner.nil?
+    @command_runner.set_in_game_mode!
     return if @human_player_class.nil?
     return if @game_save.count_saves < 1
 
+    @command_runner.set_load_mode!
     last_input = ""
     is_valid_input = true
     loop do
+      @console_ui.print_load_screen(
+        is_valid_input, last_input
+      )
       last_input = gets.chomp
       if @command_runner.can_command?(last_input)
         @command_runner.execute_command!(last_input)
-        return
+        break
       end
       is_valid_input = false
     end
