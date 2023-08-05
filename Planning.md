@@ -337,7 +337,7 @@ Each save file is saved as a YAML file with the following metadata:
 :players:
 
   # Hash that represents the first player.
-  - :player_1:
+  -
 
     # Symbol that represents what side (by color) the player is playing
     # as. Either `:white` or `:black`.
@@ -352,9 +352,8 @@ Each save file is saved as a YAML file with the following metadata:
     # `{COLOR} ({Player_type} Player {player_type_count})`.
     :name: WHITE (Human Player 1)
 
-
-  # Same data structure as `:player_1` but for the second player.
-  - :player_2:
+  # Same data structure as the first player but for the second player.
+  -
     # ...
 
 
@@ -362,8 +361,8 @@ Each save file is saved as a YAML file with the following metadata:
 # current state) on the chess board.
 :pieces:
 
-  - :piece_1:
-
+  # A single chess piece represented as a hash (map).
+  -
     # 0-indexed [row, col] position of the piece on the chess board
     # as an integer array of size 2. Both `row` and `col` are integers
     # in the range [0, 7] inclusive. E.g., [0, 0] is the square 'a8'.
@@ -396,8 +395,8 @@ Each save file is saved as a YAML file with the following metadata:
     # either `true` or `false`.
     :is_capturable_en_passant: false
 
-
-  - :piece_N:
+  # More pieces from the chess board omitted...
+  -
     # ...
 
 
@@ -457,7 +456,7 @@ Save files are saved in the `./saves` directory as YAML files with the `save_{un
 BLACK's captures:
 WHITE's captures:
 
-✅ Started new game.
+✅ Started a new game.
 It is WHITE (Human Player 1)'s turn.
 
 Enter your move in Long Algebraic Notation (e.g. 'e2e3'

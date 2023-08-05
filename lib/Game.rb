@@ -9,7 +9,7 @@ class Game
     :board, :players, :white_captured, :black_captured,
     :piece_factory, :chess_move_runner, :console_ui,
     :human_player_class, :computer_player_class, :game_save,
-    :command_runner
+    :command_runner, :notices
   )
 
   # TODO - to test
@@ -35,6 +35,7 @@ class Game
     @rows = self.class.board_length
     @cols = self.class.board_length
     @board = build_start_board
+    @notices = []
 
     if !pieces.nil? && are_valid_pieces?(pieces)
       @board = build_board(pieces)
@@ -101,9 +102,7 @@ class Game
     last_input = ""
     is_valid_input = true
     loop do
-      @console_ui.print_load_screen(
-        is_valid_input, last_input
-      )
+      @console_ui.print_load_screen(is_valid_input, last_input)
       last_input = gets.chomp
       if @command_runner.can_command?(last_input)
         @command_runner.execute_command!(last_input)
@@ -116,6 +115,8 @@ class Game
   # TODO - to test manually
   def play!
     return if @players.size != @players_count
+
+    add_notice!("✅ Started a new game.") if @notices.empty?
 
     loop do
       if did_tie?
@@ -131,7 +132,6 @@ class Game
 
       current_player = player(@turn_color)
       execute_input!(current_player.input)
-      switch_players!
     end
   end
 
@@ -170,6 +170,7 @@ class Game
     if @chess_move_runner.can_chess_move?(input)
       @chess_move_runner.execute_chess_move!(input)
       @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(self.class.enemy_color(@turn_color))
+      switch_players!
     elsif @command_runner.can_command?(input)
       @command_runner.execute_command!(input)
     end
@@ -429,6 +430,14 @@ class Game
       count = @white_captured.fetch(piece.type, 0)
       @white_captured[piece.type] = count + 1
     end
+  end
+
+  def last_notice!
+    @notices.pop
+  end
+
+  def add_notice!(notice_msg)
+    @notices.push(notice_msg)
   end
 
   private

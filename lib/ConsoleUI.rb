@@ -80,7 +80,7 @@ class ConsoleUI
     puts(res.join(''))
   end
 
-  def print_turn_prompt(is_valid_input, last_input = "")
+  def print_turn_prompt(is_valid_input, last_input)
     return unless @game
     return if @game.players.size != @game.players_count
 
@@ -91,14 +91,15 @@ class ConsoleUI
     is_king_checked = king[:piece].is_checked?(king[:cell], @game.board)
     king_checked_msg = "❕Move your king out of check to another square."
     invalid_input_msg = "❌ '#{last_input}' is an illegal move or invalid command. Try again."
+    notice_msg = @game.last_notice!
 
     res = [
-      # TODO: game save load / start message at start of game
+      "#{ notice_msg ? "#{notice_msg}" : "" }\n",
       "It is #{player.to_s}'s turn.\n",
       "#{ is_king_checked ? king_checked_msg : "" }\n",
       "Enter your move in Long Algebraic Notation (e.g. 'e2e3'\n",
-      "to move your pawn from 'e2' to 'e3' as WHITE):\n",
-      "or 'save!' to save the game:\n",
+      "to move your pawn from 'e2' to 'e3' as WHITE)\n",
+      "or '!save' to save the game:\n",
       "#{ is_valid_input ? "" : invalid_input_msg }\n",
     ]
     puts(res.join(''))
@@ -212,7 +213,7 @@ class ConsoleUI
     return unless @game
   end
 
-  def print_turn_screen(is_valid_input, last_input = "")
+  def print_turn_screen(is_valid_input, last_input)
     return unless @game
 
     clear_UI

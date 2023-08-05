@@ -77,10 +77,10 @@ class CommandRunner
     syntax == COMMANDS[:new_game]
   end
 
-  # TODO - to test
   def new_game!(syntax)
     return unless can_new_game?(syntax)
     set_in_game_mode!
+    @game.add_notice!("✅ Started a new game.")
   end
 
   def can_save_game?(syntax)
@@ -93,6 +93,8 @@ class CommandRunner
     return unless can_save_game?(syntax)
     set_in_game_mode!
     name = @game.game_save.create_save
+    @game.add_notice!("✅ Saved game as save '#{name}'.")
+    name
   end
 
   def can_load_game?(syntax)
@@ -110,6 +112,7 @@ class CommandRunner
     command, save_name = syntax.split(" ")
     save_state = @game.game_save.open_save(save_name)
     @game.update!(save_state)
+    @game.add_notice!("✅ Loaded game from save '#{save_name}'.")
     set_in_game_mode!
   end
 

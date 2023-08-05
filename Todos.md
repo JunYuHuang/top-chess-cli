@@ -375,6 +375,8 @@ Complete the following:
 - [x] `#simple_state` method
 - [x] `#update!` method
 - [x] `#add_captured_piece!` method
+- [x] `#last_notice!` method
+- [x] `#add_notice!` method
 - [x] `#is_valid_piece?` method (private)
 - [x] `#is_bool_key?` method (private)
 
@@ -395,7 +397,6 @@ Complete the tests for the following:
 - [x] `#simple_state` method
 - [ ] `#update!` method
 - [x] `#add_captured_piece!` method
-- [ ] TODO
 
 ## `ChessMoveRunner` class
 
