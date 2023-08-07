@@ -248,6 +248,25 @@ class Game
     @players.push(new_player)
   end
 
+  def remove_players!(filters)
+    return if @players.empty? or filters.class != Hash
+
+    def passes_filters(filters, player_obj)
+      type = filters.fetch(:type, nil)
+      piece_color = filters.fetch(:piece_color, nil)
+      name = filters.fetch(:name, nil)
+
+      return false if type && type != player_obj.type
+      return false if piece_color && piece_color != player_obj.piece_color
+      return false if name && name != player_obj.name
+      true
+    end
+
+    @players.filter! {
+      |player_obj| !passes_filters(filters, player_obj)
+    }
+  end
+
   # TODO - to test manually
   def load!
     return if @game_save.nil? or @command_runner.nil?

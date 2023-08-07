@@ -92,6 +92,61 @@ describe Game do
     end
   end
 
+  describe "#remove_players!" do
+    it "does nothing if called on a game with no players with a hash" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      delete_filters = { piece_color: :white }
+      game.remove_players!(delete_filters)
+      expect(game.players.size).to eql(0)
+    end
+
+    it "does nothing if called on a game with 1 player with an argument that is not a hash" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      game.players = [nil]
+      delete_filters = nil
+      game.remove_players!(delete_filters)
+      expect(game.players.size).to eql(1)
+    end
+
+    it "removes the white player if called on a game that has 2 players with a certain filter hash object" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(options)
+      delete_filters = { piece_color: :white }
+      game.remove_players!(delete_filters)
+      expect(game.players.size).to eql(1)
+      expect(game.players[0].piece_color).to eql(:black)
+    end
+
+    it "removes the black computer player if called on a game that has 2 players with a certain filter hash object" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(options)
+      game.players[1].type = :computer
+      delete_filters = { piece_color: :black, type: :computer }
+      game.remove_players!(delete_filters)
+      expect(game.players.size).to eql(1)
+      expect(game.players[0].piece_color).to eql(:white)
+    end
+
+    it "removes both human players if called on a game that has 2 players with a certain filter hash object" do
+      options = {
+        piece_factory_class: PieceFactory,
+        player_class: MockPlayer
+      }
+      game = Game.new(options)
+      delete_filters = { type: :human }
+      game.remove_players!(delete_filters)
+      expect(game.players.size).to eql(0)
+    end
+  end
+
   describe "#player" do
     it "returns the white player if called with (:white) on a game that has 2 players" do
       options = {

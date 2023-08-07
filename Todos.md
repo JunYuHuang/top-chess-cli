@@ -354,6 +354,7 @@ Complete the following:
 
 - [x] `::initialize` constructor
 - [x] `#add_player!` method
+- [x] `#remove_players!` method
 - [x] `#play!` method
 - [x] `#can_input?` method
 - [x] `#execute_input!` method
@@ -381,6 +382,7 @@ Complete the tests for the following:
 
 - [x] `::initialize` constructor
 - [x] `#add_player!` method
+- [x] `#remove_players!` method
 - [ ] `#can_input?` method
 - [ ] `#execute_input!` method
 - [x] `#player` method
