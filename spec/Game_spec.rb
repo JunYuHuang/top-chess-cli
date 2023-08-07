@@ -75,6 +75,21 @@ describe Game do
       expect(player_2.name).to eql("BLACK (Human Player 2)")
       expect(player_2.piece_color).to eql(:black)
     end
+
+    it "adds a player with custom parameters if called on a game with a Player class or subclass and a hash" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      player_options = {
+        type: :alien, piece_color: :green,
+        name: "GREEN (Alien Player)"
+      }
+      game.add_player!(MockPlayer, player_options)
+      player_1 = game.players[0]
+      expect(game.players.size).to eql(1)
+      expect(player_1.name).to eql("GREEN (Alien Player)")
+      expect(player_1.type).to eql(:alien)
+      expect(player_1.piece_color).to eql(:green)
+    end
   end
 
   describe "#player" do

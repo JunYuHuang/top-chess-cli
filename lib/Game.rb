@@ -222,19 +222,29 @@ class Game
     end
   end
 
-  def add_player!(player_class)
+  def add_player!(player_class, options = {})
     return if @players.size >= @players_count
+
+    type = options.fetch(:type, nil)
+    piece_color = options.fetch(:piece_color, nil)
+    name = options.fetch(:name, nil)
+    default_color = @players.empty? ? :white : :black
+
     new_player = player_class.new({
       game: self,
-      type: :human,
-      piece_color: @players.empty? ? :white : :black
+      type: type ? type : :human,
+      piece_color: piece_color ? piece_color : default_color
     })
-    new_name = [
-      "#{new_player.piece_color.to_s.upcase} (",
-      "#{new_player.type.to_s.capitalize} Player ",
-      "#{@players.size + 1})"
-    ]
-    new_player.name = new_name.join('')
+    if name
+      new_player.name = name
+    else
+      new_name = [
+        "#{new_player.piece_color.to_s.upcase} (",
+        "#{new_player.type.to_s.capitalize} Player ",
+        "#{@players.size + 1})"
+      ]
+      new_player.name = new_name.join('')
+    end
     @players.push(new_player)
   end
 
