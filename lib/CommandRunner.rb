@@ -1,8 +1,7 @@
 require 'set'
 
 class CommandRunner
-  APP_MODES = { load: :load, setup: :setup, in_game: :in_game, post_game: :post_game }
-  DEFAULTS = { game: nil, app_mode: APP_MODES[:load] }
+  DEFAULTS = { game: nil, app_mode: :load }
   COMMANDS = {
     new_game: "!new", load_game: "!load", save_game: "!save"
   }
@@ -18,23 +17,23 @@ class CommandRunner
   end
 
   def set_load_mode!
-    return if @app_mode == APP_MODES[:load]
-    @app_mode = APP_MODES[:load]
+    return if @app_mode == :load
+    @app_mode = :load
   end
 
   def set_setup_mode!
-    return if @app_mode == APP_MODES[:setup]
-    @app_mode = APP_MODES[:setup]
+    return if @app_mode == :setup
+    @app_mode = :setup
   end
 
   def set_in_game_mode!
-    return if @app_mode == APP_MODES[:in_game]
-    @app_mode = APP_MODES[:in_game]
+    return if @app_mode == :in_game
+    @app_mode = :in_game
   end
 
   def set_post_game_mode!
-    return if @app_mode == APP_MODES[:post_game]
-    @app_mode = APP_MODES[:post_game]
+    return if @app_mode == :post_game
+    @app_mode = :post_game
   end
 
   def game_meets_prereqs?(game = @game)
@@ -73,7 +72,7 @@ class CommandRunner
 
   def can_new_game?(syntax)
     return false unless game_meets_prereqs?
-    return false unless @app_mode == APP_MODES[:load]
+    return false unless [:load].include?(@app_mode)
     syntax == COMMANDS[:new_game]
   end
 
@@ -85,7 +84,7 @@ class CommandRunner
 
   def can_save_game?(syntax)
     return false unless game_meets_prereqs?
-    return false unless @app_mode == APP_MODES[:in_game]
+    return false unless @app_mode == :in_game
     syntax == COMMANDS[:save_game]
   end
 
@@ -99,7 +98,7 @@ class CommandRunner
 
   def can_load_game?(syntax)
     return false unless game_meets_prereqs?
-    return false unless @app_mode == APP_MODES[:load]
+    return false unless @app_mode == :load
     return false unless LOAD_REGEX.match?(syntax)
 
     command, save_name = syntax.split(" ")
@@ -119,14 +118,14 @@ class CommandRunner
   # TODO - to test
   def can_pick_enemy_type?(syntax)
     return false unless game_meets_prereqs?
-    return false unless @app_mode == APP_MODES[:setup]
+    return false unless @app_mode == :setup
     PLAYER_TYPE_REGEX.match?(syntax)
   end
 
   # TODO - to test
   def can_pick_color?(syntax)
     return false unless game_meets_prereqs?
-    return false unless @app_mode == APP_MODES[:setup]
+    return false unless @app_mode == :setup
     PIECE_COLOR_REGEX.match?(syntax)
   end
 
