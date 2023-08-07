@@ -54,6 +54,8 @@ class ChessMoveRunner
     "Q" => :queen,
     "K" => :king
   }
+  INT_COL_TO_ALPHA_FILE = ALPHA_FILE_TO_INT_COL.invert
+  PIECE_SYMBOL_TO_CHAR = PIECE_CHAR_TO_SYMBOL.invert
   COORDS_REGEX = /[a-h][1-8]/
   PIECE_CHAR_REGEX = /(R|N|B|Q|K)/
 
@@ -148,6 +150,17 @@ class ChessMoveRunner
     PIECE_CHAR_TO_SYMBOL[char]
   end
 
+  # TODO - to test
+  def matrix_cell_to_coords(cell)
+    row, col = cell
+    [INT_COL_TO_ALPHA_FILE[col], 8 - row].join
+  end
+
+  # TODO - to test
+  def piece_type_to_char(type)
+    PIECE_SYMBOL_TO_CHAR[type]
+  end
+
   def is_matching_piece?(args)
     return false if args.class != Hash
 
@@ -207,6 +220,63 @@ class ChessMoveRunner
       dst_cell: coords_to_matrix_cell(dst_coords),
       promo_piece_type: piece_char_to_type(promo_piece_char)
     }
+  end
+
+  # TODO - to test
+  # assumes hash is valid
+  def move_hash_to_syntax(hash)
+    hash => { src_piece_type:, src_cell:, dst_cell: }
+    res = [
+      piece_type_to_char(src_piece_type),
+      matrix_cell_to_coords(src_cell),
+      "-",
+      matrix_cell_to_coords(dst_cell)
+    ]
+    res.join
+  end
+
+  # TODO - to test
+  # assumes hash is valid
+  def capture_hash_to_syntax(hash)
+    hash => { src_piece_type:, src_cell:, dst_cell: }
+    res = [
+      piece_type_to_char(src_piece_type),
+      matrix_cell_to_coords(src_cell),
+      "x",
+      matrix_cell_to_coords(dst_cell)
+    ]
+    res.join
+  end
+
+  # TODO - to test
+  # assumes hash is valid
+  def capture_en_passant_hash_to_syntax(hash)
+    capture_hash_to_syntax(hash)
+  end
+
+  # TODO - to test
+  # assumes hash is valid
+  def promote_hash_to_syntax(hash)
+    hash => {
+      src_piece_type:, src_cell:, dst_cell:, promo_piece_type:,
+      is_capture:
+    }
+    res = [
+      piece_type_to_char(src_piece_type),
+      matrix_cell_to_coords(src_cell),
+      is_capture ? "x" : "-",
+      matrix_cell_to_coords(dst_cell),
+      "=",
+      piece_type_to_char(promo_piece_type),
+    ]
+    res.join
+  end
+
+  # TODO - to test
+  # assumes hash is valid
+  def castle_hash_to_syntax(hash)
+    hash => { is_kingside: }
+    is_kingside ? "0-0" : "0-0-0"
   end
 
   def can_move?(syntax, src_piece_color = turn_color)

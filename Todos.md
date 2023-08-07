@@ -73,7 +73,13 @@ Complete the following:
 
 - [ ] `::initialize` constructor
 - [ ] `#input` method
-- [ ] `#random_move` method (private)
+- [ ] `#random_move` method (protected)
+- [ ] `#random_piece` method (protected)
+
+Complete the tests for the following:
+
+- [ ] `::initialize` constructor
+- TODO
 
 ## `PieceUtils` module
 
@@ -423,12 +429,19 @@ Complete the following:
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
 - [x] `#piece_char_to_type` method
+- [x] `#matrix_cell_to_coords` method
+- [x] `#piece_type_to_char` method
 - [x] `#is_matching_piece?` method
 - [x] `#turn_color` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
 - [x] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
+- [x] `#move_hash_to_syntax` method
+- [x] `#capture_hash_to_syntax` method
+- [x] `#capture_en_passant_hash_to_syntax` method
+- [x] `#promote_hash_to_syntax` method
+- [x] `#castle_hash_to_syntax` method
 - [x] `#can_move?` method
 - [x] `#move!` method
 - [x] `#can_capture?` method
@@ -459,11 +472,17 @@ Complete the tests for the following:
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
+- [ ] `#matrix_cell_to_coords` method
 - [x] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
 - [x] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
+- [ ] `#move_hash_to_syntax` method
+- [ ] `#capture_hash_to_syntax` method
+- [ ] `#capture_en_passant_hash_to_syntax` method
+- [ ] `#promote_hash_to_syntax` method
+- [ ] `#castle_hash_to_syntax` method
 - [x] `#can_move?` method
 - [x] `#move!` method
 - [x] `#can_capture?` method
