@@ -62,21 +62,18 @@ Complete the following:
 
 - [x] `::initialize` constructor
 - [x] `#input` method
-- [ ] `#get_start_option` method
-- [ ] `#get_opponent_type` method
 
 Complete the tests for the following:
 
 - [x] `::initialize` constructor
 
-<!-- ## `ComputerPlayer` class
+## `ComputerPlayer` class
 
 Complete the following:
 
 - [ ] `::initialize` constructor
-- [ ] `#get_turn_input` method
-- [ ] `#get_random_move` method (private)
-- [ ] `to_s` method -->
+- [ ] `#input` method
+- [ ] `#random_move` method (private)
 
 ## `PieceUtils` module
 
