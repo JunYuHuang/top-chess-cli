@@ -2,6 +2,153 @@ require './lib/PieceUtils'
 require 'set'
 
 class Game
+  START_STATE = {
+    turn_color: :white,
+    players: [
+      {
+        piece_color: :white, type: :human,
+        name: "WHITE (Human Player 1)"
+      },
+      {
+        piece_color: :black, type: :human,
+        name: "BLACK (Human Player 2)"
+      }
+    ],
+    pieces: [
+      {
+        cell: [0,0], color: :black, type: :rook,
+        is_capturable: true,
+      },
+      {
+        cell: [0,7], color: :black, type: :rook,
+        is_capturable: true,
+      },
+      {
+        cell: [0,1], color: :black, type: :knight,
+        is_capturable: true,
+      },
+      {
+        cell: [0,6], color: :black, type: :knight,
+        is_capturable: true,
+      },
+      {
+        cell: [0,2], color: :black, type: :bishop,
+        is_capturable: true,
+      },
+      {
+        cell: [0,5], color: :black, type: :bishop,
+        is_capturable: true,
+      },
+      {
+        cell: [0,3], color: :black, type: :queen,
+        is_capturable: true,
+      },
+      {
+        cell: [0,4], color: :black, type: :king,
+        is_capturable: false,
+      },
+      {
+        cell: [1,0], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,1], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,2], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,3], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,4], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,5], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,6], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [1,7], color: :black, type: :pawn,
+        is_capturable: true,
+      },
+      # white pieces
+      {
+        cell: [7,0], color: :white, type: :rook,
+        is_capturable: true,
+      },
+      {
+        cell: [7,7], color: :white, type: :rook,
+        is_capturable: true,
+      },
+      {
+        cell: [7,1], color: :white, type: :knight,
+        is_capturable: true,
+      },
+      {
+        cell: [7,6], color: :white, type: :knight,
+        is_capturable: true,
+      },
+      {
+        cell: [7,2], color: :white, type: :bishop,
+        is_capturable: true,
+      },
+      {
+        cell: [7,5], color: :white, type: :bishop,
+        is_capturable: true,
+      },
+      {
+        cell: [7,3], color: :white, type: :queen,
+        is_capturable: true,
+      },
+      {
+        cell: [7,4], color: :white, type: :king,
+        is_capturable: false,
+      },
+      {
+        cell: [6,0], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,1], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,2], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,3], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,4], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,5], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,6], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+      {
+        cell: [6,7], color: :white, type: :pawn,
+        is_capturable: true,
+      },
+    ],
+    white_captured: {},
+    black_captured: {}
+  }
+
   extend PieceUtils
 
   attr_accessor(
