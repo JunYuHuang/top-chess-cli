@@ -57,14 +57,16 @@ rspec
   - En-passant captures
   - Pawn promotions
   - Both queenside and kingside castling
-- Uses the following symbols / characters to specify special moves in player input:
+- Uses the following symbols / characters as part of or specifying chess moves in player input:
+  - `-`: Non-capturing move (can be omitted)
   - `=`: Pawn Promotion
-  - `+`: Check (can be omitted)
-  - `#`: Checkmate (can be omitted)
   - `x`: Capture
-  - `e.p.`: Piece captured / taken en-passant (can be omitted)
   - `O-O` or `0-0`: Kingside Castle
   - `O-O-O` or `0-0-0`: Queenside Castle
+- Excludes the following symbols / characters that are part of specifying chess moves in player input:
+  - `e.p.`: Pawn captured / taken en-passant (MUST be omitted)
+  - `+`: Check (MUST be omitted)
+  - `#`: Checkmate (MUST BE omitted)
 - Game ends on a checkmate or stalemate
 - Does **not** support the following rules:
   - Resign and draw proposals
