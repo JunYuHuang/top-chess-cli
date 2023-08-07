@@ -39,6 +39,10 @@ Complete the following:
 - [x] Add `kingside_castle` method to `RookPiece` class
 - [ ] Rename `PieceUtils` module to `ChessUtils`
 - [x] Remove `PawnPiece`'s `@did_double_step` instance variable, its affected methods, and updated all other classes that reference it to not use it or depend on `@is_capturable_en_passant` instead
+- [ ] Update `KingPiece#is_stalemated?` method to return true only if all pieces of the same color as the king piece itself (including the king) have no valid moves, captures, promotions, en-passant captures, queenside castles, or kingside castles
+- [ ] Make `!new` and `!load` commands available to the (human) player while they are in-game
+- [ ] Update `ChessMoveRunner` class to accept optional check (`+`) and checkmate (`#`) suffixes for moves and captures when parsing Long AN notation
+- [ ] Update `ConsoleUI` class to let player choose their own color and which opponent type (human or computer) to play against
 
 ## `Player` class
 
