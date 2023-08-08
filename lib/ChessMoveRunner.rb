@@ -412,7 +412,7 @@ class ChessMoveRunner
 
     pawn = pieces[0]
     return false if pawn[:piece].type != :pawn
-    pawn[:piece].is_promotable?(src_cell, @game.board)
+    pawn[:piece].can_promote?(src_cell, @game.board)
   end
 
   def can_promote?(syntax, src_piece_color = turn_color)

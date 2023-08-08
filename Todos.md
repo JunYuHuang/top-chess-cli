@@ -286,7 +286,7 @@ Complete the following:
 - [x] `#did_move?` method
 - [x] `#moved!` method
 - [x] `#is_double_step_forward?` method
-- [x] `#is_promotable?` method
+- [x] `#can_promote?` method
 - [x] `#black_moves` method (private)
 - [x] `#white_moves` method (private)
 - [x] `#black_captures` method (private)
@@ -306,7 +306,7 @@ Complete the tests for the following:
 - [x] `#can_capture_en_passant?` method
 - [x] `#capture_en_passant` method
 - [x] `#is_double_step_forward?` method
-- [x] `#is_promotable?` method
+- [x] `#can_promote?` method
 - [x] `#move` method
 - [x] `#capture` method
 - [x] `#capture_en_passant` method

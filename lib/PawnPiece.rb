@@ -117,7 +117,7 @@ class PawnPiece < Piece
     self.class.count_col_cells_amid_two_cells(*cells) == 1
   end
 
-  def is_promotable?(src_cell, board)
+  def can_promote?(src_cell, board)
     return false unless self.class.is_inbound_cell?(src_cell)
     return false if self.class.is_empty_cell?(src_cell, board)
 
