@@ -41,7 +41,7 @@ Complete the following:
 - [x] Remove `PawnPiece`'s `@did_double_step` instance variable, its affected methods, and updated all other classes that reference it to not use it or depend on `@is_capturable_en_passant` instead
 - [ ] Update `KingPiece#is_stalemated?` method to return true only if all pieces of the same color as the king piece itself (including the king) have no valid moves, captures, promotions, en-passant captures, queenside castles, or kingside castles
 - [ ] Make `!new` and `!load` commands available to the (human) player while they are in-game
-- [ ] Update `ChessMoveRunner` class to accept optional check (`+`) and checkmate (`#`) suffixes for moves and captures when parsing Long AN notation
+- [ ] Update `ChessMoveRunner` class to accept optional check (`+`) and checkmate (`#`) suffixes for moves and captures when parsing Long AN
 - [ ] Update `ConsoleUI` class to let player choose their own color and which opponent type (human or computer) to play against
 
 ## `Player` class
@@ -75,10 +75,17 @@ Complete the tests for the following:
 
 Complete the following:
 
-- [ ] `::initialize` constructor
-- [ ] `#input` method
-- [ ] `#random_move` method (protected)
-- [ ] `#random_piece` method (protected)
+- [x] `::initialize` constructor
+- [x] `#input` method
+- [x] `#random_item` method (protected)
+- [x] `#random_piece` method (protected)
+- [x] `#random_chess_move` method (protected)
+- [x] `#random_capture` method (protected)
+- [x] `#random_move` method (protected)
+- [x] `#random_capture_en_passant` method (protected)
+- [ ] `#random_promote` method (protected)
+- [x] `#queenside_castle` method (protected)
+- [x] `#kingside_castle` method (protected)
 
 Complete the tests for the following:
 
