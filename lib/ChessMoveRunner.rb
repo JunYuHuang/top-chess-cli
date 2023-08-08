@@ -430,17 +430,11 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false unless should_promote?(src_cell)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
     pawn = self.class.pieces(@game.board, filters)[0]
-    pawn_moves = pawn[:piece].moves(src_cell, @game.board)
-    pawn_captures= pawn[:piece].captures(src_cell, @game.board)
-    is_capture_promotion = syntax.include?('x')
-    is_capture_promotion ?
-      pawn_captures.include?(dst_cell) :
-      pawn_moves.include?(dst_cell)
+    pawn[:piece].can_promote?(src_cell, @game.board)
   end
 
   def promote!(syntax, src_piece_color = turn_color)
