@@ -31,14 +31,4 @@ class HumanPlayer < Player
       last_input = player_input
     end
   end
-
-  # TODO - to test
-  def get_start_option
-    # TODO
-  end
-
-  # TODO - to test
-  def get_opponent_type
-    # TODO
-  end
 end
