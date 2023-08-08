@@ -98,12 +98,12 @@ Complete the following:
 
 - [x] `#is_valid_piece_color?` method
 - [x] `#is_valid_piece_type?` method
-- [x] `#is_inbound_cell?` method (possibly not needed?)
+- [x] `#is_inbound_cell?` method
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#deep_copy` method
-- [x] `#count_col_cells_amid_two_cells`
+- [x] `#count_col_cells_amid_two_cells` method
 - [x] `#enemy_color` method
 - [x] `#move` method
 - [x] `#capture` method
@@ -143,12 +143,12 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 
 - [x] `#is_valid_piece_color?` method
 - [x] `#is_valid_piece_type?` method
-- [x] `#is_inbound_cell?` method (possibly not needed?)
+- [x] `#is_inbound_cell?` method
 - [x] `#is_empty_cell?` method
 - [x] `#is_ally_piece_cell?` method
 - [x] `#is_enemy_piece_cell?` method
 - [x] `#deep_copy` method
-- [x] `#count_col_cells_amid_two_cells`
+- [x] `#count_col_cells_amid_two_cells` method
 - [x] `#enemy_color` method
 - [x] `#move` method
 - [x] `#capture` method
