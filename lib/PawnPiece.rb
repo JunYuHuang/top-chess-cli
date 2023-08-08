@@ -130,6 +130,10 @@ class PawnPiece < Piece
     return false if itself_on_board[:piece] != self
     return false unless self.class.is_valid_piece_color?(@color)
 
+    can_capture = captures(src_cell, board).size > 0
+    can_move = moves(src_cell, board).size > 0
+    return false unless can_capture || can_move
+
     @color == :white ?
       src_row == 1 :
       src_row == self.class.board_length - 2

@@ -654,6 +654,54 @@ describe PawnPiece do
       board[6][4] = black_pawn
       expect(black_pawn.is_promotable?([6,4], board)).to eql(true)
     end
+
+    it "returns false if called with a cell in the 2nd top-most row and a certain board with itself and 2 other pieces on a white pawn" do
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      white_rook = MockPiece.new({
+        color: :white, type: :rook, did_move: true,
+      })
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = black_rook
+      board[0][1] = white_rook
+      board[1][0] = white_pawn
+      expect(white_pawn.is_promotable?([1,0], board)).to eql(false)
+    end
+
+    it "returns false if called with a cell in the 2nd bottom-most row and a certain board with itself and 2 other pieces on a black pawn" do
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      black_rook = MockPiece.new({
+        color: :black, type: :rook, did_move: true,
+      })
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][7] = white_rook
+      board[7][6] = black_rook
+      board[6][7] = black_pawn
+      expect(black_pawn.is_promotable?([6,7], board)).to eql(false)
+    end
+
+    it "returns true if called with a cell in the 2nd top-most row and a certain board with itself and a capturable enemy piece on a white pawn" do
+      black_rook = MockPiece.new({
+        color: :black, type: :rook, did_move: true
+      })
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][6] = black_rook
+      board[1][5] = white_pawn
+      expect(white_pawn.is_promotable?([1,5], board)).to eql(true)
+    end
+
+    it "returns true if called with a cell in the 2nd bottom-most row and a certain board with itself and a capturable enemy piece on a black pawn" do
+      white_rook = MockPiece.new({
+        color: :white, type: :rook, did_move: true
+      })
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][3] = white_rook
+      board[6][4] = black_pawn
+      expect(black_pawn.is_promotable?([6,4], board)).to eql(true)
+    end
   end
 
   describe "#move" do
