@@ -169,16 +169,16 @@ class KingPiece < Piece
 
   # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
   def moves_queenside_castle(src_cell, board)
-    return false unless self.class.is_inbound_cell?(src_cell)
-    return false if self.class.is_empty_cell?(src_cell, board)
+    return [] unless self.class.is_inbound_cell?(src_cell)
+    return [] if self.class.is_empty_cell?(src_cell, board)
     res = self.class.left_moves(src_cell, board, @@two_steps)
     res.filter { |cell| !is_checked?(cell, board) }
   end
 
   # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
   def moves_kingside_castle(src_cell, board)
-    return false unless self.class.is_inbound_cell?(src_cell)
-    return false if self.class.is_empty_cell?(src_cell, board)
+    return [] unless self.class.is_inbound_cell?(src_cell)
+    return [] if self.class.is_empty_cell?(src_cell, board)
     res = self.class.right_moves(src_cell, board, @@two_steps)
     res.filter { |cell| !is_checked?(cell, board) }
   end
