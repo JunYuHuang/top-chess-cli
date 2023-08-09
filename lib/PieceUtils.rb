@@ -222,6 +222,32 @@ module PieceUtils
     true
   end
 
+  # TODO - to test
+  def is_piece_actionable?(cell, board)
+    return false unless is_inbound_cell?(cell)
+    return false if is_empty_cell?(cell, board)
+
+    row, col = cell
+    piece = board[row][col]
+    return true if piece.moves(cell, board).size > 0
+    return true if piece.captures(cell, board).size > 0
+    if piece.respond_to?(:captures_en_passant)
+      return true if piece.captures_en_passant(cell, board).size > 0
+    end
+    # TODO - uncomment below once `PawnPiece#promotes` method is
+    # done and has passing tests
+    # if piece.respond_to?(:promotes)
+    #   return true if piece.promotes(cell, board).size > 0
+    # end
+    if piece.respond_to?(:can_queenside_castle?)
+      return true if piece.can_queenside_castle?(cell, board)
+    end
+    if piece.respond_to?(:can_kingside_castle?)
+      return true if piece.can_kingside_castle?(cell, board)
+    end
+    false
+  end
+
   def pieces(board, filters)
     res = []
 
@@ -240,6 +266,7 @@ module PieceUtils
       color = filters.fetch(:color, nil)
       row = filters.fetch(:row, nil)
       col = filters.fetch(:col, nil)
+      is_actionable = filters.fetch(:is_actionable, nil)
 
       my_type = piece_hash[:piece].type
       my_color = piece_hash[:piece].color
@@ -250,6 +277,10 @@ module PieceUtils
       return false if is_valid_piece_color?(color) && my_color != color
       return false if is_valid_row?(row) && my_row != row
       return false if is_valid_col?(col) && my_col != col
+      return false if (
+        is_actionable == true &&
+        !is_piece_actionable?(piece_hash[:cell], board)
+      )
       true
     end
 

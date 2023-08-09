@@ -111,6 +111,7 @@ Complete the following:
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
 - [x] `#is_matching_piece?` method
+- [x] `#is_piece_actionable?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#in_row?` method
@@ -156,6 +157,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_piece_type?` method
 - [x] `#is_piece_color?` method
 - [x] `#is_matching_piece?` method
+- [ ] `#is_piece_actionable?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
 - [x] `#in_row?` method
