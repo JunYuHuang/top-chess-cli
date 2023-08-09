@@ -222,7 +222,6 @@ module PieceUtils
     true
   end
 
-  # TODO - to test
   def is_piece_actionable?(cell, board)
     return false unless is_inbound_cell?(cell)
     return false if is_empty_cell?(cell, board)
@@ -234,11 +233,9 @@ module PieceUtils
     if piece.respond_to?(:captures_en_passant)
       return true if piece.captures_en_passant(cell, board).size > 0
     end
-    # TODO - uncomment below once `PawnPiece#promotes` method is
-    # done and has passing tests
-    # if piece.respond_to?(:promotes)
-    #   return true if piece.promotes(cell, board).size > 0
-    # end
+    if piece.respond_to?(:promotes)
+      return true if piece.promotes(cell, board).size > 0
+    end
     if piece.respond_to?(:can_queenside_castle?)
       return true if piece.can_queenside_castle?(cell, board)
     end
