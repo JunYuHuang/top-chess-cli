@@ -139,6 +139,11 @@ class PawnPiece < Piece
       src_row == self.class.board_length - 2
   end
 
+  def promotes(cell, board)
+    return [] unless can_promote?(cell, board)
+    [*moves(cell, board), *captures(cell, board)]
+  end
+
   def move(src_cell, dst_cell, board)
     args = {
       src_cell: src_cell, dst_cell: dst_cell,

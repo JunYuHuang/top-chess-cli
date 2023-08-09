@@ -704,6 +704,116 @@ describe PawnPiece do
     end
   end
 
+  describe "#promotes" do
+    it "returns an empty array if called with an out-of-bounds cell and a board" do
+      white_pawn = PawnPiece.new({ color: :white })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[6][3] = white_pawn
+      res = white_pawn.promotes([0,8], board)
+      expect(res).to eql([])
+    end
+
+    it "returns an empty array if called with a cell in the top row and a board on a white pawn" do
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][3] = white_pawn
+      res = white_pawn.promotes([0,3], board)
+      expect(res).to eql([])
+    end
+
+    it "returns an empty array if called with a cell in the bottom row and a board on a black pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][3] = black_pawn
+      res = black_pawn.promotes([7,3], board)
+      expect(res).to eql([])
+    end
+
+    it "returns the correct int matrix if called with a cell in the 2nd top-most row and a board on a white pawn" do
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[1][5] = white_pawn
+      res = white_pawn.promotes([1,5], board)
+      expected = [[0,5]]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns the correct int matrix if called with a cell in the 2nd bottom-most row and a board on a black pawn" do
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[6][4] = black_pawn
+      res = black_pawn.promotes([6,4], board)
+      expected = [[7,4]]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns an empty array if called with a cell in the 2nd top-most row and a certain board with itself and 2 other pieces on a white pawn" do
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      white_rook = MockPiece.new({
+        color: :white, type: :rook, did_move: true,
+      })
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = black_rook
+      board[0][1] = white_rook
+      board[1][0] = white_pawn
+      res = white_pawn.promotes([1,0], board)
+      expect(res).to eql([])
+    end
+
+    it "returns an empty array if called with a cell in the 2nd bottom-most row and a certain board with itself and 2 other pieces on a black pawn" do
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      black_rook = MockPiece.new({
+        color: :black, type: :rook, did_move: true,
+      })
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][7] = white_rook
+      board[7][6] = black_rook
+      board[6][7] = black_pawn
+      res = black_pawn.promotes([6,7], board)
+      expect(res).to eql([])
+    end
+
+    it "returns the correct int matrix if called with a cell in the 2nd top-most row and a certain board with itself and a capturable enemy piece on a white pawn" do
+      black_rook = MockPiece.new({
+        color: :black, type: :rook, did_move: true
+      })
+      white_pawn = PawnPiece.new({ color: :white, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][6] = black_rook
+      board[1][5] = white_pawn
+      res = white_pawn.promotes([1,5], board)
+      expected = [[0,5], [0,6]]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+
+    it "returns true if called with a cell in the 2nd bottom-most row and a certain board with itself and a capturable enemy piece on a black pawn" do
+      white_rook = MockPiece.new({
+        color: :white, type: :rook, did_move: true
+      })
+      black_pawn = PawnPiece.new({ color: :black, did_move: true })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[7][3] = white_rook
+      board[6][4] = black_pawn
+      res = black_pawn.promotes([6,4], board)
+      expected = [[7,4], [7,3]]
+      expect(res.size).to eql(expected.size)
+      expected.each do |cell|
+        expect(res.include?(cell)).to eql(true)
+      end
+    end
+  end
+
   describe "#move" do
     it "returns the correct board if called with all valid arguments on a white pawn" do
       board = Array.new(8) { Array.new(8, nil) }
