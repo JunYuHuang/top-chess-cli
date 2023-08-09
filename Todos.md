@@ -459,7 +459,6 @@ Complete the following:
 - [x] `#move!` method
 - [x] `#can_capture?` method
 - [x] `#capture!` method
-- [x] `#should_promote?` method
 - [x] `#can_promote?` method
 - [x] `#promote!` method
 - [x] `#can_queenside_castle?` method
@@ -500,7 +499,6 @@ Complete the tests for the following:
 - [x] `#move!` method
 - [x] `#can_capture?` method
 - [x] `#capture!` method
-- [x] `#should_promote?` method
 - [x] `#can_promote?` method
 - [x] `#promote!` method
 - [x] `#can_queenside_castle?` method

@@ -295,7 +295,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false if should_promote?(src_cell)
+    return false if can_promote?(syntax + "=Q", src_piece_color)
 
     src_row, src_col = src_cell
     filters = { row: src_row, col: src_col }
@@ -364,7 +364,7 @@ class ChessMoveRunner
       cell: src_cell
     }
     return false unless is_matching_piece?(args)
-    return false if should_promote?(src_cell)
+    return false if can_promote?(syntax + "=Q", src_piece_color)
 
     capturee_piece = res[0]
     return false if self.class.is_ally_piece_cell?(src_cell, dst_cell, @game.board)
@@ -399,20 +399,6 @@ class ChessMoveRunner
     @game.board = capturer_piece[:piece].capture(
       src_cell, dst_cell, @game.board
     )
-  end
-
-  def should_promote?(src_cell)
-    return false unless @game
-    return false unless self.class.is_inbound_cell?(src_cell)
-
-    src_row, src_col = src_cell
-    filter = { row: src_row, col: src_col }
-    pieces = self.class.pieces(@game.board, filter)
-    return false if pieces.size != 1
-
-    pawn = pieces[0]
-    return false if pawn[:piece].type != :pawn
-    pawn[:piece].can_promote?(src_cell, @game.board)
   end
 
   def can_promote?(syntax, src_piece_color = turn_color)
