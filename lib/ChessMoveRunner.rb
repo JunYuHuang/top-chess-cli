@@ -262,7 +262,6 @@ class ChessMoveRunner
     res.join
   end
 
-  # TODO - to test
   # assumes hash is valid
   def castle_hash_to_syntax(hash)
     hash => { is_kingside: }

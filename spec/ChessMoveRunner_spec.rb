@@ -1047,7 +1047,6 @@ describe ChessMoveRunner do
     end
   end
 
-  # TODO
   describe "#promote_hash_to_syntax" do
     it "returns 'c7-c8=Q' if called with a certain hash" do
       mock_game = nil
@@ -1086,6 +1085,24 @@ describe ChessMoveRunner do
       }
       res = chess_move_runner.promote_hash_to_syntax(hash)
       expect(res).to eql('h2xg1=N')
+    end
+  end
+
+  describe "#castle_hash_to_syntax" do
+    it "returns '0-0' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = { is_kingside: true }
+      res = chess_move_runner.castle_hash_to_syntax(hash)
+      expect(res).to eql('0-0')
+    end
+
+    it "returns '0-0-0' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = { is_kingside: false }
+      res = chess_move_runner.castle_hash_to_syntax(hash)
+      expect(res).to eql('0-0-0')
     end
   end
 
