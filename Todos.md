@@ -495,7 +495,7 @@ Complete the tests for the following:
 - [x] `#move_hash_to_syntax` method
 - [x] `#capture_hash_to_syntax` method
 - [x] `#capture_en_passant_hash_to_syntax` method
-- [ ] `#promote_hash_to_syntax` method
+- [x] `#promote_hash_to_syntax` method
 - [ ] `#castle_hash_to_syntax` method
 - [x] `#can_move?` method
 - [x] `#move!` method

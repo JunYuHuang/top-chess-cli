@@ -249,15 +249,10 @@ class ChessMoveRunner
     capture_hash_to_syntax(hash)
   end
 
-  # TODO - to test
   # assumes hash is valid
   def promote_hash_to_syntax(hash)
-    hash => {
-      src_piece_type:, src_cell:, dst_cell:, promo_piece_type:,
-      is_capture:
-    }
+    hash => { src_cell:, dst_cell:, promo_piece_type:, is_capture: }
     res = [
-      piece_type_to_char(src_piece_type),
       matrix_cell_to_coords(src_cell),
       is_capture ? "x" : "-",
       matrix_cell_to_coords(dst_cell),

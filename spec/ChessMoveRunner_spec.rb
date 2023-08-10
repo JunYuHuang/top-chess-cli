@@ -1047,6 +1047,48 @@ describe ChessMoveRunner do
     end
   end
 
+  # TODO
+  describe "#promote_hash_to_syntax" do
+    it "returns 'c7-c8=Q' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_cell: [1,2],
+        dst_cell: [0,2],
+        promo_piece_type: :queen,
+        is_capture: false
+      }
+      res = chess_move_runner.promote_hash_to_syntax(hash)
+      expect(res).to eql('c7-c8=Q')
+    end
+
+    it "returns 'h2-h1=B' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_cell: [6,7],
+        dst_cell: [7,7],
+        promo_piece_type: :bishop,
+        is_capture: false
+      }
+      res = chess_move_runner.promote_hash_to_syntax(hash)
+      expect(res).to eql('h2-h1=B')
+    end
+
+    it "returns 'h2xg1=N' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_cell: [6,7],
+        dst_cell: [7,6],
+        promo_piece_type: :knight,
+        is_capture: true
+      }
+      res = chess_move_runner.promote_hash_to_syntax(hash)
+      expect(res).to eql('h2xg1=N')
+    end
+  end
+
   describe "#can_move?" do
     it "returns false if called with 'asd13fa' on a mock game" do
       mock_game = nil
