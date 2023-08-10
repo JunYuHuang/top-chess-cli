@@ -956,6 +956,44 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#move_hash_to_syntax" do
+    it "returns 'a2-a4' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :pawn,
+        src_cell: [6,0],
+        dst_cell: [4,0]
+      }
+      res = chess_move_runner.move_hash_to_syntax(hash)
+      expect(res).to eql('a2-a4')
+    end
+
+    it "returns 'Ra8-b8' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :rook,
+        src_cell: [0,0],
+        dst_cell: [0,1]
+      }
+      res = chess_move_runner.move_hash_to_syntax(hash)
+      expect(res).to eql('Ra8-b8')
+    end
+
+    it "returns 'Qa8-b8' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :queen,
+        src_cell: [0,0],
+        dst_cell: [0,1]
+      }
+      res = chess_move_runner.move_hash_to_syntax(hash)
+      expect(res).to eql('Qa8-b8')
+    end
+  end
+
   describe "#can_move?" do
     it "returns false if called with 'asd13fa' on a mock game" do
       mock_game = nil

@@ -155,7 +155,6 @@ class ChessMoveRunner
     [INT_COL_TO_ALPHA_FILE[col], 8 - row].join
   end
 
-  # TODO - to test
   def piece_type_to_char(type)
     PIECE_SYMBOL_TO_CHAR[type]
   end
@@ -221,7 +220,6 @@ class ChessMoveRunner
     }
   end
 
-  # TODO - to test
   # assumes hash is valid
   def move_hash_to_syntax(hash)
     hash => { src_piece_type:, src_cell:, dst_cell: }
