@@ -112,6 +112,7 @@ class ComputerPlayer < Player
     piece_obj = piece[:piece]
     cell = piece[:cell]
     return if piece_obj.nil? or cell.nil?
+    return if piece_obj.color != @piece_color
     return if piece_obj.type != :pawn
 
     return unless piece_obj.respond_to?(:promotes)
@@ -138,6 +139,7 @@ class ComputerPlayer < Player
     piece_obj = piece[:piece]
     cell = piece[:cell]
     return if piece_obj.nil? or cell.nil?
+    return if piece_obj.color != @piece_color
     return if piece_obj.type != :king
 
     return unless piece_obj.respond_to?(:can_queenside_castle?)
@@ -154,6 +156,7 @@ class ComputerPlayer < Player
     piece_obj = piece[:piece]
     cell = piece[:cell]
     return if piece_obj.nil? or cell.nil?
+    return if piece_obj.color != @piece_color
     return if piece_obj.type != :king
 
     return unless piece_obj.respond_to?(:can_kingside_castle?)
