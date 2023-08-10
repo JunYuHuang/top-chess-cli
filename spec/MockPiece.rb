@@ -12,6 +12,7 @@ class MockPiece < Piece
 
   ONE_STEP_MAX = { max_steps: 1 }
   TWO_STEPS_MAX = { max_steps: 2 }
+  THREE_STEPS_MAX = { max_steps: 3 }
   DEFAULTS = {
     color: :white,
     type: :mock,
@@ -45,13 +46,13 @@ class MockPiece < Piece
     @is_capturable_en_passant
   end
 
-  def moves(src_cell, board, options = {})
+  def moves(src_cell, board)
     return [] if !self.class.is_inbound_cell?(src_cell)
     return [] if self.class.is_empty_cell?(src_cell, board)
 
     src_row, src_col = src_cell
     piece = board[src_row][src_col]
-    return king_move(src_cell, board, options) if piece.type == :king
+    return king_moves(src_cell, board) if piece.type == :king
     return rook_moves(src_cell, board) if piece.type == :rook
     return bishop_moves(src_cell, board) if piece.type == :bishop
     return knight_moves(src_cell, board) if piece.type == :knight
@@ -100,6 +101,23 @@ class MockPiece < Piece
       return true if checkable
     end
     false
+  end
+
+  def is_checkmated?(src_cell, board)
+    return false unless @type == :king
+    return false unless is_checked?(src_cell, board)
+    moves(src_cell, board).size == 0
+  end
+
+  def is_stalemated?(src_cell, board)
+    return false unless @type == :king
+    return false if is_checked?(src_cell, board)
+
+    adj_cells = self.class.adjacent_cells(src_cell)
+    return false if adj_cells.all? do |cell|
+      !self.class.is_empty_cell?(cell, board)
+    end
+    moves(src_cell, board).size == 0
   end
 
   def can_queenside_castle?(src_cell, board)
@@ -369,6 +387,32 @@ class MockPiece < Piece
     res.push(down_right_cell) if can_capture_en_passant?(down_right_args)
 
     res
+  end
+
+  # TODO
+
+  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
+  def moves_queenside_castle(src_cell, board)
+    return [] unless self.class.is_inbound_cell?(src_cell)
+    return [] if self.class.is_empty_cell?(src_cell, board)
+    res = self.class.left_moves(src_cell, board, TWO_STEPS_MAX)
+    res.filter { |cell| !is_checked?(cell, board) }
+  end
+
+  # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
+  def moves_kingside_castle(src_cell, board)
+    return [] unless self.class.is_inbound_cell?(src_cell)
+    return [] if self.class.is_empty_cell?(src_cell, board)
+    res = self.class.right_moves(src_cell, board, TWO_STEPS_MAX)
+    res.filter { |cell| !is_checked?(cell, board) }
+  end
+
+  def are_cells_amid_queenside_castle_empty?(src_cell, board)
+    self.class.left_moves(src_cell, board, THREE_STEPS_MAX).size == 3
+  end
+
+  def are_cells_amid_kingside_castle_empty?(src_cell, board)
+    self.class.right_moves(src_cell, board, TWO_STEPS_MAX).size == 2
   end
 
   def can_white_queenside_castle?(src_cell, board)

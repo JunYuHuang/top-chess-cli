@@ -258,7 +258,7 @@ module PieceUtils
       end
     end
 
-    def passes_filters?(filters, piece_hash)
+    def passes_filters?(board, filters, piece_hash)
       type = filters.fetch(:type, nil)
       color = filters.fetch(:color, nil)
       row = filters.fetch(:row, nil)
@@ -281,7 +281,7 @@ module PieceUtils
       true
     end
 
-    res.filter { |piece_hash| passes_filters?(filters, piece_hash) }
+    res.filter { |hash| passes_filters?(board, filters, hash) }
   end
 
   def remove_pieces(board, filters)
@@ -394,6 +394,9 @@ module PieceUtils
     steps = 1
     while row >= 0 do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, src_col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
@@ -428,6 +431,9 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, src_col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
@@ -462,6 +468,9 @@ module PieceUtils
     steps = 1
     while col >= 0 do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [src_row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
@@ -496,6 +505,9 @@ module PieceUtils
     steps = 1
     while col < BOARD_LENGTH do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [src_row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
@@ -535,6 +547,9 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH && col >= 0 do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
@@ -575,6 +590,9 @@ module PieceUtils
     steps = 1
     while row >= 0 && col < BOARD_LENGTH do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
@@ -615,6 +633,9 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH && col < BOARD_LENGTH do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
@@ -655,6 +676,9 @@ module PieceUtils
     steps = 1
     while row >= 0 && col >= 0 do
       break if steps > max_steps
+      break if is_ally_piece_cell?(
+        [src_row, src_col], [row, col], board
+      )
       if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end

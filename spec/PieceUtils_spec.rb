@@ -121,7 +121,7 @@ describe "PieceUtils" do
       white_knight = MockPiece.new({ color: :white, type: :knight })
       white_bishop = MockPiece.new({ color: :white, type: :bishop })
       white_queen = MockPiece.new({ color: :white, type: :queen })
-      white_king = MockPiece.new({ color: :white, type: :king })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
       8.times do |col|
         board[6][col] = white_pawn
       end
@@ -144,7 +144,7 @@ describe "PieceUtils" do
       white_knight = MockPiece.new({ color: :white, type: :knight })
       white_bishop = MockPiece.new({ color: :white, type: :bishop })
       white_queen = MockPiece.new({ color: :white, type: :queen })
-      white_king = MockPiece.new({ color: :white, type: :king })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
       8.times do |col|
         board[6][col] = white_pawn
       end
@@ -160,6 +160,52 @@ describe "PieceUtils" do
       expect(res).to eql(false)
     end
 
+    it "returns false if called with a certain cell occupied by a white queen and a certain board that has 16 pieces on it" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_knight = MockPiece.new({ color: :white, type: :knight })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
+      8.times do |col|
+        board[6][col] = white_pawn
+      end
+      board[7][0] = white_rook
+      board[7][1] = white_knight
+      board[7][2] = white_bishop
+      board[7][3] = white_queen
+      board[7][4] = white_king
+      board[7][5] = white_bishop
+      board[7][6] = white_knight
+      board[7][7] = white_rook
+      res = PieceUtilsClass.is_piece_actionable?([7,3], board)
+      expect(res).to eql(false)
+    end
+
+    it "returns false if called with a certain cell occupied by a white king and a certain board that has 16 pieces on it" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_knight = MockPiece.new({ color: :white, type: :knight })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
+      8.times do |col|
+        board[6][col] = white_pawn
+      end
+      board[7][0] = white_rook
+      board[7][1] = white_knight
+      board[7][2] = white_bishop
+      board[7][3] = white_queen
+      board[7][4] = white_king
+      board[7][5] = white_bishop
+      board[7][6] = white_knight
+      board[7][7] = white_rook
+      res = PieceUtilsClass.is_piece_actionable?([7,4], board)
+      expect(res).to eql(false)
+    end
+
     it "returns true if called with a certain cell occupied by a white pawn and a certain board that has 16 pieces on it" do
       board = Array.new(8) { Array.new(8, nil) }
       white_pawn = MockPiece.new({ color: :white, type: :pawn })
@@ -167,7 +213,7 @@ describe "PieceUtils" do
       white_knight = MockPiece.new({ color: :white, type: :knight })
       white_bishop = MockPiece.new({ color: :white, type: :bishop })
       white_queen = MockPiece.new({ color: :white, type: :queen })
-      white_king = MockPiece.new({ color: :white, type: :king })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
       8.times do |col|
         board[6][col] = white_pawn
       end
@@ -190,7 +236,7 @@ describe "PieceUtils" do
       white_knight = MockPiece.new({ color: :white, type: :knight })
       white_bishop = MockPiece.new({ color: :white, type: :bishop })
       white_queen = MockPiece.new({ color: :white, type: :queen })
-      white_king = MockPiece.new({ color: :white, type: :king })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
       8.times do |col|
         board[6][col] = white_pawn
       end
@@ -204,6 +250,44 @@ describe "PieceUtils" do
       board[7][7] = white_rook
       res = PieceUtilsClass.is_piece_actionable?([7,1], board)
       expect(res).to eql(true)
+    end
+
+    it "returns false if called with a a certain cell that represents a white rook and a certain board that has 32 pieces on it" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_knight = MockPiece.new({ color: :white, type: :knight })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      black_knight = MockPiece.new({ color: :black, type: :knight })
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_queen = MockPiece.new({ color: :black, type: :queen })
+      black_king = MockPiece.new({ color: :black, type: :king, is_capturable: false })
+      8.times do |col|
+        board[6][col] = white_pawn
+        board[1][col] = black_pawn
+      end
+      board[7][0] = white_rook
+      board[7][1] = white_knight
+      board[7][2] = white_bishop
+      board[7][3] = white_queen
+      board[7][4] = white_king
+      board[7][5] = white_bishop
+      board[7][6] = white_knight
+      board[7][7] = white_rook
+      board[0][0] = black_rook
+      board[0][1] = black_knight
+      board[0][2] = black_bishop
+      board[0][3] = black_queen
+      board[0][4] = black_king
+      board[0][5] = black_bishop
+      board[0][6] = black_knight
+      board[0][7] = black_rook
+      res = PieceUtilsClass.is_piece_actionable?([7,0], board)
+      expect(res).to eql(false)
     end
   end
 
@@ -267,6 +351,45 @@ describe "PieceUtils" do
       filters = { color: :black }
       res = PieceUtilsClass.pieces(board, filters)
       expect(res.size).to eql(0)
+    end
+
+    it "returns an array of the correct piece hashes if called with a certain board that has 32 pieces on it and a certain filters hash" do
+      board = Array.new(8) { Array.new(8, nil) }
+      white_pawn = MockPiece.new({ color: :white, type: :pawn })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      white_knight = MockPiece.new({ color: :white, type: :knight })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      white_queen = MockPiece.new({ color: :white, type: :queen })
+      white_king = MockPiece.new({ color: :white, type: :king, is_capturable: false })
+      black_pawn = MockPiece.new({ color: :black, type: :pawn })
+      black_rook = MockPiece.new({ color: :black, type: :rook })
+      black_knight = MockPiece.new({ color: :black, type: :knight })
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_queen = MockPiece.new({ color: :black, type: :queen })
+      black_king = MockPiece.new({ color: :black, type: :king, is_capturable: false })
+      8.times do |col|
+        board[6][col] = white_pawn
+        board[1][col] = black_pawn
+      end
+      board[7][0] = white_rook
+      board[7][1] = white_knight
+      board[7][2] = white_bishop
+      board[7][3] = white_queen
+      board[7][4] = white_king
+      board[7][5] = white_bishop
+      board[7][6] = white_knight
+      board[7][7] = white_rook
+      board[0][0] = black_rook
+      board[0][1] = black_knight
+      board[0][2] = black_bishop
+      board[0][3] = black_queen
+      board[0][4] = black_king
+      board[0][5] = black_bishop
+      board[0][6] = black_knight
+      board[0][7] = black_rook
+      filters = { color: :black, is_actionable: true }
+      res = PieceUtilsClass.pieces(board, filters)
+      expect(res.size).to eql(10)
     end
   end
 
