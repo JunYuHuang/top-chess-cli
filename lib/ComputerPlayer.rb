@@ -46,8 +46,12 @@ class ComputerPlayer < Player
   end
 
   def random_capture(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+
     piece_captures = piece_obj.captures(cell, @game.board)
     return if piece_obj.color != @piece_color
     return if piece_captures.size < 1
@@ -61,8 +65,12 @@ class ComputerPlayer < Player
   end
 
   def random_move(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+
     piece_moves = piece_obj.moves(cell, @game.board)
     return if piece_obj.color != @piece_color
     return if piece_moves.size < 1
@@ -100,8 +108,12 @@ class ComputerPlayer < Player
 
   # TODO - to test
   def random_promote(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+
     return unless piece_obj.respond_to?(:promotes)
 
     promotes = piece_obj.promotes(cell, @game.board)
@@ -121,8 +133,13 @@ class ComputerPlayer < Player
 
   # TODO - to test
   def queenside_castle(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+    return if piece_obj.type != :king
+
     return unless piece_obj.respond_to?(:can_queenside_castle?)
     return unless piece_obj.can_queenside_castle?(cell, @game.board)
 
@@ -132,8 +149,13 @@ class ComputerPlayer < Player
 
   # TODO - to test
   def kingside_castle(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+    return if piece_obj.type != :king
+
     return unless piece_obj.respond_to?(:can_kingside_castle?)
     return unless piece_obj.can_kingside_castle?(cell, @game.board)
 
