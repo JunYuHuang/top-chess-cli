@@ -132,7 +132,6 @@ class ComputerPlayer < Player
     })
   end
 
-  # TODO - to test
   def queenside_castle(piece)
     return unless piece.class == Hash
 
