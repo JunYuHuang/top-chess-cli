@@ -25,5 +25,34 @@ describe ComputerPlayer do
     end
   end
 
-  # TODO
+  describe "#random_item" do
+    it "returns nil if called with a non-array" do
+      args = { game: nil }
+      computer_player = ComputerPlayer.new(args)
+      res = computer_player.random_item({})
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with an empty array" do
+      args = { game: nil }
+      computer_player = ComputerPlayer.new(args)
+      res = computer_player.random_item([])
+      expect(res).to eql(nil)
+    end
+
+    it "returns the first element if called with an array of size 1" do
+      args = { game: nil }
+      computer_player = ComputerPlayer.new(args)
+      res = computer_player.random_item([1])
+      expect(res).to eql(1)
+    end
+
+    it "returns a random element if called with an array that has 2 or more elements" do
+      args = { game: nil }
+      computer_player = ComputerPlayer.new(args)
+      res = computer_player.random_item([1,2,3])
+      expected = [1,2,3]
+      expect(expected.include?(res)).to eql(true)
+    end
+  end
 end

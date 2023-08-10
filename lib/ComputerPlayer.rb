@@ -20,12 +20,9 @@ class ComputerPlayer < Player
     random_chess_move
   end
 
-  protected
-
-  # TODO - to test
   def random_item(array)
     return if array.class != Array or array.size < 1
-    array[random(0...array.size)]
+    array[rand(0...array.size)]
   end
 
   # TODO - to test

@@ -77,28 +77,28 @@ Complete the following:
 
 - [x] `::initialize` constructor
 - [x] `#input` method
-- [x] `#random_item` method (protected)
-- [x] `#random_piece` method (protected)
-- [x] `#random_chess_move` method (protected)
-- [x] `#random_capture` method (protected)
-- [x] `#random_move` method (protected)
-- [x] `#random_capture_en_passant` method (protected)
-- [x] `#random_promote` method (protected)
-- [x] `#queenside_castle` method (protected)
-- [x] `#kingside_castle` method (protected)
+- [x] `#random_item` method
+- [x] `#random_piece` method
+- [x] `#random_chess_move` method
+- [x] `#random_capture` method
+- [x] `#random_move` method
+- [x] `#random_capture_en_passant` method
+- [x] `#random_promote` method
+- [x] `#queenside_castle` method
+- [x] `#kingside_castle` method
 
 Complete the tests for the following:
 
 - [x] `::initialize` constructor
-- [ ] `#random_item` method (protected)
-- [ ] `#random_piece` method (protected)
-- [ ] `#random_chess_move` method (protected)
-- [ ] `#random_capture` method (protected)
-- [ ] `#random_move` method (protected)
-- [ ] `#random_capture_en_passant` method (protected)
-- [ ] `#random_promote` method (protected)
-- [ ] `#queenside_castle` method (protected)
-- [ ] `#kingside_castle` method (protected)
+- [x] `#random_item` method
+- [ ] `#random_piece` method
+- [ ] `#random_chess_move` method
+- [ ] `#random_capture` method
+- [ ] `#random_move` method
+- [ ] `#random_capture_en_passant` method
+- [ ] `#random_promote` method
+- [ ] `#queenside_castle` method
+- [ ] `#kingside_castle` method
 
 ## `PieceUtils` module
 
