@@ -148,7 +148,6 @@ class ComputerPlayer < Player
     @game.chess_move_runner.castle_hash_to_syntax(option)
   end
 
-  # TODO - to test
   def kingside_castle(piece)
     return unless piece.class == Hash
 

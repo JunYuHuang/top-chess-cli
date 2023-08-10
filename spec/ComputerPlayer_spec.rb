@@ -689,4 +689,138 @@ describe ComputerPlayer do
       expect(res).to eql('0-0-0')
     end
   end
+
+  describe "#kingside_castle" do
+    it "returns nil if called with a king that cannot kingside castle for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      king = { piece: game.board[7][4], cell: [7,4] }
+      res = computer_player.kingside_castle(king)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a king that is not owned by the ComputerPlayer obj that calls it for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [5,6],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [0,7],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      king = { piece: game.board[0][4], cell: [0,4] }
+      res = computer_player.kingside_castle(king)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a king that is in position to kingside castle but is checked for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [2,6],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      king = { piece: game.board[7][4], cell: [7,4] }
+      res = computer_player.kingside_castle(king)
+      expect(res).to eql(nil)
+    end
+
+    it "returns the correct Long AN string if called with a king that can queenside castle for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [2,2],
+          color: :black,
+          type: :bishop,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,7],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+          did_move: false,
+        },
+        {
+          cell: [7,4],
+          color: :white,
+          type: :king,
+          is_capturable: false,
+          did_move: false,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      king = { piece: game.board[7][4], cell: [7,4] }
+      res = computer_player.kingside_castle(king)
+      expect(res).to eql('0-0')
+    end
+  end
 end

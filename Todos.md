@@ -98,7 +98,7 @@ Complete the tests for the following:
 - [x] `#capture_en_passant` method
 - [x] `#random_promote` method
 - [x] `#queenside_castle` method
-- [ ] `#kingside_castle` method
+- [x] `#kingside_castle` method
 
 ## `PieceUtils` module
 
