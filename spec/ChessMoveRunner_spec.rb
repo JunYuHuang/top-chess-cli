@@ -1020,6 +1020,33 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#capture_en_passant_hash_to_syntax" do
+    it "returns 'f5xg6' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :pawn,
+        src_cell: [3,5],
+        dst_cell: [2,6]
+      }
+      res = chess_move_runner.capture_en_passant_hash_to_syntax(hash)
+      expect(res).to eql('f5xg6')
+    end
+
+    it "returns 'c4xd3' if called with a certain hash" do
+      options = { piece_factory_class: PieceFactory }
+      game = Game.new(options)
+      chess_move_runner = ChessMoveRunner.new(game)
+      hash = {
+        src_piece_type: :pawn,
+        src_cell: [4,2],
+        dst_cell: [5,3]
+      }
+      res = chess_move_runner.capture_en_passant_hash_to_syntax(hash)
+      expect(res).to eql('c4xd3')
+    end
+  end
+
   describe "#can_move?" do
     it "returns false if called with 'asd13fa' on a mock game" do
       mock_game = nil

@@ -244,7 +244,6 @@ class ChessMoveRunner
     res.join
   end
 
-  # TODO - to test
   # assumes hash is valid
   def capture_en_passant_hash_to_syntax(hash)
     capture_hash_to_syntax(hash)
