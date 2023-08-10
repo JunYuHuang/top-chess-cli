@@ -60,11 +60,11 @@ class ComputerPlayer < Player
     })
   end
 
-  # TODO - to test
   def random_move(piece)
     piece_obj = piece[:piece]
     cell = piece[:cell]
     piece_moves = piece_obj.moves(cell, @game.board)
+    return if piece_obj.color != @piece_color
     return if piece_moves.size < 1
 
     dst_cell = random_item(piece_moves)
