@@ -77,6 +77,40 @@ describe ComputerPlayer do
     end
   end
 
+  describe "#random_chess_move" do
+    it "returns a legal Long AN string if called on a ComputerPlayer object playing as white for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      res = computer_player.random_chess_move
+      is_legal = game.chess_move_runner.can_chess_move?(res, :white)
+      expect(res.class).to eql(String)
+      expect(is_legal).to eql(true)
+    end
+
+    it "returns a legal Long AN string if called on a ComputerPlayer object playing as black for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :white })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :black, type: :computer }
+      )
+      res = computer_player.random_chess_move
+      is_legal = game.chess_move_runner.can_chess_move?(res, :black)
+      expect(res.class).to eql(String)
+      expect(is_legal).to eql(true)
+    end
+  end
+
   describe "#random_capture" do
     it "returns nil if called with a piece that has no available captures for a game with the default starting board" do
       options = {

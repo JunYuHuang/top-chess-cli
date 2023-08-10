@@ -31,7 +31,6 @@ class ComputerPlayer < Player
     piece = random_item(ally_pieces)
   end
 
-  # TODO - to test
   def random_chess_move
     piece = random_piece
     chess_moves = [

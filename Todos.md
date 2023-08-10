@@ -92,7 +92,7 @@ Complete the tests for the following:
 - [x] `::initialize` constructor
 - [x] `#random_item` method
 - [x] `#random_piece` method
-- [ ] `#random_chess_move` method
+- [x] `#random_chess_move` method
 - [x] `#random_capture` method
 - [x] `#random_move` method
 - [x] `#capture_en_passant` method
