@@ -246,6 +246,7 @@ class Game
       new_player.name = new_name.join('')
     end
     @players.push(new_player)
+    new_player
   end
 
   def remove_players!(filters)

@@ -25,10 +25,9 @@ class ComputerPlayer < Player
     array[rand(0...array.size)]
   end
 
-  # TODO - to test
   def random_piece
-    filter = { is_actionable: true, color: @piece_color }
-    ally_pieces = self.class.pieces(filter, @game.board)
+    filters = { is_actionable: true, color: @piece_color }
+    ally_pieces = @game.class.pieces(@game.board, filters)
     piece = random_item(ally_pieces)
   end
 

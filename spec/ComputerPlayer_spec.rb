@@ -55,4 +55,25 @@ describe ComputerPlayer do
       expect(expected.include?(res)).to eql(true)
     end
   end
+
+  describe "#random_piece" do
+    it "returns a hash that represents a random chess piece that can be played in the current turn and is the same color as the ComputerPlayer object it is called on for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      res = computer_player.random_piece
+      res_moves = res[:piece].moves(res[:cell], game.board)
+      expected_types = [:pawn, :knight]
+      expect(res.class).to eql(Hash)
+      expect(res[:piece].color).to eql(:white)
+      expect(expected_types.include?(res[:piece].type)).to eql(true)
+      expect(res_moves.size > 0).to eql(true)
+    end
+  end
 end
