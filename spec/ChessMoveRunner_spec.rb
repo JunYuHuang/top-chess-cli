@@ -994,6 +994,32 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#capture_hash_to_syntax" do
+    it "returns 'Bc1xg5' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :bishop,
+        src_cell: [7,2],
+        dst_cell: [3,6]
+      }
+      res = chess_move_runner.capture_hash_to_syntax(hash)
+      expect(res).to eql('Bc1xg5')
+    end
+
+    it "returns 'Ng1xf3' if called with a certain hash" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      hash = {
+        src_piece_type: :knight,
+        src_cell: [7,6],
+        dst_cell: [5,5]
+      }
+      res = chess_move_runner.capture_hash_to_syntax(hash)
+      expect(res).to eql('Ng1xf3')
+    end
+  end
+
   describe "#can_move?" do
     it "returns false if called with 'asd13fa' on a mock game" do
       mock_game = nil

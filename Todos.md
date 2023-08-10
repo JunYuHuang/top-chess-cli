@@ -493,7 +493,7 @@ Complete the tests for the following:
 - [x] `#capture_en_passant_syntax_to_hash` method
 - [x] `#promote_syntax_to_hash` method
 - [x] `#move_hash_to_syntax` method
-- [ ] `#capture_hash_to_syntax` method
+- [x] `#capture_hash_to_syntax` method
 - [ ] `#capture_en_passant_hash_to_syntax` method
 - [ ] `#promote_hash_to_syntax` method
 - [ ] `#castle_hash_to_syntax` method

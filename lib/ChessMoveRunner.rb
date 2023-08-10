@@ -232,7 +232,6 @@ class ChessMoveRunner
     res.join
   end
 
-  # TODO - to test
   # assumes hash is valid
   def capture_hash_to_syntax(hash)
     hash => { src_piece_type:, src_cell:, dst_cell: }
