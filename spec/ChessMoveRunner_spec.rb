@@ -681,6 +681,50 @@ describe ChessMoveRunner do
     end
   end
 
+  describe "#matrix_cell_to_coords" do
+    it "returns 'a8' if called with [0,0]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([0,0])
+      expect(res).to eql('a8')
+    end
+
+    it "returns 'a1' if called with [7,0]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([7,0])
+      expect(res).to eql('a1')
+    end
+
+    it "returns 'h8' if called with [0,7]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([0,7])
+      expect(res).to eql('h8')
+    end
+
+    it "returns 'h1' if called with [7,7]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([7,7])
+      expect(res).to eql('h1')
+    end
+
+    it "returns 'c4' if called with [4,2]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([4,2])
+      expect(res).to eql('c4')
+    end
+
+    it "returns 'f5' if called with [3,5]" do
+      mock_game = nil
+      chess_move_runner = ChessMoveRunner.new(mock_game)
+      res = chess_move_runner.matrix_cell_to_coords([3,5])
+      expect(res).to eql('f5')
+    end
+  end
+
   describe "#is_matching_piece?" do
     it "returns false if called with nil" do
       mock_game = nil

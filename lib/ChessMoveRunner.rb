@@ -150,7 +150,6 @@ class ChessMoveRunner
     PIECE_CHAR_TO_SYMBOL[char]
   end
 
-  # TODO - to test
   def matrix_cell_to_coords(cell)
     row, col = cell
     [INT_COL_TO_ALPHA_FILE[col], 8 - row].join

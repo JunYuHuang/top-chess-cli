@@ -486,7 +486,7 @@ Complete the tests for the following:
 - [x] `#is_valid_kingside_castle_syntax?` method
 - [x] `#is_valid_syntax?` method
 - [x] `#coords_to_matrix_cell` method
-- [ ] `#matrix_cell_to_coords` method
+- [x] `#matrix_cell_to_coords` method
 - [x] `#is_matching_piece?` method
 - [x] `#move_syntax_to_hash` method
 - [x] `#capture_syntax_to_hash` method
