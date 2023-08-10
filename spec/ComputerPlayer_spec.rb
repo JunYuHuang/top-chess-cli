@@ -434,4 +434,125 @@ describe ComputerPlayer do
       expect(res).to eql('f5xg6')
     end
   end
+
+  describe "#random_promote" do
+    it "returns nil if called with a pawn that has no available promotions for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[6][0], cell: [6,0] }
+      res = computer_player.random_promote(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a pawn that is not owned by the ComputerPlayer obj that calls it with a certain board with 2 pieces" do
+      pieces = [
+        {
+          cell: [6,3],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        },
+        {
+          cell: [7,3],
+          color: :white,
+          type: :knight,
+          is_capturable: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[6][3], cell: [6,3] }
+      res = computer_player.random_promote(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a pawn that has no available promotions for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [0,5],
+          color: :black,
+          type: :bishop,
+          is_capturable: true
+        },
+        {
+          cell: [1,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[1][5], cell: [1,5] }
+      res = computer_player.random_promote(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns a legal Long AN string if called with a pawn that has at least 1 available promotion for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [0,6],
+          color: :black,
+          type: :bishop,
+          is_capturable: true
+        },
+        {
+          cell: [0,4],
+          color: :black,
+          type: :queen,
+          is_capturable: true
+        },
+        {
+          cell: [1,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[1][5], cell: [1,5] }
+      expected = [
+        'f7-f8=R', 'f7-f8=N', 'f7-f8=B', 'f7-f8=Q',
+        'f7xe8=R', 'f7xe8=N', 'f7xe8=B', 'f7xe8=Q',
+        'f7xg8=R', 'f7xg8=N', 'f7xg8=B', 'f7xg8=Q',
+      ]
+      res = computer_player.random_promote(pawn)
+      expect(expected.include?(res)).to eql(true)
+    end
+  end
 end

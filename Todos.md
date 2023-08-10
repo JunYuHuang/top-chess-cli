@@ -96,7 +96,7 @@ Complete the tests for the following:
 - [x] `#random_capture` method
 - [x] `#random_move` method
 - [x] `#capture_en_passant` method
-- [ ] `#random_promote` method
+- [x] `#random_promote` method
 - [ ] `#queenside_castle` method
 - [ ] `#kingside_castle` method
 

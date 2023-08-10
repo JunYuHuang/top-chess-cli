@@ -106,13 +106,13 @@ class ComputerPlayer < Player
     })
   end
 
-  # TODO - to test
   def random_promote(piece)
     return unless piece.class == Hash
 
     piece_obj = piece[:piece]
     cell = piece[:cell]
     return if piece_obj.nil? or cell.nil?
+    return if piece_obj.type != :pawn
 
     return unless piece_obj.respond_to?(:promotes)
 
