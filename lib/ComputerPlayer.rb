@@ -45,11 +45,11 @@ class ComputerPlayer < Player
     random_item(chess_moves)
   end
 
-  # TODO - to test
   def random_capture(piece)
     piece_obj = piece[:piece]
     cell = piece[:cell]
     piece_captures = piece_obj.captures(cell, @game.board)
+    return if piece_obj.color != @piece_color
     return if piece_captures.size < 1
 
     dst_cell = random_item(piece_captures)

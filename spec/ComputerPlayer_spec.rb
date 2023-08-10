@@ -76,4 +76,121 @@ describe ComputerPlayer do
       expect(res_moves.size > 0).to eql(true)
     end
   end
+
+  describe "#random_capture" do
+    it "returns nil if called with a piece that has no available captures for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      piece = { piece: game.board[6][0], cell: [6,0] }
+      res = computer_player.random_capture(piece)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a piece that is not owned by the ComputerPlayer obj that calls it and that has no available captures for a game with a certain board with 2 pieces" do
+      pieces = [
+        {
+          cell: [1,4],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [2,3],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      piece = { piece: game.board[2][3], cell: [2,3] }
+      res = computer_player.random_capture(piece)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a piece that has no available captures for a game with a certain board with 2 pieces" do
+      pieces = [
+        {
+          cell: [1,4],
+          color: :white,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [2,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      piece = { piece: game.board[2][3], cell: [2,3] }
+      res = computer_player.random_capture(piece)
+      expect(res).to eql(nil)
+    end
+
+    it "returns the correct Long AN string if called with a piece that has at least 1 available capture for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [1,2],
+          color: :black,
+          type: :bishop,
+          is_capturable: true,
+        },
+        {
+          cell: [1,4],
+          color: :black,
+          type: :rook,
+          is_capturable: true,
+        },
+        {
+          cell: [2,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      piece = { piece: game.board[2][3], cell: [2,3] }
+      res = computer_player.random_capture(piece)
+      expected = ['d6xe7', 'd6xc7']
+      expect(expected.include?(res)).to eql(true)
+    end
+  end
 end

@@ -93,7 +93,7 @@ Complete the tests for the following:
 - [x] `#random_item` method
 - [x] `#random_piece` method
 - [ ] `#random_chess_move` method
-- [ ] `#random_capture` method
+- [x] `#random_capture` method
 - [ ] `#random_move` method
 - [ ] `#random_capture_en_passant` method
 - [ ] `#random_promote` method
