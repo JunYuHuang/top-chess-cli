@@ -37,7 +37,7 @@ class ComputerPlayer < Player
     chess_moves = [
       queenside_castle(piece),
       kingside_castle(piece),
-      captures_en_passant(piece),
+      capture_en_passant(piece),
       random_promote(piece),
       random_capture(piece),
       random_move(piece)
@@ -75,20 +75,26 @@ class ComputerPlayer < Player
     })
   end
 
-  # TODO - to test
-  def random_capture_en_passant(piece)
+  def capture_en_passant(piece)
+    return unless piece.class == Hash
+
     piece_obj = piece[:piece]
     cell = piece[:cell]
+    return if piece_obj.nil? or cell.nil?
+    return if piece_obj.type != :pawn
+
+    return if piece_obj.color != @piece_color
     return unless piece_obj.respond_to?(:captures_en_passant)
 
     captures = piece_obj.captures_en_passant(cell, @game.board)
     return if captures.size < 1
 
-    dst_cell = random_item(captures)
-    @game.chess_move_runner.capture_hash_to_syntax({
+    # There is only at most 1 possible en-passant capture per
+    # player's turn so only the first and only item is taken.
+    @game.chess_move_runner.capture_en_passant_hash_to_syntax({
       src_piece_type: piece_obj.type,
       src_cell: cell,
-      dst_cell: dst_cell
+      dst_cell: captures[0]
     })
   end
 

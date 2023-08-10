@@ -310,4 +310,128 @@ describe ComputerPlayer do
       expect(expected.include?(res)).to eql(true)
     end
   end
+
+  describe "#capture_en_passant" do
+    it "returns nil if called with a pawn that has no available en-passant capture for a game with the default starting board" do
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[6][0], cell: [6,0] }
+      res = computer_player.capture_en_passant(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a pawn that is not owned by the ComputerPlayer obj that calls it with a certain board with 2 pieces" do
+      pieces = [
+        {
+          cell: [4,3],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [4,2],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[4][2], cell: [4,2] }
+      res = computer_player.capture_en_passant(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns nil if called with a pawn that has no available en-passant capture for a game with a certain board with 2 pieces" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      pawn = { piece: game.board[3][5], cell: [3,5] }
+      res = computer_player.capture_en_passant(pawn)
+      expect(res).to eql(nil)
+    end
+
+    it "returns the legal Long AN string if called with a pawn that has an available en-passant capture for a game with a certain board with 3 pieces" do
+      pieces = [
+        {
+          cell: [3,4],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: false
+        },
+        {
+          cell: [3,6],
+          color: :black,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+          is_capturable_en_passant: true
+        },
+        {
+          cell: [3,5],
+          color: :white,
+          type: :pawn,
+          is_capturable: true,
+          did_move: true,
+        }
+      ]
+      options = {
+        piece_factory_class: PieceFactory,
+        chess_move_runner_class: ChessMoveRunner,
+        pieces: pieces
+      }
+      game = Game.new(options)
+      game.add_player!(MockPlayer, { piece_color: :black })
+      computer_player = game.add_player!(
+        ComputerPlayer, { piece_color: :white, type: :computer }
+      )
+      piece = { piece: game.board[3][5], cell: [3,5] }
+      res = computer_player.capture_en_passant(piece)
+      expect(res).to eql('f5xg6')
+    end
+  end
 end

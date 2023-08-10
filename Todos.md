@@ -82,7 +82,7 @@ Complete the following:
 - [x] `#random_chess_move` method
 - [x] `#random_capture` method
 - [x] `#random_move` method
-- [x] `#random_capture_en_passant` method
+- [x] `#capture_en_passant` method
 - [x] `#random_promote` method
 - [x] `#queenside_castle` method
 - [x] `#kingside_castle` method
@@ -95,7 +95,7 @@ Complete the tests for the following:
 - [ ] `#random_chess_move` method
 - [x] `#random_capture` method
 - [x] `#random_move` method
-- [ ] `#random_capture_en_passant` method
+- [x] `#capture_en_passant` method
 - [ ] `#random_promote` method
 - [ ] `#queenside_castle` method
 - [ ] `#kingside_castle` method
