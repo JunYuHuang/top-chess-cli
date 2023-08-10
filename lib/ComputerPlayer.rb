@@ -100,13 +100,21 @@ class ComputerPlayer < Player
   def random_promote(piece)
     piece_obj = piece[:piece]
     cell = piece[:cell]
-    return unless piece_obj.respond_to?(:is_promotable?)
-    return unless piece_obj.is_promotable?(cell, @game.board)
+    return unless piece_obj.respond_to?(:promotes)
 
+    promotes = piece_obj.promotes(cell, @game.board)
+    return if promotes.size < 1
+
+    dst_cell = random_item(promotes)
+    is_capture = !@game.class.is_empty_cell?(dst_cell, @game.board)
     promo_piece_types = [:rook, :knight, :bishop, :queen]
     random_promo_piece = random_item(promo_piece_types)
-    # TODO - return a random promote via a capture if it's available
-    # TODO - return a random promote via a move if it's available
+    @game.chess_move_runner.promote_hash_to_syntax({
+      src_cell: cell,
+      dst_cell: dst_cell,
+      promo_piece_type: random_promo_piece,
+      is_capture: is_capture
+    })
   end
 
   # TODO - to test

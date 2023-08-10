@@ -83,14 +83,22 @@ Complete the following:
 - [x] `#random_capture` method (protected)
 - [x] `#random_move` method (protected)
 - [x] `#random_capture_en_passant` method (protected)
-- [ ] `#random_promote` method (protected)
+- [x] `#random_promote` method (protected)
 - [x] `#queenside_castle` method (protected)
 - [x] `#kingside_castle` method (protected)
 
 Complete the tests for the following:
 
-- [ ] `::initialize` constructor
-- TODO
+- [x] `::initialize` constructor
+- [ ] `#random_item` method (protected)
+- [ ] `#random_piece` method (protected)
+- [ ] `#random_chess_move` method (protected)
+- [ ] `#random_capture` method (protected)
+- [ ] `#random_move` method (protected)
+- [ ] `#random_capture_en_passant` method (protected)
+- [ ] `#random_promote` method (protected)
+- [ ] `#queenside_castle` method (protected)
+- [ ] `#kingside_castle` method (protected)
 
 ## `PieceUtils` module
 
