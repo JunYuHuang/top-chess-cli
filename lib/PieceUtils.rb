@@ -64,7 +64,7 @@ module PieceUtils
     piece.nil?
   end
 
-  def is_ally_piece_cell?(src_cell, dst_cell, board)
+  def is_ally_cell?(src_cell, dst_cell, board)
     return false if is_empty_cell?(src_cell, board)
     return false if is_empty_cell?(dst_cell, board)
 
@@ -79,7 +79,7 @@ module PieceUtils
     src_piece.color == dst_piece.color
   end
 
-  def is_enemy_piece_cell?(src_cell, dst_cell, board)
+  def is_enemy_cell?(src_cell, dst_cell, board)
     return false if is_empty_cell?(src_cell, board)
     return false if is_empty_cell?(dst_cell, board)
 
@@ -394,10 +394,8 @@ module PieceUtils
     steps = 1
     while row >= 0 do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, src_col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
+      break if is_ally_cell?([src_row, src_col], [row, src_col], board)
+      if is_enemy_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
       row -= 1
@@ -431,10 +429,8 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, src_col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, src_col], board)
+      break if is_ally_cell?([src_row, src_col], [row, src_col], board)
+      if is_enemy_cell?([src_row, src_col], [row, src_col], board)
         return [row, src_col]
       end
       row += 1
@@ -468,10 +464,8 @@ module PieceUtils
     steps = 1
     while col >= 0 do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [src_row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
+      break if is_ally_cell?([src_row, src_col], [src_row, col], board)
+      if is_enemy_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
       col -= 1
@@ -505,10 +499,8 @@ module PieceUtils
     steps = 1
     while col < BOARD_LENGTH do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [src_row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [src_row, col], board)
+      break if is_ally_cell?([src_row, src_col], [src_row, col], board)
+      if is_enemy_cell?([src_row, src_col], [src_row, col], board)
         return [src_row, col]
       end
       col += 1
@@ -547,10 +539,8 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH && col >= 0 do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
+      break if is_ally_cell?([src_row, src_col], [row, col], board)
+      if is_enemy_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row += 1
@@ -590,10 +580,8 @@ module PieceUtils
     steps = 1
     while row >= 0 && col < BOARD_LENGTH do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
+      break if is_ally_cell?([src_row, src_col], [row, col], board)
+      if is_enemy_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row -= 1
@@ -633,10 +621,8 @@ module PieceUtils
     steps = 1
     while row < BOARD_LENGTH && col < BOARD_LENGTH do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
+      break if is_ally_cell?([src_row, src_col], [row, col], board)
+      if is_enemy_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row += 1
@@ -676,10 +662,8 @@ module PieceUtils
     steps = 1
     while row >= 0 && col >= 0 do
       break if steps > max_steps
-      break if is_ally_piece_cell?(
-        [src_row, src_col], [row, col], board
-      )
-      if is_enemy_piece_cell?([src_row, src_col], [row, col], board)
+      break if is_ally_cell?([src_row, src_col], [row, col], board)
+      if is_enemy_cell?([src_row, src_col], [row, col], board)
         return [row, col]
       end
       row -= 1
@@ -708,7 +692,7 @@ module PieceUtils
       offset_row, offset_col = offset_cell
       dst_cell = [src_row + offset_row, src_col + offset_col]
       next unless is_inbound_cell?(dst_cell)
-      res.push(dst_cell) if is_enemy_piece_cell?(src_cell, dst_cell, board)
+      res.push(dst_cell) if is_enemy_cell?(src_cell, dst_cell, board)
     end
     res
   end

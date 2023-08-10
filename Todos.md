@@ -100,8 +100,8 @@ Complete the following:
 - [x] `#is_valid_piece_type?` method
 - [x] `#is_inbound_cell?` method
 - [x] `#is_empty_cell?` method
-- [x] `#is_ally_piece_cell?` method
-- [x] `#is_enemy_piece_cell?` method
+- [x] `#is_ally_cell?` method
+- [x] `#is_enemy_cell?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells` method
 - [x] `#enemy_color` method
@@ -146,8 +146,8 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_valid_piece_type?` method
 - [x] `#is_inbound_cell?` method
 - [x] `#is_empty_cell?` method
-- [x] `#is_ally_piece_cell?` method
-- [x] `#is_enemy_piece_cell?` method
+- [x] `#is_ally_cell?` method
+- [x] `#is_enemy_cell?` method
 - [x] `#deep_copy` method
 - [x] `#count_col_cells_amid_two_cells` method
 - [x] `#enemy_color` method

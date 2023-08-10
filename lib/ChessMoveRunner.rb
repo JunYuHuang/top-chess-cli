@@ -367,7 +367,7 @@ class ChessMoveRunner
     return false if can_promote?(syntax + "=Q", src_piece_color)
 
     capturee_piece = res[0]
-    return false if self.class.is_ally_piece_cell?(src_cell, dst_cell, @game.board)
+    return false if self.class.is_ally_cell?(src_cell, dst_cell, @game.board)
     return false unless capturee_piece[:piece].is_capturable?
 
     src_row, src_col = src_cell
