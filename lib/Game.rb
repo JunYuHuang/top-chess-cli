@@ -347,6 +347,9 @@ class Game
     if @chess_move_runner.can_chess_move?(input)
       @chess_move_runner.execute_chess_move!(input)
       @chess_move_runner.set_enemy_pawns_non_capturable_en_passant!(self.class.enemy_color(@turn_color))
+      add_notice!(
+        "👉 #{player(@turn_color).name} played the move '#{input}'."
+      )
       switch_players!
     elsif @command_runner.can_command?(input)
       @command_runner.execute_command!(input)
