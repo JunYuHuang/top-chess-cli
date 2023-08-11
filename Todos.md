@@ -17,11 +17,11 @@ Complete the expanded pseudocode for following classes:
 
 Complete the following:
 
-- [ ] Build base game logic
-- [ ] Build GUI interfaces for getting player inputs (via console)
-- [ ] Build GUI interfaces for displaying the game (via console)
-- [ ] Build game saving and loading feature
-- [ ] Build simple computer AI opponent player
+- [x] Build base game logic
+- [x] Build GUI interfaces for getting player inputs (via console)
+- [x] Build GUI interfaces for displaying the game (via console)
+- [x] Build game saving and loading feature
+- [x] Build simple computer AI opponent player
 
 ## Optional and Nice-to-have TODOs
 
