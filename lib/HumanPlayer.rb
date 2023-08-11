@@ -13,7 +13,6 @@ class HumanPlayer < Player
     super(passed_args)
   end
 
-  # TODO - to test
   def input
     return unless @game
 

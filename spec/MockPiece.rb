@@ -389,8 +389,6 @@ class MockPiece < Piece
     res
   end
 
-  # TODO
-
   # includes all cells that the king must traverse over to reach its destination castling cell (including the destination cell)
   def moves_queenside_castle(src_cell, board)
     return [] unless self.class.is_inbound_cell?(src_cell)

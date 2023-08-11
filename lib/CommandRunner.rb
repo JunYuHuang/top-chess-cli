@@ -44,7 +44,6 @@ class CommandRunner
     true
   end
 
-  # TODO - to test
   def can_command?(syntax)
     return false unless game_meets_prereqs?
     return true if can_new_game?(syntax)
@@ -53,7 +52,6 @@ class CommandRunner
     false
   end
 
-  # TODO - to test
   def execute_command!(syntax)
     return unless can_command?(syntax)
 

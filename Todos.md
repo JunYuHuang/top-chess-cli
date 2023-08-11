@@ -565,8 +565,6 @@ Complete the following:
 Complete the tests for the following:
 
 - [x] `#game_meets_prereqs?` method
-- [ ] `#can_command?` method
-- [ ] `#execute_command!` method
 - [x] `#can_new_game?` method
 - [x] `#new_game!` method
 - [x] `#can_save_game?` method

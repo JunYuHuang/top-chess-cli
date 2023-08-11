@@ -13,7 +13,6 @@ class ComputerPlayer < Player
     super(passed_args)
   end
 
-  # TODO - to test
   def input
     return if @game.nil? or @game.chess_move_runner.nil?
 
