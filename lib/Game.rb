@@ -268,6 +268,58 @@ class Game
     }
   end
 
+  def is_enemy_type?(type)
+    ["computer", "human"].include?(type)
+  end
+
+  def is_color?(color)
+    ["white", "black"].include?(color)
+  end
+
+  # TODO - to test
+  def setup!
+    return if @game_save.nil? or @command_runner.nil?
+    return if @human_player_class.nil?
+    return if @computer_player_class.nil?
+
+    args = { color: "", is_color: true, enemy: "", is_enemy: true }
+
+    loop do
+      # print setup screen with console ui passing in args
+      args[:color] = gets.chomp
+      if is_color?(args[:color])
+        args[:is_color] = true
+        break
+      end
+      args[:is_color] = false
+    end
+
+    loop do
+      # print setup screen with console ui passing in args
+      args[:enemy] = gets.chomp
+      if is_enemy_type?(args[:enemy])
+        args[:is_enemy] = true
+        break
+      end
+      args[:is_enemy] = false
+    end
+
+    player_1_hash = {
+      piece_color: args[:color].to_sym,
+      type: :human,
+      name: "#{args[:color].upcase} (Human Player 1)"
+    }
+    enemy_color = args[:color] == "white" ? "black" : "white"
+    player_2_hash = {
+      piece_color: enemy_color.to_sym,
+      type: args[:enemy].to_sym,
+      name: "#{enemy_color.upcase} (#{args[:enemy].capitalize} Player 2)"
+    }
+    new_state = self.class.deep_copy(START_STATE)
+    new_state[:players] = [player_1_hash, player_2_hash]
+    update!(new_state)
+  end
+
   # TODO - to test manually
   def load!
     return if @game_save.nil? or @command_runner.nil?

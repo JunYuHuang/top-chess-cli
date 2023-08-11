@@ -384,6 +384,9 @@ Complete the following:
 - [x] `::initialize` constructor
 - [x] `#add_player!` method
 - [x] `#remove_players!` method
+- [x] `#is_enemy_type?` method
+- [x] `#is_color?` method
+- [x] `#setup!` method
 - [x] `#load!` method
 - [x] `#play!` method
 - [x] `#can_input?` method

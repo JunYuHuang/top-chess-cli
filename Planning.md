@@ -586,13 +586,15 @@ Enter your command (without quotes):
 ```
 New Chess Game Setup
 
-Choose to play against a human or a computer opponent.
-Enter 'human' or 'computer' (without quotes):
-
-You chose 'human'.
-
 Choose your colored piece.
 Enter 'white' or 'black' (without quotes):
+❌ 'yellow' is not a valid choice. Try again.
 
 You chose 'white'.
+
+Choose to play against a human or a computer opponent.
+Enter 'human' or 'computer' (without quotes):
+❌ 'AI' is not a valid choice. Try again.
+
+You chose 'human'.
 ```
