@@ -42,7 +42,7 @@ Complete the following:
 - [ ] Update `KingPiece#is_stalemated?` method to return true only if all pieces of the same color as the king piece itself (including the king) have no valid moves, captures, promotions, en-passant captures, queenside castles, or kingside castles
 - [ ] Make `!new` and `!load` commands available to the (human) player while they are in-game
 - [ ] Update `ChessMoveRunner` class to accept optional check (`+`) and checkmate (`#`) suffixes for moves and captures when parsing Long AN
-- [ ] Update `ConsoleUI` class to let player choose their own color and which opponent type (human or computer) to play against
+- [x] Update `ConsoleUI` class to let player choose their own color and which opponent type (human or computer) to play against
 
 ## `Player` class
 
@@ -536,7 +536,7 @@ Complete the following:
 - [x] `#print_saves_table` method
 - [x] `#print_load_prompt` method
 - [x] `#print_load_screen` method
-- [ ] `#print_setup_screen` method
+- [x] `#print_setup_screen` method
 - [x] `#print_turn_screen` method
 - [x] `#print_end_screen` method
 - [x] `#row_to_rank` method (protected)

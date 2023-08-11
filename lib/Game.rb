@@ -285,7 +285,7 @@ class Game
     args = { color: "", is_color: true, enemy: "", is_enemy: true }
 
     loop do
-      # print setup screen with console ui passing in args
+      @console_ui.print_setup_screen(args)
       args[:color] = gets.chomp
       if is_color?(args[:color])
         args[:is_color] = true
@@ -295,7 +295,7 @@ class Game
     end
 
     loop do
-      # print setup screen with console ui passing in args
+      @console_ui.print_setup_screen(args)
       args[:enemy] = gets.chomp
       if is_enemy_type?(args[:enemy])
         args[:is_enemy] = true

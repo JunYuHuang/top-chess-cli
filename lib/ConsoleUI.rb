@@ -208,9 +208,28 @@ class ConsoleUI
     print_load_prompt(is_valid, input)
   end
 
-  # TODO - to test
-  def print_setup_screen
+  def print_setup_screen(args)
     return unless @game
+
+    clear_UI
+    args => { color:, is_color:, enemy:, is_enemy: }
+    res = [
+      "New Chess Game Setup\n\n",
+      "Choose your colored piece.\n",
+      "Enter 'white' or 'black' (without quotes):\n",
+      "#{ is_color ? "" : "❌ '#{color}' is not a valid choice. Try again."}\n",
+      "#{ @game.is_color?(color) ? "You chose '#{color}'." : ""}\n\n",
+    ]
+    if @game.is_color?(color)
+      enemy_prompt_strings = [
+        "Choose to play against a human or a computer opponent.\n",
+        "Enter 'human' or 'computer' (without quotes):\n",
+        "#{ is_enemy ? "" : "❌ '#{enemy}' is not a valid choice. Try again."}\n",
+        "#{ @game.is_enemy_type?(enemy) ? "You chose '#{enemy}'." : ""}\n"
+      ]
+      res.push(*enemy_prompt_strings)
+    end
+    puts(res.join)
   end
 
   def print_turn_screen(is_valid_input, last_input)

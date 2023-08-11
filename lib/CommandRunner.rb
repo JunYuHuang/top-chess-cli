@@ -75,6 +75,7 @@ class CommandRunner
   def new_game!(syntax)
     return unless can_new_game?(syntax)
     set_in_game_mode!
+    @game.setup!
     @game.add_notice!("✅ Started a new game.")
   end
 
