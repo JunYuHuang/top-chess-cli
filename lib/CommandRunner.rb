@@ -6,8 +6,6 @@ class CommandRunner
     new_game: "!new", load_game: "!load", save_game: "!save"
   }
   LOAD_REGEX = /^#{Regexp.quote(COMMANDS[:load_game])}\s(\S)+$/
-  PLAYER_TYPE_REGEX = /^(human)|(computer)$/
-  PIECE_COLOR_REGEX = /^(white)|(black)$/
 
   attr_accessor(:game, :app_mode)
 
@@ -41,8 +39,6 @@ class CommandRunner
     return false unless game.piece_factory
     return false unless game.game_save
     return false unless game.human_player_class
-    # TODO - to implement `ComputerPlayer` class
-    # return false unless game.computer_player_class
     return false unless game.players.class == Array
     return false unless game.players.size == game.players_count
     true
@@ -113,28 +109,5 @@ class CommandRunner
     @game.update!(save_state)
     @game.add_notice!("✅ Loaded game from save '#{save_name}'.")
     set_in_game_mode!
-  end
-
-  # TODO - to test
-  def can_pick_enemy_type?(syntax)
-    return false unless game_meets_prereqs?
-    return false unless @app_mode == :setup
-    PLAYER_TYPE_REGEX.match?(syntax)
-  end
-
-  # TODO - to test
-  def can_pick_color?(syntax)
-    return false unless game_meets_prereqs?
-    return false unless @app_mode == :setup
-    PIECE_COLOR_REGEX.match?(syntax)
-  end
-
-  # TODO - to test
-  def setup_game!(options)
-    enemy_type = options.fetch(:enemy_type, "human")
-    color = options.fetch(:color, "white")
-    return if enemy_type.nil? or color.nil?
-
-    # TODO
   end
 end

@@ -384,6 +384,7 @@ Complete the following:
 - [x] `::initialize` constructor
 - [x] `#add_player!` method
 - [x] `#remove_players!` method
+- [x] `#load!` method
 - [x] `#play!` method
 - [x] `#can_input?` method
 - [x] `#execute_input!` method
@@ -560,9 +561,6 @@ Complete the following:
 - [x] `#save_game!` method
 - [x] `#can_load_game?` method
 - [x] `#load_game!` method
-<!-- - [ ] `#can_pick_enemy_type?` method -->
-<!-- - [ ] `#can_pick_color?` method -->
-<!-- - [ ] `#setup_game!` method -->
 
 Complete the tests for the following:
 
