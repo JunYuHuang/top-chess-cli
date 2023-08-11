@@ -2,6 +2,7 @@ require './lib/Game'
 require './lib/PieceFactory'
 require './lib/ChessMoveRunner'
 require './lib/HumanPlayer'
+require './lib/ComputerPlayer'
 require './lib/ConsoleUI'
 require './lib/GameSave'
 require './lib/CommandRunner'
@@ -12,6 +13,7 @@ dependencies = {
   console_ui_class: ConsoleUI,
   player_class: HumanPlayer,
   human_player_class: HumanPlayer,
+  computer_player_class: ComputerPlayer,
   game_save_class: GameSave,
   command_runner_class: CommandRunner,
 }
