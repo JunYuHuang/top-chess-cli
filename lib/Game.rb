@@ -159,7 +159,6 @@ class Game
     :command_runner, :notices
   )
 
-  # TODO - to test
   def initialize(options = {})
     @piece_factory = options[:piece_factory_class]
     console_ui_class = options.fetch(:console_ui_class, nil)
@@ -276,7 +275,6 @@ class Game
     ["white", "black"].include?(color)
   end
 
-  # TODO - to test
   def setup!
     return if @game_save.nil? or @command_runner.nil?
     return if @human_player_class.nil?
@@ -320,7 +318,6 @@ class Game
     update!(new_state)
   end
 
-  # TODO - to test manually
   def load!
     return if @game_save.nil? or @command_runner.nil?
     @command_runner.set_in_game_mode!
@@ -341,7 +338,6 @@ class Game
     end
   end
 
-  # TODO - to test manually
   def play!
     return if @players.size != @players_count
 
@@ -364,7 +360,6 @@ class Game
     end
   end
 
-  # TODO - to test
   def can_input?(input)
     return false if @players.size != @players_count
     return false if @chess_move_runner.nil? or @console_ui.nil?
@@ -374,7 +369,6 @@ class Game
     false
   end
 
-  # TODO - to test
   def execute_input!(input)
     return if @players.size != @players_count
     return if @chess_move_runner.nil? or @console_ui.nil?
@@ -621,7 +615,6 @@ class Game
     }
   end
 
-  # TODO - to test
   def update!(state)
     state => {
       turn_color:,

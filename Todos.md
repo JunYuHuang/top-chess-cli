@@ -416,8 +416,6 @@ Complete the tests for the following:
 - [x] `::initialize` constructor
 - [x] `#add_player!` method
 - [x] `#remove_players!` method
-- [ ] `#can_input?` method
-- [ ] `#execute_input!` method
 - [x] `#player` method
 - [x] `#switch_players!` method
 - [x] `#did_player_win?` method
@@ -427,7 +425,6 @@ Complete the tests for the following:
 - [x] `#build_board` method
 - [x] `#build_pieces` method
 - [x] `#simple_state` method
-- [ ] `#update!` method
 - [x] `#add_captured_piece!` method
 
 ## `ChessMoveRunner` class

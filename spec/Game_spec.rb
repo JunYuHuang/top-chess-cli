@@ -40,8 +40,6 @@ describe Game do
       expect(game).to_not eql(nil)
       expect(game.players.size).to eql(2)
     end
-
-    # TODO - add more tests with different options
   end
 
   describe "#add_player!" do
