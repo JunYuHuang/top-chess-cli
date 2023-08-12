@@ -309,13 +309,13 @@ class ConsoleUI
     res.join('')
   end
 
-  def captured_piece_str(capturer_color, captive_type)
-    count = capturer_color == :white ?
+  def captured_piece_str(captive_color, captive_type)
+    count = captive_color == :black ?
       @game.white_captured.fetch(captive_type, 0) :
       @game.black_captured.fetch(captive_type, 0)
     return "" if count < 1
     res = [
-      COLOR_TO_STR[capturer_color],
+      COLOR_TO_STR[captive_color],
       PIECE_TO_STR[captive_type],
       " x ",
       count.to_s
