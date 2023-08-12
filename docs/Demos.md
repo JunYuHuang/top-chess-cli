@@ -48,7 +48,6 @@
 
 ![Gameplay demo of Black Checkmating White](/assets/black-wins-demo.gif)
 
-## Demo - Draw / Tie (White Is Stalemated)
+## Demo - Draw / Tie (Black Is Stalemated)
 
-<!-- ![Gameplay demo of White Getting Stalemated](/assets/tie-demo.gif) -->
-
+![Gameplay demo of Black Getting Stalemated](/assets/tie-demo.gif)
