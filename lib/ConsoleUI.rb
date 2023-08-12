@@ -97,8 +97,8 @@ class ConsoleUI
       "#{ notice_msg ? "#{notice_msg}" : "" }\n",
       "It is #{player.to_s}'s turn.\n",
       "#{ is_king_checked ? king_checked_msg : "" }\n",
-      "Enter your move in Long Algebraic Notation (e.g. 'e2e3'\n",
-      "to move your pawn from 'e2' to 'e3' as WHITE)\n",
+      "Enter your move in Long Algebraic Notation\n",
+      "(e.g. 'e2e3' to move the pawn at 'e2' to 'e3' as WHITE)\n",
       "or '!save' to save the game:\n",
       "#{ is_valid_input ? "" : invalid_input_msg }\n",
     ]
