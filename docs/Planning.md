@@ -493,7 +493,7 @@ WHITE's captures: bP x 8, bB x 2, bN x 2, bR x 2, bQ x 1
 
 
 It is BLACK (Human Player 2)'s turn.
-❕ Move your king out of check to another square.
+❕ Move your king out of check or block its check.
 Enter your move in Long Algebraic Notation
 (e.g. 'e2e3' to move the pawn at 'e2' to 'e3' as WHITE)
 or '!save' to save the game:

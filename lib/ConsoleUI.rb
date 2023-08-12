@@ -89,7 +89,7 @@ class ConsoleUI
       color: @game.turn_color, type: :king
     })[0]
     is_king_checked = king[:piece].is_checked?(king[:cell], @game.board)
-    king_checked_msg = "❕Move your king out of check to another square."
+    king_checked_msg = "❕Move your king out of check or block its check."
     invalid_input_msg = "❌ '#{last_input}' is an illegal move or invalid command. Try again."
     notice_msg = @game.last_notice!
 
