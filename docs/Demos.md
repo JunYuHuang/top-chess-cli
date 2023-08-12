@@ -44,9 +44,9 @@
 
 ![Gameplay demo of White Checkmating Black](/assets/white-wins-demo.gif)
 
-## Demo - Black Victory (Black Checkmates White)
+## Demo - Black Wins (Black Checkmates White)
 
-<!-- ![Gameplay demo of Black Checkmating White](/assets/black-wins-demo.gif) -->
+![Gameplay demo of Black Checkmating White](/assets/black-wins-demo.gif)
 
 ## Demo - Draw / Tie (White Is Stalemated)
 
