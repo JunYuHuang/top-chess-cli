@@ -85,7 +85,7 @@ class ChessMoveRunner
     elsif can_promote?(syntax, src_piece_color)
       promote!(syntax, src_piece_color)
     elsif can_queenside_castle?(syntax, src_piece_color)
-      can_queenside_castle!(syntax, src_piece_color)
+      queenside_castle!(syntax, src_piece_color)
     elsif can_kingside_castle?(syntax, src_piece_color)
       kingside_castle!(syntax, src_piece_color)
     end
