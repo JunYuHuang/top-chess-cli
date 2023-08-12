@@ -30,7 +30,7 @@
 
 ## Demo - Queenside Castle
 
-<!-- ![Gameplay demo of a Queenside Castle](/assets/queenside-castle-demo.gif) -->
+![Gameplay demo of a Queenside Castle](/assets/queenside-castle-demo.gif)
 
 ## Demo - Kingside Castle
 
