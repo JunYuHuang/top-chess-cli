@@ -10,7 +10,7 @@
 
 ## Demo - Loading From A Save
 
-<!-- ![Gameplay demo of Loading From A Save](/assets/load-game-demo.gif) -->
+![Gameplay demo of Loading From A Save](/assets/load-game-demo.gif)
 
 ## Demo - Non-capturing Move
 
