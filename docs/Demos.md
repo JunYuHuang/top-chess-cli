@@ -26,7 +26,7 @@
 
 ## Demo - (Pawn) Promotion
 
-<!-- ![Gameplay demo of a (Pawn) Promotion](/assets/promotion-demo.gif) -->
+![Gameplay demo of a (Pawn) Promotion](/assets/promotion-demo.gif)
 
 ## Demo - Queenside Castle
 
