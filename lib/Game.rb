@@ -322,7 +322,11 @@ class Game
     return if @game_save.nil? or @command_runner.nil?
     @command_runner.set_in_game_mode!
     return if @human_player_class.nil?
-    return if @game_save.count_saves < 1
+
+    if @game_save.count_saves < 1
+      setup!
+      return
+    end
 
     @command_runner.set_load_mode!
     last_input = ""
