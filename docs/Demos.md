@@ -4,6 +4,10 @@
 
 ![Gameplay demo of Starting A New Game Versus A Human Player](/assets/new-game-vs-human-demo.gif)
 
+## Demo - Starting A New Game Versus A Computer Player
+
+![Gameplay demo of Starting A New Game Versus A Computer Player](/assets/new-game-vs-computer-demo.gif)
+
 ## Demo - Saving A Game
 
 ![Gameplay demo of Saving A Game](/assets/save-game-demo.gif)
