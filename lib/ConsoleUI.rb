@@ -47,29 +47,29 @@ class ConsoleUI
 
     black_captures = ["BLACK's captures: "]
     white_pieces = []
-    w_pawns = captured_piece_str(:black, :pawn)
+    w_pawns = captured_piece_str(:white, :pawn)
     white_pieces.push(w_pawns) if w_pawns.size > 0
-    w_bishops = captured_piece_str(:black, :bishop)
+    w_bishops = captured_piece_str(:white, :bishop)
     white_pieces.push(w_bishops) if w_bishops.size > 0
-    w_knights = captured_piece_str(:black, :knight)
+    w_knights = captured_piece_str(:white, :knight)
     white_pieces.push(w_knights) if w_knights.size > 0
-    w_rooks = captured_piece_str(:black, :rook)
+    w_rooks = captured_piece_str(:white, :rook)
     white_pieces.push(w_rooks) if w_rooks.size > 0
-    w_queens = captured_piece_str(:black, :queen)
+    w_queens = captured_piece_str(:white, :queen)
     white_pieces.push(w_queens) if w_queens.size > 0
     black_captures.push(white_pieces.join(', '))
 
     white_captures = ["WHITE's captures: "]
     black_pieces = []
-    b_pawns = captured_piece_str(:white, :pawn)
+    b_pawns = captured_piece_str(:black, :pawn)
     black_pieces.push(b_pawns) if b_pawns.size > 0
-    b_bishops = captured_piece_str(:white, :bishop)
+    b_bishops = captured_piece_str(:black, :bishop)
     black_pieces.push(b_bishops) if b_bishops.size > 0
-    b_knights = captured_piece_str(:white, :knight)
+    b_knights = captured_piece_str(:black, :knight)
     black_pieces.push(b_knights) if b_knights.size > 0
-    b_rooks = captured_piece_str(:white, :rook)
+    b_rooks = captured_piece_str(:black, :rook)
     black_pieces.push(b_rooks) if b_rooks.size > 0
-    b_queens = captured_piece_str(:white, :queen)
+    b_queens = captured_piece_str(:black, :queen)
     black_pieces.push(b_queens) if b_queens.size > 0
     white_captures.push(black_pieces.join(', '))
 
