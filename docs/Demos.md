@@ -6,7 +6,7 @@
 
 ## Demo - Saving A Game
 
-<!-- ![Gameplay demo of Saving A Game](/assets/save-game-demo.gif) -->
+![Gameplay demo of Saving A Game](/assets/save-game-demo.gif)
 
 ## Demo - Loading From A Save
 
