@@ -34,7 +34,7 @@
 
 ## Demo - Kingside Castle
 
-<!-- ![Gameplay demo of a Kingside Castle](/assets/kingside-castle-demo.gif) -->
+![Gameplay demo of a Kingside Castle](/assets/kingside-castle-demo.gif)
 
 ## Demo - White Checks Black
 
