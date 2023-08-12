@@ -40,9 +40,9 @@
 
 ![Gameplay demo of White Checking Black](/assets/white-checks-black-demo.gif)
 
-## Demo - White Victory (White Checkmates Black)
+## Demo - White Wins (White Checkmates Black)
 
-<!-- ![Gameplay demo of White Checkmating Black](/assets/white-wins-demo.gif) -->
+![Gameplay demo of White Checkmating Black](/assets/white-wins-demo.gif)
 
 ## Demo - Black Victory (Black Checkmates White)
 
