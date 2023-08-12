@@ -18,7 +18,7 @@
 
 ## Demo - Capture
 
-<!-- ![Gameplay demo of a Capture](/assets/capture-demo.gif) -->
+![Gameplay demo of a Capture](/assets/capture-demo.gif)
 
 ## Demo - En-Passant Capture
 
