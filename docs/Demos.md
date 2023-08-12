@@ -22,7 +22,7 @@
 
 ## Demo - En-Passant Capture
 
-<!-- ![Gameplay demo of an En-Passant Capture](/assets/en-passant-capture-demo.gif) -->
+![Gameplay demo of an En-Passant Capture](/assets/en-passant-capture-demo.gif)
 
 ## Demo - (Pawn) Promotion
 
