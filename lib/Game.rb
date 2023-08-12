@@ -345,6 +345,7 @@ class Game
   def play!
     return if @players.size != @players_count
 
+    @command_runner.set_in_game_mode!
     add_notice!("✅ Started a new game.") if @notices.empty?
 
     loop do
