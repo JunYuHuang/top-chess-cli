@@ -1,6 +1,6 @@
 # Chess Console Game
 
-<!-- ![Gameplay demo of one player winning the game Chess](/assets/chess-demo.gif) -->
+![Gameplay demo of one player winning the game Chess](/assets/chess-demo.gif)
 
 This is a console or command-line implementation of the classic two-player board game Chess that lets players input their moves using a custom form of Long Algebraic Notation. Players can choose to either play against another human player or a simple computer player / bot. Games can be saved and loaded from save files.
 
@@ -35,7 +35,7 @@ rspec
 
 ## Skills Demonstrated
 
-- Unit and Integration Testing with over 500 tests
+- Unit and Integration Testing with over 510 tests
 - Object-Oriented Programming (OOP) Design
 - Applied SOLID Principles (e.g. Dependency Injection, Single Responsiblity, etc.)
 - Input Validation
