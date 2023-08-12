@@ -38,7 +38,7 @@
 
 ## Demo - White Checks Black
 
-<!-- ![Gameplay demo of White Checking Black](/assets/white-checks-black-demo.gif) -->
+![Gameplay demo of White Checking Black](/assets/white-checks-black-demo.gif)
 
 ## Demo - White Victory (White Checkmates Black)
 
