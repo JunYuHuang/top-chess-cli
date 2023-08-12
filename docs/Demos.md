@@ -14,7 +14,7 @@
 
 ## Demo - Non-capturing Move
 
-<!-- ![Gameplay demo of a Non-capturing Move](/assets/move-demo.gif) -->
+![Gameplay demo of a Non-capturing Move](/assets/move-demo.gif)
 
 ## Demo - Capture
 
