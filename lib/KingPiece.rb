@@ -104,11 +104,9 @@ class KingPiece < Piece
   def is_stalemated?(src_cell, board)
     return false if is_checked?(src_cell, board)
 
-    adj_cells = self.class.adjacent_cells(src_cell)
-    return false if adj_cells.all? do |cell|
-      !self.class.is_empty_cell?(cell, board)
-    end
-    moves(src_cell, board).size == 0
+    filters = { color: @color, is_actionable: true }
+    playable_pieces = self.class.pieces(board, filters)
+    playable_pieces.size < 1
   end
 
   def can_queenside_castle?(src_cell, board)
