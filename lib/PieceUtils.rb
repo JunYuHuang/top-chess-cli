@@ -319,6 +319,25 @@ module PieceUtils
     board_copy
   end
 
+  def is_absolute_pinned?(src_cell, dst_cell, board)
+    return false unless is_inbound_cell?(src_cell)
+    return false unless is_inbound_cell?(dst_cell)
+    return false if is_empty_cell?(src_cell, board)
+
+    src_row, src_col = src_cell
+    src_piece = board[src_row][src_col]
+    return false if src_piece.type == :king
+
+    # assumes there is an allied king on the board
+    new_board = deep_copy(board)
+    new_board[src_row][src_col] = nil
+    dst_row, dst_col = dst_cell
+    new_board[dst_row][dst_col] = src_piece
+    king_filter = { color: src_piece.color, type: :king }
+    king = pieces(new_board, king_filter)[0]
+    king[:piece].is_checked?(king[:cell], new_board)
+  end
+
   def in_row?(src_cell, row)
     src_row, src_col = src_cell
     src_row == row

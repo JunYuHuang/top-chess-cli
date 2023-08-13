@@ -393,6 +393,56 @@ describe "PieceUtils" do
     end
   end
 
+  describe "#is_absolute_pinned?" do
+    it "returns false if called with a cell that represents a King piece and a certain board with 4 pieces" do
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_king = MockPiece.new({ color: :black, type: :king, did_move: true })
+      white_king = MockPiece.new({ color: :white, type: :king, did_move: true })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = black_king
+      board[0][1] = black_bishop
+      board[0][7] = white_rook
+      board[2][1] = white_king
+      res = PieceUtilsClass.is_absolute_pinned?(
+        [0,0], [1,1], board
+      )
+      expect(res).to eql(false)
+    end
+
+    it "returns true if called with a cell that represents a non-King piece and a certain board with 4 pieces" do
+      black_bishop = MockPiece.new({ color: :black, type: :bishop })
+      black_king = MockPiece.new({ color: :black, type: :king, did_move: true })
+      white_king = MockPiece.new({ color: :white, type: :king, did_move: true })
+      white_rook = MockPiece.new({ color: :white, type: :rook })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][0] = black_king
+      board[0][1] = black_bishop
+      board[0][7] = white_rook
+      board[2][1] = white_king
+      res = PieceUtilsClass.is_absolute_pinned?(
+        [0,1], [1,2], board
+      )
+      expect(res).to eql(true)
+    end
+
+    it "returns true if called with a cell that represents a non-King piece and a certain board with 4 pieces" do
+      black_knight = MockPiece.new({ color: :black, type: :knight })
+      black_king = MockPiece.new({ color: :black, type: :king, did_move: true })
+      white_king = MockPiece.new({ color: :white, type: :king, did_move: true })
+      white_bishop = MockPiece.new({ color: :white, type: :bishop })
+      board = Array.new(8) { Array.new(8, nil) }
+      board[0][2] = black_king
+      board[2][4] = black_knight
+      board[3][5] = white_bishop
+      board[7][3] = white_king
+      res = PieceUtilsClass.is_absolute_pinned?(
+        [2,4], [1,2], board
+      )
+      expect(res).to eql(true)
+    end
+  end
+
   describe "#count_col_cells_amid_two_cells" do
     it "returns 0 if called with ([0,0],[1,0])" do
       cells = [[0,0],[1,0]]

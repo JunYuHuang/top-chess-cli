@@ -122,6 +122,7 @@ Complete the following:
 - [x] `#is_piece_actionable?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
+- [x] `#is_absolute_pinned?` method
 - [x] `#in_row?` method
 - [x] `#is_left_adjacent?` method
 - [x] `#is_right_adjacent?` method
@@ -168,6 +169,7 @@ Complete the tests for the following (directly or indirectly via `Piece` subclas
 - [x] `#is_piece_actionable?` method
 - [x] `#pieces` method
 - [x] `#remove_pieces` method
+- [x] `#is_absolute_pinned?` method
 - [x] `#in_row?` method
 - [x] `#is_left_adjacent?` method
 - [x] `#is_right_adjacent?` method
