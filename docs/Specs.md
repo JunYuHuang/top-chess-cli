@@ -30,7 +30,7 @@
   - Reptition of moves
   - 50 moves rules
   - Chess clocks and time
-<!-- - TODO: Allow the human player to play against a simple AI computer player. -->
+- Allows the human player to play against a simple AI computer player.
 
 ## Features
 
@@ -40,7 +40,7 @@
   - Castling
 - Save as many in-progress games as desired when in-game as `save_<unique_integer_id>.yaml` YAML files in the `/saves` folder.
 - Load from any existing game save file.
-<!-- - TODO: Allow the human player to play against a simple AI computer player. -->
+- Allow the human player to play against a simple AI computer player.
 
 ## Custom Long Algebraic Notation Notes
 
