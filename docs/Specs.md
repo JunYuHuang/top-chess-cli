@@ -1,5 +1,18 @@
 # Specifications
 
+## Table of Contents
+
+1. [Scope](./Specs.md#scope)
+1. [Features](./Specs.md#features)
+### [Custom Long Algebraic Notation Notes](./Specs.md#custom-long-algebraic-notation-notes)
+
+1. [(Non-Capturing) Moves](./Specs.md#non-capturing-moves)
+1. [Captures (includes en-passant captures)](./Specs.md#captures-includes-en-passant-captures)
+1. [Checks and Checkmates](./Specs.md#checks-and-checkmates)
+1. [(Pawn) Promotions](./Specs.md#pawn-promotions)
+1. [Queenside Castles](./Specs.md#queenside-castles)
+1. [Kingside Castles](./Specs.md#kingside-castles)
+
 ## Scope
 
 - Allows 2 human players to play against each other.
