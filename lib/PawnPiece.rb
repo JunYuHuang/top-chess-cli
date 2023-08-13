@@ -4,19 +4,15 @@ require './lib/PieceUtils'
 class PawnPiece < Piece
   extend PieceUtils
 
+  ONE_STEP_MAX = { max_steps: 1 }
+  TWO_STEPS_MAX = { max_steps: 2 }
   DEFAULT_OPTIONS = {
     color: :white,
     did_move: false,
     is_capturable_en_passant: false
   }
 
-  attr_accessor(
-    :did_move, :is_capturable_en_passant, :one_step, :two_steps
-  )
-
-  @@one_step = { max_steps: 1 }
-
-  @@two_steps = { max_steps: 2 }
+  attr_accessor(:did_move, :is_capturable_en_passant)
 
   def initialize(options = DEFAULT_OPTIONS)
     passed_options = {
@@ -180,27 +176,27 @@ class PawnPiece < Piece
   private
 
   def white_moves(src_cell, board)
-    options = did_move? ? @@one_step : @@two_steps
+    options = did_move? ? ONE_STEP_MAX : TWO_STEPS_MAX
     self.class.up_moves(src_cell, board, options)
   end
 
   def black_moves(src_cell, board)
-    options = did_move? ? @@one_step : @@two_steps
+    options = did_move? ? ONE_STEP_MAX : TWO_STEPS_MAX
     self.class.down_moves(src_cell, board, options)
   end
 
   def white_captures(src_cell, board)
     res = [
-      self.class.up_left_capture(src_cell, board, @@one_step),
-      self.class.up_right_capture(src_cell, board, @@one_step),
+      self.class.up_left_capture(src_cell, board, ONE_STEP_MAX),
+      self.class.up_right_capture(src_cell, board, ONE_STEP_MAX),
     ]
     res.filter { |cell| !cell.nil? }
   end
 
   def black_captures(src_cell, board)
     res = [
-      self.class.down_left_capture(src_cell, board, @@one_step),
-      self.class.down_right_capture(src_cell, board, @@one_step),
+      self.class.down_left_capture(src_cell, board, ONE_STEP_MAX),
+      self.class.down_right_capture(src_cell, board, ONE_STEP_MAX),
     ]
     res.filter { |cell| !cell.nil? }
   end
@@ -208,13 +204,13 @@ class PawnPiece < Piece
   def white_captures_en_passant(src_cell, board)
     res = []
 
-    up_left_cell = self.class.up_left_moves(src_cell, board, @@one_step)[0]
+    up_left_cell = self.class.up_left_moves(src_cell, board, ONE_STEP_MAX)[0]
     up_left_args = {
       src_cell: src_cell, dst_cell: up_left_cell, board: board
     }
     res.push(up_left_cell) if can_capture_en_passant?(up_left_args)
 
-    up_right_cell = self.class.up_right_moves(src_cell, board, @@one_step)[0]
+    up_right_cell = self.class.up_right_moves(src_cell, board, ONE_STEP_MAX)[0]
     up_right_args = {
       src_cell: src_cell, dst_cell: up_right_cell, board: board
     }
@@ -226,13 +222,13 @@ class PawnPiece < Piece
   def black_captures_en_passant(src_cell, board)
     res = []
 
-    down_left_cell = self.class.down_left_moves(src_cell, board, @@one_step)[0]
+    down_left_cell = self.class.down_left_moves(src_cell, board, ONE_STEP_MAX)[0]
     down_left_args = {
       src_cell: src_cell, dst_cell: down_left_cell, board: board
     }
     res.push(down_left_cell) if can_capture_en_passant?(down_left_args)
 
-    down_right_cell = self.class.down_right_moves(src_cell, board, @@one_step)[0]
+    down_right_cell = self.class.down_right_moves(src_cell, board, ONE_STEP_MAX)[0]
     down_right_args = {
       src_cell: src_cell, dst_cell: down_right_cell, board: board
     }
