@@ -23,14 +23,14 @@ The letter to piece mappings are as follows:
 This application assumes you have Ruby 3.1.4 installed.
 
 ```bash
-# install RSpec
+# install dependencies
 bundle install
 
-# running the game
+# run the game
 ruby app.rb
 
-# running the tests
-rspec
+# run the tests
+bundle exec rspec
 ```
 
 ## Skills Demonstrated
